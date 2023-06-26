@@ -1,0 +1,19 @@
+@startuml
+
+类01 "1" *-- "many" 类02 : 包含
+
+类03 o-- 类04 : 聚合
+
+类05 --> "1" 类06
+
+@enduml
+
+
+
+@startuml
+Class01 <|-- Class02
+Class03 *-- Class04
+Class05 o-- Class06
+Class07 .. Class08
+Class09 -- Class10
+@enduml
