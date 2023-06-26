@@ -55,7 +55,7 @@ Class TraderService {
 
 BidService --> Bid : Uses
 BWICService --> BWIC : Uses
-BidService --> BWICService : Collaborates
+BidService --> BWICSehrvice : Collaborates
 BWICService --> BidService : Collaborates
 Bid --> BWIC : Bids on
 Client --> ClientService : Uses
