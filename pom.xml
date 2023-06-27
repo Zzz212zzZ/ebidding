@@ -15,7 +15,6 @@
 	<name>service</name>
 	<description>Demo project for Spring Boot</description>
 	<modules>
-		<module>account-svc</module>
 		<module>account-api</module>
 		<module>bid-svc</module>
 		<module>account-svc</module>
