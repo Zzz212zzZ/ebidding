@@ -21,7 +21,7 @@ import java.time.LocalDate;
 import static springfox.documentation.schema.AlternateTypeRules.newRule;
 
 /**
- * localhost:8080/swagger-ui/index.html
+ * swagger-ui/index.html
  */
 
 @EnableSwagger2
