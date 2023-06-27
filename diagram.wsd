@@ -1,0 +1,69 @@
+@startuml
+Class Bid {
+  +Integer id
+  +String clientId
+  +String bwicId
+  +Double price
+  +Double size
+  +String transactionId
+  +Long rank
+  +DateTime effectiveTime
+  +Long version
+  +Boolean active
+}
+
+Class BWIC {
+  +String id
+  +String traderId
+  +String cusip
+  +Double size
+  +Double startingPrice
+  +DateTime dueDate
+}
+
+Class BidService {
+  +Bid createBid(CreateBidRequest createBidRequest, String clientId)
+  +void deleteBid(String bidId, String clientId)
+}
+
+Class BWICService {
+  +BWIC createBWIC(CreateBWICRequest createBWICRequest, String traderId)
+  +List<BWIC> getActiveBWICs()
+  +List<Bid> getBidHistory(String clientId)
+}
+
+Class Client {
+  +String id
+  +String name
+}
+
+Class Trader {
+  +String id
+  +String name
+}
+
+Class ClientService {
+  +void login(String clientId)
+  +void logout(String clientId)
+  +List<Bid> getSelfBidHistory(String clientId)
+  +int getSelfBidRank(String bidId, String clientId)
+  +List<BWIC> recommendBWICs(String clientId)
+}
+
+Class TraderService {
+  +void login(String traderId)
+  +void logout(String traderId)
+}
+
+BidService --> Bid : Uses
+BWICService --> BWIC : Uses
+BidService --> BWICService : Collaborates
+BWICService --> BidService : Collaborates
+Bid --> BWIC : Bids on
+Client --> ClientService : Uses
+Trader --> TraderService : Uses
+ClientService --> BidService : Uses
+ClientService --> BWICService : Uses
+TraderService --> BWICService : Uses
+
+@enduml
