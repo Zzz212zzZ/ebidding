@@ -24,6 +24,7 @@ import static springfox.documentation.schema.AlternateTypeRules.newRule;
  * /swagger-ui/index.html
  */
 
+
 @EnableSwagger2
 @ComponentScan(basePackageClasses = {
         AccountController.class
