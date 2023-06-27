@@ -11,8 +11,15 @@
 	<groupId>com.ebidding</groupId>
 	<artifactId>service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
 	<name>service</name>
 	<description>Demo project for Spring Boot</description>
+	<modules>
+		<module>bid-svc</module>
+		<module>bid-svc</module>
+		<module>account-svc</module>
+		<module>account-api</module>
+	</modules>
 	<properties>
 		<java.version>11</java.version>
 	</properties>
@@ -58,6 +65,12 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+
 	</dependencies>
 
 	<build>
