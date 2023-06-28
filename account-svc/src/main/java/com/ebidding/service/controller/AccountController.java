@@ -1,7 +1,9 @@
 package com.ebidding.service.controller;
 
+import com.ebidding.account.api.AccountDTO;
 import com.ebidding.service.domain.Account;
 import com.ebidding.service.service.AccountService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,10 +17,17 @@ public class AccountController {
     @Autowired
     private AccountService accountService;
 
+    @Autowired
+    private ModelMapper modelMapper;
+
     //实现了通过name查找数据库中的数据的接口
     @GetMapping()
-    public ResponseEntity<Account> getAccount(@RequestParam("name") String name) {
+    public ResponseEntity<AccountDTO> getAccount(@RequestParam("name") String name) {
 //      Account account= accountService.findByName(name);
-        return ResponseEntity.ok(this.accountService.findByName(name));
+//        return ResponseEntity.ok(this.accountService.findByName(name));
+        Account account = this.accountService.findByName(name);
+        // Account -> AccountDTO
+        AccountDTO accountDTO = this.modelMapper.map(account, AccountDTO.class);
+        return ResponseEntity.ok(accountDTO);
     }
 }
