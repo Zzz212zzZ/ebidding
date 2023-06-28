@@ -9,6 +9,12 @@
     <file url="file://$PROJECT_DIR$/service/account-svc2/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/service/bid-svc/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/service/bid-svc/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/service/bwic-svc/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/service/bwic-svc/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/service/common-lib/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/service/common-lib/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/service/gateway/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/service/gateway/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/service/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/service/test/src/main/java" charset="UTF-8" />

@@ -1,16 +1,24 @@
 package com.ebidding.bid.service;
 
-import com.ebidding.account.api.Account;
+import com.ebidding.account.api.AccountDTO;
 import com.ebidding.account.api.AccountClient;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+
+
 import org.springframework.stereotype.Service;
 
-@Service
-public class BidService {
-    @Autowired
-    private AccountClient accountClient;
 
-    public Account findByName(String inputName) {
-        return this.accountClient.getAccount(inputName).getBody();
+@Service
+@RequiredArgsConstructor
+public class BidService {
+    private final AccountClient accountClient;
+
+
+    public AccountDTO findByName(String inputName) {
+        AccountDTO res = this.accountClient.getAccount(inputName).getBody();
+//        if ("Kuo".equals(inputName)) {
+//            res.setName(res.getName().toUpperCase());
+//        }
+        return res;
     }
 }
