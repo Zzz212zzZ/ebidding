@@ -1,0 +1,6 @@
+spring:
+  profiles:
+    active: uat
+
+server:
+  port: 8001
