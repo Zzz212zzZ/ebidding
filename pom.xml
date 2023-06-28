@@ -7,7 +7,8 @@
 		<module>account-svc</module>
 		<module>bid-svc</module>
 		<module>account-api</module>
-	</modules>
+        <module>common-lib</module>
+    </modules>
 	<groupId>com.ebidding</groupId>
 	<artifactId>service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>

@@ -10,4 +10,5 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface AccountClient {
     @GetMapping("/")
     ResponseEntity<AccountDTO> getAccount(@RequestParam(name = "name") String name);
+    //得到除了密码之外的数据
 }

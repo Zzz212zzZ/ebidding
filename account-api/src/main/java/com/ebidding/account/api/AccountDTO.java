@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class AccountDTO {
+    //不传密码
     private String id;
 
     private String name;
