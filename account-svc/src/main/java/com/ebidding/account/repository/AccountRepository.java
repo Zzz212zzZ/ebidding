@@ -1,6 +1,6 @@
-package com.ebidding.service.repository;
+package com.ebidding.account.repository;
 
-import com.ebidding.service.domain.Account;
+import com.ebidding.account.domain.Account;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

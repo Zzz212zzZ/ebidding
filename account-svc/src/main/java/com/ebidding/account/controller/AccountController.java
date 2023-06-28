@@ -1,8 +1,8 @@
-package com.ebidding.service.controller;
+package com.ebidding.account.controller;
 
 import com.ebidding.account.api.AccountDTO;
-import com.ebidding.service.domain.Account;
-import com.ebidding.service.service.AccountService;
+import com.ebidding.account.domain.Account;
+import com.ebidding.account.service.AccountService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

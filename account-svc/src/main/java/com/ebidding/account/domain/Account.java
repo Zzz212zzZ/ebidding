@@ -1,4 +1,4 @@
-package com.ebidding.service.domain;
+package com.ebidding.account.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -1,4 +1,4 @@
-package com.ebidding.service;
+package com.ebidding.account;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
