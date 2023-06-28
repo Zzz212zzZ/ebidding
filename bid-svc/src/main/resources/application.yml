@@ -1,0 +1,9 @@
+spring:
+  profiles:
+    active: uat
+
+server:
+    port: 8002
+
+ebidding:
+    account-endpoint: localhost:8001
