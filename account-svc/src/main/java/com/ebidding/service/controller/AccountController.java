@@ -15,6 +15,7 @@ public class AccountController {
     @Autowired
     private AccountService accountService;
 
+    //实现了通过name查找数据库中的数据的接口
     @GetMapping()
     public ResponseEntity<Account> getAccount(@RequestParam("name") String name) {
 //      Account account= accountService.findByName(name);
