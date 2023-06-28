@@ -8,7 +8,8 @@
 		<module>bid-svc</module>
 		<module>account-api</module>
         <module>common-lib</module>
-    </modules>
+		<module>gateway</module>
+	</modules>
 	<groupId>com.ebidding</groupId>
 	<artifactId>service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
@@ -23,10 +24,6 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
 		<dependency>
