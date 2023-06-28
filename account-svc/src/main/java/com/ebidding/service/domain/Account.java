@@ -10,6 +10,8 @@ import javax.persistence.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+//@NoArgsConstructor 注解是针对无参数的构造函数，它会生成一个无参数的构造方法。
+//@AllArgsConstructor 会生成一个包含所有变量的构造方法。
 @Builder
 @Entity
 public class Account {
