@@ -29,5 +29,6 @@ public class AccountController {
         // Account -> AccountDTO
         AccountDTO accountDTO = this.modelMapper.map(account, AccountDTO.class);
         return ResponseEntity.ok(accountDTO);
+        //取得了所需要的数据
     }
 }
