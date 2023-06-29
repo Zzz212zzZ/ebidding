@@ -10,6 +10,9 @@ import java.util.Optional;
 @Repository
 public interface BwicRepository extends JpaRepository<Bwic, Long> {
     //SELECT * FROM BOND WHERE CUSIP = ?
-    Optional<Bwic> findByCusip(String cusip);
+//    Optional<Bwic> findByCusip(String cusip);
+
+    //SELECT * FROM BOND WHERE BWIC_ID = ?
+    Optional<Bwic> findByBwicId(String bwicId);
 
 }

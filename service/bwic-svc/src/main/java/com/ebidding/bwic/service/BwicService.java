@@ -10,8 +10,14 @@ public class BwicService {
     @Autowired
     private BwicRepository bwicRepository;
 
-    public Bwic findByCusip(String cusip) {
-        return this.bwicRepository.findByCusip(cusip).orElse(null);
+//    public Bwic findByCusip(String cusip) {
+//        return this.bwicRepository.findByCusip(cusip).orElse(null);
+//    }
+
+public Bwic findByBwicId(String bwicId) {
+        return this.bwicRepository.findByBwicId(bwicId).orElse(null);
     }
+
+
 
 }

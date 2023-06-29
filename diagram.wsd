@@ -11,7 +11,7 @@ Class Bid {
   +String bidID (PK)
   +String accountId (FK)
   +Double price
-  +Long rank
+  +Long ranking
   +LocalDateTime time
   +String bwicID
 }
@@ -31,7 +31,7 @@ Class BWIC {
   +Double startPrice
   +LocalDateTime startTime
   +LocalDateTime dueTime
-  +Long times
+  +Long BidCounts
 }
 
 Class Bond {
