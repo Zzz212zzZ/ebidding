@@ -1,15 +1,17 @@
 package com.ebidding.bwic.service.controller;
 
-import com.ebidding.bwic.account.api.AccountDTO;
+import com.ebidding.account.api.AccountDTO;
+import com.ebidding.account.api.LoginRequestDTO;
+import com.ebidding.account.api.LoginResponseDTO;
 import com.ebidding.bwic.service.domain.Account;
 import com.ebidding.bwic.service.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.modelmapper.ModelMapper;
+
+import java.util.Optional;
 
 @RestController
 @RequestMapping("api/v1/accounts")
@@ -32,4 +34,13 @@ public class AccountController {
         AccountDTO accountDTO = this.modelMapper.map(account, AccountDTO.class);
         return ResponseEntity.ok(accountDTO);
     }
+
+    @PostMapping()
+    // [POST] http://localhost:8001/api/v1/accounts {}
+    public ResponseEntity<LoginResponseDTO> login(@RequestBody LoginRequestDTO login) {
+        Optional<LoginResponseDTO> loginResponse = this.accountService.login(login.getUsername(), login.getPassword());
+        return loginResponse.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
+    }
+
 }
+

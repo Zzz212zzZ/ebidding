@@ -1,4 +1,4 @@
-package com.ebidding.bwic.account.api;
+package com.ebidding.account.api;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;

@@ -1,6 +1,6 @@
 package com.ebidding.bwic.bid.controller;
 
-import com.ebidding.bwic.account.api.AccountDTO;
+import com.ebidding.account.api.AccountDTO;
 import com.ebidding.bwic.bid.service.BidService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

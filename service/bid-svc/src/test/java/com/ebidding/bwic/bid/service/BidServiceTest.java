@@ -1,8 +1,8 @@
 package com.ebidding.bwic.bid.service;
 
 
-import com.ebidding.bwic.account.api.AccountClient;
-import com.ebidding.bwic.account.api.AccountDTO;
+import com.ebidding.account.api.AccountClient;
+import com.ebidding.account.api.AccountDTO;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.ResponseEntity;
 

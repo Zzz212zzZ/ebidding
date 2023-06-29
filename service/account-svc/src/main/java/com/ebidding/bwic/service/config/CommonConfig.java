@@ -1,6 +1,6 @@
 package com.ebidding.bwic.service.config;
 
-import com.ebidding.bwic.common.config.EBiddingConfig;
+import com.ebidding.common.config.EBiddingConfig;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
