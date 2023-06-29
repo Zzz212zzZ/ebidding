@@ -2,6 +2,7 @@ package com.ebidding.bwic.gateway.filter;
 
 
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.ebidding.common.auth.AuthConstant;
 import com.ebidding.common.utils.JwtUtils;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
@@ -32,10 +33,14 @@ public class JwtFilter extends AbstractGatewayFilterFactory {
                     String token = splits[1];
                     try {
                         DecodedJWT decodedJWT = JwtUtils.VerifyToken(token);
-                        //If you want to build a "pre" filter you need to manipulate the
-                        //request before calling chain.filter
-                        ServerHttpRequest.Builder builder = exchange.getRequest().mutate();
-                        //use builder to manipulate the request
+                        String userId = decodedJWT.getClaim(AuthConstant.CLAIM_USER_ID).asString();
+                        String name = decodedJWT.getClaim(AuthConstant.CLAIM_USER_NAME).asString();
+                        String role = decodedJWT.getClaim(AuthConstant.CLAIM_ROLE).asString();
+                        ServerHttpRequest.Builder builder = exchange.getRequest().mutate()
+                                .header(AuthConstant.X_JWT_ID_HEADER, userId)
+                                .header(AuthConstant.X_JWT_NAME_HEADER, name)
+                                .header(AuthConstant.X_JWT_ROLE_HEADER, role);
+
                         return chain.filter(exchange.mutate().request(builder.build()).build());
                     } catch (Exception ex) {
                         return OnUnAuthorized(exchange);

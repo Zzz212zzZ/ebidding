@@ -1,7 +1,7 @@
-package com.ebidding.bwic.bid.config;
+package com.ebidding.bid.config;
 
 
-import com.ebidding.bwic.bid.controller.BidController;
+import com.ebidding.bid.controller.BidController;
 import com.fasterxml.classmate.TypeResolver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

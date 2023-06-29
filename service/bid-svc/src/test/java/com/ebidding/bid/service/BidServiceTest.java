@@ -1,4 +1,4 @@
-package com.ebidding.bwic.bid.service;
+package com.ebidding.bid.service;
 
 
 import com.ebidding.account.api.AccountClient;
