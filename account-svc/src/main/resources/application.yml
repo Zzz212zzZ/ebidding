@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: dev
+    active: uat
 
 server:
   port: 8001
