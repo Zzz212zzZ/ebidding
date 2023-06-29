@@ -24,7 +24,7 @@ public class AccountController {
     @GetMapping()
     public ResponseEntity<AccountDTO> getAccount(@RequestParam("name") String name) {
 //      Account account= accountService.findByName(name);
-//        return ResponseEntity.ok(this.accountService.findByName(name));
+//      return ResponseEntity.ok(this.accountService.findByName(name));
         Account account = this.accountService.findByName(name);
         // Account -> AccountDTO
         AccountDTO accountDTO = this.modelMapper.map(account, AccountDTO.class);
