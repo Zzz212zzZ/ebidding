@@ -28,15 +28,10 @@ public class JwtUtils {
     }
 
     public static DecodedJWT VerifyToken(String token) {
-        try {
-            Algorithm algorithm = Algorithm.HMAC256(SECRET.getBytes(StandardCharsets.UTF_8));
-            JWTVerifier verifier = JWT.require(algorithm)
-                    // reusable verifier instance
-                    .build();
-            return verifier.verify(token);
-        } catch (JWTCreationException exception) {
-            log.error(exception.getMessage());
-        }
-        return null;
+        Algorithm algorithm = Algorithm.HMAC256(SECRET.getBytes(StandardCharsets.UTF_8));
+        JWTVerifier verifier = JWT.require(algorithm)
+                // reusable verifier instance
+                .build();
+        return verifier.verify(token);
     }
 }

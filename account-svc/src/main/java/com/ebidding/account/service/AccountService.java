@@ -27,10 +27,10 @@ public class AccountService {
     }
 
     public Optional<LoginResponseDTO> login(String username, String password) {
-        return this.accountRepository.findByName(username)
+        return this.accountRepository.findByName(username)//设置断点截获数据
                 .filter(acc -> {
                     try {
-                        return Objects.equals(acc.getPassword_hash(), HashUtils.encode(password));
+                        return Objects.equals(acc.getPassword_hash(), HashUtils.encode(password));//设置断点截获数据
                     } catch (Exception e) {
                         return false;
                     }
