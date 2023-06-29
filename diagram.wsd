@@ -1,67 +1,79 @@
 @startuml
+
+Class Account {
+  +String accountId (PK)
+  +String name
+  +String role
+  +String password
+}
+
 Class Bid {
-  +Integer id
-  +String clientId
-  +String bwicId
+  +String bidID (PK)
+  +String accountId (FK)
   +Double price
-  +Double size
-  +String transactionId
   +Long rank
-  +DateTime effectiveTime
-  +Long version
-  +Boolean active
+  +LocalDateTime time
+  +String bwicID
+}
+
+class BidRank {
+  +String bidID (FK,PK)
+  +String accountId
+  +Double price
+  +LocalDateTime time
+  +String bwicID
 }
 
 Class BWIC {
-  +String id
-  +String traderId
-  +String cusip
+  +String bwicID (PK)
+  +String boundID (FK)
   +Double size
-  +Double startingPrice
-  +DateTime dueDate
+  +Double startPrice
+  +LocalDateTime startTime
+  +LocalDateTime dueTime
+  +Long times
+}
+
+Class Bond {
+  +String bondID (FK)
+  +String cusip 
+  +String issuer
+  +String rating
+  +Double coupon
+  +LocalDateTime maturityDate
+}
+
+Class AccountService {
+  +void login(String accountId, String password)
+  +Account findById(String accountId)
+  +List<BWIC> recommendBWIC(String accountId)
 }
 
 Class BidService {
-  +Bid createBid(CreateBidRequest createBidRequest, String clientId)
-  +void deleteBid(String bidId, String clientId)
+  +Bid createBid(String cusip, Double price)
+  +void updateRank(String bwicId, Long newRank)  #insert Bid, update BidRank
+  +Long getRank(String bidId)
+  +List<Bid> bidHistoryRecord(String accountId)
 }
 
 Class BWICService {
-  +BWIC createBWIC(CreateBWICRequest createBWICRequest, String traderId)
-  +List<BWIC> getActiveBWICs()
-  +List<Bid> getBidHistory(String clientId)
+  +BWIC createBWIC(BWIC bwic)
+  +Long getRank(String accountId, String bidId)  #获得当前用户的rank
+  +boolean isActive(String bwicId)
+  +List<BWIC> bwicHistoryRecord(String accountId)
+  +Double getPrice(String bwicId)
 }
 
-Class Client {
-  +String id
-  +String name
-}
-
-Class Trader {
-  +String id
-  +String name
-}
-
-Class ClientService {
-  +List<Bid> getSelfBidHistory(String clientId)
-  +int getSelfBidRank(String bidId, String clientId)
-  +List<BWIC> recommendBWICs(String clientId)
-}
-
-Class TraderService {
-  +void login(String traderId)
-  +void logout(String traderId)
-}
-
+AccountService --> Account : Uses
 BidService --> Bid : Uses
+BidService --> BidRank : Uses
 BWICService --> BWIC : Uses
-BidService --> BWICSehrvice : Collaborates
-BWICService --> BidService : Collaborates
-Bid --> BWIC : Bids on
-Client --> ClientService : Uses
-Trader --> TraderService : Uses
-ClientService --> BidService : Uses
-ClientService --> BWICService : Uses
-TraderService --> BWICService : Uses
+BidService --> BWICService : Calls
+BWICService --> BidService : Calls
+Bid --> BWIC : Relies on
+Bid --> Account : Relies on
+BidRank --> Bid : Relies on
+BWIC --> Bond : Relies on
+AccountService --> BWICService : Calls
 
 @enduml
