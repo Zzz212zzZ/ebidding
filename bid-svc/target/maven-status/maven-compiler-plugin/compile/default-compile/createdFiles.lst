@@ -1,0 +1,4 @@
+com\ebidding\bid\BidServiceApplication.class
+com\ebidding\bid\service\BidService.class
+com\ebidding\bid\config\SwaggerConfig.class
+com\ebidding\bid\controller\BidController.class
