@@ -15,8 +15,8 @@ Software architecture description
 #### Instructions
 
 1.  xxxx
-2.  xxxx
-3.  xxxx
+2.  tyx
+3.  tyx
 
 #### Contribution
 
@@ -35,3 +35,4 @@ Software architecture description
 5.  The manual of Gitee [https://gitee.com/help](https://gitee.com/help)
 6.  The most popular members  [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
 7. lyy
+7.  xwxhhhhhh
