@@ -9,7 +9,8 @@
 		<module>account-api</module>
 		<module>common-lib</module>
 		<module>gateway</module>
-	</modules>
+        <module>admin</module>
+    </modules>
 	<groupId>com.ebidding</groupId>
 	<artifactId>service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>

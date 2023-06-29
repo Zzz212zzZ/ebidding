@@ -23,4 +23,5 @@ public class Account {
     private AccountRole role;
 
     private String passwordHash;
+
 }
