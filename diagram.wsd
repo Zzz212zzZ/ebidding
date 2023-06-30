@@ -47,21 +47,23 @@ Class AccountService {
   +void login(String accountId, String password)
   +Account findById(String accountId)
   +List<BWIC> recommendBWIC(String accountId)
+  +Long getRank (String bwicId, String accountId)
+  +Double getPrice(Long rank, String bwicId)
 }
 
 Class BidService {
   +Bid createBid(String cusip, Double price)
   +void updateRank(String bwicId, Long newRank)  #insert Bid, update BidRank
   +Long getRank(String bidId)
+  +Double getPrice(Long rank, String bwicId)
   +List<Bid> bidHistoryRecord(String accountId)
 }
 
 Class BWICService {
-  +BWIC createBWIC(BWIC bwic)
-  +Long getRank(String accountId, String bidId)  #获得当前用户的rank
+  +BWIC createBWIC(String bondId, Double startPrice, LocalDateTime startTime, LocalDateTime dueTime)
   +boolean isActive(String bwicId)
   +List<BWIC> bwicHistoryRecord(String accountId)
-  +Double getPrice(String bwicId)
+  +Double getPrice(String bwicId, Long rank)
 }
 
 AccountService --> Account : Uses
@@ -75,5 +77,6 @@ Bid --> Account : Relies on
 BidRank --> Bid : Relies on
 BWIC --> Bond : Relies on
 AccountService --> BWICService : Calls
+AccountService --> BidService : Calls
 
 @enduml

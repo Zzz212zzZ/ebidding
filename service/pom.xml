@@ -10,7 +10,8 @@
 		<module>common-lib</module>
 		<module>gateway</module>
 		<module>bwic-svc</module>
-	</modules>
+        <module>bwic-api</module>
+    </modules>
 	<groupId>com.ebidding</groupId>
 	<artifactId>service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>

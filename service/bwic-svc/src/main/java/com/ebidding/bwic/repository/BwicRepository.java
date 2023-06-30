@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -18,7 +19,9 @@ public interface BwicRepository extends JpaRepository<Bwic, Long> {
     //SELECT * FROM BOND WHERE BWIC_ID = ?
     Optional<Bwic> findByBwicId(long bwicId);
 
+    List<Bwic> findAllByDueTimeAfterOrderByDueTimeAsc(LocalDateTime time);
 
+    List<Bwic> findAllByDueTimeBeforeOrderByDueTimeDesc(LocalDateTime time);
 
 
 

@@ -8,6 +8,9 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -52,6 +55,17 @@ public class BwicService {
     public boolean isActive(Long bwicId) {
         Bwic bwic = this.bwicRepository.findByBwicId(bwicId).orElse(null);
         return bwic.getDueTime().isAfter(LocalDateTime.now());
+    }
+
+    public Map<String, List<Bwic>> getHistoryRecords() {
+        List<Bwic> activeBwics = bwicRepository.findAllByDueTimeAfterOrderByDueTimeAsc(LocalDateTime.now());
+        List<Bwic> inactiveBwics = bwicRepository.findAllByDueTimeBeforeOrderByDueTimeDesc(LocalDateTime.now());
+
+        Map<String, List<Bwic>> result = new HashMap<>();
+        result.put("active", activeBwics);
+        result.put("inactive", inactiveBwics);
+
+        return result;
     }
 
 

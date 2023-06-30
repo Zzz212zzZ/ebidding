@@ -12,7 +12,9 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Builder
 @Entity
+
 public class Account {
+
     @Id
     @Column(name = "id", nullable = false)
     private String id;
