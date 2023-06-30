@@ -6,5 +6,4 @@ server:
   port: 8002
 
 ebidding:
-  account-endpoint: localhost:8001\
-  bid-endpoint: localhost:8002\
+  account-endpoint: localhost:8001

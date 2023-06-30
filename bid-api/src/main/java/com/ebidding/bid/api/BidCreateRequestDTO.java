@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class BidCreateRequestDTO {
-    private int bwicId;
+    private Long bwicId;
 
     private Double price;
 }

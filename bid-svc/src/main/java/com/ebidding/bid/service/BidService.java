@@ -35,17 +35,15 @@ public class BidService {
         return this.bidRepository.findById(bidId).orElse(null);
     }
 
-    public Bid createBid(Bid bid){
-        return bidRepository.save(bid);
-    }
-
-    public BidRank update(Long bidId,BidRank bid){
-        return bid;
-    }
+//    public Bid createBid(Bid bid){
+//        return bidRepository.save(bid);
+//    }
+//
+//    public BidRank update(Long bidId,BidRank bid){
+//        return bid;
+//    }
 
     public BidRank findBybidId(Long bidId){
         return this.bidRankRepository.findBybidId(bidId).orElse(null);
     }
-
-
 }

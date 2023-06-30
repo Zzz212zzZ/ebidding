@@ -2,6 +2,7 @@ package com.ebidding.bid.controller;
 
 import com.ebidding.account.api.AccountDTO;
 import com.ebidding.bid.api.BidCreateRequestDTO;
+import com.ebidding.bid.api.BidCreateResponseDTO;
 import com.ebidding.bid.domain.Bid;
 import com.ebidding.bid.domain.BidRank;
 import com.ebidding.bid.service.BidService;
@@ -13,8 +14,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
-
 @RestController
 @RequestMapping("api/v1/bids")
 public class BidController {
@@ -23,7 +22,7 @@ public class BidController {
 
     @Autowired
     private ModelMapper modelMapper;
-//
+
 //    @RequestHeader(AuthConstant.X_JWT_ID_HEADER) String userId;
 //
     @GetMapping()//默认"api/v1/bids"
@@ -32,11 +31,17 @@ public class BidController {
         return ResponseEntity.ok(this.bidService.findByName(name));
     }
 
-    @GetMapping("/bidIds")//"api/v1/bids/bidids"
-    public ResponseEntity<Bid> getBid(@RequestParam("bid_id") Long bidId){
-        return ResponseEntity.ok(this.bidService.findById(bidId));
+    @GetMapping("/bidDtos")//"api/v1/bids/bidids"
+    public ResponseEntity<BidCreateResponseDTO> getsomeBid(@RequestParam("bid_id") Long bidId){
+        Bid bid = this.bidService.findById(bidId);
+        BidCreateResponseDTO bidCreateResponseDTO = this.modelMapper.map(bid, BidCreateResponseDTO.class);
+        return ResponseEntity.ok(bidCreateResponseDTO);
     }
 
+    @GetMapping("/bidIds")
+    public  ResponseEntity<Bid> getBid(@RequestParam("bid_id") Long bidId){
+        return ResponseEntity.ok(this.bidService.findById(bidId));
+    }
 //    @PostMapping("/creates")
 //    public ResponseEntity<BidCreateRequestDTO> createBid(@RequestBody BidCreateRequestDTO bidCreateRequestDTO){
 //        Bid bidRequest = modelMapper.map(bidCreateRequestDTO,Bid.class);
