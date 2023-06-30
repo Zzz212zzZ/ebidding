@@ -7,3 +7,4 @@ server:
 
 ebidding:
   account-endpoint: localhost:8001
+  bid-endpoint: localhost:8002

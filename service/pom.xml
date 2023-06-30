@@ -5,12 +5,13 @@
 	<packaging>pom</packaging>
 	<modules>
 		<module>account-svc</module>
-		<module>bid-svc</module>
 		<module>account-api</module>
 		<module>common-lib</module>
 		<module>gateway</module>
 		<module>bwic-svc</module>
         <module>bwic-api</module>
+		<module>bid-svc</module>
+		<module>bid-api</module>
     </modules>
 	<groupId>com.ebidding</groupId>
 	<artifactId>service</artifactId>

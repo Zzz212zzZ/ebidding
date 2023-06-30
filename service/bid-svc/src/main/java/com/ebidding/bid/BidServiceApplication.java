@@ -7,7 +7,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @SpringBootApplication
 @EnableFeignClients(basePackages = {"com.ebidding.account"})
 public class BidServiceApplication {
-	public static void main(String[] args) {
-		SpringApplication.run(BidServiceApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(BidServiceApplication.class, args);
+    }
 }
