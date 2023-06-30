@@ -31,9 +31,11 @@ public class JwtFilter extends AbstractGatewayFilterFactory {
                     String token = splits[1];
                     try {
                         DecodedJWT decodedJWT = JwtUtils.VerifyToken(token);
+                        //Filter从gateway拿到heder(Request -> Gateway)
                         String userId = decodedJWT.getClaim(AuthConstant.CLAIM_USER_ID).asString();
                         String name = decodedJWT.getClaim(AuthConstant.CLAIM_USER_NAME).asString();
                         String role = decodedJWT.getClaim(AuthConstant.CLAIM_ROLE).asString();
+                        //header -> svc
                         ServerHttpRequest.Builder builder = exchange.getRequest().mutate()
                                 .header(AuthConstant.X_JWT_ID_HEADER, userId)
                                 .header(AuthConstant.X_JWT_NAME_HEADER, name)

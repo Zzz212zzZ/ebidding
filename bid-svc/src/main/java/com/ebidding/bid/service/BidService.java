@@ -18,7 +18,7 @@ public class BidService {
 //        this.accountClient = accountClient;
 //    }用@RequiredArgsConstructor代替
 
-    public AccountDTO findByName(String inputName) {
+    public AccountDTO findByName(String inputName) {//调用account-api
         return this.accountClient.getAccount(inputName).getBody();
     }
 }

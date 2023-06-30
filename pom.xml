@@ -9,6 +9,9 @@
 		<module>account-api</module>
         <module>common-lib</module>
 		<module>gateway</module>
+		<module>bwic-svc</module>
+		<module>bid-api</module>
+		<module>bwic-api</module>
 	</modules>
 	<groupId>com.ebidding</groupId>
 	<artifactId>service</artifactId>
