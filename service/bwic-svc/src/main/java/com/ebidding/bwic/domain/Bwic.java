@@ -22,7 +22,7 @@ public class Bwic {
 
     @Id
     @Column(name = "bwic_id", nullable = false)
-    private String bwicId;
+    private Long bwicId;
 
     @Column(name = "bond_id", nullable = false)
     private String bondId;
@@ -41,4 +41,6 @@ public class Bwic {
 
     @Column(name = "bid_counts")
     private Long bidCounts;
+
+
 }

@@ -1,9 +1,12 @@
 package com.ebidding.bwic.repository;
 
+import com.ebidding.bwic.api.BwicDTO;
 import com.ebidding.bwic.domain.Bwic;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 
@@ -13,6 +16,10 @@ public interface BwicRepository extends JpaRepository<Bwic, Long> {
 //    Optional<Bwic> findByCusip(String cusip);
 
     //SELECT * FROM BOND WHERE BWIC_ID = ?
-    Optional<Bwic> findByBwicId(String bwicId);
+    Optional<Bwic> findByBwicId(long bwicId);
+
+
+
+
 
 }

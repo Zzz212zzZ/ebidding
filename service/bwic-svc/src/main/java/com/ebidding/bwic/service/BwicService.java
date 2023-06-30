@@ -1,9 +1,14 @@
 package com.ebidding.bwic.service;
 
+import com.ebidding.bwic.api.BwicDTO;
 import com.ebidding.bwic.domain.Bwic;
 import com.ebidding.bwic.repository.BwicRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Service
 public class BwicService {
@@ -14,10 +19,40 @@ public class BwicService {
 //        return this.bwicRepository.findByCusip(cusip).orElse(null);
 //    }
 
-public Bwic findByBwicId(String bwicId) {
-        return this.bwicRepository.findByBwicId(bwicId).orElse(null);
+
+
+    public Optional<BwicDTO> saveBwic(String bondId, BigDecimal startPrice, LocalDateTime startTime, LocalDateTime dueTime, double size) {
+        Bwic bwic = Bwic.builder()
+                .bondId(bondId)
+                .startPrice(startPrice)
+                .startTime(startTime)
+                .dueTime(dueTime)
+                .size(size)
+                .bidCounts(0L)   // default value
+                .build();
+
+        Bwic savedBwic = bwicRepository.save(bwic);
+
+        BwicDTO savedBwicDTO = BwicDTO.builder()
+                .bondId(savedBwic.getBondId())
+                .startPrice(savedBwic.getStartPrice())
+                .startTime(savedBwic.getStartTime())
+                .dueTime(savedBwic.getDueTime())
+                .size(savedBwic.getSize())
+                .build();
+
+        return Optional.of(savedBwicDTO);
     }
 
+    public BigDecimal getBwicPrice(Long bwicId) {
+        Bwic bwic = this.bwicRepository.findByBwicId(bwicId).orElse(null);
+        return bwic.getStartPrice();
+    }
+
+    public boolean isActive(Long bwicId) {
+        Bwic bwic = this.bwicRepository.findByBwicId(bwicId).orElse(null);
+        return bwic.getDueTime().isAfter(LocalDateTime.now());
+    }
 
 
 }
