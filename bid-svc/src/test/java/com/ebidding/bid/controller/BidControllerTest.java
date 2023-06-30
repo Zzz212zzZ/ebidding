@@ -31,7 +31,7 @@ public class BidControllerTest {
     @Test
     public void TestBidController() {
         // step 1: prepare test data
-        AccountDTO accountDTO = AccountDTO.builder().id("1").build();
+        AccountDTO accountDTO = AccountDTO.builder().id(1l).build();
         // step 2: mock interface
         when(bidService.findByName("tyx")).thenReturn(accountDTO);
         // step 3: init test instance
@@ -42,7 +42,7 @@ public class BidControllerTest {
     @Test
     public void TestBidControllerWithMvc() throws Exception {
         // step 1: prepare test data
-        AccountDTO accountDTO = AccountDTO.builder().id("1").build();
+        AccountDTO accountDTO = AccountDTO.builder().id(1l).build();
         // step 2: mock interface
         when(bidService.findByName("tyx")).thenReturn(accountDTO);
         // step 3: init test instance
@@ -58,7 +58,7 @@ public class BidControllerTest {
     @Test
     public void TestInvalidBidControllerWithMvc() throws Exception {
         // step 1: prepare test data
-        AccountDTO accountDTO = AccountDTO.builder().id("1").build();
+        AccountDTO accountDTO = AccountDTO.builder().id(1l).build();
         // step 2: mock interface
         when(bidService.findByName("tyx")).thenReturn(accountDTO);
         // step 3: init test instance

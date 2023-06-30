@@ -1,4 +1,4 @@
-package com.ebidding.account.api;
+package com.ebidding.bid.api;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,11 +9,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class AccountDTO {
-    //不传密码
-    private Long id;
+public class BidCreateRequestDTO {
+    private int bwicId;
 
-    private String name;
-
-    private String role;
+    private Double price;
 }
+

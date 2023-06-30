@@ -19,7 +19,7 @@ public class Account {
     //@Id标注用于声明一个实体类的属性映射为数据库的主键列
     @Column(name = "id", nullable = false)
     //id位主键，不能为空
-    private String id;
+    private Long id;
 
     private String name;
 

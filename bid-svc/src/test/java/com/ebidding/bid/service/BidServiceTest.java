@@ -13,7 +13,7 @@ public class BidServiceTest {
     @Test
     public void TestBidService() {
         // step 1: prepare test data
-        AccountDTO accountDTO = AccountDTO.builder().id("1").build();
+        AccountDTO accountDTO = AccountDTO.builder().id(1l).build();
         // step 2: mock interface
         AccountClient client = mock(AccountClient.class);
         when(client.getAccount("tyx")).thenReturn(ResponseEntity.ok(accountDTO));
