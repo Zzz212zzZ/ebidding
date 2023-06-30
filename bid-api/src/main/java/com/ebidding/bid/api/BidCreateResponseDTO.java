@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,6 +19,6 @@ public class BidCreateResponseDTO {
 
     private Double price;
 
-    private Timestamp time;
+    private LocalDateTime time;
 
 }

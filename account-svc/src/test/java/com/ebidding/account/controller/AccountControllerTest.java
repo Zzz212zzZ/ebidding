@@ -30,7 +30,7 @@ public class AccountControllerTest {
     @Test
     public void TestAccountController(){
         // step 1: prepare test data
-        Account account = Account.builder().id(1l).build();
+        Account account = Account.builder().accountId(1l).build();
         // step 2: mock interface
         AccountService mock = org.mockito.Mockito.mock(AccountService.class);
         when(mock.findByName("tyx")).thenReturn(account);
@@ -42,7 +42,7 @@ public class AccountControllerTest {
 
     @Test
     public void TestAccountControllerWithMvc() throws Exception {
-        Account account = Account.builder().id(1l).build();
+        Account account = Account.builder().accountId(1l).build();
         AccountService mock = org.mockito.Mockito.mock(AccountService.class);
         when(mock.findByName("tyx")).thenReturn(account);
 //        when(accountService.findByName("tyx")).thenReturn(account);
@@ -57,7 +57,7 @@ public class AccountControllerTest {
 
     @Test
     public void TestInvalidAccountControllerWithMvc() throws Exception {
-        Account account = Account.builder().id(1l).build();
+        Account account = Account.builder().accountId(1l).build();
         AccountService mock = org.mockito.Mockito.mock(AccountService.class);
         when(mock.findByName("tyx")).thenReturn(account);
 //      when(accountService.findByName("tyx")).thenReturn(account);

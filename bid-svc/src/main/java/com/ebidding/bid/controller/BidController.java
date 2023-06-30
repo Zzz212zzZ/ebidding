@@ -42,9 +42,11 @@ public class BidController {
     public  ResponseEntity<Bid> getBid(@RequestParam("bid_id") Long bidId){
         return ResponseEntity.ok(this.bidService.findById(bidId));
     }
+
 //    @PostMapping("/creates")
 //    public ResponseEntity<BidCreateRequestDTO> createBid(@RequestBody BidCreateRequestDTO bidCreateRequestDTO){
 //        Bid bidRequest = modelMapper.map(bidCreateRequestDTO,Bid.class);
+//
 //    }
 
     @GetMapping("/bidRanks")

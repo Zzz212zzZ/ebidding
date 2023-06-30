@@ -17,9 +17,9 @@ import javax.persistence.*;
 public class Account {
     @Id
     //@Id标注用于声明一个实体类的属性映射为数据库的主键列
-    @Column(name = "id", nullable = false)
+    @Column(name = "account_id", nullable = false)
     //id位主键，不能为空
-    private Long id;
+    private Long accountId;
 
     private String name;
 

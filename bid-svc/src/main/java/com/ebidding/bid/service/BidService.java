@@ -2,13 +2,17 @@ package com.ebidding.bid.service;
 
 import com.ebidding.account.api.AccountDTO;
 import com.ebidding.account.api.AccountClient;
+import com.ebidding.bid.api.BidCreateRequestDTO;
 import com.ebidding.bid.domain.Bid;
 import com.ebidding.bid.domain.BidRank;
 import com.ebidding.bid.repository.BidRankRepository;
 import com.ebidding.bid.repository.BidRepository;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -27,6 +31,9 @@ public class BidService {
     @Autowired
     private BidRankRepository bidRankRepository;
 
+    @Autowired
+    private ModelMapper modelMapper;
+
     public AccountDTO findByName(String inputName) {//调用account-api
         return this.accountClient.getAccount(inputName).getBody();
     }
@@ -35,10 +42,19 @@ public class BidService {
         return this.bidRepository.findById(bidId).orElse(null);
     }
 
-//    public Bid createBid(Bid bid){
-//        return bidRepository.save(bid);
+//    public Bid findBybwicId(Long bwicId) {
+//        return this.bidRepository.findBybwicId(bwicId).orElse(null);
 //    }
 //
+//    public Optional<BidCreateRequestDTO> saveBid(Long bwicId,Double price){
+//        return this.bidRepository.findBybwicId(bwicId)
+//                .map(bid -> {
+//                    BidCreateRequestDTO bidCreateRequestDTO = modelMapper.map(bid,BidCreateRequestDTO.class);
+//
+//                    return bidCreateRequestDTO;
+//                });
+//    }
+
 //    public BidRank update(Long bidId,BidRank bid){
 //        return bid;
 //    }

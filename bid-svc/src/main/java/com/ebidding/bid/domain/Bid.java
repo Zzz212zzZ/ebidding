@@ -10,6 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
@@ -27,7 +29,7 @@ public class Bid {
 
     private Long ranking;
 
-    private Timestamp time;
+    private LocalDateTime time;
 
     private Long bwicId;
 }

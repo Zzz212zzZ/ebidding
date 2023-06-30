@@ -16,7 +16,7 @@ public class AccountServiceTest {
     @Test
     public void TestAccountService(){
         // step 1: prepare test data
-        Account account = Account.builder().id(1l).build();
+        Account account = Account.builder().accountId(1l).build();
         // step 2: mock interface
         AccountRepository repository = mock(AccountRepository.class);
         when(repository.findByName("tyx")).thenReturn(Optional.of(account));
