@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class LoginResponseDTO {
-    private String id;
+    private int id;
 
     private String name;
 

@@ -9,6 +9,9 @@ import java.util.Optional;
 @Repository
 public interface AccountRepository extends JpaRepository<Account, String> {
     // SELECT ... FROM Account Where NAME = ${inputName}
+    Optional<Account> findById(int inputId);
+
     Optional<Account> findByName(String inputName);
+
 }
 

@@ -28,12 +28,13 @@ public class AccountController {
     // http://localhost:8001/api/v1/accounts?name={inputName}
     // http://localhost:8001/api/v1/accounts/1
     // [GET] http://localhost:8001/api/v1/accounts {}
-    public ResponseEntity<AccountDTO> getAccount(@RequestParam("name") String name) {
-        Account account = this.accountService.findByName(name);
+    public ResponseEntity<AccountDTO> getAccount(@RequestParam("id") int id) {
+        Account account = this.accountService.findById(id);
         // Account -> AccountDTO
         AccountDTO accountDTO = this.modelMapper.map(account, AccountDTO.class);
         return ResponseEntity.ok(accountDTO);
     }
+
 
     @PostMapping()
     // [POST] http://localhost:8001/api/v1/accounts {}

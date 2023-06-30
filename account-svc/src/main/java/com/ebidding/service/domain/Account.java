@@ -14,8 +14,8 @@ import javax.persistence.*;
 @Entity
 public class Account {
     @Id
-    @Column(name = "id", nullable = false)
-    private String id;
+    @Column(name = "account_id", nullable = false)
+    private int id;
 
     private String name;
 
