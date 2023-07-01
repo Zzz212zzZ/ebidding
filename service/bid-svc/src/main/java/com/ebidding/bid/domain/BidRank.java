@@ -6,9 +6,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.sql.Timestamp;
+
+
 
 @Data
 @NoArgsConstructor
@@ -16,16 +19,11 @@ import java.sql.Timestamp;
 @Builder
 @Entity(name = "bidrank")
 public class BidRank {
-    @Id
-    @Column(name = "bid_id",nullable = false)
-    private Long bidId;
-
-    private Long accountId;
+    @EmbeddedId
+    private BidRankPK id;
 
     private Double price;
 
     private Timestamp time;
-
-    private Long bwicId;
 }
 

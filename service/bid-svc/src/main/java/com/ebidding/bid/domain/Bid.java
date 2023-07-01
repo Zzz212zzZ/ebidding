@@ -15,9 +15,9 @@ import java.sql.Timestamp;
 @Builder
 @Entity(name = "bid")
 public class Bid {
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name = "bid_id", nullable = false)
+    @Column(name = "bid_id")
     private Long bidId;      // name: bid_id
 
     @Column(name = "account_id")

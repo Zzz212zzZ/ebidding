@@ -4,6 +4,7 @@ import com.ebidding.account.api.AccountDTO;
 import com.ebidding.account.api.AccountClient;
 import com.ebidding.bid.domain.Bid;
 import com.ebidding.bid.domain.BidRank;
+import com.ebidding.bid.domain.BidRankPK;
 import com.ebidding.bid.repository.BidRankRepository;
 import com.ebidding.bid.repository.BidRepository;
 import lombok.RequiredArgsConstructor;
@@ -44,24 +45,27 @@ public class BidService {
 
 
     public Bid createBid(Bid bid) {
-        // 1. 添加时间戳，并将 Bid 存入数据库
-        bid.setTime(new Timestamp(System.currentTimeMillis()));
-        Bid savedBid = bidRepository.save(bid);
-        Long bidId = savedBid.getBidId();  // 获取保存后的 bidId
 
-        // 2. 设置 bidId，将 Bid 转为 BidRank，并存入数据库
-        bid.setBidId(bidId);
-        BidRank bidRank = modelMapper.map(bid, BidRank.class);
-        BidRank savedBidRank = bidRankRepository.save(bidRank);
 
-        // 3. 通过 bidId 和 ranking 查询 bidRank 表中的 rank 字段
+        // 1. 添加AccountId和BwicId,再添加时间戳
+        BidRank bidRank = new BidRank();
+        BidRankPK embbedeId = new BidRankPK(bid.getAccountId(), bid.getBwicId());
+        bidRank.setId(embbedeId);
+        bidRank.setPrice(bid.getPrice());
+        Timestamp preTime=new Timestamp(System.currentTimeMillis());
+        bidRank.setTime(preTime);
+        bid.setTime(preTime);
+
+        //2.现在获取排名
+        this.bidRankRepository.save(bidRank);
         Long ranking = bidRankRepository.getRanking(bid.getBwicId(), bid.getPrice(), bid.getTime());
 
-        // 4. 通过 bidId 和 ranking 更新 bidRank 表中的 rank 字段
+        // 3. 更新Bid的排名
         bid.setRanking(ranking);
-        bidRepository.save(bid);
+        this.bidRepository.save(bid);
 
-        return savedBid;
+
+        return bid;
     }
 
 

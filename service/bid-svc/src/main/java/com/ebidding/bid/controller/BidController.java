@@ -4,6 +4,7 @@ import com.ebidding.account.api.AccountDTO;
 import com.ebidding.bid.api.BidCreateRequestDTO;
 import com.ebidding.bid.domain.Bid;
 import com.ebidding.bid.domain.BidRank;
+import com.ebidding.bid.domain.BidRankPK;
 import com.ebidding.bid.service.BidService;
 import com.ebidding.common.auth.AuthConstant;
 import com.ebidding.common.auth.Authorize;
@@ -44,18 +45,23 @@ public class BidController {
     public ResponseEntity<BidCreateRequestDTO> createBid(@RequestBody BidCreateRequestDTO bidCreateRequestDTO, HttpServletRequest request){
         //获取header里面的bid_id
         String currentAccountId = request.getHeader(AuthConstant.X_JWT_ID_HEADER);
+        Long accountId =Long.valueOf(currentAccountId);
 
-        Optional<Long> accountId = Optional.ofNullable(Long.valueOf(currentAccountId));
-        if(!accountId.isPresent()){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-        }
+//        // 创建BidRankPK对象，包含accountId和bwicId
+//        BidRankPK id = new BidRankPK(accountId.get(), bidCreateRequestDTO.getBwicId());
 
-        Bid bid = modelMapper.map(bidCreateRequestDTO,Bid.class);
-        bid.setAccountId(accountId.get());
-        //现在的bid只有输入的price和bwicId，以及从请求头获取的accountId。但是还缺少bidTime和bidRank
+        //创建新的Bid
+        Bid bid = new Bid();
+        //设置id
+        bid.setAccountId(accountId);
+        bid.setPrice(bidCreateRequestDTO.getPrice());
+        bid.setBwicId(bidCreateRequestDTO.getBwicId());
+
+        // 现在的bid只有输入的price和bwicId（在BidRankPK中），以及从请求头获取的accountId。但是还缺少bidTime和bidRank
         bidService.createBid(bid);
         return ResponseEntity.status(HttpStatus.CREATED).body(bidCreateRequestDTO);
     }
+
 
 
 //    @GetMapping("/bidRanks")
