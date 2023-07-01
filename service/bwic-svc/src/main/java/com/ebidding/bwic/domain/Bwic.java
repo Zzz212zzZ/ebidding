@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 @Data
@@ -34,13 +35,13 @@ public class Bwic {
     private double presentPrice;
 
     @Column(name = "start_time")
-    private LocalDateTime startTime;
+    private Timestamp startTime;
 
     @Column(name = "due_time")
-    private LocalDateTime dueTime;
+    private Timestamp dueTime;
 
     @Column(name = "last_bid_time")
-    private LocalDateTime lastBidTime;
+    private Timestamp lastBidTime;
 
     @Column(name = "bid_counts")
     private Long bidCounts;

@@ -3,6 +3,7 @@ package com.ebidding.bwic.controller;
 
 import com.ebidding.bwic.api.BwicDTO;
 import com.ebidding.bwic.domain.Bwic;
+import com.ebidding.bwic.service.BondService;
 import com.ebidding.bwic.service.BwicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,6 +11,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
+import java.sql.Time;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -17,6 +21,9 @@ import java.util.Optional;
 @RestController
 @RequestMapping("api/v1/bwics")
 public class BwicController {
+    @Autowired
+    private BondService bondService;
+
     @Autowired
     private BwicService bwicService;
 
@@ -68,14 +75,17 @@ public class BwicController {
     }
 
 
-    @PutMapping("/{bwicId}/incrementBidCount")
-    public ResponseEntity<Void> incrementBidCount(@PathVariable("bwicId") Long bwicId) {
-        bwicService.incrementBidCount(bwicId);
-        return ResponseEntity.noContent().build();  // Respond with 204 No Content status
+    @PostMapping("/update")
+    public ResponseEntity<Void> updateBwic(@RequestParam("bwicId") Long bwicId,
+                                           @RequestParam("price") double price,
+                                           @RequestParam("time") Timestamp time) {
+        this.bwicService.updateBwicAndBond(bwicId, price, time);
+
+        return ResponseEntity.ok().build();
     }
 
-    
 
-    
+
+
 
 }

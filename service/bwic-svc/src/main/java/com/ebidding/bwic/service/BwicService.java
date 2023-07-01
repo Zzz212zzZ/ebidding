@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
@@ -21,15 +22,9 @@ public class BwicService {
     private BwicRepository bwicRepository;
 
     @Autowired
-    private BondRepository bondRepository;
+    private BondService bondService;
 
-//    public Bwic findByCusip(String cusip) {
-//        return this.bwicRepository.findByCusip(cusip).orElse(null);
-//    }
-
-
-
-    public Optional<BwicDTO> saveBwic(String bondId, double startPrice, LocalDateTime startTime, LocalDateTime dueTime, double size) {
+    public Optional<BwicDTO> saveBwic(String bondId, double startPrice, Timestamp startTime, Timestamp dueTime, double size) {
         Bwic bwic = Bwic.builder()
                 .bondId(bondId)
                 .startPrice(startPrice)
@@ -61,8 +56,13 @@ public class BwicService {
 
     public boolean isActive(Long bwicId) {
         Bwic bwic = this.bwicRepository.findByBwicId(bwicId).orElse(null);
-        return bwic.getDueTime().isAfter(LocalDateTime.now());
+        if (bwic == null) {
+            throw new RuntimeException("Bwic not found");
+        }
+        LocalDateTime dueTime = bwic.getDueTime().toLocalDateTime();
+        return dueTime.isAfter(LocalDateTime.now());
     }
+
 
     public Map<String, List<Bwic>> getHistoryRecords() {
         List<Bwic> activeBwics = bwicRepository.findAllByDueTimeAfterOrderByDueTimeAsc(LocalDateTime.now());
@@ -81,7 +81,8 @@ public class BwicService {
         Bwic bwic = this.bwicRepository.findByBwicId(bwicId).orElse(null);
         String bondId = bwic.getBondId();
         //再根据bondId查询bond表，获取cusip
-        String cusip = this.bondRepository.findByBondId(bondId).orElse(null).getCusip();
+
+        String cusip = bondService.findCuSipByBondId(bondId);
         return cusip;
     }
 
@@ -91,5 +92,27 @@ public class BwicService {
     public void incrementBidCount(Long bwicId) {
         bwicRepository.incrementBidCount(bwicId);
     }
+
+
+
+    public void updateBwicAndBond(Long bwicId, double price, Timestamp time) {
+        Bwic bwic = this.bwicRepository.findById(bwicId)
+                .orElseThrow(() -> new RuntimeException("Bwic not found"));
+
+        bwic.setBidCounts(bwic.getBidCounts() + 1);
+        bwic.setLastBidTime(time);
+
+        if (price  > bwic.getPresentPrice()) {
+            bwic.setPresentPrice(price);
+        }
+
+        this.bwicRepository.save(bwic);
+
+        //更新bond表
+        bondService.incrementTransactionCount(bwic.getBondId());
+
+    }
+
+
 
 }

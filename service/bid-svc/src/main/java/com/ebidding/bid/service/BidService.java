@@ -2,6 +2,7 @@ package com.ebidding.bid.service;
 
 import com.ebidding.account.api.AccountDTO;
 import com.ebidding.account.api.AccountClient;
+import com.ebidding.bwic.api.BwicClient;
 import com.ebidding.bid.api.PriceResponseDTO;
 import com.ebidding.bid.domain.Bid;
 import com.ebidding.bid.domain.BidRank;
@@ -26,7 +27,11 @@ public class BidService {
     @Autowired
     private final AccountClient accountClient;
 
-//    @Autowired
+    @Autowired
+    private BwicClient bwicClient;
+
+
+    //    @Autowired
 //    public BidService(AccountClient accountClient) {
 //        this.accountClient = accountClient;
 //    }用@RequiredArgsConstructor代替
@@ -68,7 +73,9 @@ public class BidService {
         bid.setRanking(ranking);
         this.bidRepository.save(bid);
 
-        //最后还要更新bwic中的
+        //最后还要更新bwic中的bidCounts，last_bid_time，和present_price(如果比present_price高的话)
+        //这个方法还要更新bond中的transaction_counts
+        bwicClient.updateBwic(bid.getBwicId(),bid.getPrice(),bid.getTime());
 
         return bid;
     }

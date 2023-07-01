@@ -12,7 +12,14 @@ import java.util.Optional;
 
 public interface BidRankRepository extends JpaRepository<BidRank, Long> {
 
-    @Query(nativeQuery = true, value = "SELECT COUNT(*) + 1 FROM (SELECT * FROM bidrank WHERE bwic_id = :bwicId ORDER BY price DESC, time ASC) AS ranks WHERE account_id < :accountId OR (account_id = :accountId AND time < (SELECT time FROM bidrank WHERE bwic_id = :bwicId AND account_id = :accountId))")
+    @Query(nativeQuery = true, value = "" +
+            "SELECT COUNT(*)+1 \n" +
+            "FROM bidrank \n" +
+            "WHERE bwic_id = :bwicId \n" +
+            "AND account_id != :accountId \n" +
+            "AND (price > (SELECT price FROM bidrank WHERE bwic_id = :bwicId AND account_id = :accountId) \n" +
+            "OR (price = (SELECT price FROM bidrank WHERE bwic_id = :bwicId AND account_id = :accountId) AND time < (SELECT time FROM bidrank WHERE bwic_id = :bwicId AND account_id = :accountId)))\n")
+
     Long getRanking(@Param("bwicId") Long bwicId, @Param("accountId") Long accountId);
 
     @Query(value = "SELECT * FROM bidrank WHERE bwic_id = :bwicId AND account_id = :accountId", nativeQuery = true)
