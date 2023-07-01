@@ -1,4 +1,4 @@
-package com.ebidding.account;
+package com.ebidding.bwic.service;
 
 import com.ebidding.bwic.api.BwicDTO;
 import com.ebidding.bwic.domain.Bwic;
@@ -6,6 +6,7 @@ import com.ebidding.bwic.repository.BondRepository;
 import com.ebidding.bwic.repository.BwicRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -28,12 +29,14 @@ public class BwicService {
 
 
 
-    public Optional<BwicDTO> saveBwic(String bondId, BigDecimal startPrice, LocalDateTime startTime, LocalDateTime dueTime, double size) {
+    public Optional<BwicDTO> saveBwic(String bondId, double startPrice, LocalDateTime startTime, LocalDateTime dueTime, double size) {
         Bwic bwic = Bwic.builder()
                 .bondId(bondId)
                 .startPrice(startPrice)
+                .presentPrice(startPrice)
                 .startTime(startTime)
                 .dueTime(dueTime)
+                .lastBidTime(startTime)
                 .size(size)
                 .bidCounts(0L)   // default value
                 .build();
@@ -51,7 +54,7 @@ public class BwicService {
         return Optional.of(savedBwicDTO);
     }
 
-    public BigDecimal getBwicPrice(Long bwicId) {
+    public double getBwicPrice(Long bwicId) {
         Bwic bwic = this.bwicRepository.findByBwicId(bwicId).orElse(null);
         return bwic.getStartPrice();
     }
@@ -80,6 +83,13 @@ public class BwicService {
         //再根据bondId查询bond表，获取cusip
         String cusip = this.bondRepository.findByBondId(bondId).orElse(null).getCusip();
         return cusip;
-
     }
+
+
+    //加入Transactional，防止并发
+    @Transactional
+    public void incrementBidCount(Long bwicId) {
+        bwicRepository.incrementBidCount(bwicId);
+    }
+
 }

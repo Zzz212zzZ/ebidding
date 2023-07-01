@@ -2,6 +2,7 @@ package com.ebidding.bid.service;
 
 import com.ebidding.account.api.AccountDTO;
 import com.ebidding.account.api.AccountClient;
+import com.ebidding.bid.api.PriceResponseDTO;
 import com.ebidding.bid.domain.Bid;
 import com.ebidding.bid.domain.BidRank;
 import com.ebidding.bid.domain.BidRankPK;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -66,6 +68,8 @@ public class BidService {
         bid.setRanking(ranking);
         this.bidRepository.save(bid);
 
+        //最后还要更新bwic中的
+
         return bid;
     }
 
@@ -84,6 +88,27 @@ public class BidService {
 
     }
 
+    public Long getParticipantCount(Long bwicId) {
+        return bidRankRepository.countByBwicId(bwicId);
+    }
+
+    public PriceResponseDTO getPrice(Long bwicId, Long accountId) {
+
+        PriceResponseDTO response = new PriceResponseDTO();
+        BidRank bidRank = this.bidRankRepository.findByBwicIdAndAccountId(bwicId, accountId).orElseThrow(()-> new NoSuchElementException("Record not found"));
+        response.setPrice(bidRank.getPrice());
+        Long rank = this.getRankByBwicIdAndAccountId(bwicId, accountId);
+        if (rank == 1) {
+            response.setIsFirst(true);
+            if (this.getParticipantCount(bwicId) > 1) {
+                Double secondPrice = this.bidRankRepository.getSecondHighestPrice(bwicId, accountId).orElse(null);
+                response.setSecondPrice(secondPrice);
+            }
+        } else {
+            response.setIsFirst(false);
+        }
+        return response;
+    }
 
 //    public BidRank getByBidId(Long bidId){
 //        return this.bidRankRepository.findByBidId(bidId).orElse(null);

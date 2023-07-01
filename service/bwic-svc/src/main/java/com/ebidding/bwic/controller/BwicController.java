@@ -3,7 +3,7 @@ package com.ebidding.bwic.controller;
 
 import com.ebidding.bwic.api.BwicDTO;
 import com.ebidding.bwic.domain.Bwic;
-import com.ebidding.account.BwicService;
+import com.ebidding.bwic.service.BwicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -41,8 +41,8 @@ public class BwicController {
 
     @GetMapping("/price")
     // [GET] http://localhost:8001/api/v1/bwics/price?bwicId={bwicId}
-    public ResponseEntity<BigDecimal> getBwicPrice(@RequestParam("bwicId") Long bwicId) {
-        BigDecimal price = this.bwicService.getBwicPrice(bwicId);
+    public ResponseEntity<Double> getBwicPrice(@RequestParam("bwicId") Long bwicId) {
+        double price = this.bwicService.getBwicPrice(bwicId);
         return ResponseEntity.ok(price);
     }
 
@@ -65,6 +65,13 @@ public class BwicController {
     public ResponseEntity<Map<String, List<Bwic>>> getHistoryRecords() {
         Map<String, List<Bwic>> historyRecords = this.bwicService.getHistoryRecords();
         return ResponseEntity.ok(historyRecords);
+    }
+
+
+    @PutMapping("/{bwicId}/incrementBidCount")
+    public ResponseEntity<Void> incrementBidCount(@PathVariable("bwicId") Long bwicId) {
+        bwicService.incrementBidCount(bwicId);
+        return ResponseEntity.noContent().build();  // Respond with 204 No Content status
     }
 
     

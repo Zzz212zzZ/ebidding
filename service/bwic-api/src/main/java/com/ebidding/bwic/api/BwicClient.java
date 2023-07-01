@@ -10,4 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface BwicClient {
     @GetMapping("/cusip")
     ResponseEntity<String> getCusip(@RequestParam("bwicId") Long bwicId);
+
+
+
 }

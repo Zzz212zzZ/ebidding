@@ -5,10 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Data
@@ -18,7 +15,6 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "bond")
 public class Bond {
-
     @Id
     @Column(name = "bond_id", nullable = false)
     private String bondId;

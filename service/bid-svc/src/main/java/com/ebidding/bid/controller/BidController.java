@@ -3,6 +3,7 @@ package com.ebidding.bid.controller;
 import com.ebidding.account.api.AccountDTO;
 import com.ebidding.bid.api.BidCreateRequestDTO;
 import com.ebidding.bid.api.BidCreateResponseDTO;
+import com.ebidding.bid.api.PriceResponseDTO;
 import com.ebidding.bid.domain.Bid;
 import com.ebidding.bid.domain.BidRank;
 import com.ebidding.bid.domain.BidRankPK;
@@ -89,6 +90,22 @@ public class BidController {
         return ResponseEntity.ok(rank);
 
     }
+
+
+    @GetMapping("/participants")
+    public ResponseEntity<Long> getParticipantCount(@RequestParam("bwicId") Long bwicId) {
+        Long participantCount = bidService.getParticipantCount(bwicId);
+        return ResponseEntity.ok(participantCount);
+    }
+
+
+    @GetMapping("/price")
+    public ResponseEntity<PriceResponseDTO> getPrice(@RequestParam("bwicId") Long bwicId, @RequestHeader(AuthConstant.X_JWT_ID_HEADER) String accountId) {
+        PriceResponseDTO response = this.bidService.getPrice(bwicId, Long.valueOf(accountId));
+        return ResponseEntity.ok(response);
+    }
+
+
 
 
 

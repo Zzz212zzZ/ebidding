@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @Builder
 public class BwicDTO {
     private String bondId;
-    private BigDecimal startPrice;
+    private Double startPrice;
     private LocalDateTime startTime;
     private LocalDateTime dueTime;
     private double size;
