@@ -58,15 +58,15 @@ public class BidService {
 
         //2.现在获取排名
         this.bidRankRepository.save(bidRank);
-        Long ranking = bidRankRepository.getRanking(bid.getBwicId(), bid.getPrice(), bid.getTime());
+        Long ranking = bidRankRepository.getRanking(bid.getBwicId(),bid.getAccountId(), bid.getPrice(), bid.getTime());
 
         // 3. 更新Bid的排名
         bid.setRanking(ranking);
         this.bidRepository.save(bid);
 
-
         return bid;
     }
+
 
 
 

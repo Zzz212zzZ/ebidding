@@ -2,6 +2,7 @@ package com.ebidding.bwic.service;
 
 import com.ebidding.bwic.api.BwicDTO;
 import com.ebidding.bwic.domain.Bwic;
+import com.ebidding.bwic.repository.BondRepository;
 import com.ebidding.bwic.repository.BwicRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,9 @@ import java.util.Optional;
 public class BwicService {
     @Autowired
     private BwicRepository bwicRepository;
+
+    @Autowired
+    private BondRepository bondRepository;
 
 //    public Bwic findByCusip(String cusip) {
 //        return this.bwicRepository.findByCusip(cusip).orElse(null);
@@ -69,4 +73,13 @@ public class BwicService {
     }
 
 
+    public String getCusip(Long bwicId) {
+        //先根据bwicId查询bwic表，获取bondId
+        Bwic bwic = this.bwicRepository.findByBwicId(bwicId).orElse(null);
+        String bondId = bwic.getBondId();
+        //再根据bondId查询bond表，获取cusip
+        String cusip = this.bondRepository.findByBondId(bondId).orElse(null).getCusip();
+        return cusip;
+
+    }
 }

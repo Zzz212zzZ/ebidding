@@ -2,10 +2,12 @@ package com.ebidding.bid.controller;
 
 import com.ebidding.account.api.AccountDTO;
 import com.ebidding.bid.api.BidCreateRequestDTO;
+import com.ebidding.bid.api.BidCreateResponseDTO;
 import com.ebidding.bid.domain.Bid;
 import com.ebidding.bid.domain.BidRank;
 import com.ebidding.bid.domain.BidRankPK;
 import com.ebidding.bid.service.BidService;
+import com.ebidding.bwic.api.BwicClient;
 import com.ebidding.common.auth.AuthConstant;
 import com.ebidding.common.auth.Authorize;
 import org.modelmapper.ModelMapper;
@@ -26,6 +28,9 @@ public class BidController {
 
     @Autowired
     private ModelMapper modelMapper;
+
+    @Autowired
+    private BwicClient bwicClient;
 //
 //    @RequestHeader(AuthConstant.X_JWT_ID_HEADER) String userId;
 //
@@ -42,7 +47,7 @@ public class BidController {
     }
 
     @PostMapping("/creates")
-    public ResponseEntity<BidCreateRequestDTO> createBid(@RequestBody BidCreateRequestDTO bidCreateRequestDTO, HttpServletRequest request){
+    public ResponseEntity<BidCreateResponseDTO> createBid(@RequestBody BidCreateRequestDTO bidCreateRequestDTO, HttpServletRequest request){
         //获取header里面的bid_id
         String currentAccountId = request.getHeader(AuthConstant.X_JWT_ID_HEADER);
         Long accountId =Long.valueOf(currentAccountId);
@@ -58,8 +63,20 @@ public class BidController {
         bid.setBwicId(bidCreateRequestDTO.getBwicId());
 
         // 现在的bid只有输入的price和bwicId（在BidRankPK中），以及从请求头获取的accountId。但是还缺少bidTime和bidRank
-        bidService.createBid(bid);
-        return ResponseEntity.status(HttpStatus.CREATED).body(bidCreateRequestDTO);
+        Bid createdBid = bidService.createBid(bid);
+
+        //将Bid对象转换为BidCreateResponseDTO对象
+        BidCreateResponseDTO responseDTO = new BidCreateResponseDTO();
+        responseDTO.setPrice(createdBid.getPrice());
+        responseDTO.setRanking(createdBid.getRanking());
+        responseDTO.setTime(createdBid.getTime());
+                    //下面将createdBid的bwicId转化为cusip。
+        ResponseEntity<String> response = bwicClient.getCusip(createdBid.getBwicId());
+        String cusip = response.getBody();
+        responseDTO.setCusip(cusip);
+
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(responseDTO);
     }
 
 

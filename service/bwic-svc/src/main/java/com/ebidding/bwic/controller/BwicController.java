@@ -50,6 +50,15 @@ public class BwicController {
         return ResponseEntity.ok(price);
     }
 
+    //根据bwicId获取cusip
+    @GetMapping("/cusip")
+    // [GET] http://localhost:8001/api/v1/bwics/cusip?bwicId={bwicId}
+    public ResponseEntity<String> getCusip(@RequestParam("bwicId") Long bwicId) {
+        String cusip = this.bwicService.getCusip(bwicId);
+        return ResponseEntity.ok(cusip);
+    }
+
+
     @GetMapping("/active")
     public ResponseEntity<Boolean> isActive(@RequestParam("bwicId")  Long bwicId) {
         boolean isActive = bwicService.isActive(bwicId);
