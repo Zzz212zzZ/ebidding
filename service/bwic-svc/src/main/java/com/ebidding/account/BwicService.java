@@ -1,4 +1,4 @@
-package com.ebidding.bwic.service;
+package com.ebidding.account;
 
 import com.ebidding.bwic.api.BwicDTO;
 import com.ebidding.bwic.domain.Bwic;

@@ -1,4 +1,4 @@
-package com.ebidding.bwic.service.config;
+package com.ebidding.account.config;
 
 import com.ebidding.common.config.EBiddingConfig;
 import org.springframework.context.annotation.Configuration;

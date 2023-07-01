@@ -1,10 +1,10 @@
-package com.ebidding.bwic.service.controller;
+package com.ebidding.account.controller;
 
 import com.ebidding.account.api.AccountDTO;
 import com.ebidding.account.api.LoginRequestDTO;
 import com.ebidding.account.api.LoginResponseDTO;
-import com.ebidding.bwic.service.domain.Account;
-import com.ebidding.bwic.service.service.AccountService;
+import com.ebidding.account.domain.Account;
+import com.ebidding.account.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

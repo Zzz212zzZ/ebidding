@@ -1,6 +1,6 @@
-package com.ebidding.bwic.service.config;
+package com.ebidding.account.config;
 
-import com.ebidding.bwic.service.controller.AccountController;
+import com.ebidding.account.controller.AccountController;
 import com.fasterxml.classmate.TypeResolver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

@@ -1,8 +1,8 @@
-package com.ebidding.bwic.service.service;
+package com.ebidding.account.service;
 
 import com.ebidding.account.api.LoginResponseDTO;
-import com.ebidding.bwic.service.domain.Account;
-import com.ebidding.bwic.service.repository.AccountRepository;
+import com.ebidding.account.domain.Account;
+import com.ebidding.account.repository.AccountRepository;
 import com.ebidding.common.utils.HashUtils;
 import com.ebidding.common.utils.JwtUtils;
 import org.modelmapper.ModelMapper;

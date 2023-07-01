@@ -14,12 +14,14 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 //针对标有 @NonNull 注解的变量和 final 变量进行参数的构造方法。
 public class BidService {
 
+    @Autowired
     private final AccountClient accountClient;
 
 //    @Autowired
@@ -58,7 +60,7 @@ public class BidService {
 
         //2.现在获取排名
         this.bidRankRepository.save(bidRank);
-        Long ranking = bidRankRepository.getRanking(bid.getBwicId(),bid.getAccountId(), bid.getPrice(), bid.getTime());
+        Long ranking = bidRankRepository.getRanking(bid.getBwicId(),bid.getAccountId());
 
         // 3. 更新Bid的排名
         bid.setRanking(ranking);
@@ -67,7 +69,20 @@ public class BidService {
         return bid;
     }
 
+    public Long getRankByBwicIdAndAccountId(Long bwicId, Long accountId) {
 
+        // 检查bidRank是否存在
+        Optional<BidRank> bidRankOptional = this.bidRankRepository.findByBwicIdAndAccountId(bwicId, accountId);
+
+        // 判断是否存在，存在则调用getRanking方法，不存在则抛出异常
+        if (bidRankOptional.isPresent()) {
+            return this.bidRankRepository.getRanking(bwicId, accountId);
+        } else {
+            throw new RuntimeException("BidRank not found");
+        }
+
+
+    }
 
 
 //    public BidRank getByBidId(Long bidId){

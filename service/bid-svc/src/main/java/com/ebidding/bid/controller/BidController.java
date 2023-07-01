@@ -31,6 +31,8 @@ public class BidController {
 
     @Autowired
     private BwicClient bwicClient;
+
+
 //
 //    @RequestHeader(AuthConstant.X_JWT_ID_HEADER) String userId;
 //
@@ -78,6 +80,16 @@ public class BidController {
 
         return ResponseEntity.status(HttpStatus.CREATED).body(responseDTO);
     }
+
+
+    @GetMapping("/rank")
+    public ResponseEntity<Long> getRealTimeRank(@RequestParam("bwicId") Long bwicId, @RequestHeader(AuthConstant.X_JWT_ID_HEADER) String accountId) {
+
+        Long rank = this.bidService.getRankByBwicIdAndAccountId(bwicId, Long.valueOf(accountId));
+        return ResponseEntity.ok(rank);
+
+    }
+
 
 
 

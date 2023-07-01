@@ -11,8 +11,13 @@ import java.util.List;
 import java.util.Optional;
 
 public interface BidRankRepository extends JpaRepository<BidRank, Long> {
-    @Query(nativeQuery = true, value = "SELECT COUNT(*) + 1 FROM bidrank WHERE bwic_id = :bwicId AND (price > :price OR (price = :price AND time < :time)) AND not (bwic_id = :bwicId AND account_id = :accountId)")
-    Long getRanking(@Param("bwicId") Long bwicId, @Param("accountId") Long accountId, @Param("price") Double price, @Param("time") Timestamp time);
+
+    @Query(nativeQuery = true, value = "SELECT COUNT(*) + 1 FROM (SELECT * FROM bidrank WHERE bwic_id = :bwicId ORDER BY price DESC, time ASC) AS ranks WHERE account_id < :accountId OR (account_id = :accountId AND time < (SELECT time FROM bidrank WHERE bwic_id = :bwicId AND account_id = :accountId))")
+    Long getRanking(@Param("bwicId") Long bwicId, @Param("accountId") Long accountId);
+
+    @Query(value = "SELECT * FROM bidrank WHERE bwic_id = :bwicId AND account_id = :accountId", nativeQuery = true)
+    Optional<BidRank> findByBwicIdAndAccountId(@Param("bwicId") Long bwicId, @Param("accountId") Long accountId);
+
 
 }
 
