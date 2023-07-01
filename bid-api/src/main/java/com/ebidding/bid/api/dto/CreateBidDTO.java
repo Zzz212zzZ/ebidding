@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @Data
 public class CreateBidDTO {
-    private int bwicId;
+    private Long bwicId;
 
     private Double price;
 

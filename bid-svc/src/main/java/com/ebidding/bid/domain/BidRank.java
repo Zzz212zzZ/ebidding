@@ -19,12 +19,12 @@ public class BidRank {
 
     @Id
     @Column(name = "bid_id", nullable = false)
-    private int bidId;
+    private Long bidId;
 
     @Column(name = "account_id", nullable = false)
-    private int accountId;
+    private Long accountId;
 
-    private int bwicId;
+    private Long bwicId;
 
     private Double price;
 

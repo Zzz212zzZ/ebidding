@@ -5,9 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Data
@@ -17,15 +15,16 @@ import java.time.LocalDate;
 @Entity
 
 public class Bid {
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "bid_id", nullable = false)
-    private int bidId;
+    private Long bidId;
 
     @Column(name = "account_id", nullable = false)
-    private int accountId;
+    private Long accountId;
 
     @Column(name = "bwic_id", nullable = false)
-    private int bwicId;
+    private Long bwicId;
 
     @Column(name = "price", nullable = false)
     private Double price;

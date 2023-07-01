@@ -15,11 +15,11 @@ import java.time.LocalDate;
 public class BidRankDTO {
     @Id
 
-    private int bidId;
+    private Long bidId;
 
-    private int accountId;
+    private Long accountId;
 
-    private int bwicId;
+    private Long bwicId;
 
     private Double price;
 

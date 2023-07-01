@@ -15,9 +15,9 @@ import java.time.LocalDate;
 public class BidDTO {
     @Id
 
-    private int bidId;
+    private Long bidId;
 
-    private int bwicId;
+    private Long bwicId;
 
     private Double price;
 

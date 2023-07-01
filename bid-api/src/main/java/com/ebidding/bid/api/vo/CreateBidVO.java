@@ -14,9 +14,9 @@ import java.time.LocalDate;
 
 public class CreateBidVO {
 
-    private int accountId;
+    private Long accountId;
 
-    private int bwicId;
+    private Long bwicId;
 
     private Double price;
 

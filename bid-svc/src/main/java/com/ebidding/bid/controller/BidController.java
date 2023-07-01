@@ -21,7 +21,7 @@ public class BidController {
     private BidService bidService;
 
     @GetMapping()
-    @Authorize(AuthConstant.TRADER)
+    @Authorize(AuthConstant.CLIENT)
     public ResponseEntity<AccountDTO> getBid(@RequestParam("name") String name) {
         ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = requestAttributes.getRequest();
@@ -30,14 +30,14 @@ public class BidController {
     }
 
     @PostMapping("createBid")
-    @Authorize(AuthConstant.TRADER)
+    @Authorize(AuthConstant.CLIENT)
     public ResponseEntity<String> createBid(@RequestBody CreateBidDTO bidCreateDTO) {
         ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = requestAttributes.getRequest();
         String userId = request.getHeader("X-jwt-id");
 
         Bid bid = new Bid();
-        bid.setAccountId(Integer.parseInt(userId));
+        bid.setAccountId(Long.valueOf(userId));
         bid.setPrice(bidCreateDTO.getPrice());
         bid.setBwicId(bidCreateDTO.getBwicId());
         bidService.createBid(bid);
