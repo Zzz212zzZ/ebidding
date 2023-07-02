@@ -27,4 +27,5 @@ public class EBiddingConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new AuthHandlerInterceptor());
     }
+
 }

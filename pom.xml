@@ -5,12 +5,15 @@
 	<packaging>pom</packaging>
 	<modules>
 		<module>account-svc</module>
-		<module>bid-svc</module>
 		<module>account-api</module>
 		<module>common-lib</module>
 		<module>gateway</module>
-        <module>admin</module>
-    </modules>
+		<module>bwic-svc</module>
+        <module>bwic-api</module>
+		<module>bid-svc</module>
+		<module>bid-api</module>
+
+	</modules>
 	<groupId>com.ebidding</groupId>
 	<artifactId>service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
@@ -20,8 +23,7 @@
 		<java.version>11</java.version>
 		<spring-cloud.version>2020.0.6</spring-cloud.version>
 		<spring.boot.version>2.5.7</spring.boot.version>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<nacos.version>2020.0.RC1</nacos.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -29,13 +31,13 @@
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
 
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 			<scope>runtime</scope>
 			<optional>true</optional>
 		</dependency>
-
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
@@ -81,7 +83,17 @@
 			<version>3.0.0</version>
 		</dependency>
 
-
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-loadbalancer</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.alibaba.cloud</groupId>
+			<artifactId>spring-cloud-alibaba-dependencies</artifactId>
+			<version>${nacos.version}</version>
+			<type>pom</type>
+			<scope>import</scope>
+		</dependency>
 	</dependencies>
 
 	<dependencyManagement>
@@ -173,4 +185,3 @@
 	</reporting>
 
 </project>
-

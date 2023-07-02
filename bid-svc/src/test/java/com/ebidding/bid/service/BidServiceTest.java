@@ -1,6 +1,5 @@
 package com.ebidding.bid.service;
 
-
 import com.ebidding.account.api.AccountClient;
 import com.ebidding.account.api.AccountDTO;
 import org.junit.jupiter.api.Test;
@@ -14,13 +13,13 @@ public class BidServiceTest {
     @Test
     public void TestBidService() {
         // step 1: prepare test data
-        AccountDTO accountDTO = AccountDTO.builder().id("001").build();
+        AccountDTO accountDTO = AccountDTO.builder().id(1l).build();
         // step 2: mock interface
         AccountClient client = mock(AccountClient.class);
-        when(client.getAccount("xwx")).thenReturn(ResponseEntity.ok(accountDTO));
+        when(client.getAccount("tyx")).thenReturn(ResponseEntity.ok(accountDTO));
         // step 3: init test instance
         BidService bidService = new BidService(client);
         // step 4: test and assert
-        assertThat(bidService.findByName("xwx")).isEqualTo(accountDTO);
+        assertThat(bidService.findByName("tyx")).isEqualTo(accountDTO);
     }
 }
