@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("api/v1/bids")
+@RequestMapping("api/v1/bid-service")
 public class BidController {
     @Autowired
     private BidService bidService;
@@ -37,19 +37,19 @@ public class BidController {
 //
 //    @RequestHeader(AuthConstant.X_JWT_ID_HEADER) String userId;
 //
-    @GetMapping()//默认"api/v1/bids"
-    @Authorize(AuthConstant.TRADER)
-    public ResponseEntity<AccountDTO> getBid(@RequestParam("name") String name) {
-        return ResponseEntity.ok(this.bidService.getByName(name));
-    }
+//    @GetMapping("/accounts")//默认"api/v1/bids"
+//    @Authorize(AuthConstant.TRADER)
+//    public ResponseEntity<AccountDTO> getBid(@RequestParam("name") String name) {
+//        return ResponseEntity.ok(this.bidService.getByName(name));
+//    }
 
     @Authorize(AuthConstant.TRADER)
-    @GetMapping("/bidIds")//"api/v1/bids/bidids"
-    public ResponseEntity<Bid> getBid(@RequestParam("bid_id") Long bidId){
+    @GetMapping("/bids/{bidId}")
+    public ResponseEntity<Bid> getBid(@PathVariable("bidId") Long bidId){
         return ResponseEntity.ok(this.bidService.getByBidId(bidId));
     }
 
-    @PostMapping("/creates")
+    @PostMapping("/bids")
     public ResponseEntity<BidCreateResponseDTO> createBid(@RequestBody BidCreateRequestDTO bidCreateRequestDTO, HttpServletRequest request){
         //获取header里面的bid_id
         String currentAccountId = request.getHeader(AuthConstant.X_JWT_ID_HEADER);
@@ -83,7 +83,7 @@ public class BidController {
     }
 
 
-    @GetMapping("/rank")
+    @GetMapping("/bids/{bidId}/rank")
     public ResponseEntity<Long> getRealTimeRank(@RequestParam("bwicId") Long bwicId, @RequestHeader(AuthConstant.X_JWT_ID_HEADER) String accountId) {
 
         Long rank = this.bidService.getRankByBwicIdAndAccountId(bwicId, Long.valueOf(accountId));
@@ -92,15 +92,15 @@ public class BidController {
     }
 
 
-    @GetMapping("/participants")
-    public ResponseEntity<Long> getParticipantCount(@RequestParam("bwicId") Long bwicId) {
+    @GetMapping("/bwics/{bwicId}/bids/count")
+    public ResponseEntity<Long> getParticipantCount(@PathVariable("bwicId") Long bwicId) {
         Long participantCount = bidService.getParticipantCount(bwicId);
         return ResponseEntity.ok(participantCount);
     }
 
 
-    @GetMapping("/price")
-    public ResponseEntity<PriceResponseDTO> getPrice(@RequestParam("bwicId") Long bwicId, @RequestHeader(AuthConstant.X_JWT_ID_HEADER) String accountId) {
+    @GetMapping("/bids/{bidId}/price")
+    public ResponseEntity<PriceResponseDTO> getPrice(@PathVariable("bwicId") Long bwicId, @RequestHeader(AuthConstant.X_JWT_ID_HEADER) String accountId) {
         PriceResponseDTO response = this.bidService.getPrice(bwicId, Long.valueOf(accountId));
         return ResponseEntity.ok(response);
     }

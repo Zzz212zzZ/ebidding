@@ -19,7 +19,7 @@ import java.util.Map;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("api/v1/bwics")
+@RequestMapping("api/v1/bwic-service")
 public class BwicController {
     @Autowired
     private BondService bondService;
@@ -32,7 +32,7 @@ public class BwicController {
 //        this.bwicService.findByCusip(cusip);
 //        return ResponseEntity.ok(this.bwicService.findByCusip(cusip));
 //    }
-    @PostMapping()
+    @PostMapping("/bwics")
     // [POST] http://localhost:8001/api/v1/bwics {}
     public ResponseEntity<BwicDTO> createBwic(@RequestBody BwicDTO bwicDTO) {
         Optional<BwicDTO> createdBwic = this.bwicService.saveBwic(
@@ -46,37 +46,37 @@ public class BwicController {
         return createdBwic.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build());
     }
 
-    @GetMapping("/price")
+    @GetMapping("/bwics/{bwicId}/price")
     // [GET] http://localhost:8001/api/v1/bwics/price?bwicId={bwicId}
-    public ResponseEntity<Double> getBwicPrice(@RequestParam("bwicId") Long bwicId) {
+    public ResponseEntity<Double> getBwicPrice(@PathVariable("bwicId") Long bwicId) {
         double price = this.bwicService.getBwicPrice(bwicId);
         return ResponseEntity.ok(price);
     }
 
     //根据bwicId获取cusip
-    @GetMapping("/cusip")
+    @GetMapping("/bwics/{bwicId}/cusip")
     // [GET] http://localhost:8001/api/v1/bwics/cusip?bwicId={bwicId}
-    public ResponseEntity<String> getCusip(@RequestParam("bwicId") Long bwicId) {
+    public ResponseEntity<String> getCusip(@PathVariable("bwicId") Long bwicId) {
         String cusip = this.bwicService.getCusip(bwicId);
         return ResponseEntity.ok(cusip);
     }
 
 
-    @GetMapping("/active")
-    public ResponseEntity<Boolean> isActive(@RequestParam("bwicId")  Long bwicId) {
+    @GetMapping("/bwics/{bwicId}/status")
+    public ResponseEntity<Boolean> isActive(@PathVariable("bwicId")  Long bwicId) {
         boolean isActive = bwicService.isActive(bwicId);
         return ResponseEntity.ok(isActive);
     }
 
-    @GetMapping("/historyRecords")
+    @GetMapping("/bwics/history")
     public ResponseEntity<Map<String, List<Bwic>>> getHistoryRecords() {
         Map<String, List<Bwic>> historyRecords = this.bwicService.getHistoryRecords();
         return ResponseEntity.ok(historyRecords);
     }
 
 
-    @PostMapping("/update")
-    public ResponseEntity<Void> updateBwic(@RequestParam("bwicId") Long bwicId,
+    @PutMapping("/bwics/{bwicId}")
+    public ResponseEntity<Void> updateBwic(@PathVariable("bwicId") Long bwicId,
                                            @RequestParam("price") double price,
                                            @RequestParam("time") Timestamp time) {
         this.bwicService.updateBwicAndBond(bwicId, price, time);
