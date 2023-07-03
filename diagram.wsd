@@ -1,15 +1,15 @@
 @startuml
 
 Class Account {
-  +String accountId (PK)
+  +Long account_id (PK)
   +String name
   +String role
-  +String password
+  +String password_hash
 }
 
 Class Bid {
-  +String bidID (PK)
-  +String accountId (FK)
+  +Long bid_id (PK)
+  +String account_id
   +Double price
   +Long ranking
   +LocalDateTime time
@@ -17,16 +17,15 @@ Class Bid {
 }
 
 class BidRank {
-  +String bidID (FK,PK)
-  +String accountId
-  +Double price
+  +Long accountId (PK)
+  +Double price (PK)
   +LocalDateTime time
   +String bwicID
 }
 
 Class BWIC {
-  +String bwicID (PK)
-  +String boundID (FK)
+  +Long bwicID (PK)
+  +String bondID (FK)
   +Double size
   +Double startPrice
   +LocalDateTime startTime
@@ -35,7 +34,7 @@ Class BWIC {
 }
 
 Class Bond {
-  +String bondID (FK)
+  +String bondID (PK)
   +String cusip 
   +String issuer
   +String rating
@@ -44,39 +43,37 @@ Class Bond {
 }
 
 Class AccountService {
-  +void login(String accountId, String password)
-  +Account findById(String accountId)
-  +List<BWIC> recommendBWIC(String accountId)
-  +Long getRank (String bwicId, String accountId)
-  +Double getPrice(Long rank, String bwicId)
+  +Optional<LoginResponseDTO> login(String username, String password)
+  +Account findByName(String name)
 }
+
 
 Class BidService {
-  +Bid createBid(String cusip, Double price)
-  +void updateRank(String bwicId, Long newRank)  #insert Bid, update BidRank
-  +Long getRank(String bidId)
-  +Double getPrice(Long rank, String bwicId)
-  +List<Bid> bidHistoryRecord(String accountId)
+  +Bid createBid(Long bwicId, Double price)
+  +Bid getBid(Long bidId)
+  +Double getPrice(Long bidId)
+  +Long getRealTimeRank(Long bidId)
+  +Long getParticipantCount(Long bwicId)
 }
 
+
 Class BWICService {
-  +BWIC createBWIC(String bondId, Double startPrice, LocalDateTime startTime, LocalDateTime dueTime)
-  +boolean isActive(String bwicId)
-  +List<BWIC> bwicHistoryRecord(String accountId)
-  +Double getPrice(String bwicId, Long rank)
+  +BWIC createBWIC(String bondId, Double startPrice, Timestamp startTime, Timestamp dueTime, double size)
+  +void updateBWIC(Long bwicId, double price, Timestamp time)
+  +String getCusip(Long bwicId)
+  +Double getBwicPrice(Long bwicId)
+  +Boolean isActive(Long bwicId)
+  +Map<String, List<BWIC>> getHistoryRecords()
 }
+
 
 AccountService --> Account : Uses
 BidService --> Bid : Uses
 BidService --> BidRank : Uses
 BWICService --> BWIC : Uses
 BidService --> BWICService : Calls
-BWICService --> BidService : Calls
-Bid --> BWIC : Relies on
-Bid --> Account : Relies on
 BidRank --> Bid : Relies on
 BWIC --> Bond : Relies on
-AccountService --> BWICService : Calls
-AccountService --> BidService : Calls
+
 
 @enduml

@@ -67,7 +67,7 @@ public class BidService {
 
         //2.现在获取排名
         this.bidRankRepository.save(bidRank);
-        Long ranking = bidRankRepository.getRanking(bid.getBwicId(),bid.getAccountId());
+        Long ranking = this.getRankByBwicIdAndAccountId(bid.getBwicId(),bid.getAccountId());
 
         // 3. 更新Bid的排名
         bid.setRanking(ranking);
@@ -76,22 +76,13 @@ public class BidService {
         //最后还要更新bwic中的bidCounts，last_bid_time，和present_price(如果比present_price高的话)
         //这个方法还要更新bond中的transaction_counts
         bwicClient.updateBwic(bid.getBwicId(),bid.getPrice(),bid.getTime());
-
         return bid;
     }
 
     public Long getRankByBwicIdAndAccountId(Long bwicId, Long accountId) {
-
         // 检查bidRank是否存在
-        Optional<BidRank> bidRankOptional = this.bidRankRepository.findByBwicIdAndAccountId(bwicId, accountId);
-
-        // 判断是否存在，存在则调用getRanking方法，不存在则抛出异常
-        if (bidRankOptional.isPresent()) {
-            return this.bidRankRepository.getRanking(bwicId, accountId);
-        } else {
-            throw new RuntimeException("BidRank not found");
-        }
-
+        Long ranking = bidRankRepository.getRanking(bwicId,accountId);
+       return ranking;
 
     }
 
