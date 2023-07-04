@@ -1,5 +1,7 @@
 package com.ebidding.bid.service;
 
+import cn.hutool.json.JSONObject;
+import cn.hutool.json.JSONUtil;
 import com.ebidding.account.api.AccountDTO;
 import com.ebidding.account.api.AccountClient;
 import com.ebidding.bwic.api.BwicClient;
@@ -9,15 +11,21 @@ import com.ebidding.bid.domain.BidRank;
 import com.ebidding.bid.domain.BidRankPK;
 import com.ebidding.bid.repository.BidRankRepository;
 import com.ebidding.bid.repository.BidRepository;
+import com.ebidding.common.utils.WebSocketMessageUtil;
+import com.ebidding.common.websocket.UserIdSessionManager;
+import com.ebidding.common.websocket.enums.WebSocketMsgType;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.socket.WebSocketSession;
 
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Service
 @RequiredArgsConstructor
@@ -112,5 +120,28 @@ public class BidService {
 //        return this.bidRankRepository.findByBidId(bidId).orElse(null);
 //    }
 
+
+    public Bid getSuccesBidByBwicid(Long bwicId) {
+        Bid bid = bidRepository.getSuccesBidByBwicid(bwicId);
+        WebSocketSession webSocketSession = UserIdSessionManager.getSession(bid.getAccountId().intValue());
+        JSONObject msgObj = new JSONObject();
+        msgObj.put("msgType", WebSocketMsgType.NOTICE_RESULT_MSG.getCode());
+        msgObj.put("result", "success");
+        msgObj.put("msg", "恭喜您，此次拍卖竞拍成功！");
+        WebSocketMessageUtil.sendMsgToOne(webSocketSession, JSONUtil.toJsonStr(msgObj));
+
+        List<Bid> bidList = bidRepository.getListByBwicid(bwicId);
+        bidList.forEach(bidInfo -> {
+            if(bidInfo.getAccountId().intValue() != bid.getAccountId().intValue()){
+                WebSocketSession webSocketSession1 = UserIdSessionManager.getSession(bidInfo.getAccountId().intValue());
+                JSONObject msgObj1 = new JSONObject();
+                msgObj1.put("msgType", WebSocketMsgType.NOTICE_RESULT_MSG.getCode());
+                msgObj1.put("result", "success");
+                msgObj1.put("msg", "抱歉，您此次拍卖竞拍失败！");
+                WebSocketMessageUtil.sendMsgToOne(webSocketSession1, JSONUtil.toJsonStr(msgObj1));
+            }
+        });
+        return bid;
+    }
 
 }
