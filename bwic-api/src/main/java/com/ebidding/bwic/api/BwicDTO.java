@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 @Data
@@ -14,8 +15,8 @@ import java.time.LocalDateTime;
 @Builder
 public class BwicDTO {
     private String bondId;
-    private BigDecimal startPrice;
-    private LocalDateTime startTime;
-    private LocalDateTime dueTime;
-    private double size;
+    private Double startPrice;
+    private Timestamp startTime;
+    private Timestamp dueTime;
+    private Double size;
 }

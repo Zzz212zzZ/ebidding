@@ -1,6 +1,5 @@
 package com.ebidding.common.config;
 
-
 import com.ebidding.common.auth.AuthFeignRequestInterceptor;
 import com.ebidding.common.auth.AuthHandlerInterceptor;
 import feign.RequestInterceptor;
@@ -28,4 +27,5 @@ public class EBiddingConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new AuthHandlerInterceptor());
     }
+
 }

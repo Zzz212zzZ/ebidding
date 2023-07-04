@@ -1,4 +1,4 @@
-package com.ebidding.account;
+package com.ebidding.service;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

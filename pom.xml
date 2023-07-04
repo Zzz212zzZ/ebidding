@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<packaging>pom</packaging>
 	<modules>
 		<module>account-svc</module>
-		<module>bid-svc</module>
 		<module>account-api</module>
-        <module>common-lib</module>
+		<module>common-lib</module>
 		<module>gateway</module>
 		<module>bwic-svc</module>
+        <module>bwic-api</module>
+		<module>bid-svc</module>
 		<module>bid-api</module>
-		<module>bwic-api</module>
+
 	</modules>
 	<groupId>com.ebidding</groupId>
 	<artifactId>service</artifactId>
@@ -22,13 +23,14 @@
 		<java.version>11</java.version>
 		<spring-cloud.version>2020.0.6</spring-cloud.version>
 		<spring.boot.version>2.5.7</spring.boot.version>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<nacos.version>2020.0.RC1</nacos.version>
 	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
+
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -69,16 +71,30 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-openfeign</artifactId>
 		</dependency>
+
 		<dependency>
 			<groupId>org.modelmapper</groupId>
 			<artifactId>modelmapper</artifactId>
 			<version>3.0.0</version>
 		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-loadbalancer</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.alibaba.cloud</groupId>
+			<artifactId>spring-cloud-alibaba-dependencies</artifactId>
+			<version>${nacos.version}</version>
+			<type>pom</type>
+		</dependency>
 	</dependencies>
+
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
@@ -88,6 +104,7 @@
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
+
 			<dependency>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-dependencies</artifactId>
@@ -96,7 +113,6 @@
 				<scope>import</scope>
 			</dependency>
 		</dependencies>
-
 	</dependencyManagement>
 
 	<build>
@@ -104,7 +120,7 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<version>2.2.6.RELEASE</version>
+				<version>2.5.7</version>
 				<configuration>
 					<excludes>
 						<exclude>
@@ -114,6 +130,7 @@
 					</excludes>
 				</configuration>
 			</plugin>
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
@@ -148,6 +165,7 @@
 			</plugin>
 		</plugins>
 	</build>
+
 	<reporting>
 		<plugins>
 			<plugin>

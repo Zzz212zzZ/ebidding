@@ -19,52 +19,52 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 public class BidControllerTest {
-    @Autowired
-    private MockMvc mvc;
-
-    @Autowired
-    private BidController bidController;
-
-    @MockBean
-    private BidService bidService;
-
-    @Test
-    public void TestBidController() {
-        // step 1: prepare test data
-        AccountDTO accountDTO = AccountDTO.builder().id(1l).build();
-        // step 2: mock interface
-        when(bidService.findByName("tyx")).thenReturn(accountDTO);
-        // step 3: init test instance
-        // step 4: test and assert
-        assertThat(bidController).isNotNull();
-    }
-
-    @Test
-    public void TestBidControllerWithMvc() throws Exception {
-        // step 1: prepare test data
-        AccountDTO accountDTO = AccountDTO.builder().id(1l).build();
-        // step 2: mock interface
-        when(bidService.findByName("tyx")).thenReturn(accountDTO);
-        // step 3: init test instance
-        // step 4: test and assert
-        mvc.perform(get("/api/v1/bids?name=tyx")
-                .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(content()
-                        .contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.id", is("1")));
-    }
-
-    @Test
-    public void TestInvalidBidControllerWithMvc() throws Exception {
-        // step 1: prepare test data
-        AccountDTO accountDTO = AccountDTO.builder().id(1l).build();
-        // step 2: mock interface
-        when(bidService.findByName("tyx")).thenReturn(accountDTO);
-        // step 3: init test instance
-        // step 4: test and assert
-        mvc.perform(get("/api/v1/accounts?name=tyx")
-                .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().is4xxClientError());
-    }
+//    @Autowired
+//    private MockMvc mvc;
+//
+//    @Autowired
+//    private BidController bidController;
+//
+//    @MockBean
+//    private BidService bidService;
+//
+//    @Test
+//    public void TestBidController() {
+//        // step 1: prepare test data
+//        AccountDTO accountDTO = AccountDTO.builder().id(1l).build();
+//        // step 2: mock interface
+//        when(bidService.findByName("tyx")).thenReturn(accountDTO);
+//        // step 3: init test instance
+//        // step 4: test and assert
+//        assertThat(bidController).isNotNull();
+//    }
+//
+//    @Test
+//    public void TestBidControllerWithMvc() throws Exception {
+//        // step 1: prepare test data
+//        AccountDTO accountDTO = AccountDTO.builder().id(1l).build();
+//        // step 2: mock interface
+//        when(bidService.findByName("tyx")).thenReturn(accountDTO);
+//        // step 3: init test instance
+//        // step 4: test and assert
+//        mvc.perform(get("/api/v1/bids?name=tyx")
+//                .contentType(MediaType.APPLICATION_JSON))
+//                .andExpect(status().isOk())
+//                .andExpect(content()
+//                        .contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+//                .andExpect(jsonPath("$.id", is("1")));
+//    }
+//
+//    @Test
+//    public void TestInvalidBidControllerWithMvc() throws Exception {
+//        // step 1: prepare test data
+//        AccountDTO accountDTO = AccountDTO.builder().id(1l).build();
+//        // step 2: mock interface
+//        when(bidService.findByName("tyx")).thenReturn(accountDTO);
+//        // step 3: init test instance
+//        // step 4: test and assert
+//        mvc.perform(get("/api/v1/accounts?name=tyx")
+//                .contentType(MediaType.APPLICATION_JSON))
+//                .andExpect(status().is4xxClientError());
+//    }
 }

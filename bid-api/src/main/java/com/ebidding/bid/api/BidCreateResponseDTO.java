@@ -1,24 +1,24 @@
 package com.ebidding.bid.api;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
+import java.time.LocalTime;
 
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-@Data
 public class BidCreateResponseDTO {
-    private Long accountId;
-
-    private Long bwicId;
 
     private Double price;
 
-    private LocalDateTime time;
+    private Long ranking;
+
+    private Timestamp time;
+
+    private String cusip;
+
 
 }

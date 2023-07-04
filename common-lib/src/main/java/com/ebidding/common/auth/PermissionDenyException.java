@@ -1,4 +1,4 @@
 package com.ebidding.common.auth;
 
-public class PermissionDenyException extends Exception{
+public class PermissionDenyException extends Exception {
 }

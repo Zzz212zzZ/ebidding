@@ -5,13 +5,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+
 import java.sql.Timestamp;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
@@ -19,17 +15,23 @@ import java.time.LocalDateTime;
 @Builder
 @Entity(name = "bid")
 public class Bid {
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "bid_id", nullable = false)
-    private Long bidId;
+    @Column(name = "bid_id")
+    private Long bidId;      // name: bid_id
 
-    private Long accountId;
+    @Column(name = "account_id")
+    private Long accountId;  // name: account_id
 
-    private Double price;
+    @Column(name = "price")
+    private Double price;    // name: price
 
-    private Long ranking;
+    @Column(name = "ranking")
+    private Long ranking;    // name: ranking
 
-    private LocalDateTime time;
+    @Column(name = "time")
+    private Timestamp time;  // name: time
 
-    private Long bwicId;
+    @Column(name = "bwic_id")
+    private Long bwicId;     // name: bwic_id
 }

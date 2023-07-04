@@ -5,11 +5,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 @Data
@@ -19,6 +17,7 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "bwic")
 public class Bwic {
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Id
     @Column(name = "bwic_id", nullable = false)
     private Long bwicId;
@@ -30,14 +29,21 @@ public class Bwic {
     private double size;
 
     @Column(name = "start_price")
-    private BigDecimal startPrice;
+    private double startPrice;
+
+    @Column(name = "present_price")
+    private double presentPrice;
 
     @Column(name = "start_time")
-    private LocalDateTime startTime;
+    private Timestamp startTime;
 
     @Column(name = "due_time")
-    private LocalDateTime dueTime;
+    private Timestamp dueTime;
+
+    @Column(name = "last_bid_time")
+    private Timestamp lastBidTime;
 
     @Column(name = "bid_counts")
     private Long bidCounts;
+
 }

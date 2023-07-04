@@ -44,7 +44,7 @@ public class SwaggerConfig {
                 .genericModelSubstitutes(ResponseEntity.class)
                 .alternateTypeRules(
                         newRule(typeResolver.resolve(DeferredResult.class,
-                                typeResolver.resolve(ResponseEntity.class, WildcardType.class)),
+                                        typeResolver.resolve(ResponseEntity.class, WildcardType.class)),
                                 typeResolver.resolve(WildcardType.class)))
                 .useDefaultResponseMessages(false)
                 .enableUrlTemplating(true)

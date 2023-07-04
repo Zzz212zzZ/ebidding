@@ -5,9 +5,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-//@FeignClient(name = "bid-service", path = "api/v1/bids", url = "${ebidding.bid-endpoint}")
-//public interface BidClient {
+@FeignClient(name = "bid-service", path = "api/v1/bid-service", url = "${ebidding.bid-endpoint}")
+public interface BidClient {
 //    @GetMapping("/")
-//    ResponseEntity<BidCreateRequestDTO> getBid(@RequestParam("bid_id") Long bidId);
-//}
-//
+//    ResponseEntity<BidCreateRequestDTO> gitBid(@RequestParam("bid_id") Long bidId);
+}
+
