@@ -29,7 +29,7 @@ public class AccountService {
         return this.accountRepository.findByName(username)
                 .filter(acc -> {
                     try {
-                        return Objects.equals(acc.getPassword_hash(), HashUtils.encode(password));
+                        return Objects.equals(acc.getPasswordHash(), HashUtils.encode(password));
                     } catch (Exception e) {
                         return false;
                     }

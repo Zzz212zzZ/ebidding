@@ -16,11 +16,12 @@ import javax.persistence.*;
 public class Account {
 
     @Id
-    @Column(name = "id", nullable = false)
-    private String id;
-
+    @Column(name = "account_id", nullable = false)
+    private String accountId;
+    @Column(name = "name", nullable = false)
     private String name;
-    private String password_hash;
+    @Column(name = "password_hash", nullable = false)
+    private String passwordHash;
 
     @Enumerated(EnumType.STRING)
     private AccountRole role;
