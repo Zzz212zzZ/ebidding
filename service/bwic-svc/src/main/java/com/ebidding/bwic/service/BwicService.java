@@ -57,7 +57,7 @@ public class BwicService {
 
     public double getBwicPrice(Long bwicId) {
         Bwic bwic = this.bwicRepository.findByBwicId(bwicId).orElse(null);
-        return bwic.getStartPrice();
+        return bwic.getPresentPrice();
     }
 
     public boolean isActive(Long bwicId) {

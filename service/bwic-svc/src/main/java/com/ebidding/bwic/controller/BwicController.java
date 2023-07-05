@@ -47,6 +47,7 @@ public class BwicController {
     }
 
     @GetMapping("/bwics/{bwicId}/price")
+    //返回现在的价格
     // [GET] http://localhost:8001/api/v1/bwics/price?bwicId={bwicId}
     public ResponseEntity<Double> getBwicPrice(@PathVariable("bwicId") Long bwicId) {
         double price = this.bwicService.getBwicPrice(bwicId);

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';  // 导入 Router 服务
+import { UserService } from './core/services/user.service';
 
 @Component({
   selector: 'app-root',
@@ -7,8 +7,11 @@ import { Router } from '@angular/router';  // 导入 Router 服务
   styleUrls: ['./app.component.less']
 })
 
-export class AppComponent {
- 
+export class AppComponent implements OnInit{
+  constructor(private userService: UserService){
+  }
 
-  
+  ngOnInit(): void {
+    const user = this.userService.getUser();
+  }
 }

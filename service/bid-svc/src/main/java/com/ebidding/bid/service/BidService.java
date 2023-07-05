@@ -104,14 +104,13 @@ public class BidService {
         BidRank bidRank = this.bidRankRepository.findByBwicIdAndAccountId(bwicId, accountId).orElseThrow(()-> new NoSuchElementException("Record not found"));
         response.setPrice(bidRank.getPrice());
         Long rank = this.getRankByBwicIdAndAccountId(bwicId, accountId);
+        response.setRanking(rank);
         if (rank == 1) {
-            response.setIsFirst(true);
+            response.setRanking(this.bidRankRepository.getRanking(bwicId, accountId));
             if (this.getParticipantCount(bwicId) > 1) {
                 Double secondPrice = this.bidRankRepository.getSecondHighestPrice(bwicId, accountId).orElse(null);
                 response.setSecondPrice(secondPrice);
             }
-        } else {
-            response.setIsFirst(false);
         }
         return response;
     }

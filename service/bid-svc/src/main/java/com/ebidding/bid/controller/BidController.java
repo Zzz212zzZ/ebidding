@@ -99,7 +99,8 @@ public class BidController {
     }
 
 
-    @GetMapping("/bids/{bidId}/price")
+    @GetMapping("/bwics/{bwicId}/account/price-info")
+    //这是用户界面的接口，用户界面需要知道自己的price，排名以及第二名的price（如果自己是第一名的话）
     public ResponseEntity<PriceResponseDTO> getPrice(@PathVariable("bwicId") Long bwicId, @RequestHeader(AuthConstant.X_JWT_ID_HEADER) String accountId) {
         PriceResponseDTO response = this.bidService.getPrice(bwicId, Long.valueOf(accountId));
         return ResponseEntity.ok(response);

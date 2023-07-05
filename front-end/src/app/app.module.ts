@@ -15,14 +15,13 @@ import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { BwicOverviewComponent } from './pages/client-portal/bwic-overview/bwic-overview.component';
 import { LoginComponent } from './pages/login/login.component';
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { NzTabsModule } from 'ng-zorro-antd/tabs';
 
 
 registerLocaleData(en);
@@ -32,7 +31,6 @@ registerLocaleData(en);
     AppComponent,
     BwicOverviewComponent,
     LoginComponent,
-    DashboardComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,7 +46,8 @@ registerLocaleData(en);
     NzButtonModule,     
     NzGridModule,       
     NzCheckboxModule,   
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NzTabsModule
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US }
