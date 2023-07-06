@@ -8,6 +8,7 @@ import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { FormsModule } from '@angular/forms';
 import { NgForOf } from '@angular/common';
+import { WebsocketComponent } from '../websocket/websocket.component';
 
 
 
@@ -31,7 +32,8 @@ interface Person {
     NzTableModule,
     NzDividerModule,
     NgForOf,
-    NzCardModule
+    NzCardModule,
+    WebsocketComponent
   ],
   templateUrl: './welcome.component.html',
   styleUrls: ['./welcome.component.less']
