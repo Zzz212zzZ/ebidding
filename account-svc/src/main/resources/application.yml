@@ -1,7 +1,6 @@
 spring:
   profiles:
     active: uat
-
   application:
     name: account-service
 

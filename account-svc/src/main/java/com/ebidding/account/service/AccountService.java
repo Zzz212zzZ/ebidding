@@ -20,8 +20,8 @@ public class AccountService {
     @Autowired
     private ModelMapper modelMapper;
 
-    public Account findById(int inputId) {
-        return this.accountRepository.findById(inputId).orElse(null);
+    public Account findByName(String inputName) {
+        return this.accountRepository.findByName(inputName).orElse(null);
     }
 
 
@@ -36,7 +36,7 @@ public class AccountService {
                 })
                 .map(acc -> {
                     LoginResponseDTO user = modelMapper.map(acc, LoginResponseDTO.class);
-                    user.setToken(JwtUtils.SignToken(String.valueOf(user.getId()), user.getName(), user.getRole()));
+                    user.setToken(JwtUtils.SignToken(user.getId(), user.getName(), user.getRole()));
                     return user;
                 });
     }

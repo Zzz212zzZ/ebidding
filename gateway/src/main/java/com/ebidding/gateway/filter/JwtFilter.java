@@ -1,5 +1,6 @@
 package com.ebidding.gateway.filter;
 
+
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.ebidding.common.auth.AuthConstant;
 import com.ebidding.common.utils.JwtUtils;
@@ -13,17 +14,18 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
 @Component
 public class JwtFilter extends AbstractGatewayFilterFactory {
-
     @Override
     public GatewayFilter apply(Object config) {
         // Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJuYW1lIjoiS3VvIiwicm9sZSI6IlRSQURFUiJ9.9AisoVbr5HLULQy6WQpfBrpCGTIYE7L58NLTAv2wEZk
         return (exchange, chain) -> {
             List<String> headers = exchange.getRequest().getHeaders().getOrDefault(HttpHeaders.AUTHORIZATION, new ArrayList<>());
+            System.out.println("headers: " + headers);
             if (headers.size() > 0) {
                 String authorization = headers.get(0);
                 String[] splits = authorization.split("\\s");
@@ -38,6 +40,7 @@ public class JwtFilter extends AbstractGatewayFilterFactory {
                                 .header(AuthConstant.X_JWT_ID_HEADER, userId)
                                 .header(AuthConstant.X_JWT_NAME_HEADER, name)
                                 .header(AuthConstant.X_JWT_ROLE_HEADER, role);
+
                         return chain.filter(exchange.mutate().request(builder.build()).build());
                     } catch (Exception ex) {
                         return OnUnAuthorized(exchange);
@@ -53,4 +56,5 @@ public class JwtFilter extends AbstractGatewayFilterFactory {
         response.setStatusCode(HttpStatus.UNAUTHORIZED);
         return response.setComplete();
     }
+
 }

@@ -17,7 +17,7 @@ public class Account {
 
     @Id
     @Column(name = "account_id", nullable = false)
-    private int id;
+    private String id;
 
     private String name;
     private String password_hash;

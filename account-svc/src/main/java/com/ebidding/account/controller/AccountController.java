@@ -24,8 +24,8 @@ public class AccountController {
 
     @GetMapping("/accounts/byname")
     // [POST] http://localhost:8080/api/v1/accounts {}
-    public ResponseEntity<AccountDTO> getAccount(@RequestParam("id") int id) {
-        Account account = this.accountService.findById(id);
+    public ResponseEntity<AccountDTO> getAccount(@RequestParam("name") String name) {
+        Account account = this.accountService.findByName(name);
         // Account -> AccountDTO
         AccountDTO accountDTO = this.modelMapper.map(account, AccountDTO.class);
         return ResponseEntity.ok(accountDTO);

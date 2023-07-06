@@ -1,12 +1,18 @@
 package com.ebidding.bwic.service;
 
+import cn.hutool.json.JSONObject;
+import cn.hutool.json.JSONUtil;
 import com.ebidding.bwic.api.BwicDTO;
 import com.ebidding.bwic.domain.Bwic;
 import com.ebidding.bwic.repository.BondRepository;
 import com.ebidding.bwic.repository.BwicRepository;
+import com.ebidding.common.utils.WebSocketMessageUtil;
+import com.ebidding.common.websocket.UserIdSessionManager;
+import com.ebidding.common.websocket.enums.WebSocketMsgType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.socket.WebSocketSession;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
@@ -60,13 +66,19 @@ public class BwicService {
             throw new RuntimeException("Bwic not found");
         }
         LocalDateTime dueTime = bwic.getDueTime().toLocalDateTime();
+
+
+        // 查询竞拍成功的用户并发送通知
+        // TODO 这里通过feign调用 bid-svc服务的api/v1/bids/getSuccesBidByBwicid接口即可
+
+
         return dueTime.isAfter(LocalDateTime.now());
     }
 
-
     public Map<String, List<Bwic>> getHistoryRecords() {
-        List<Bwic> activeBwics = bwicRepository.findAllByDueTimeAfterOrderByDueTimeAsc(LocalDateTime.now());
-        List<Bwic> inactiveBwics = bwicRepository.findAllByDueTimeBeforeOrderByDueTimeDesc(LocalDateTime.now());
+        Timestamp timestampNow = Timestamp.valueOf(LocalDateTime.now());
+        List<Bwic> activeBwics = bwicRepository.findAllByDueTimeAfterOrderByDueTimeAsc(timestampNow);
+        List<Bwic> inactiveBwics = bwicRepository.findAllByDueTimeBeforeOrderByDueTimeDesc(timestampNow);
 
         Map<String, List<Bwic>> result = new HashMap<>();
         result.put("active", activeBwics);
@@ -74,6 +86,7 @@ public class BwicService {
 
         return result;
     }
+
 
 
     public String getCusip(Long bwicId) {

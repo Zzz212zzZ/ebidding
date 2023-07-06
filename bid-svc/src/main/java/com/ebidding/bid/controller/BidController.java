@@ -83,9 +83,9 @@ public class BidController {
     }
 
 
-    @GetMapping("/bids/{bidId}/rank")
-    public ResponseEntity<Long> getRealTimeRank(@RequestParam("bwicId") Long bwicId, @RequestHeader(AuthConstant.X_JWT_ID_HEADER) String accountId) {
-
+    @GetMapping("/bwics/{bwicId}/accounts/rank")
+    public ResponseEntity<Long> getUserRank(@PathVariable("bwicId") Long bwicId, @RequestHeader(AuthConstant.X_JWT_ID_HEADER) String accountId) {
+        //通过bidrank表获取到某个用户现在的排名
         Long rank = this.bidService.getRankByBwicIdAndAccountId(bwicId, Long.valueOf(accountId));
         return ResponseEntity.ok(rank);
 
@@ -99,7 +99,8 @@ public class BidController {
     }
 
 
-    @GetMapping("/bids/{bidId}/price")
+    @GetMapping("/bwics/{bwicId}/account/price-info")
+    //用户界面的接口，第一名可以知道自己的价格
     public ResponseEntity<PriceResponseDTO> getPrice(@PathVariable("bwicId") Long bwicId, @RequestHeader(AuthConstant.X_JWT_ID_HEADER) String accountId) {
         PriceResponseDTO response = this.bidService.getPrice(bwicId, Long.valueOf(accountId));
         return ResponseEntity.ok(response);
