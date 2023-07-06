@@ -7,14 +7,13 @@ import { en_US } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, provideHttpClient, withInterceptors } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { IconsProviderModule } from './icons-provider.module';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { BwicOverviewComponent } from './pages/client-portal/bwic-overview/bwic-overview.component';
-import { LoginComponent } from './pages/login/login.component';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzButtonModule } from 'ng-zorro-antd/button';
@@ -22,6 +21,8 @@ import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
+import { NzSpinModule } from 'ng-zorro-antd/spin';
+import { authInterceptor } from './core/interceptor/auth.interceptor';
 
 
 registerLocaleData(en);
@@ -30,7 +31,6 @@ registerLocaleData(en);
   declarations: [
     AppComponent,
     BwicOverviewComponent,
-    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -47,10 +47,17 @@ registerLocaleData(en);
     NzGridModule,       
     NzCheckboxModule,   
     ReactiveFormsModule,
-    NzTabsModule
+    NzTabsModule,
+    NzSpinModule,
+    
   ],
   providers: [
-    { provide: NZ_I18N, useValue: en_US }
+    { provide: NZ_I18N, useValue: en_US },
+    provideHttpClient(
+      withInterceptors(
+        [authInterceptor]
+      )
+    ),
   ],
   bootstrap: [AppComponent]
 })

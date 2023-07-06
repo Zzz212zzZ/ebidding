@@ -2,7 +2,7 @@
 @form-bg: #13232f;
 @white: #ffffff;
 
-@main: #1ab188;
+@main: #1aa7b1;
 @main-light: spin(@main, 5%);
 @main-dark: spin(@main, -5%);
 
@@ -14,10 +14,23 @@
 @bold: 600;
 @br: 4px;
 
+
+
+
+
 body {
-    background:@body-bg;
-    font-family: 'Titillium Web', sans-serif;
-  }
+  // background: @body-bg;
+  font-family: 'Titillium Web', sans-serif;
+  // background-color: #333 !important;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-image: url('https://www.marcoguglie.it/Codepen/AnimatedHeaderBg/demo-1/img/demo-1-bg.jpg') !important;
+
+
+}
 
 
 
@@ -42,58 +55,174 @@ a {
   text-decoration: none;
   color: @main;
   transition: .5s ease;
+
   &:hover {
     color: @main-dark;
   }
 }
 
+
+
+
 .form {
-    // min-height: 330px;  // 你可以根据实际需要调整这个值
-    display: flex;
-    flex-direction: column; 
+  // min-height: 330px;  // 你可以根据实际需要调整这个值
+  display: flex;
+  flex-direction: column;
   background: rgba(@form-bg, .9);
-  padding: 40px;
-  max-width: 600px;
-  margin: 40px auto;
+  padding: 40px !important;
+  min-width: 30%;
+  max-width: 50%;
+  margin: 0 auto;
   border-radius: @br;
   box-shadow: 0 4px 10px 4px rgba(@form-bg, .3);
-}
 
-.tab-group {
-  list-style: none;
-  padding: 0;
-  margin: 0 0 40px 0;
-  &:after {
-    content: "";
-    display: table;
-    clear: both;
-  }
-  li a {
-    display: block;
+  .login-button {
+    position: relative;
+    padding: 10px 20px;
+    color: #03e9f4;
+    font-size: 36px;
     text-decoration: none;
-    padding: 15px;
-    background: rgba(@gray-light, .25);
-    color: @gray-light;
-    font-size: 20px;
-    float: left;
-    width: 50%;
-    text-align: center;
-    cursor: pointer;
-    transition: .5s ease;
+    text-transform: uppercase;
+    overflow: hidden;
+    transition: .5s;
+    margin-top: 40px;
+    letter-spacing: 4px;
+
     &:hover {
-      background: @main-dark;
-      color: @white;
+      background: #03e9f4;
+      color: #fff;
+      border-radius: 5px;
+      box-shadow: 0 0 5px #03e9f4,
+                  0 0 25px #03e9f4,
+                  0 0 50px #03e9f4,
+                  0 0 100px #03e9f4;
+    }
+
+    &::before,
+    &::after,
+    span::before,
+    span::after {
+      content: '';
+      position: absolute;
+      background: #03e9f4;
+    }
+
+    &::before {
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 3px;
+      animation: btn-anim1 1s linear infinite;
+    }
+
+    @keyframes btn-anim1 {
+      0% {
+        left: -100%;
+      }
+      50%,100% {
+        left: 100%;
+      }
+    }
+
+    &::after {
+      top: -100%;
+      right: 0;
+      width: 3px;
+      height: 100%;
+      background: linear-gradient(180deg, transparent, #03e9f4);
+      animation: btn-anim2 1s linear infinite;
+      animation-delay: .25s
+    }
+
+    @keyframes btn-anim2 {
+      0% {
+        top: -100%;
+      }
+      50%,100% {
+        top: 100%;
+      }
+    }
+
+    span::before {
+      bottom: 0;
+      right: -100%;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(270deg, transparent, #03e9f4);
+      animation: btn-anim3 1s linear infinite;
+      animation-delay: .5s
+    }
+
+    @keyframes btn-anim3 {
+      0% {
+        right: -100%;
+      }
+      50%,100% {
+        right: 100%;
+      }
+    }
+
+    span::after {
+      bottom: -100%;
+      left: 0;
+      width: 3px;
+      height: 100%;
+      background: linear-gradient(360deg, transparent, #03e9f4);
+      animation: btn-anim4 1s linear infinite;
+      animation-delay: .75s
+    }
+
+    @keyframes btn-anim4 {
+      0% {
+        bottom: -100%;
+      }
+      50%,100% {
+        bottom: 100%;
+      }
     }
   }
-  .active a {
-    background: @main !important;
-    color: @white;
+
+
+
+
+
+
+
+
+
+
+
+}
+
+
+
+// .tab-content > div:last-child {
+//   display:none;
+// }
+
+.custom-tabset /deep/ .ant-tabs-nav-list {
+
+  .ant-tabs-tab {
+    // background: rgba(@gray-light, 0.25) !important;
+    color: @gray-light !important;
+    font-size: 20px !important;
+    text-align: center !important;
+    cursor: pointer !important;
+    transition: background 0.5s ease, color 0.5s ease !important;
+
+    &:hover {
+      // background: #c9c9f9 !important;
+      color: @white !important;
+    }
+  }
+
+  .ant-tabs-tab-active {
+    // background:  #c9dbf4 !important;
+    // color: @white !important;
   }
 }
 
-.tab-content > div:last-child {
-  display: none;
-}
+
 
 h1 {
   text-align: center;
@@ -111,6 +240,7 @@ label {
   -webkit-backface-visibility: hidden;
   pointer-events: none;
   font-size: 22px;
+
   .req {
     margin: 2px;
     color: @main;
@@ -121,6 +251,7 @@ label.active {
   transform: translateY(50px);
   left: 2px;
   font-size: 14px;
+
   .req {
     opacity: 0;
   }
@@ -143,6 +274,7 @@ textarea {
   color: @white;
   border-radius: 0;
   transition: border-color .25s ease, box-shadow .25s ease;
+
   &:focus {
     outline: 0;
     border-color: @main;
@@ -166,10 +298,11 @@ textarea {
     clear: both;
   }
 
-  > div {
+  >div {
     float: left;
     width: 48%;
     margin-right: 4%;
+
     &:last-child {
       margin: 0;
     }
@@ -177,24 +310,27 @@ textarea {
 }
 
 .button {
-    border: 0;
-    outline: none;
-    border-radius: 0;
-    padding: 0 0; // 改变padding值以增加button的高度
-    font-size: 1.5rem; // 改变字体大小以增加button的宽度
-    font-weight: @bold;
-    text-transform: uppercase;
-    letter-spacing: .1em;
-    background: @main !important;
-    color: @white;
-    transition: all .5s ease;
-    -webkit-appearance: none;
-    &:hover,
-    &:focus {
-      background: @main-dark;
-    }
+  border: 0;
+  outline: none;
+  border-radius: 0;
+  padding: 0 0; // 改变padding值以增加button的高度
+  font-size: 3rem; // 改变字体大小以增加button的宽度
+  font-weight: @bold;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  background: @main !important;
+  color: @white;
+  transition: all .5s ease;
+  height: 80px; // 新添加的属性
+  -webkit-appearance: none;
+
+
+  &:hover,
+  &:focus {
+    background: @main-dark;
   }
-  
+}
+
 
 .button-block {
   display: block;

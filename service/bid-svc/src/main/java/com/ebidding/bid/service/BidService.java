@@ -108,7 +108,7 @@ public class BidService {
         if (rank == 1) {
             response.setRanking(this.bidRankRepository.getRanking(bwicId, accountId));
             if (this.getParticipantCount(bwicId) > 1) {
-                Double secondPrice = this.bidRankRepository.getSecondHighestPrice(bwicId, accountId).orElse(null);
+                Double secondPrice = this.bidRankRepository.getSecondHighestPrice(bwicId).orElse(null);
                 response.setSecondPrice(secondPrice);
             }
         }

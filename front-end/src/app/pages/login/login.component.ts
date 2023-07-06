@@ -1,88 +1,57 @@
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 
-// import { Component, OnInit } from '@angular/core';
-// import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
-// import { Router } from '@angular/router';  // 导入 Router 服务
+import { FormControl, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, } from '@angular/forms';
+// import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-
-
-// @Component({
-//   selector: 'app-login',
-//   templateUrl: './login.component.html',
-//   styleUrls: ['./login.component.less']
-// })
-
-
-// export class LoginComponent implements OnInit {
-//   // 在构造函数中注入 Router 服务
-
-//   constructor(private fb: UntypedFormBuilder, private router: Router) { }
-
-
-//   validateForm!: UntypedFormGroup;
-
-//   submitForm(): void {
-//     if (this.validateForm.valid) {
-//       console.log('submit', this.validateForm.value);
-
-//       let token = '123456';
-//       localStorage.setItem('Token', token);
-
-//       // 登录成功后，跳转到 dashboard
-//       this.router.navigate(['/dashboard']);
-
-//       //       // 假设 login() 方法返回一个包含 Token 的响应
-//       //   //   this.authService.login(this.model.username, this.model.password).subscribe(response => {
-//       //   //   // // 将 Token 存储到 localStorage
-//       //   //   // localStorage.setItem('Token', response.token);
-
-
-//     } else {
-//       Object.values(this.validateForm.controls).forEach(control => {
-//         if (control.invalid) {
-//           control.markAsDirty();
-//           control.updateValueAndValidity({ onlySelf: true });
-//         }
-//       });
-//     }
-
-
-
-//   }
-
-//   ngOnInit(): void {
-//         // 检查是否存在 Token
-//     if (localStorage.getItem('Token')) {
-//       // 如果存在 Token，自动跳转到 dashboard
-//       this.router.navigate(['/dashboard']);
-//     }
-
-
-//     this.validateForm = this.fb.group({
-//       userName: [null, [Validators.required]],
-//       password: [null, [Validators.required]],
-//       remember: [true]
-//     });
-//   }
-// }
-
-
-
-
-
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { Router } from '@angular/router';  // 导入 Router 服务
+import { SpinService } from 'src/app/core/services/spin.service';
+import { AccountService, UserInfo } from 'src/app/core/services/account.service';
+
+
+const fnCheckLoginForm = function checkLoginForm(form: FormGroup): boolean {
+  // 检查登录表单的字段
+  ['username', 'password'].forEach(key => {
+    const control = form.controls[key];
+
+    // 检查字段是否存在
+    if (control) {
+      control.markAsDirty();
+      control.updateValueAndValidity();
+    }
+  });
+
+  return !form.invalid;
+};
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.less']
+  styleUrls: ['./login.component.less'],
+  standalone: true,
+  // encapsulation: ViewEncapsulation.None,  // 添加这行
+  imports: [
+    FormsModule,
+    ReactiveFormsModule,
+    // BrowserAnimationsModule,
+    NzButtonModule,
+    NzInputModule,
+    NzFormModule,
+    NzTabsModule,
+  ]
 })
+
+
 export class LoginComponent implements OnInit {
-  constructor(private router: Router) { }
+  constructor(private router: Router, private spinService: SpinService, private accountService: AccountService) { }
 
   signupForm!: FormGroup;
   loginForm!: FormGroup;
+
   selectedIndex = 1;
 
   ngOnInit(): void {
@@ -95,13 +64,13 @@ export class LoginComponent implements OnInit {
 
 
     this.signupForm = new FormGroup({
-      name: new FormControl('', [Validators.required]),
+      username: new FormControl('', [Validators.required]),
       password: new FormControl('', [Validators.required]),
       confirmPassword: new FormControl('', [Validators.required]),
     });
 
     this.loginForm = new FormGroup({
-      name: new FormControl('', [Validators.required]),
+      username: new FormControl('', [Validators.required]),
       password: new FormControl('', [Validators.required]),
     });
 
@@ -118,17 +87,32 @@ export class LoginComponent implements OnInit {
       // 实现注册逻辑
     }
   }
-
   submitLogin(): void {
-    if (this.loginForm.valid) {
-      // 实现登录逻辑
-      let token = '123456';
-      localStorage.setItem('Token', token);
 
-      // 登录成功后，跳转到 dashboard
-      this.router.navigate(['/dashboard']);
+    if (!fnCheckLoginForm(this.loginForm)) {
+      return;
     }
+    const param = this.loginForm.getRawValue();
+
+    this.spinService.setCurrentGlobalSpinStore(true);
+    console.log(param);
+    this.accountService.login(param).subscribe((data: UserInfo) => {
+      if(data.role === 'CLIENT'){
+        // localStorage.setItem('Authorization', `Bearer ${data.token as string}`);
+        localStorage.setItem('Token', `Bearer ${data.token as string}`);
+        console.log(data.role);
+        console.log(data.token);
+        this.router.navigateByUrl('/layout/client/bidding');
+      }
+      if(data.role === 'TRADER'){
+        // this.router.navigateByUrl('/layout/sales/admin');
+        this.router.navigateByUrl('/layout');
+      }
+      this.spinService.setCurrentGlobalSpinStore(false);
+  });
+
   }
 
-
 }
+
+export enum Role { CLIENT, TRADER };
