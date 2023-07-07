@@ -1,0 +1,53 @@
+<nz-table #nestedTable [nzData]="listOfParentData" [nzPageSize]="10">
+    <thead>
+      <tr>
+        <th></th>
+        <th>BWIC ID</th>
+        <th>Issuer</th>
+        <th>Size</th>
+        <th>Start Time</th>
+        <th>Due Time</th>
+        <th>Last Bid Time</th>
+        <th>Bid Counts</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-template ngFor let-data [ngForOf]="nestedTable.data">
+        <tr>
+          <td [(nzExpand)]="data.expand"></td>
+          <td>{{ data.bwic_id }}</td>
+          <td>{{ data.issuer }}</td>
+          <td>{{ data.size }}</td>
+          <td>{{ data.start_time }}</td>
+          <td>{{ data.due_time }}</td>
+          <td>{{ data.last_bid_time }}</td>
+          <td>{{ data.bid_counts }}</td>
+        </tr>
+        <tr [nzExpand]="data.expand">
+          <nz-table #innerTable [nzData]="listOfChildrenData" nzSize="middle" [nzShowPagination]="false">
+            <thead>
+              <tr>
+                <th>Bid ID</th>
+                <th>Account ID</th>
+                <th>Account Name</th>
+                <th>Price</th>
+                <th>Ranking</th>
+                <th>Time</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let data of innerTable.data">
+                <td>{{ data.bid_id }}</td>
+                <td>{{ data.account_id }}</td>
+                <td>{{ data.account_name }}</td>
+                <td>{{ data.price }}</td>
+                <td>{{ data.ranking }}</td>
+                <td>{{ data.time }}</td>
+              </tr>
+            </tbody>
+          </nz-table>
+        </tr>
+      </ng-template>
+    </tbody>
+  </nz-table>
+  

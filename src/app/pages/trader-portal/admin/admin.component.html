@@ -1,1 +1,12 @@
-<p>admin works!</p>
+<nz-tabset>
+    <nz-tab *ngFor="let tab of tabs" [nzTitle]="titleTemplate">
+      <ng-template #titleTemplate>
+        <span nz-icon [nzType]="tab.iconType" nzTheme='twotone' [nzSpin]="tab.iconSpin" style="margin: 0 0 0 0;"></span>
+        {{ tab.name }}
+      </ng-template>
+      <app-ongoing-table [data]="ongoingData" *ngIf="selectedTab === 'Ongoing'"></app-ongoing-table>
+      <app-upcoming-table [data]="upcomingData" *ngIf="selectedTab === 'Upcoming'"></app-upcoming-table>
+      <app-ended-table [data]="endedData" *ngIf="selectedTab === 'Ended'"></app-ended-table>
+    </nz-tab>
+  </nz-tabset>
+  
