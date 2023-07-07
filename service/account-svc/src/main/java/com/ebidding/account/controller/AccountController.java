@@ -14,7 +14,7 @@ import org.modelmapper.ModelMapper;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("api/v1/accounts")
+@RequestMapping("api/v1/account-service")
 public class AccountController {
     @Autowired
     private AccountService accountService;
@@ -22,12 +22,8 @@ public class AccountController {
     @Autowired
     private ModelMapper modelMapper;
 
-    @GetMapping()
-    // PathVariable v.s. RequestParam v.s. RequestBody
-    // http://localhost:8080/api/v1/accounts?name={inputName}
-    // http://localhost:8080/api/v1/accounts/1
+    @GetMapping("/accounts/byname")
     // [POST] http://localhost:8080/api/v1/accounts {}
-
     public ResponseEntity<AccountDTO> getAccount(@RequestParam("name") String name) {
         Account account = this.accountService.findByName(name);
         // Account -> AccountDTO
@@ -35,7 +31,7 @@ public class AccountController {
         return ResponseEntity.ok(accountDTO);
     }
 
-    @PostMapping()
+    @PostMapping("/accounts/login")
     // [POST] http://localhost:8001/api/v1/accounts {}
     public ResponseEntity<LoginResponseDTO> login(@RequestBody LoginRequestDTO login) {
         Optional<LoginResponseDTO> loginResponse = this.accountService.login(login.getUsername(), login.getPassword());

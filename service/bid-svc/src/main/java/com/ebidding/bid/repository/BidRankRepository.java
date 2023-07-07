@@ -19,7 +19,6 @@ public interface BidRankRepository extends JpaRepository<BidRank, Long> {
             "AND account_id != :accountId \n" +
             "AND (price > (SELECT price FROM bidrank WHERE bwic_id = :bwicId AND account_id = :accountId) \n" +
             "OR (price = (SELECT price FROM bidrank WHERE bwic_id = :bwicId AND account_id = :accountId) AND time < (SELECT time FROM bidrank WHERE bwic_id = :bwicId AND account_id = :accountId)))\n")
-
     Long getRanking(@Param("bwicId") Long bwicId, @Param("accountId") Long accountId);
 
     @Query(value = "SELECT * FROM bidrank WHERE bwic_id = :bwicId AND account_id = :accountId", nativeQuery = true)
@@ -28,8 +27,8 @@ public interface BidRankRepository extends JpaRepository<BidRank, Long> {
     @Query(value = "SELECT COUNT(*) FROM bidrank WHERE bwic_id = :bwicId", nativeQuery = true)
     Long countByBwicId(@Param("bwicId") Long bwicId);
 
-    @Query(nativeQuery = true, value = "SELECT price FROM bidrank WHERE bwic_id = :bwicId AND account_id != :accountId ORDER BY price DESC LIMIT 1, 1")
-    Optional<Double> getSecondHighestPrice(@Param("bwicId") Long bwicId, @Param("accountId") Long accountId);
+    @Query(nativeQuery = true, value = "SELECT price FROM bidrank WHERE bwic_id = :bwicId ORDER BY price DESC LIMIT 1, 1")
+    Optional<Double> getSecondHighestPrice(@Param("bwicId") Long bwicId);
 
 
 }

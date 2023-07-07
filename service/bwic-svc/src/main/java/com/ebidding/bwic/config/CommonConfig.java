@@ -1,4 +1,4 @@
-package com.ebidding.bid.config;
+package com.ebidding.bwic.config;
 
 import com.ebidding.common.config.EBiddingConfig;
 import org.springframework.context.annotation.Configuration;

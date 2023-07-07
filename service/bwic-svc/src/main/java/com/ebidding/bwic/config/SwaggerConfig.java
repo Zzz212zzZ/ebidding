@@ -1,6 +1,6 @@
-package com.ebidding.bid.config;
+package com.ebidding.bwic.config;
 
-import com.ebidding.bid.controller.BidController;
+import com.ebidding.bwic.controller.BwicController;
 import com.fasterxml.classmate.TypeResolver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -26,7 +26,7 @@ import static springfox.documentation.schema.AlternateTypeRules.newRule;
 
 @EnableSwagger2
 @ComponentScan(basePackageClasses = {
-        BidController.class
+        BwicController.class
 })
 public class SwaggerConfig {
     @Autowired
