@@ -64,7 +64,7 @@ public class BwicController {
     @GetMapping("/bwics/{bwicId}/issuer")
     // [GET] http://localhost:8001/api/v1/bwics/issuer?bwicId={bwicId}
     public ResponseEntity<String> getIssuer(@PathVariable("bwicId") Long bwicId) {
-        String issuer = this.bwicService.getCusip(bwicId);
+        String issuer = this.bwicService.getIssuer(bwicId);
         return ResponseEntity.ok(issuer);
     }
     @GetMapping("/bwics/{bwicId}/status")
