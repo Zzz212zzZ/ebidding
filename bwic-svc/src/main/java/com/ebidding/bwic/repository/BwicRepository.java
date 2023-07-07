@@ -23,6 +23,13 @@ public interface BwicRepository extends JpaRepository<Bwic, Long> {
     //SELECT * FROM BOND WHERE BWIC_ID = ?
     Optional<Bwic> findByBwicId(long bwicId);
 
+    Optional<Bwic> findByBwicId(Long bwicId);
+    //
+////    @Query(nativeQuery = true,
+////            value = "SELECT bwic.* FROM bwic, bond WHERE bond.cusip = :cusip in (SELECT cusip= :cusip from bond, bwic WHERE bwic.bond_id = bond.bond_id)")
+////    Optional<List<Bwic>> findByCusip(@Param("cusip") String cusip);
+//
+    Optional<Bwic> findByBondId(String bondId);
     List<Bwic> findAllByDueTimeAfterOrderByDueTimeAsc(Timestamp time);
 
     List<Bwic> findAllByDueTimeBeforeOrderByDueTimeDesc(Timestamp time);

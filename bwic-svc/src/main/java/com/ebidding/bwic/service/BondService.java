@@ -18,10 +18,9 @@ public class BondService {
         return  this.bondRepository.findByBondId(bondId).orElse(null).getCusip();
     }
 
-    public String findIssuerByBondId(String bondId) {
-        return  this.bondRepository.findByBondId(bondId).orElse(null).getIssuer();
+    public String getBondid(String cusip) {
+        return  this.bondRepository.getBondid(cusip).orElse(null);
     }
-
 
     @Transactional
     public void incrementTransactionCount(String bondId) {
@@ -30,4 +29,7 @@ public class BondService {
     }
 
 
+    public String findIssuerByBondId(String bondId) {
+        return  this.bondRepository.findByBondId(bondId).orElse(null).getIssuer();
+    }
 }
