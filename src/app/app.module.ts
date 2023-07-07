@@ -13,7 +13,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { IconsProviderModule } from './icons-provider.module';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
-import { BwicOverviewComponent } from './pages/client-portal/bwic-overview/bwic-overview.component';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzButtonModule } from 'ng-zorro-antd/button';
@@ -25,12 +24,12 @@ import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { authInterceptor } from './core/interceptor/auth.interceptor';
 
 
+
 registerLocaleData(en);
 
 @NgModule({
   declarations: [
     AppComponent,
-    BwicOverviewComponent,
   ],
   imports: [
     BrowserModule,

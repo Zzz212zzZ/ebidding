@@ -97,16 +97,20 @@ export class LoginComponent implements OnInit {
     this.spinService.setCurrentGlobalSpinStore(true);
     console.log(param);
     this.accountService.login(param).subscribe((data: UserInfo) => {
-      if(data.role === 'CLIENT'){
-        // localStorage.setItem('Authorization', `Bearer ${data.token as string}`);
-        localStorage.setItem('Token', `Bearer ${data.token as string}`);
+
+       // localStorage.setItem('Authorization', `Bearer ${data.token as string}`);
+       localStorage.setItem('Token', `Bearer ${data.token as string}`);
+       //设置localStorage的role
+       localStorage.setItem('role', data.role);
+
+      if(data.role === 'client'){
         console.log(data.role);
         console.log(data.token);
-        this.router.navigateByUrl('/layout/client/bidding');
+        this.router.navigateByUrl('/layout/client/homePage');
       }
-      if(data.role === 'TRADER'){
+      if(data.role === 'trader'){
         // this.router.navigateByUrl('/layout/sales/admin');
-        this.router.navigateByUrl('/layout');
+        this.router.navigateByUrl('/layout/trader/homePage');
       }
       this.spinService.setCurrentGlobalSpinStore(false);
   });

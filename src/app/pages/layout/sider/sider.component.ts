@@ -6,6 +6,9 @@ import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 
+import { ClientMenu,TraderMenu } from './menuProperties';
+
+
 
 export interface SubMenu{
   path: string,
@@ -35,44 +38,16 @@ export interface Menu{
 export class SiderComponent {
   @Input() isCollapsed = false;
 
-  menus: Menu[] = [
-    {
-      title: 'Dashboard',
-      icon: 'dashboard',
-      children: [
-        {
-          path: '/layout/welcome',
-          desc: 'Welcome'
-        }
-      ]
-    },
-    {
-      title: 'Client',
-      icon: 'pie-chart',
-      children: [
-        {
-          path: '/layout/client/bidding',
-          desc: 'Bidding'
-        },
-        {
-          path: '/layout/client/history',
-          desc: 'History'
-        },
-      ]
-    },
-    {
-      title: 'Sales',
-      icon: 'pie-chart',
-      children: [
-        {
-          path: '/layout/sales/admin',
-          desc: 'Admin'
-        },
-        {
-          path: '/layout/sales/popular',
-          desc: 'Popular'
-        },
-      ]
-    },
-  ];
+  menus: Menu[]=[];  // 根据身份动态加载
+
+  ngOnInit() {
+    const role = localStorage.getItem('role');
+    if (role === 'client') {
+      this.menus = ClientMenu;
+      console.log(this.menus);
+    } else if (role === 'trader') {
+      this.menus = TraderMenu;
+    }
+  }
 }
+

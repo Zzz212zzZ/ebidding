@@ -1,13 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { BwicOverviewComponent } from './bwic-overview/bwic-overview.component';
+
 import { BiddingComponent } from './bidding/bidding.component';
 import { HistoryComponent } from './history/history.component';
 
+import { HomepageComponent } from './homepage/homepage.component';
+
 const routes: Routes = [
-  {path:'bidding',component:BiddingComponent},
-  {path:'history',component:HistoryComponent}
-  
+  { path: '', redirectTo: 'homepage', pathMatch: 'full',data: { expectedRole: 'client' } }, // redirect to `homepage`
+  { path: 'homepage', component: HomepageComponent,data: { expectedRole: 'client' }},
+  { path: 'bidding', component: BiddingComponent ,data: { expectedRole: 'client' }},
+  { path: 'history', component: HistoryComponent ,data: { expectedRole: 'client' }}
 ];
 
 @NgModule({
