@@ -51,7 +51,7 @@ public class BidController {
 
     @PostMapping("/bids")
     public ResponseEntity<BidCreateResponseDTO> createBid(@RequestBody BidCreateRequestDTO bidCreateRequestDTO, HttpServletRequest request){
-        //获取header里面的bid_id
+        //获取header里面的account_id
         String currentAccountId = request.getHeader(AuthConstant.X_JWT_ID_HEADER);
         Long accountId =Long.valueOf(currentAccountId);
 

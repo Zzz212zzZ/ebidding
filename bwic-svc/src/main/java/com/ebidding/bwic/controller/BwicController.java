@@ -61,7 +61,12 @@ public class BwicController {
         return ResponseEntity.ok(cusip);
     }
 
-
+    @GetMapping("/bwics/{bwicId}/issuer")
+    // [GET] http://localhost:8001/api/v1/bwics/issuer?bwicId={bwicId}
+    public ResponseEntity<String> getIssuer(@PathVariable("bwicId") Long bwicId) {
+        String issuer = this.bwicService.getCusip(bwicId);
+        return ResponseEntity.ok(issuer);
+    }
     @GetMapping("/bwics/{bwicId}/status")
     public ResponseEntity<Boolean> isActive(@PathVariable("bwicId")  Long bwicId) {
         boolean isActive = bwicService.isActive(bwicId);

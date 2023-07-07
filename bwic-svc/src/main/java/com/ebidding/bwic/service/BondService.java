@@ -25,4 +25,7 @@ public class BondService {
     }
 
 
+    public String findIssuerByBondId(String bondId) {
+        return  this.bondRepository.findByBondId(bondId).orElse(null).getIssuer();
+    }
 }

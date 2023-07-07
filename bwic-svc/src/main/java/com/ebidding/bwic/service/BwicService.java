@@ -99,6 +99,15 @@ public class BwicService {
         return cusip;
     }
 
+    public String getIssuer(Long bwicId) {
+        //先根据bwicId查询bwic表，获取bondId
+        Bwic bwic = this.bwicRepository.findByBwicId(bwicId).orElse(null);
+        String bondId = bwic.getBondId();
+        //再根据bondId查询bond表，获取issuer
+
+        String issuer = bondService.findIssuerByBondId(bondId);
+        return issuer;
+    }
 
     //加入Transactional，防止并发
     @Transactional
