@@ -15,6 +15,6 @@ public interface BwicClient {
 
     @PutMapping("/bwics/{bwicId}")
     ResponseEntity<Void> updateBwic(@PathVariable("bwicId") Long bwicId,
-                                    @RequestParam("price") Double price,
+                                    @RequestParam("price") double price,
                                     @RequestParam("time") Timestamp time);
 }

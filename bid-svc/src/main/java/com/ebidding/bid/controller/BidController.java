@@ -43,16 +43,15 @@ public class BidController {
 //        return ResponseEntity.ok(this.bidService.getByName(name));
 //    }
 
-
-    @GetMapping("/bids/{bidId}")
     @Authorize(AuthConstant.TRADER)
+    @GetMapping("/bids/{bidId}")
     public ResponseEntity<Bid> getBid(@PathVariable("bidId") Long bidId){
         return ResponseEntity.ok(this.bidService.getByBidId(bidId));
     }
 
     @PostMapping("/bids")
     public ResponseEntity<BidCreateResponseDTO> createBid(@RequestBody BidCreateRequestDTO bidCreateRequestDTO, HttpServletRequest request){
-        //获取header里面的bid_id
+        //获取header里面的account_id
         String currentAccountId = request.getHeader(AuthConstant.X_JWT_ID_HEADER);
         Long accountId =Long.valueOf(currentAccountId);
 
@@ -100,9 +99,9 @@ public class BidController {
     }
 
 
-    @GetMapping("/bids/{bidId}/price")
-//    public ResponseEntity<PriceResponseDTO> getPrice(@PathVariable("bwicId") Long bwicId, @RequestHeader(AuthConstant.X_JWT_ID_HEADER) String accountId) {
-    public ResponseEntity<PriceResponseDTO> getPrice(Long bwicId, @RequestHeader(AuthConstant.X_JWT_ID_HEADER) String accountId) {
+    @GetMapping("/bwics/{bwicId}/account/price-info")
+    //用户界面的接口，第一名可以知道自己的价格
+    public ResponseEntity<PriceResponseDTO> getPrice(@PathVariable("bwicId") Long bwicId, @RequestHeader(AuthConstant.X_JWT_ID_HEADER) String accountId) {
         PriceResponseDTO response = this.bidService.getPrice(bwicId, Long.valueOf(accountId));
         return ResponseEntity.ok(response);
     }

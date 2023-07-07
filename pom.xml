@@ -92,6 +92,7 @@
 			<artifactId>spring-cloud-alibaba-dependencies</artifactId>
 			<version>${nacos.version}</version>
 			<type>pom</type>
+			<scope>import</scope>
 		</dependency>
 	</dependencies>
 

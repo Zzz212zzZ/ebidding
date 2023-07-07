@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 public class PriceResponseDTO {
 
     private Double price;
-    private Boolean isFirst;
+    private long Ranking;
     private Double secondPrice;
 
 

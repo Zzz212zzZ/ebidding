@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @FeignClient(name = "account-service", path = "api/v1/account-service", url= "${ebidding.account-endpoint}" )
 public interface AccountClient {
-    @GetMapping("/accounts/byname")
-    ResponseEntity<AccountDTO> getAccount(@RequestParam(name = "name") String name);
+    @GetMapping("/")
+    ResponseEntity<AccountDTO> getAccount (@RequestParam(name = "name") String name);
 }

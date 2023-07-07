@@ -75,10 +75,10 @@ public class BwicService {
         return dueTime.isAfter(LocalDateTime.now());
     }
 
-
     public Map<String, List<Bwic>> getHistoryRecords() {
-        List<Bwic> activeBwics = bwicRepository.findAllByDueTimeAfterOrderByDueTimeAsc(LocalDateTime.now());
-        List<Bwic> inactiveBwics = bwicRepository.findAllByDueTimeBeforeOrderByDueTimeDesc(LocalDateTime.now());
+        Timestamp timestampNow = Timestamp.valueOf(LocalDateTime.now());
+        List<Bwic> activeBwics = bwicRepository.findAllByDueTimeAfterOrderByDueTimeAsc(timestampNow);
+        List<Bwic> inactiveBwics = bwicRepository.findAllByDueTimeBeforeOrderByDueTimeDesc(timestampNow);
 
         Map<String, List<Bwic>> result = new HashMap<>();
         result.put("active", activeBwics);
@@ -86,6 +86,7 @@ public class BwicService {
 
         return result;
     }
+
 
 
     public String getCusip(Long bwicId) {

@@ -36,7 +36,7 @@ public class AccountService {
                 })
                 .map(acc -> {
                     LoginResponseDTO user = modelMapper.map(acc, LoginResponseDTO.class);
-                    user.setToken(JwtUtils.SignToken(String.valueOf(user.getAccountId()), user.getName(), user.getRole()));
+                    user.setToken(JwtUtils.SignToken(user.getId(), user.getName(), user.getRole()));
                     return user;
                 });
     }
