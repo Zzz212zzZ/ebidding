@@ -26,4 +26,10 @@ import { SiderComponent } from './sider/sider.component';
 })
 export class LayoutComponent {
   isCollapsed = false;
+
+
+  logout(): void{
+    localStorage.clear();//清除localstorage
+    window.location.href = `http://localhost:${window.location.port}/login`;
+  }
 }
