@@ -93,15 +93,12 @@ public class BwicController {
     public ResponseEntity<Bwic> getBwicByCusip(@PathVariable("cusip") String cusip){
         return ResponseEntity.ok(this.bwicService.findByBondId(this.bondService.getBondid(cusip)));
     }
-//
-//    @GetMapping("/bwics/{bondId}")
-//    public ResponseEntity<Bwic> getBwicByBondid(@PathVariable("bondId") String bondId){
-//        return ResponseEntity.ok(this.bwicService.findByBondId(bondId));
-//    }
-//
-//    @GetMapping("/bondIds")
-//    public ResponseEntity<String> getBondId(@PathVariable("cusip") String cusip){
-//        return ResponseEntity.ok(this.bondService.getBondidByCusip(cusip));
-//    }
+
+    @GetMapping("/bwics/{bwicId}/issuer")
+    // [GET] http://localhost:8001/api/v1/bwics/issuer?bwicId={bwicId}
+    public ResponseEntity<String> getIssuer(@PathVariable("bwicId") Long bwicId) {
+        String issuer = this.bwicService.getIssuer(bwicId);
+        return ResponseEntity.ok(issuer);
+    }
 
 }

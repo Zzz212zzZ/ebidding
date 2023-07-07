@@ -22,6 +22,10 @@ public class BondService {
         return  this.bondRepository.getBondid(cusip).orElse(null);
     }
 
+    public String findIssuerByBondId(String bondId) {
+        return  this.bondRepository.findByBondId(bondId).orElse(null).getIssuer();
+    }
+
     @Transactional
     public void incrementTransactionCount(String bondId) {
         this.bondRepository.findByBondId(bondId).orElseThrow(() -> new RuntimeException("Bond not found: " + bondId));

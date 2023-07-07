@@ -2,15 +2,12 @@ package com.ebidding.bwic.repository;
 
 import com.ebidding.bwic.api.BwicDTO;
 import com.ebidding.bwic.domain.Bwic;
-import org.apache.http.nio.entity.NStringEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import javax.swing.text.html.Option;
-import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
