@@ -1,5 +1,6 @@
 package com.ebidding.bid.config;
 
+
 import com.ebidding.bid.controller.BidController;
 import com.fasterxml.classmate.TypeResolver;
 import org.springframework.beans.factory.annotation.Autowired;

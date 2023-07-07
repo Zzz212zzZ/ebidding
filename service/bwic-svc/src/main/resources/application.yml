@@ -1,8 +1,5 @@
 spring:
   profiles:
     active: uat
-  application:
-    name: bwic-service
-
 server:
   port: 8003

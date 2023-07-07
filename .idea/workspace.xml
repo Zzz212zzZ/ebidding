@@ -4,88 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0a9beb7d-bbf8-4f73-8a8d-d0b1975db1f1" name="Changes" comment="前后端通讯，后端功能的调试，以及仓库整理">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.en.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/account-api/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/account-api/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/account-api/src/main/java/com/ebidding/account/api/AccountClient.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/account-api/src/main/java/com/ebidding/account/api/AccountDTO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/account-api/src/main/java/com/ebidding/account/api/LoginRequestDTO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/account-api/src/main/java/com/ebidding/account/api/LoginResponseDTO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/account-svc/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/account-svc/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/account-svc/src/main/java/com/ebidding/service/ServiceApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/account-svc/src/main/java/com/ebidding/service/config/CommonConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/account-svc/src/main/java/com/ebidding/service/config/SwaggerConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/account-svc/src/main/java/com/ebidding/service/controller/AccountController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/account-svc/src/main/java/com/ebidding/service/domain/Account.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/account-svc/src/main/java/com/ebidding/service/domain/AccountRole.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/account-svc/src/main/java/com/ebidding/service/repository/AccountRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/account-svc/src/main/java/com/ebidding/service/service/AccountService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/account-svc/src/main/java/org/example/Main.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/account-svc/src/main/resources/application-dev.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/account-svc/src/main/resources/application-uat.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/account-svc/src/main/resources/application.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/account-svc/src/test/java/com/ebidding/service/ServiceApplicationTests.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bid-api/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bid-api/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bid-api/src/main/java/com/ebidding/bid/api/BidDTO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bid-api/src/main/java/com/ebidding/bid/api/BidRankDTO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bid-api/src/main/java/com/ebidding/bid/api/dto/CreateBidDTO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bid-api/src/main/java/com/ebidding/bid/api/vo/CreateBidVO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bid-svc/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bid-svc/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bid-svc/src/main/java/com/ebidding/bid/BidServiceApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bid-svc/src/main/java/com/ebidding/bid/Repository/BidRankRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bid-svc/src/main/java/com/ebidding/bid/Repository/BidRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bid-svc/src/main/java/com/ebidding/bid/config/CommonConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bid-svc/src/main/java/com/ebidding/bid/config/SwaggerConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bid-svc/src/main/java/com/ebidding/bid/controller/BidController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bid-svc/src/main/java/com/ebidding/bid/domain/Bid.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bid-svc/src/main/java/com/ebidding/bid/domain/BidRank.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bid-svc/src/main/java/com/ebidding/bid/service/BidService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bid-svc/src/main/resources/application-dev.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bid-svc/src/main/resources/application-uat.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bid-svc/src/main/resources/application.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bid-svc/src/test/java/com/ebidding/bid/controller/BidControllerTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bid-svc/src/test/java/com/ebidding/bid/service/BidServiceTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/common-lib/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/common-lib/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/common-lib/src/main/java/com/ebidding/common/auth/AuthConstant.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/common-lib/src/main/java/com/ebidding/common/auth/AuthContext.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/common-lib/src/main/java/com/ebidding/common/auth/AuthFeignRequestInterceptor.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/common-lib/src/main/java/com/ebidding/common/auth/AuthHandlerInterceptor.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/common-lib/src/main/java/com/ebidding/common/auth/Authorize.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/common-lib/src/main/java/com/ebidding/common/auth/PermissionDenyException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/common-lib/src/main/java/com/ebidding/common/config/EBiddingConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/common-lib/src/main/java/com/ebidding/common/config/GlobalExceptionHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/common-lib/src/main/java/com/ebidding/common/utils/HashUtils.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/common-lib/src/main/java/com/ebidding/common/utils/JwtUtils.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ddls.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/diagram.wsd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gateway/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gateway/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gateway/src/main/java/com/ebidding/gateway/GatewayApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gateway/src/main/java/com/ebidding/gateway/filter/JwtFilter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gateway/src/main/resources/application.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mvnw" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mvnw.cmd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ebidding/service/ServiceApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ebidding/service/config/SwaggerConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ebidding/service/controller/AccountController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ebidding/service/domain/Account.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ebidding/service/domain/AccountRole.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ebidding/service/repository/AccountRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ebidding/service/service/AccountService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application-dev.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application-uat.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/ebidding/service/ServiceApplicationTests.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/uml.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/基本框架及答疑补充.docx" beforeDir="false" />
+    <list default="true" id="0a9beb7d-bbf8-4f73-8a8d-d0b1975db1f1" name="Changes" comment="前后端联调，整理仓库结构">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -103,12 +23,12 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -134,7 +54,23 @@
       <option name="project" value="LOCAL" />
       <updated>1688630074054</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="前后端联调，整理仓库结构">
+      <option name="closed" value="true" />
+      <created>1688630692567</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1688630692567</updated>
+    </task>
+    <task id="LOCAL-00004" summary="前后端联调，整理仓库结构">
+      <option name="closed" value="true" />
+      <created>1688630700289</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1688630700289</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -150,6 +86,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="前后端通讯，后端功能的调试，以及仓库整理" />
-    <option name="LAST_COMMIT_MESSAGE" value="前后端通讯，后端功能的调试，以及仓库整理" />
+    <MESSAGE value="前后端联调，整理仓库结构" />
+    <option name="LAST_COMMIT_MESSAGE" value="前后端联调，整理仓库结构" />
   </component>
 </project>

@@ -12,9 +12,3 @@ spring:
             - Path=/api/v1/bids/**
           filters:
             JwtFilter
-        - id : bwic_service
-          uri: http://localhost:8003
-          predicates:
-            - Path=/api/v1/bwics/**
-          filters:
-            JwtFilter
