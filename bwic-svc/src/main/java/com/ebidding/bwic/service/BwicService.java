@@ -3,6 +3,7 @@ package com.ebidding.bwic.service;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.ebidding.bwic.api.BwicDTO;
+import com.ebidding.bwic.domain.Bond;
 import com.ebidding.bwic.domain.Bwic;
 import com.ebidding.bwic.repository.BondRepository;
 import com.ebidding.bwic.repository.BwicRepository;
@@ -126,6 +127,16 @@ public class BwicService {
 
     }
 
+    public Bwic findByBwicId(Long bwicId){
+        return this.bwicRepository.findByBwicId(bwicId).orElse(null);
+    }
 
+////    public List<Bwic> findByCusip(String cusip) {
+////        return  this.bwicRepository.findByCusip(cusip).orElse(null);
+//    }
+
+    public Bwic findByBondId(String bondId){
+        return this.bwicRepository.findByBondId(bondId).orElse(null);
+    }
 
 }

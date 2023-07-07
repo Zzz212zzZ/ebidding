@@ -2,12 +2,14 @@ package com.ebidding.bwic.repository;
 
 import com.ebidding.bwic.api.BwicDTO;
 import com.ebidding.bwic.domain.Bwic;
+import org.apache.http.nio.entity.NStringEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import javax.swing.text.html.Option;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
@@ -21,7 +23,13 @@ public interface BwicRepository extends JpaRepository<Bwic, Long> {
 //    Optional<Bwic> findByCusip(String cusip);
 
     //SELECT * FROM BOND WHERE BWIC_ID = ?
-    Optional<Bwic> findByBwicId(long bwicId);
+    Optional<Bwic> findByBwicId(Long bwicId);
+//
+////    @Query(nativeQuery = true,
+////            value = "SELECT bwic.* FROM bwic, bond WHERE bond.cusip = :cusip in (SELECT cusip= :cusip from bond, bwic WHERE bwic.bond_id = bond.bond_id)")
+////    Optional<List<Bwic>> findByCusip(@Param("cusip") String cusip);
+//
+    Optional<Bwic> findByBondId(String bondId);
 
     List<Bwic> findAllByDueTimeAfterOrderByDueTimeAsc(Timestamp time);
 

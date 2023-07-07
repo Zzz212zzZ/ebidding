@@ -13,6 +13,9 @@ public interface BondRepository extends JpaRepository<Bond, Long> {
 
     Optional<Bond> findByBondId(String bondId);
 
+    @Query(nativeQuery = true, value = "SELECT bond_id FROM bond WHERE cusip = :cusip")
+    Optional<String> getBondid(@Param("cusip") String cusip);
+
     @Modifying
     @Query("UPDATE Bond b SET b.transactionCounts = b.transactionCounts + 1 WHERE b.bondId = :bondId")
     void incrementTransactionCount(@Param("bondId") String bondId);
