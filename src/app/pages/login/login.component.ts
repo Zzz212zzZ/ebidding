@@ -105,6 +105,7 @@ export class LoginComponent implements OnInit {
        localStorage.setItem('Token', `Bearer ${token}`);
        //设置localStorage的role
        localStorage.setItem('role', role);
+        localStorage.setItem('name', data.name);
 
       if(role === 'client'){
         console.log(role);
