@@ -1,12 +1,23 @@
-<nz-tabset>
-    <nz-tab *ngFor="let tab of tabs" [nzTitle]="titleTemplate">
-      <ng-template #titleTemplate>
-        <span nz-icon [nzType]="tab.iconType" nzTheme='twotone' [nzSpin]="tab.iconSpin" style="margin: 0 0 0 0;"></span>
-        {{ tab.name }}
-      </ng-template>
-      <app-ongoing-table [data]="ongoingData" *ngIf="selectedTab === 'Ongoing'"></app-ongoing-table>
-      <app-upcoming-table [data]="upcomingData" *ngIf="selectedTab === 'Upcoming'"></app-upcoming-table>
-      <app-ended-table [data]="endedData" *ngIf="selectedTab === 'Ended'"></app-ended-table>
-    </nz-tab>
-  </nz-tabset>
-  
+<nz-tabset [(nzSelectedIndex)]="selectedIndex">
+  <nz-tab [nzTitle]="tabs[0].name">
+    <ng-template #titleTemplate>
+      <span nz-icon [nzType]="tabs[0].iconType" nzTheme='twotone' [nzSpin]="tabs[0].iconSpin" style="margin: 0 0 0 0;"></span>
+      {{ tabs[0].name }}
+    </ng-template>
+    <app-ongoing-table [data]="ongoingData"></app-ongoing-table>
+  </nz-tab>
+  <nz-tab [nzTitle]="tabs[1].name">
+    <ng-template #titleTemplate>
+      <span nz-icon [nzType]="tabs[1].iconType" nzTheme='twotone' [nzSpin]="tabs[1].iconSpin" style="margin: 0 0 0 0;"></span>
+      {{ tabs[1].name }}
+    </ng-template>
+    <app-upcoming-table [data]="upcomingData"></app-upcoming-table>
+  </nz-tab>
+  <nz-tab [nzTitle]="tabs[2].name">
+    <ng-template #titleTemplate>
+      <span nz-icon [nzType]="tabs[2].iconType" nzTheme='twotone' [nzSpin]="tabs[2].iconSpin" style="margin: 0 0 0 0;"></span>
+      {{ tabs[2].name }}
+    </ng-template>
+    <app-ended-table [data]="endedData"></app-ended-table>
+  </nz-tab>
+</nz-tabset>
