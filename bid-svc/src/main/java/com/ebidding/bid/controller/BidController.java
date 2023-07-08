@@ -106,7 +106,10 @@ public class BidController {
         return ResponseEntity.ok(response);
     }
 
-
+    @GetMapping("api/v1/bid-service/{bwicId}/bid/success")
+    public Bid getSuccesBidByBwicid(@PathVariable Long bwicId) {
+        return bidService.getSuccesBidByBwicid(bwicId);
+    }
 
 
 

@@ -74,6 +74,8 @@ public class BwicService {
         // TODO 这里通过feign调用 bid-svc服务的api/v1/bids/getSuccesBidByBwicid接口即可
 
 
+
+
         return dueTime.isAfter(LocalDateTime.now());
     }
 
