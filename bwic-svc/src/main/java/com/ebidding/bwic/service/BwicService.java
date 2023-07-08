@@ -149,4 +149,8 @@ public class BwicService {
         return issuer;
     }
 
+    public List<Bwic> getAllBwics(){
+        return bwicRepository.findAll();
+    }
+
 }
