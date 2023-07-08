@@ -6,6 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="2a4f9960-20b1-4731-ae3d-438c38e3e91e" name="更改" comment="更新getOngoing的bwic接口">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bwic-svc/src/main/java/com/ebidding/bwic/controller/BwicController.java" beforeDir="false" afterPath="$PROJECT_DIR$/bwic-svc/src/main/java/com/ebidding/bwic/controller/BwicController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bwic-svc/src/main/java/com/ebidding/bwic/repository/BwicRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/bwic-svc/src/main/java/com/ebidding/bwic/repository/BwicRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bwic-svc/src/main/java/com/ebidding/bwic/service/BwicService.java" beforeDir="false" afterPath="$PROJECT_DIR$/bwic-svc/src/main/java/com/ebidding/bwic/service/BwicService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,31 +50,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "Z:/OneDrive/CitiPractice/group4/service",
-    "node.js.detected.package.eslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "reference.projectsettings.compiler.javacompiler",
-    "spring.configuration.checksum": "d0d2190b5de3aee74bf4e2882c3aeef8",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;Z:/OneDrive/CitiPractice/group4/service&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.projectsettings.compiler.javacompiler&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;d0d2190b5de3aee74bf4e2882c3aeef8&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="ReactorSettings">
     <option name="notificationShown" value="true" />
   </component>
-  <component name="RunManager" selected="Spring Boot.GatewayApplication">
+  <component name="RunManager" selected="Spring Boot.BwicServiceApplication">
     <configuration name="AccountServiceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.ebidding.account.AccountServiceApplication" />
       <module name="account-svc" />
@@ -178,6 +181,7 @@
       <updated>1688539318350</updated>
       <workItem from="1688796769571" duration="690000" />
       <workItem from="1688797468525" duration="4776000" />
+      <workItem from="1688806480570" duration="312000" />
     </task>
     <task id="LOCAL-00001" summary="后端7.7更改，添加了getissuer和通过cusip区查询bwic方法">
       <option name="closed" value="true" />
@@ -208,11 +212,6 @@
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/bwic-svc/src/main/java/com/ebidding/bwic/controller/BwicController.java</url>
-          <line>86</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/account-svc/src/main/java/com/ebidding/account/AccountServiceApplication.java</url>
           <line>11</line>

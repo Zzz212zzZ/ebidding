@@ -88,17 +88,17 @@ public class BwicController {
         return ResponseEntity.ok(ongoingBwics);
     }
 
-//    @GetMapping("/bwics/incoming")
-//    public ResponseEntity<List<BwicRecordResponseDTO>> getIncomingBwics() {
-//        List<BwicRecordResponseDTO> incomingBwics = this.bwicService.getIncomingBwics();
-//        return ResponseEntity.ok(incomingBwics);
-//    }
-//
-//    @GetMapping("/bwics/ended")
-//    public ResponseEntity<List<BwicRecordResponseDTO>> getEndedBwics() {
-//        List<BwicRecordResponseDTO> endedBwics = this.bwicService.getEndedBwics();
-//        return ResponseEntity.ok(endedBwics);
-//    }
+    @GetMapping("/bwics/upcoming")
+    public ResponseEntity<List<BwicRecordResponseDTO>> getUpcomingBwics() {
+        List<BwicRecordResponseDTO> incomingBwics = this.bwicService.getUpcomingBwics();
+        return ResponseEntity.ok(incomingBwics);
+    }
+
+    @GetMapping("/bwics/ended")
+    public ResponseEntity<List<BwicRecordResponseDTO>> getEndedBwics() {
+        List<BwicRecordResponseDTO> endedBwics = this.bwicService.getEndedBwics();
+        return ResponseEntity.ok(endedBwics);
+    }
 
 
 

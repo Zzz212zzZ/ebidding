@@ -44,6 +44,11 @@ public interface BwicRepository extends JpaRepository<Bwic, Long> {
     @Query("SELECT b FROM Bwic b WHERE b.startTime <= CURRENT_TIMESTAMP AND b.dueTime >= CURRENT_TIMESTAMP ORDER BY b.startTime ASC")
     List<Bwic> findOngoingBwics();
 
+    @Query("SELECT b FROM Bwic b WHERE b.startTime > CURRENT_TIMESTAMP ORDER BY b.startTime ASC")
+    List<Bwic> findUpcomingBwics();
+
+    @Query("SELECT b FROM Bwic b WHERE b.dueTime < CURRENT_TIMESTAMP ORDER BY b.dueTime ASC")
+    List<Bwic> findEndedBwics();
 
 
 }

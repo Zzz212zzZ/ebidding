@@ -112,6 +112,46 @@ public class BwicService {
     //---------------------------------------------查找正在进行的bwic------------------------------------------------
 
 
+    //---------------------------------------------查找还未开始的bwic------------------------------------------------
+    public List<BwicRecordResponseDTO> getUpcomingBwics() {
+
+            List<Bwic> incomingBwics = bwicRepository.findUpcomingBwics();
+            List<BwicRecordResponseDTO> responseDTOs = new ArrayList<>();
+
+            for (Bwic bwic : incomingBwics) {
+                BwicRecordResponseDTO dto = modelMapper.map(bwic, BwicRecordResponseDTO.class);
+
+                dto.setCusip(getBondCusip(bwic.getBondId()));
+                dto.setIssuer(getBondIssuer(bwic.getBondId()));
+                responseDTOs.add(dto);
+            }
+            return responseDTOs;
+    }
+
+    //---------------------------------------------查找还未开始的bwic------------------------------------------------
+
+
+
+    //---------------------------------------------查找已经结束的bwic------------------------------------------------
+    public List<BwicRecordResponseDTO> getEndedBwics() {
+
+                List<Bwic> endedBwics = bwicRepository.findEndedBwics();
+                List<BwicRecordResponseDTO> responseDTOs = new ArrayList<>();
+
+                for (Bwic bwic : endedBwics) {
+                    BwicRecordResponseDTO dto = modelMapper.map(bwic, BwicRecordResponseDTO.class);
+
+                    dto.setCusip(getBondCusip(bwic.getBondId()));
+                    dto.setIssuer(getBondIssuer(bwic.getBondId()));
+                    responseDTOs.add(dto);
+                }
+                return responseDTOs;
+    }
+
+
+
+
+
 
     //---------------------------------------------查找bond的属性接口------------------------------------------------
     public String getBondCusip(String bondId) {
@@ -123,6 +163,7 @@ public class BwicService {
         String issuer = bondService.findIssuerByBondId(bondId);
         return issuer;
     }
+
 
 
 
