@@ -1,1 +1,57 @@
-<p>history works!</p>
+<div nz-row>
+    <div nz-col nzSpan="8" nzOffset="8">
+        <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
+            <input type="text" nz-input formControlName="bwicId/Cussip/Issuer" placeholder="input  BWIC ID/Cussip/Issuer" />
+        </nz-input-group>
+        <ng-template #suffixIconButton>
+            <button nz-button nzType="primary" nzSearch><span nz-icon nzType="search"></span></button>
+        </ng-template>
+    </div>
+</div>
+
+<nz-table #nestedTable [nzData]="listOfBwicData" [nzPageSize]="10">
+    <thead>
+        <tr>
+            <th></th>
+            <th>BWIC ID</th>
+            <th>Issuer</th>
+            <th>Cussip</th>
+            <th>Start Time</th>
+            <th>Due Time</th>
+            <th>Start Price</th>
+            <th>Size</th>
+        </tr>
+    </thead>
+    <tbody>
+        <ng-template ngFor let-data [ngForOf]="nestedTable.data">
+            <tr>
+            <td [(nzExpand)]="data.expand"></td>
+            <td>{{ data.bwicId }}</td>
+            <td>{{ data.issuer }}</td>
+            <td>{{ data.cussip }}</td>
+            <td>{{ data.startTime }}</td>
+            <td>{{ data.dueTime }}</td>
+            <td>{{ data.startPrice }}</td>
+            <td>{{ data.size }}</td>
+        </tr>
+        <tr [nzExpand]="data.expand">
+            <nz-table #innerTable [nzData]="listOfBidHistoryData" nzSize="middle" [nzShowPagination]="false">
+                <thead>
+                    <tr>
+                        <th>Time</th>
+                        <th>Price</th>
+                        <th>Rank</th>
+                    </tr>
+                </thead>
+            <tbody>
+              <tr *ngFor="let data of innerTable.data">
+                <td>{{ data.time }}</td>
+                <td>{{ data.price }}</td>
+                <td>{{ data.upgradeRank }}</td>
+              </tr>
+            </tbody>
+          </nz-table>
+        </tr>
+      </ng-template>
+    </tbody>
+</nz-table>

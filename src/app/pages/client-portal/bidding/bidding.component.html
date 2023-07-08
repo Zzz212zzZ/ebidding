@@ -1,1 +1,58 @@
-<p>bidding works!</p>
+<div nz-row>
+  <div nz-col nzSpan="8" nzOffset="8">
+    <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
+      <input type="text" [(ngModel)]="searchValue" nz-input placeholder="input BWIC ID/Cussip/Issuer" />
+    </nz-input-group>
+    <ng-template #suffixIconButton>
+      <button nz-button nzType="primary" nzSearch (click)="searchChange()"><span nz-icon
+          nzType="search"></span></button>
+    </ng-template>
+  </div>
+</div>
+
+<nz-table #editRowTable nzBordered [nzData]="listOfData" nzTableLayout="fixed">
+  <thead>
+    <tr>
+      <th>BWIC ID</th>
+      <th>Issuer</th>
+      <th>Cusip</th>
+      <th>StartTime</th>
+      <th>DueTime</th>
+      <th>StartPrice</th>
+      <th>Size</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of editRowTable.data">
+      <ng-container>
+        <td>{{ data.bwicId }}</td>
+        <td>{{ data.issuer }}</td>
+        <td>{{ data.cusip }}</td>
+        <td>{{ data.startTime }}</td>
+        <td>{{ data.dueTime }}</td>
+        <td>{{ data.startPrice }}</td>
+        <td>{{ data.size }}</td>
+        <td><a (click)="startEdit(data)">Edit</a></td>
+      </ng-container>
+    </tr>
+  </tbody>
+</nz-table>
+
+<nz-modal [(nzVisible)]="isVisible" nzTitle="Edit" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()" [nzMaskClosable]="false">
+  <ng-container *nzModalContent>
+    <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="handleOk()">
+      <nz-form-item>
+        <nz-form-control>
+          <input type="text" nz-input formControlName="bwicId"  />
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+    <nz-input-group nzSearch nzSize="large" [nzAddOnAfter]="suffixButton">
+      <input type="text" nz-input placeholder="BIDDING" [(ngModel)]="price" />
+    </nz-input-group>
+    <ng-template #suffixButton>
+      <button nz-button nzType="primary" nzSize="large" class="" (click)="submit()">提交</button>
+    </ng-template>
+  </ng-container>
+</nz-modal>

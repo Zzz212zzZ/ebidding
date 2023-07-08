@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { ClientPortalRoutingModule } from './client-portal-routing.module';
 import { BiddingComponent } from './bidding/bidding.component';
+import { NgxEchartsModule } from 'ngx-echarts';
 
 
 @NgModule({
@@ -10,7 +11,8 @@ import { BiddingComponent } from './bidding/bidding.component';
   ],
   imports: [
     CommonModule,
-    ClientPortalRoutingModule
+    ClientPortalRoutingModule,
+    NgxEchartsModule 
   ]
 })
 export class ClientPortalModule { }

@@ -37,7 +37,9 @@
             "styles": [
               "src/styles.less"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/echarts/dist/echarts.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -109,5 +111,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "44d0cd7a-c34d-41d1-839b-c67b07d0f117"
   }
 }

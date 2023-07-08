@@ -15,4 +15,18 @@ export class BwicService {
         console.log(data);
       });
   }
+
+  getBidding(value:string){
+    return this.http
+      .get(`/api/bwics/${value}/bycusip`);
+  }
+
+  getHistory(){
+    return this.http
+      .get(`/api/bwics/history`).toPromise();
+  }
+
+  setBids(model:{bwicId:string,price:string}){
+    return this.http.post('/bid/bids',model)
+  }
 }

@@ -1,1 +1,39 @@
-<p>homepage works!</p>
+
+<div nz-row>
+      <div nz-col nzSpan="8" nzOffset="8">
+        <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
+          <input type="text" nz-input placeholder="input BWIC ID/Cussip/Issuer" />
+        </nz-input-group>
+        <ng-template #suffixIconButton>
+          <button nz-button nzType="primary" nzSearch><span nz-icon nzType="search"></span></button>
+        </ng-template>
+      </div>
+    </div>
+  
+  <div style="background: #ECECEC;padding:20px;">
+    <div nz-row [nzGutter]="8">
+      <div nz-col [nzSpan]="8">
+        <nz-card nzTitle="Card title">
+          <p>Card content</p>
+        </nz-card>
+      </div>
+      <div nz-col [nzSpan]="8">
+        <nz-card nzTitle="Card title">
+          <p>Card content</p>
+        </nz-card>
+      </div>
+      <div nz-col [nzSpan]="8">
+        <nz-card nzTitle="Card title">
+          <p>Card content</p>
+        </nz-card>
+      </div>
+    </div>
+  </div>
+  <div style="height: 500px;" id ="testchart" >测试图表</div>
+
+  
+  
+  
+  
+
+
