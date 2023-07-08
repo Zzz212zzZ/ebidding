@@ -3,12 +3,14 @@ package com.ebidding.bwic.service;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.ebidding.bwic.api.BwicDTO;
+import com.ebidding.bwic.api.BwicRecordResponseDTO;
 import com.ebidding.bwic.domain.Bwic;
 import com.ebidding.bwic.repository.BondRepository;
 import com.ebidding.bwic.repository.BwicRepository;
 import com.ebidding.common.utils.WebSocketMessageUtil;
 import com.ebidding.common.websocket.UserIdSessionManager;
 import com.ebidding.common.websocket.enums.WebSocketMsgType;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,10 +19,7 @@ import org.springframework.web.socket.WebSocketSession;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class BwicService {
@@ -29,6 +28,9 @@ public class BwicService {
 
     @Autowired
     private BondService bondService;
+
+    @Autowired
+    private ModelMapper modelMapper;
 
     public Optional<BwicDTO> saveBwic(String bondId, double startPrice, Timestamp startTime, Timestamp dueTime, double size) {
         Bwic bwic = Bwic.builder()
@@ -88,26 +90,61 @@ public class BwicService {
         return result;
     }
 
+    //---------------------------------------------查找正在进行的bwic------------------------------------------------
+    public List<BwicRecordResponseDTO> getOngoingBwics() {
 
-    public String getCusip(Long bwicId) {
-        //先根据bwicId查询bwic表，获取bondId
-        Bwic bwic = this.bwicRepository.findByBwicId(bwicId).orElse(null);
-        String bondId = bwic.getBondId();
-        //再根据bondId查询bond表，获取cusip
+        List<Bwic> ongoingBwics = bwicRepository.findOngoingBwics();
+        List<BwicRecordResponseDTO> responseDTOs = new ArrayList<>();
 
+        for (Bwic bwic : ongoingBwics) {
+            BwicRecordResponseDTO dto = modelMapper.map(bwic, BwicRecordResponseDTO.class);
+
+            dto.setCusip(getBondCusip(bwic.getBondId()));
+            dto.setIssuer(getBondIssuer(bwic.getBondId()));
+            responseDTOs.add(dto);
+        }
+
+
+        return responseDTOs;
+
+    }
+
+    //---------------------------------------------查找正在进行的bwic------------------------------------------------
+
+
+
+    //---------------------------------------------查找bond的属性接口------------------------------------------------
+    public String getBondCusip(String bondId) {
         String cusip = bondService.findCuSipByBondId(bondId);
         return cusip;
     }
-
-    public String getIssuer(Long bwicId) {
-        //先根据bwicId查询bwic表，获取bondId
-        Bwic bwic = this.bwicRepository.findByBwicId(bwicId).orElse(null);
-        String bondId = bwic.getBondId();
-        //再根据bondId查询bond表，获取issuer
-
+    //---------------------------------------------查找bond的属性接口------------------------------------------------
+    public String getBondIssuer(String bondId) {
         String issuer = bondService.findIssuerByBondId(bondId);
         return issuer;
     }
+
+
+
+    public String getCusipByBwicId(Long bwicId) {
+        Bwic bwic = this.bwicRepository.findByBwicId(bwicId).orElse(null);
+        if (bwic == null) {
+            throw new RuntimeException("Bwic not found");
+        }
+        String bondId = bwic.getBondId();
+        return getBondCusip(bondId);
+    }
+
+    public String getIssuerByBwicId(Long bwicId) {
+        Bwic bwic = this.bwicRepository.findByBwicId(bwicId).orElse(null);
+        if (bwic == null) {
+            throw new RuntimeException("Bwic not found");
+        }
+        String bondId = bwic.getBondId();
+        return getBondIssuer(bondId);
+    }
+
+
 
     //加入Transactional，防止并发
     @Transactional

@@ -2,6 +2,7 @@ package com.ebidding.bwic.controller;
 
 
 import com.ebidding.bwic.api.BwicDTO;
+import com.ebidding.bwic.api.BwicRecordResponseDTO;
 import com.ebidding.bwic.domain.Bwic;
 import com.ebidding.bwic.service.BondService;
 import com.ebidding.bwic.service.BwicService;
@@ -54,20 +55,21 @@ public class BwicController {
         return ResponseEntity.ok(price);
     }
 
-    //根据bwicId获取cusip
+    //根据bwicId获取cusip--------------->不需要，直接从统一的接口一起返回
     @GetMapping("/bwics/{bwicId}/cusip")
     // [GET] http://localhost:8001/api/v1/bwics/cusip?bwicId={bwicId}
     public ResponseEntity<String> getCusip(@PathVariable("bwicId") Long bwicId) {
-        String cusip = this.bwicService.getCusip(bwicId);
+        String cusip = this.bwicService.getCusipByBwicId(bwicId);
         return ResponseEntity.ok(cusip);
     }
 
     @GetMapping("/bwics/{bwicId}/issuer")
     // [GET] http://localhost:8001/api/v1/bwics/issuer?bwicId={bwicId}
     public ResponseEntity<String> getIssuer(@PathVariable("bwicId") Long bwicId) {
-        String issuer = this.bwicService.getIssuer(bwicId);
+        String issuer = this.bwicService.getIssuerByBwicId(bwicId);
         return ResponseEntity.ok(issuer);
     }
+
     @GetMapping("/bwics/{bwicId}/status")
     public ResponseEntity<Boolean> isActive(@PathVariable("bwicId")  Long bwicId) {
         boolean isActive = bwicService.isActive(bwicId);
@@ -79,6 +81,25 @@ public class BwicController {
         Map<String, List<Bwic>> historyRecords = this.bwicService.getHistoryRecords();
         return ResponseEntity.ok(historyRecords);
     }
+
+    @GetMapping("/bwics/ongoing")
+    public ResponseEntity<List<BwicRecordResponseDTO>> getOngoingBwics() {
+        List<BwicRecordResponseDTO> ongoingBwics = this.bwicService.getOngoingBwics();
+        return ResponseEntity.ok(ongoingBwics);
+    }
+
+//    @GetMapping("/bwics/incoming")
+//    public ResponseEntity<List<BwicRecordResponseDTO>> getIncomingBwics() {
+//        List<BwicRecordResponseDTO> incomingBwics = this.bwicService.getIncomingBwics();
+//        return ResponseEntity.ok(incomingBwics);
+//    }
+//
+//    @GetMapping("/bwics/ended")
+//    public ResponseEntity<List<BwicRecordResponseDTO>> getEndedBwics() {
+//        List<BwicRecordResponseDTO> endedBwics = this.bwicService.getEndedBwics();
+//        return ResponseEntity.ok(endedBwics);
+//    }
+
 
 
     @PutMapping("/bwics/{bwicId}")

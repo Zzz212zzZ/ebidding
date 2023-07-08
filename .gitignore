@@ -31,3 +31,12 @@ build/
 
 ### VS Code ###
 .vscode/
+
+**/application.yml
+**/application-dev.yml
+**/application-uat.yml
+
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
