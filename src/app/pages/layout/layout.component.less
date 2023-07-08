@@ -1,37 +1,127 @@
-:host {
-  display: flex;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+mat-toolbar {
+    background: #004a9f;
+    color: white;
 }
 
-.app-layout {
-  height: 100vh;
-  // TODO: added
-  display: flex;
-  flex-direction: row;
+mat-sidenav {
+    height: calc(100vh - 100px);
+    margin: 16px;
+    width: 200px;
+    border-right: none;
+    background: #1e5696;
+    color: white;
+    border-radius: 10px;
+    padding: 16px;
+    text-align: center;
 }
 
-nz-header {
-  padding: 0;
-  width: 100%;
-  z-index: 2;
+.content {
+    height: calc(100vh - 100px);
+    border-radius: 10px;
+    margin: 16px;
+    margin-left: 32px;
+    padding: 16px;
+    overflow-y: scroll;
 }
 
-.app-header {
-  position: relative;
-  height: 64px;
-  padding: 0;
-  background: #fff;
-  box-shadow: 0 1px 4px rgba(0,21,41,.08);
+mat-sidenav-container {
+    height: calc(100vh - 65px);
 }
 
-nz-content {
-  margin: 24px;
+.menu-button {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    /* 这将使文本在按钮中居中 */
+    font-size: 1rem;
+    transition: background-color 0.3s, color 0.3s;
+    /* 添加颜色过渡动画 */
+    padding: 30px 0;
+    /* 在按钮的顶部和底部添加10px的padding */
+
+    mat-icon {
+        margin-right: 8px;
+        transition: color 0.3s;
+        /* 为图标添加颜色过渡动画 */
+    }
 }
 
-.inner-content {
-  padding: 24px;
-  background: #fff;
-  height: 100%;
+
+.button-text {
+    margin-left: 16px;
+}
+
+/* 当按钮处于正常状态时的样式 */
+.menu-button,
+.menu-button mat-icon,
+.menu-button span {
+    color: inherit;
+}
+
+/* 当按钮的路由被激活时，改变它和它内部的元素的颜色 */
+.menu-button.active,
+.menu-button.active mat-icon,
+.menu-button.active span {
+    background-color: #004a9f !important;
+    /* 使用你想要的背景颜色 */
+    color: white !important;
+}
+
+/* 当鼠标悬停在按钮上时，改变背景颜色 */
+.menu-button:hover {
+    background-color: rgba(0, 74, 159, 0.6) !important;
+}
+
+
+/* 修改mat-divider的margin */
+mat-divider {
+    margin: 10px !important;
+}
+
+
+.avatar {
+    margin-top: 16px;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+.name {
+    margin-top: 8px;
+    font-weight: normal;
+}
+
+.designation {
+    margin-top: 2px;
+    font-size: 0.7rem;
+    color: lightgrey;
+}
+
+mat-divider {
+    margin-top: 16px;
+    margin-bottom: 16px;
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+
+
+
+
+/* 定义滚动条的轨道（背景） */
+.content::-webkit-scrollbar {
+    width: 8px;
+    background-color: #F5F5F5;
+}
+
+/* 定义滚动条的滑块 */
+.content::-webkit-scrollbar-thumb {
+    background-color: #F90;
+    border-radius: 10px;
+}
+
+/* 定义滚动条的轨道（背景）上的阴影或边界 */
+.content::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
 }
