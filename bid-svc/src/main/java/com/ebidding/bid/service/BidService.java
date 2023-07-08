@@ -69,13 +69,13 @@ public class BidService {
         BidRankPK embbedeId = new BidRankPK(bid.getAccountId(), bid.getBwicId());
         bidRank.setId(embbedeId);
         bidRank.setPrice(bid.getPrice());
-        Timestamp preTime=new Timestamp(System.currentTimeMillis());
+        Timestamp preTime = new Timestamp(System.currentTimeMillis());
         bidRank.setTime(preTime);
         bid.setTime(preTime);
 
         //2.现在获取排名
         this.bidRankRepository.save(bidRank);
-        Long ranking = this.getRankByBwicIdAndAccountId(bid.getBwicId(),bid.getAccountId());
+        Long ranking = bidRankRepository.getRanking(bid.getBwicId(),bid.getAccountId());
 
         // 3. 更新Bid的排名
         bid.setRanking(ranking);
@@ -84,8 +84,21 @@ public class BidService {
         //最后还要更新bwic中的bidCounts，last_bid_time，和present_price(如果比present_price高的话)
         //这个方法还要更新bond中的transaction_counts
         bwicClient.updateBwic(bid.getBwicId(),bid.getPrice(),bid.getTime());
+
+        // 通知当前bwicId的用户排名更新
+        List<Bid> bidList = bidRepository.getListByBwicid(bid.getBwicId());
+        bidList.forEach(bidInfo -> {
+            WebSocketSession webSocketSession = UserIdSessionManager.getSession(bidInfo.getAccountId().intValue());
+            JSONObject msgObj = new JSONObject();
+            msgObj.put("msgType", WebSocketMsgType.NOTICE_RANK_CHANGE_MSG.getCode());
+            msgObj.put("result", "success");
+            msgObj.put("msg", "您的排名已被更新为：" + bidInfo.getRanking());
+            WebSocketMessageUtil.sendMsgToOne(webSocketSession, JSONUtil.toJsonStr(msgObj));
+        });
+
         return bid;
     }
+
 
     public Long getRankByBwicIdAndAccountId(Long bwicId, Long accountId) {
         // 检查bidRank是否存在

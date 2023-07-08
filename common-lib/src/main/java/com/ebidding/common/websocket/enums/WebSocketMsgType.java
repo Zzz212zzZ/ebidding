@@ -7,9 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @Author wzhou
+ * @Author
  * @Description WebSocket 消息类型
- * @Date 2022/9/29 10:46
  */
 @Getter
 public enum WebSocketMsgType {

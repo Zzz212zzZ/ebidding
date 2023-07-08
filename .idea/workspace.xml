@@ -4,21 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2a4f9960-20b1-4731-ae3d-438c38e3e91e" name="更改" comment="后端7.7更改，添加了getissuer和通过cusip区查询bwic方法">
-      <change afterPath="$PROJECT_DIR$/bid-svc/src/test/java/com/ebidding/bid/controller/BidControllerTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bid-svc/src/test/java/com/ebidding/bid/service/BidServiceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/account-svc/src/main/java/com/ebidding/account/AccountServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/account-svc/src/main/java/com/ebidding/account/AccountServiceApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/account-svc/src/main/java/com/ebidding/account/domain/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/account-svc/src/main/java/com/ebidding/account/domain/Account.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/account-svc/src/main/java/com/ebidding/account/service/AccountService.java" beforeDir="false" afterPath="$PROJECT_DIR$/account-svc/src/main/java/com/ebidding/account/service/AccountService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bid-api/src/main/java/com/ebidding/bid/api/PriceResponseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/bid-api/src/main/java/com/ebidding/bid/api/PriceResponseDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bid-svc/src/main/java/com/ebidding/bid/controller/BidController.java" beforeDir="false" afterPath="$PROJECT_DIR$/bid-svc/src/main/java/com/ebidding/bid/controller/BidController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bid-svc/src/main/java/com/ebidding/bid/repository/BidRankRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/bid-svc/src/main/java/com/ebidding/bid/repository/BidRankRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bwic-svc/src/main/java/com/ebidding/bwic/controller/BwicController.java" beforeDir="false" afterPath="$PROJECT_DIR$/bwic-svc/src/main/java/com/ebidding/bwic/controller/BwicController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bwic-svc/src/main/java/com/ebidding/bwic/service/BwicService.java" beforeDir="false" afterPath="$PROJECT_DIR$/bwic-svc/src/main/java/com/ebidding/bwic/service/BwicService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common-lib/src/main/java/com/ebidding/common/auth/AuthConstant.java" beforeDir="false" afterPath="$PROJECT_DIR$/common-lib/src/main/java/com/ebidding/common/auth/AuthConstant.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common-lib/src/main/java/com/ebidding/common/utils/JwtUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/common-lib/src/main/java/com/ebidding/common/utils/JwtUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gateway/src/main/java/com/ebidding/gateway/filter/JwtFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/src/main/java/com/ebidding/gateway/filter/JwtFilter.java" afterDir="false" />
+    <list default="true" id="2a4f9960-20b1-4731-ae3d-438c38e3e91e" name="更改" comment="后端7.7更改，添加了getissuer和通过cusip区查询bwic方法(新）">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bid-svc/src/main/java/com/ebidding/bid/service/BidService.java" beforeDir="false" afterPath="$PROJECT_DIR$/bid-svc/src/main/java/com/ebidding/bid/service/BidService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common-lib/src/main/java/com/ebidding/common/websocket/enums/WebSocketMsgType.java" beforeDir="false" afterPath="$PROJECT_DIR$/common-lib/src/main/java/com/ebidding/common/websocket/enums/WebSocketMsgType.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,15 +36,15 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "C:/Users/Serei/Desktop/group4",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Serei/Desktop/group4&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Application.AccountServiceApplication">
     <configuration name="AccountServiceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.ebidding.account.AccountServiceApplication" />
@@ -111,9 +100,9 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.AccountServiceApplication" />
         <item itemvalue="Application.BidServiceApplication" />
         <item itemvalue="Application.BwicServiceApplication" />
+        <item itemvalue="Application.AccountServiceApplication" />
         <item itemvalue="Application.GatewayApplication" />
       </list>
     </recent_temporary>
@@ -135,12 +124,21 @@
       <option name="project" value="LOCAL" />
       <updated>1688788386748</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="后端7.7更改，添加了getissuer和通过cusip区查询bwic方法(新）">
+      <option name="closed" value="true" />
+      <created>1688789256972</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1688789256973</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="后端7.7更改，添加了getissuer和通过cusip区查询bwic方法" />
-    <option name="LAST_COMMIT_MESSAGE" value="后端7.7更改，添加了getissuer和通过cusip区查询bwic方法" />
+    <MESSAGE value="后端7.7更改，添加了getissuer和通过cusip区查询bwic方法(新）" />
+    <option name="LAST_COMMIT_MESSAGE" value="后端7.7更改，添加了getissuer和通过cusip区查询bwic方法(新）" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
