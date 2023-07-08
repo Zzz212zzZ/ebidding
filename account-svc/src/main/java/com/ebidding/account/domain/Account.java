@@ -17,10 +17,11 @@ public class Account {
 
     @Id
     @Column(name = "account_id", nullable = false)
-    private String id;
-
+    private String accountId;
+    @Column(name = "name", nullable = false)
     private String name;
-    private String password_hash;
+    @Column(name = "password_hash", nullable = false)
+    private String passwordHash;
 
     @Enumerated(EnumType.STRING)
     private AccountRole role;

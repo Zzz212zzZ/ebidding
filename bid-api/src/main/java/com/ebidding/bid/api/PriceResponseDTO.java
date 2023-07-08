@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 public class PriceResponseDTO {
 
     private Double price;
-    private long Ranking;
+    private Long ranking;
     private Double secondPrice;
 
 

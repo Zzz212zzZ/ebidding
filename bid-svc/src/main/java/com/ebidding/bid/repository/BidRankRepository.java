@@ -27,7 +27,7 @@ public interface BidRankRepository extends JpaRepository<BidRank, Long> {
     @Query(value = "SELECT COUNT(*) FROM bidrank WHERE bwic_id = :bwicId", nativeQuery = true)
     Long countByBwicId(@Param("bwicId") Long bwicId);
 
-    @Query(nativeQuery = true, value = "SELECT price FROM bidrank WHERE bwic_id = :bwicId ORDER BY price DESC LIMIT 1, 1")
+    @Query(nativeQuery = true, value = "SELECT price FROM bidrank WHERE bwic_id = :bwicId  ORDER BY price DESC LIMIT 1, 1")
     Optional<Double> getSecondHighestPrice(@Param("bwicId") Long bwicId);
 
 

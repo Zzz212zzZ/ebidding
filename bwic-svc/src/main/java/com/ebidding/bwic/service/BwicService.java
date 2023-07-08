@@ -4,7 +4,6 @@ import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.ebidding.bwic.api.BwicDTO;
 import com.ebidding.bwic.domain.Bwic;
-import com.ebidding.bwic.domain.Bond;
 import com.ebidding.bwic.repository.BondRepository;
 import com.ebidding.bwic.repository.BwicRepository;
 import com.ebidding.common.utils.WebSocketMessageUtil;
@@ -58,7 +57,7 @@ public class BwicService {
 
     public double getBwicPrice(Long bwicId) {
         Bwic bwic = this.bwicRepository.findByBwicId(bwicId).orElse(null);
-        return bwic.getStartPrice();
+        return bwic.getPresentPrice();
     }
 
     public boolean isActive(Long bwicId) {
@@ -76,6 +75,7 @@ public class BwicService {
         return dueTime.isAfter(LocalDateTime.now());
     }
 
+
     public Map<String, List<Bwic>> getHistoryRecords() {
         Timestamp timestampNow = Timestamp.valueOf(LocalDateTime.now());
         List<Bwic> activeBwics = bwicRepository.findAllByDueTimeAfterOrderByDueTimeAsc(timestampNow);
@@ -87,7 +87,6 @@ public class BwicService {
 
         return result;
     }
-
 
 
     public String getCusip(Long bwicId) {
