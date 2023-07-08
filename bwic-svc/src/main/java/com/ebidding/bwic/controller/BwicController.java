@@ -2,6 +2,7 @@ package com.ebidding.bwic.controller;
 
 
 import com.ebidding.bwic.api.BwicDTO;
+import com.ebidding.bwic.domain.Bond;
 import com.ebidding.bwic.domain.Bwic;
 import com.ebidding.bwic.service.BondService;
 import com.ebidding.bwic.service.BwicService;
@@ -17,6 +18,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("api/v1/bwic-service")
@@ -101,4 +103,8 @@ public class BwicController {
         return ResponseEntity.ok(issuer);
     }
 
+    @GetMapping("/bwics/Allbonds")
+    public List<Bond> getAllPosts() {
+        return bondService.getAllBonds().stream().collect(Collectors.toList());
+    }
 }
