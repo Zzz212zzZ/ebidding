@@ -5,30 +5,28 @@ import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 import { NzDrawerService } from 'ng-zorro-antd/drawer';
 import { DrawerContentComponent } from './drawer-content/drawer-content.component';
 import { BwicService } from 'src/app/core/services/bwic.service';
+import { BidService } from 'src/app/core/services/bid.service';
 
 
 
 export interface BidRankItemData {
-  bid_id: number;
-  account_id: number;
-  account_name: string;
-  price: number;
   ranking: number;
+  accountId: number;
+  accountName: string;
+  price: number;
   time: string;
 }
 
-
-
 export interface ParentItemData {
-  bwic_id: number;
-  bond_id: string;
+  bwicId: number;
+  bondId: string;
   cusip: string;
   issuer: string;
   size: number;
-  start_time: string;
-  due_time: string;
-  last_bid_time: string;
-  bid_counts: number;
+  startTime: string;
+  dueTime: string;
+  lastBidTime: string;
+  bidCounts: number;
   expand: boolean;
   children: BidRankItemData[];
 }
@@ -53,7 +51,7 @@ export interface ParentItemData {
 export class OngoingTableComponent {
 
 
-constructor(private drawerService: NzDrawerService, private bwicService: BwicService) {}
+  constructor(private drawerService: NzDrawerService, private bwicService: BwicService, private bidService: BidService) { }
 
   selectedRow: ParentItemData | null = null;
 
@@ -76,54 +74,27 @@ constructor(private drawerService: NzDrawerService, private bwicService: BwicSer
     this.selectedRow = data;
     console.log('Row clicked: ', data);
 
-    const drawerRef = this.drawerService.create({
-      nzTitle: '详细信息',
-      nzPlacement: 'right',
-      nzWidth: '80%',  // 宽度设为屏幕的 80%
-      nzBodyStyle: {   // 自定义抽屉的样式
-        padding: '20px',
-        backgroundColor: '#f0f2f5', // 设置背景颜色为淡灰色
-      },
-      nzContent: DrawerContentComponent,
-      nzContentParams: {
-        data: [
-          {
-            rank: 1,
-            price: 10,
-            account_id: 'A001',
-            account_name: 'John Doe',
-            transaction_time: '2023-07-08 10:00:00'
-          },
-          {
-            rank: 2,
-            price: 20,
-            account_id: 'A002',
-            account_name: 'Jane Smith',
-            transaction_time: '2023-07-08 11:00:00'
-          },
-          {
-            rank: 3,
-            price: 15,
-            account_id: 'A003',
-            account_name: 'Bob Johnson',
-            transaction_time: '2023-07-08 09:00:00'
-          },
-          {
-            rank: 4,
-            price: 25,
-            account_id: 'A004',
-            account_name: 'Alice Williams',
-            transaction_time: '2023-07-08 12:00:00'
-          }
-        ]
-      }
+    // 获取数据
+    this.bidService.getAllBidRankingsByBwicId(data.bwicId).subscribe(bidRankData => {
+      const drawerRef = this.drawerService.create({
+        nzTitle: '详细信息',
+        nzPlacement: 'right',
+        nzWidth: '80%',  // 宽度设为屏幕的 80%
+        nzBodyStyle: {   // 自定义抽屉的样式
+          padding: '20px',
+          backgroundColor: '#f0f2f5', // 设置背景颜色为淡灰色
+        },
+        nzContent: DrawerContentComponent,
+        nzContentParams: {
+          data: bidRankData  // 使用从服务中获得的数据
+        }
+      });
     });
   }
-  
-
-
-  
-
-
 }
+
+
+
+
+
 

@@ -3,17 +3,26 @@ import { Injectable } from '@angular/core';
 import {ParentItemData } from 'src/app/pages/trader-portal/admin/ongoing-table/ongoing-table.component';
 import { Observable,map } from 'rxjs';
 
-interface ServerResponseData {
-  bwicId: number;
-  bondId: string;
-  cusip: string;
-  issuer: string;
-  size: number;
-  startTime: string;
-  dueTime: string;
-  lastBidTime: string;
-  bidCounts: number;
-}
+// interface ServerResponseData {
+//   bwicId: number;
+//   bondId: string;
+//   cusip: string;
+//   issuer: string;
+//   size: number;
+//   startTime: string;
+//   dueTime: string;
+//   lastBidTime: string;
+//   bidCounts: number;
+//   children: BidRankItemData[];  // here's the change
+// }
+
+// interface BidRankItemData {
+//   ranking: number;
+//   accountId: number;
+//   accountName: string;
+//   price: number;
+//   time: string;
+// }
 
 
 @Injectable({
@@ -25,28 +34,23 @@ export class BwicService {
 
 
   //---------------向后端请求ongoing的数据----------------
-   getOngoingBwics(): Observable<ParentItemData[]> {
+  getOngoingBwics(): Observable<ParentItemData[]> {
     const apiUrl = 'bwic/bwics/ongoing';
     console.log("bwic.service.ts: getOngoingBwics(): apiUrl = " + apiUrl);
-    return this.http.get<ServerResponseData[]>(apiUrl).pipe(
-      map((data: ServerResponseData[]) => 
+    return this.http.get<ParentItemData[]>(apiUrl).pipe(
+      map((data: ParentItemData[]) => 
         data.map(item => ({
-          bwic_id: item.bwicId,
-          bond_id: item.bondId,
-          cusip: item.cusip,
-          issuer: item.issuer,
-          size: item.size,
-          start_time: item.startTime,
-          due_time: item.dueTime,
-          last_bid_time: item.lastBidTime,
-          bid_counts: item.bidCounts,
+          ...item,   // 拷贝 item 的所有字段
           expand: false,  // 默认设置为false
-          children: []
+          children: item.children.map(child => ({
+            ...child,    // 拷贝 child 的所有字段
+          }))
         }))
       )
     );
   }
-
+  
+  
 
   //---------------向后端请求ongoing的数据----------------
 

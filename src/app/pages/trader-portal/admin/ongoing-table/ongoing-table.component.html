@@ -17,35 +17,33 @@
     <ng-template ngFor let-data [ngForOf]="nestedTable.data">
       <tr class="row-hover" (click)="onRowClick(data)" [ngClass]="{'selected-row': selectedRow === data}">
         <td [(nzExpand)]="data.expand"  (click)="$event.stopPropagation()"></td>
-        <td>{{ data.bwic_id }}</td>
-        <td>{{ data.bond_id }}</td>
+        <td>{{ data.bwicId }}</td>
+        <td>{{ data.bondId }}</td>
         <td>{{ data.cusip }}</td>
         <td>{{ data.issuer }}</td>
         <td>{{ data.size }}</td>
-        <td>{{ data.start_time }}</td>
-        <td>{{ data.due_time }}</td>
-        <td>{{ data.last_bid_time }}</td>
-        <td>{{ data.bid_counts }}</td>
+        <td>{{ data.startTime }}</td>
+        <td>{{ data.dueTime }}</td>
+        <td>{{ data.lastBidTime }}</td>
+        <td>{{ data.bidCounts }}</td>
       </tr>
       <tr [nzExpand]="data.expand">
         <nz-table #innerTable [nzData]="data.children" nzSize="middle" [nzShowPagination]="false">
           <thead>
             <tr>
-              <th>Bid ID</th>
+              <th>Ranking</th>
               <th>Account ID</th>
               <th>Account Name</th>
               <th>Price</th>
-              <th>Ranking</th>
-              <th>Time</th>
+              <th>Transaction Time</th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let data of innerTable.data">
-              <td>{{ data.bid_id }}</td>
-              <td>{{ data.account_id }}</td>
-              <td>{{ data.account_name }}</td>
-              <td>{{ data.price }}</td>
               <td>{{ data.ranking }}</td>
+              <td>{{ data.accountId }}</td>
+              <td>{{ data.accountName }}</td>
+              <td>{{ data.price }}</td>  
               <td>{{ data.time }}</td>
             </tr>
           </tbody>
