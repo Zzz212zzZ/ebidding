@@ -1,10 +1,7 @@
 package com.ebidding.bwic.controller;
 
 
-import com.ebidding.bwic.api.BwicDTO;
-import com.ebidding.bwic.api.BwicUpcomingFullRecord;
-import com.ebidding.bwic.api.BwicOngoingRecordResponseDTO;
-import com.ebidding.bwic.api.BwicUpcomingRecordResponseDTO;
+import com.ebidding.bwic.api.*;
 import com.ebidding.bwic.domain.Bwic;
 import com.ebidding.bwic.service.BondService;
 import com.ebidding.bwic.service.BwicService;
@@ -94,8 +91,8 @@ public class BwicController {
     }
 
     @GetMapping("/bwics/ended")
-    public ResponseEntity<List<BwicOngoingRecordResponseDTO>> getEndedBwics() {
-        List<BwicOngoingRecordResponseDTO> endedBwics = this.bwicService.getEndedBwics();
+    public ResponseEntity<List<BwicEndedRecordResponseDTO>> getEndedBwics() {
+        List<BwicEndedRecordResponseDTO> endedBwics = this.bwicService.getEndedBwics();
         return ResponseEntity.ok(endedBwics);
     }
 
@@ -127,6 +124,15 @@ public class BwicController {
     public ResponseEntity<Bwic> getBwicByCusip(@PathVariable("cusip") String cusip){
         return ResponseEntity.ok(this.bwicService.findByBondId(this.bondService.getBondid(cusip)));
     }
+
+
+    @DeleteMapping("/bwics/{bwicId}")
+    public ResponseEntity<String> deleteBwic(@PathVariable("bwicId") Long bwicId) {
+        this.bwicService.deleteBwic(bwicId);
+        return ResponseEntity.ok().body("{\"message\":\"Delete success\"}");
+    }
+
+
 //
 //    @GetMapping("/bwics/{bondId}")
 //    public ResponseEntity<Bwic> getBwicByBondid(@PathVariable("bondId") String bondId){
