@@ -1,4 +1,4 @@
-package com.ebidding.bwic.api.ongoingDTO;
+package com.ebidding.bwic.api;
 import java.util.List;
 
 import com.ebidding.bid.api.BidRankItemDataDTO;
@@ -18,6 +18,10 @@ public class BwicOngoingRecordResponseDTO {
     private String cusip;
     private String issuer;
     private double size;
+
+    private double startPrice;
+    private double maxPrice;
+
     //加入@JsonFormat注解，可以将Timestamp转换为指定格式的字符串
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Timestamp startTime;

@@ -4,28 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2a4f9960-20b1-4731-ae3d-438c38e3e91e" name="更改" comment="websocket接口内部的服务调用实现。">
-      <change afterPath="$PROJECT_DIR$/bid-api/src/main/java/com/ebidding/bid/api/BidRankItemDataDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bwic-api/src/main/java/com/ebidding/bwic/api/ongoingDTO/BwicOngoingRecordResponseDTO.java" afterDir="false" />
+    <list default="true" id="2a4f9960-20b1-4731-ae3d-438c38e3e91e" name="更改" comment="完善获取ongoing Item的逻辑，实现了Bid-api的一些逻辑">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/account-api/src/main/java/com/ebidding/account/api/AccountClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/account-api/src/main/java/com/ebidding/account/api/AccountClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/account-svc/src/main/java/com/ebidding/account/controller/AccountController.java" beforeDir="false" afterPath="$PROJECT_DIR$/account-svc/src/main/java/com/ebidding/account/controller/AccountController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/account-svc/src/main/java/com/ebidding/account/domain/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/account-svc/src/main/java/com/ebidding/account/domain/Account.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/account-svc/src/main/java/com/ebidding/account/repository/AccountRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/account-svc/src/main/java/com/ebidding/account/repository/AccountRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/account-svc/src/main/java/com/ebidding/account/service/AccountService.java" beforeDir="false" afterPath="$PROJECT_DIR$/account-svc/src/main/java/com/ebidding/account/service/AccountService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/account-svc/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/account-svc/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bid-api/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/bid-api/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bid-api/src/main/java/com/ebidding/bid/api/BidClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/bid-api/src/main/java/com/ebidding/bid/api/BidClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bid-svc/src/main/java/com/ebidding/bid/controller/BidController.java" beforeDir="false" afterPath="$PROJECT_DIR$/bid-svc/src/main/java/com/ebidding/bid/controller/BidController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bid-svc/src/main/java/com/ebidding/bid/repository/BidRankRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/bid-svc/src/main/java/com/ebidding/bid/repository/BidRankRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bid-svc/src/main/java/com/ebidding/bid/service/BidService.java" beforeDir="false" afterPath="$PROJECT_DIR$/bid-svc/src/main/java/com/ebidding/bid/service/BidService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bwic-api/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/bwic-api/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bwic-api/src/main/java/com/ebidding/bwic/api/BwicRecordResponseDTO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bwic-svc/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/bwic-svc/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bwic-svc/src/main/java/com/ebidding/bwic/BwicServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/bwic-svc/src/main/java/com/ebidding/bwic/BwicServiceApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bwic-api/src/main/java/com/ebidding/bwic/api/ongoingDTO/BwicOngoingRecordResponseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/bwic-api/src/main/java/com/ebidding/bwic/api/BwicOngoingRecordResponseDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bwic-svc/src/main/java/com/ebidding/bwic/controller/BwicController.java" beforeDir="false" afterPath="$PROJECT_DIR$/bwic-svc/src/main/java/com/ebidding/bwic/controller/BwicController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bwic-svc/src/main/java/com/ebidding/bwic/service/BwicService.java" beforeDir="false" afterPath="$PROJECT_DIR$/bwic-svc/src/main/java/com/ebidding/bwic/service/BwicService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bwic-svc/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/bwic-svc/src/main/resources/application.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,27 +50,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "Z:/OneDrive/CitiPractice/group4/service",
-    "node.js.detected.package.eslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "reference.projectsettings.compiler.javacompiler",
-    "spring.configuration.checksum": "576f1a7e4ba1c9bfcd8e44bc2185f8bd",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;Z:/OneDrive/CitiPractice/group4/service&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.projectsettings.compiler.javacompiler&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;576f1a7e4ba1c9bfcd8e44bc2185f8bd&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="ReactorSettings">
     <option name="notificationShown" value="true" />
   </component>
@@ -96,7 +79,7 @@
       <recent name="com.ebidding.bid.api" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.BidServiceApplication">
+  <component name="RunManager" selected="Spring Boot.GatewayApplication">
     <configuration name="AccountServiceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.ebidding.account.AccountServiceApplication" />
       <module name="account-svc" />
@@ -185,8 +168,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Spring Boot.AccountServiceApplication" />
         <item itemvalue="Application.BwicServiceApplication" />
+        <item itemvalue="Spring Boot.AccountServiceApplication" />
         <item itemvalue="Application.AccountServiceApplication" />
         <item itemvalue="Application.GatewayApplication" />
         <item itemvalue="Application.BidServiceApplication" />
@@ -207,6 +190,8 @@
       <workItem from="1688807615512" duration="1111000" />
       <workItem from="1688833513127" duration="9741000" />
       <workItem from="1688873963697" duration="3199000" />
+      <workItem from="1688886167714" duration="1146000" />
+      <workItem from="1688888226262" duration="650000" />
     </task>
     <task id="LOCAL-00001" summary="后端7.7更改，添加了getissuer和通过cusip区查询bwic方法">
       <option name="closed" value="true" />
@@ -237,7 +222,14 @@
       <option name="project" value="LOCAL" />
       <updated>1688807803332</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="完善获取ongoing Item的逻辑，实现了Bid-api的一些逻辑">
+      <created>1688886411810</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1688886411810</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -248,7 +240,8 @@
     <MESSAGE value="更新getOngoing的bwic接口" />
     <MESSAGE value="更新Upcoming以及ended" />
     <MESSAGE value="websocket接口内部的服务调用实现。" />
-    <option name="LAST_COMMIT_MESSAGE" value="websocket接口内部的服务调用实现。" />
+    <MESSAGE value="完善获取ongoing Item的逻辑，实现了Bid-api的一些逻辑" />
+    <option name="LAST_COMMIT_MESSAGE" value="完善获取ongoing Item的逻辑，实现了Bid-api的一些逻辑" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

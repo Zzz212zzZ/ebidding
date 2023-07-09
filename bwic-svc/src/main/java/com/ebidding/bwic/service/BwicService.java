@@ -3,7 +3,7 @@ package com.ebidding.bwic.service;
 import com.ebidding.bid.api.BidClient;
 import com.ebidding.bid.api.BidRankItemDataDTO;
 import com.ebidding.bwic.api.BwicDTO;
-import com.ebidding.bwic.api.ongoingDTO.BwicOngoingRecordResponseDTO;
+import com.ebidding.bwic.api.BwicOngoingRecordResponseDTO;
 import com.ebidding.bwic.domain.Bwic;
 import com.ebidding.bwic.repository.BwicRepository;
 import org.modelmapper.ModelMapper;
@@ -100,8 +100,14 @@ public class BwicService {
         for (Bwic bwic : ongoingBwics) {
             BwicOngoingRecordResponseDTO dto = modelMapper.map(bwic, BwicOngoingRecordResponseDTO.class);
 
+            //因为前端展示的table是标的maxPrice，而数据库中的是presentPrice，但含义是一样的，所以这里将presentPrice赋值给maxPrice
+            dto.setMaxPrice(bwic.getPresentPrice());
+
             dto.setCusip(getBondCusip(bwic.getBondId()));
             dto.setIssuer(getBondIssuer(bwic.getBondId()));
+
+
+
             List<BidRankItemDataDTO> bidRankings = bidClient.getBidRankingsByBwicId(bwic.getBwicId());
 
             // set the children property of dto with the obtained bidRankings

@@ -2,7 +2,7 @@ package com.ebidding.bwic.controller;
 
 
 import com.ebidding.bwic.api.BwicDTO;
-import com.ebidding.bwic.api.ongoingDTO.BwicOngoingRecordResponseDTO;
+import com.ebidding.bwic.api.BwicOngoingRecordResponseDTO;
 import com.ebidding.bwic.domain.Bwic;
 import com.ebidding.bwic.service.BondService;
 import com.ebidding.bwic.service.BwicService;
