@@ -2,7 +2,9 @@ package com.ebidding.bwic.controller;
 
 
 import com.ebidding.bwic.api.BwicDTO;
+import com.ebidding.bwic.api.BwicUpcomingFullRecord;
 import com.ebidding.bwic.api.BwicOngoingRecordResponseDTO;
+import com.ebidding.bwic.api.BwicUpcomingRecordResponseDTO;
 import com.ebidding.bwic.domain.Bwic;
 import com.ebidding.bwic.service.BondService;
 import com.ebidding.bwic.service.BwicService;
@@ -86,9 +88,9 @@ public class BwicController {
     }
 
     @GetMapping("/bwics/upcoming")
-    public ResponseEntity<List<BwicOngoingRecordResponseDTO>> getUpcomingBwics() {
-        List<BwicOngoingRecordResponseDTO> incomingBwics = this.bwicService.getUpcomingBwics();
-        return ResponseEntity.ok(incomingBwics);
+    public ResponseEntity<List<BwicUpcomingRecordResponseDTO>> getUpcomingBwics() {
+        List<BwicUpcomingRecordResponseDTO> upcomingBwics = this.bwicService.getUpcomingBwics();
+        return ResponseEntity.ok(upcomingBwics);
     }
 
     @GetMapping("/bwics/ended")
@@ -107,6 +109,16 @@ public class BwicController {
 
         return ResponseEntity.ok().build();
     }
+
+
+    // 新增一个方法来处理全字段更新
+    @PutMapping("/bwics/{bwicId}/full-record")
+    public ResponseEntity<Void> updateBwicFull(@PathVariable("bwicId") Long bwicId,
+                                               @RequestBody BwicUpcomingFullRecord record) {
+        this.bwicService.updateBwicFullRecord(bwicId, record);
+        return ResponseEntity.ok().build();
+    }
+
     @GetMapping("/bwics/{bwicId}/bybwicId")
     public ResponseEntity<Bwic> getBwicByBwicid(@PathVariable("bwicId") Long bwicId){
         return ResponseEntity.ok(this.bwicService.findByBwicId(bwicId));

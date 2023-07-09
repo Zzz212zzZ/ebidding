@@ -4,9 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2a4f9960-20b1-4731-ae3d-438c38e3e91e" name="更改" comment="完善获取ongoing Item的逻辑，实现了Bid-api的一些逻辑">
+    <list default="true" id="2a4f9960-20b1-4731-ae3d-438c38e3e91e" name="更改" comment="更新dto,加入startPrice和maxPrice">
+      <change afterPath="$PROJECT_DIR$/bwic-api/src/main/java/com/ebidding/bwic/api/BwicUpcomingFullRecord.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bwic-api/src/main/java/com/ebidding/bwic/api/BwicUpcomingRecordResponseDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bwic-api/src/main/java/com/ebidding/bwic/api/ongoingDTO/BwicOngoingRecordResponseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/bwic-api/src/main/java/com/ebidding/bwic/api/BwicOngoingRecordResponseDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bwic-api/src/main/java/com/ebidding/bwic/api/BwicDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/bwic-api/src/main/java/com/ebidding/bwic/api/BwicDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bwic-svc/src/main/java/com/ebidding/bwic/controller/BwicController.java" beforeDir="false" afterPath="$PROJECT_DIR$/bwic-svc/src/main/java/com/ebidding/bwic/controller/BwicController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bwic-svc/src/main/java/com/ebidding/bwic/service/BwicService.java" beforeDir="false" afterPath="$PROJECT_DIR$/bwic-svc/src/main/java/com/ebidding/bwic/service/BwicService.java" afterDir="false" />
     </list>
@@ -76,6 +78,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.ebidding.bwic.api" />
       <recent name="com.ebidding.bid.api" />
     </key>
   </component>
@@ -191,7 +194,7 @@
       <workItem from="1688833513127" duration="9741000" />
       <workItem from="1688873963697" duration="3199000" />
       <workItem from="1688886167714" duration="1146000" />
-      <workItem from="1688888226262" duration="650000" />
+      <workItem from="1688888226262" duration="5713000" />
     </task>
     <task id="LOCAL-00001" summary="后端7.7更改，添加了getissuer和通过cusip区查询bwic方法">
       <option name="closed" value="true" />
@@ -229,7 +232,14 @@
       <option name="project" value="LOCAL" />
       <updated>1688886411810</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="更新dto,加入startPrice和maxPrice">
+      <created>1688889148322</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1688889148322</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -241,7 +251,8 @@
     <MESSAGE value="更新Upcoming以及ended" />
     <MESSAGE value="websocket接口内部的服务调用实现。" />
     <MESSAGE value="完善获取ongoing Item的逻辑，实现了Bid-api的一些逻辑" />
-    <option name="LAST_COMMIT_MESSAGE" value="完善获取ongoing Item的逻辑，实现了Bid-api的一些逻辑" />
+    <MESSAGE value="更新dto,加入startPrice和maxPrice" />
+    <option name="LAST_COMMIT_MESSAGE" value="更新dto,加入startPrice和maxPrice" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

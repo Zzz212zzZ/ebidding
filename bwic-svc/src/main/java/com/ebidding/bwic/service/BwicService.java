@@ -3,7 +3,9 @@ package com.ebidding.bwic.service;
 import com.ebidding.bid.api.BidClient;
 import com.ebidding.bid.api.BidRankItemDataDTO;
 import com.ebidding.bwic.api.BwicDTO;
+import com.ebidding.bwic.api.BwicUpcomingFullRecord;
 import com.ebidding.bwic.api.BwicOngoingRecordResponseDTO;
+import com.ebidding.bwic.api.BwicUpcomingRecordResponseDTO;
 import com.ebidding.bwic.domain.Bwic;
 import com.ebidding.bwic.repository.BwicRepository;
 import org.modelmapper.ModelMapper;
@@ -125,13 +127,13 @@ public class BwicService {
 
 
     //---------------------------------------------查找还未开始的bwic------------------------------------------------
-    public List<BwicOngoingRecordResponseDTO> getUpcomingBwics() {
+    public List<BwicUpcomingRecordResponseDTO> getUpcomingBwics() {
 
             List<Bwic> incomingBwics = bwicRepository.findUpcomingBwics();
-            List<BwicOngoingRecordResponseDTO> responseDTOs = new ArrayList<>();
+            List<BwicUpcomingRecordResponseDTO> responseDTOs = new ArrayList<>();
 
             for (Bwic bwic : incomingBwics) {
-                BwicOngoingRecordResponseDTO dto = modelMapper.map(bwic, BwicOngoingRecordResponseDTO.class);
+                BwicUpcomingRecordResponseDTO dto = modelMapper.map(bwic, BwicUpcomingRecordResponseDTO.class);
 
                 dto.setCusip(getBondCusip(bwic.getBondId()));
                 dto.setIssuer(getBondIssuer(bwic.getBondId()));
@@ -238,5 +240,17 @@ public class BwicService {
     }
 
 
+    public void updateBwicFullRecord(Long bwicId, BwicUpcomingFullRecord record) {
+        Bwic bwic = bwicRepository.findById(bwicId)
+                .orElseThrow(() -> new RuntimeException("Bwic not found"));
+
+        bwic.setBondId(record.getBondId());
+        bwic.setSize(record.getSize());
+        bwic.setStartPrice(record.getStartPrice());
+        bwic.setStartTime(record.getStartTime());
+        bwic.setDueTime(record.getDueTime());
+
+        bwicRepository.save(bwic);
+    }
 
 }
