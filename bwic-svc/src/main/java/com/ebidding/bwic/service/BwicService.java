@@ -2,7 +2,10 @@ package com.ebidding.bwic.service;
 
 import com.ebidding.bid.api.BidClient;
 import com.ebidding.bid.api.BidRankItemDataDTO;
-import com.ebidding.bwic.api.*;
+import com.ebidding.bwic.api.BwicDTO;
+import com.ebidding.bwic.api.BwicUpcomingFullRecord;
+import com.ebidding.bwic.api.BwicOngoingRecordResponseDTO;
+import com.ebidding.bwic.api.BwicUpcomingRecordResponseDTO;
 import com.ebidding.bwic.domain.Bwic;
 import com.ebidding.bwic.repository.BwicRepository;
 import org.modelmapper.ModelMapper;
@@ -144,13 +147,13 @@ public class BwicService {
 
 
     //---------------------------------------------查找已经结束的bwic------------------------------------------------
-    public List<BwicEndedRecordResponseDTO> getEndedBwics() {
+    public List<BwicOngoingRecordResponseDTO> getEndedBwics() {
 
                 List<Bwic> endedBwics = bwicRepository.findEndedBwics();
-                List<BwicEndedRecordResponseDTO> responseDTOs = new ArrayList<>();
+                List<BwicOngoingRecordResponseDTO> responseDTOs = new ArrayList<>();
 
                 for (Bwic bwic : endedBwics) {
-                    BwicEndedRecordResponseDTO dto = modelMapper.map(bwic, BwicEndedRecordResponseDTO.class);
+                    BwicOngoingRecordResponseDTO dto = modelMapper.map(bwic, BwicOngoingRecordResponseDTO.class);
 
                     dto.setCusip(getBondCusip(bwic.getBondId()));
                     dto.setIssuer(getBondIssuer(bwic.getBondId()));
@@ -257,4 +260,8 @@ public class BwicService {
             throw new RuntimeException("Bwic not found");
         }
     }
+    public List<Bwic> getAllBwics(){
+        return bwicRepository.findAll();
+    }
+
 }
