@@ -253,4 +253,8 @@ public class BwicService {
         bwicRepository.save(bwic);
     }
 
+    public List<Bwic> getAllBwics(){
+        return bwicRepository.findAll();
+    }
+
 }

@@ -138,6 +138,15 @@ public class BwicController {
 //        return ResponseEntity.ok(this.bondService.getBondidByCusip(cusip));
 //    }
 
+    @GetMapping("/bwics/Allbonds")
+    public List<Bond> getAllBonds() {
+        return bondService.getAllBonds().stream().collect(Collectors.toList());
+    }
+
+    @GetMapping("/bwics/Allbwics")
+    public List<Bwic> getAllBwics() {
+        return bwicService.getAllBwics().stream().collect(Collectors.toList());
+    }
 
 
 
