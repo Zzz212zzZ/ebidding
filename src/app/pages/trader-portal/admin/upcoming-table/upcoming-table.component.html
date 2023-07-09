@@ -23,7 +23,10 @@
           <td>{{ data.startPrice }}</td>
           <td>{{ data.startTime }}</td>
           <td>{{ data.dueTime }}</td>
-          <td><a (click)="startEdit(data.bwicId)">Edit</a></td>
+          <td><a (click)="startEdit(data.bwicId)">Edit</a>
+            <nz-divider nzType="vertical"></nz-divider>
+          <a (click)="deleteRow(data.bwicId)">Delete</a>
+          </td>
         </ng-container>
         <ng-template #editTemplate>
           <td><input type="text" nz-input [(ngModel)]="editCache[data.bwicId].data.bwicId" /></td>

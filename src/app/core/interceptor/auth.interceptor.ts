@@ -3,11 +3,14 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { NzMessageService } from 'ng-zorro-antd/message';
+
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
   
-  constructor(private router: Router) {}
+  constructor(private router: Router, private message: NzMessageService) {}
+
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const authToken = localStorage.getItem('Token') || '';
@@ -19,6 +22,7 @@ export class AuthInterceptor implements HttpInterceptor {
       catchError((error: HttpErrorResponse) => {
         if (error.status === 401) {
           // Unauthorized. Clear the localStorage and navigate to login page.
+          this.message.create('error', 'Login expired, please login again.');
           localStorage.removeItem('Token');
           localStorage.removeItem('role');
           localStorage.removeItem('name');

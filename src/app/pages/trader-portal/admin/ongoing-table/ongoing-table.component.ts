@@ -23,7 +23,7 @@ export interface ParentItemData {
   cusip: string;
   issuer: string;
   size: number;
-  startPrice:number;
+  startPrice: number;
   maxPrice: number;
   startTime: string;
   dueTime: string;
@@ -55,6 +55,7 @@ export class OngoingTableComponent {
 
   constructor(private drawerService: NzDrawerService, private bwicService: BwicService, private bidService: BidService) { }
 
+  isLoading: boolean = false;
   selectedRow: ParentItemData | null = null;
 
   @Input() data: any[] = [];
@@ -63,11 +64,16 @@ export class OngoingTableComponent {
 
   ngOnInit(): void {
     console.log("ongoing-table.component.ts: ngOnInit(): void");
+
     this.getBwics();
   }
 
   getBwics(): void {
-    this.bwicService.getOngoingBwics().subscribe(data => this.listOfParentData = data);
+    this.isLoading = true;
+    this.bwicService.getOngoingBwics().subscribe(data => {
+      this.listOfParentData = data;
+      this.isLoading = false;
+    });
   }
 
 

@@ -23,6 +23,7 @@ import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { AuthInterceptor } from './core/interceptor/auth.interceptor';
 import { NgxEchartsModule } from 'ngx-echarts';
+import { NzMessageModule } from 'ng-zorro-antd/message';
 
 
 
@@ -49,7 +50,8 @@ registerLocaleData(en);
     ReactiveFormsModule,
     NzTabsModule,
     NzSpinModule,
-    NgxEchartsModule
+    NgxEchartsModule,
+    NzMessageModule
     
   ],
   providers: [

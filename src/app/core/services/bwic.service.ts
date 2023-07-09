@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {ParentItemData } from 'src/app/pages/trader-portal/admin/ongoing-table/ongoing-table.component';
 import { BwicUpcomingRecord } from 'src/app/pages/trader-portal/admin/upcoming-table/upcoming-table.component';
+import { BwicEndedRecordResponseDTO } from 'src/app/pages/trader-portal/admin/ended-table/ended-table.component';
 import { Observable,map } from 'rxjs';
 
 
@@ -10,8 +11,8 @@ export interface BwicUpcomingFullRecord {
   bondId: string;
   size: number;
   startPrice: number;
-  startTime: Date;
-  dueTime: Date;
+  startTime: string;
+  dueTime: string;
 }
 
 
@@ -62,7 +63,6 @@ getUpcomingBwics(): Observable<BwicUpcomingRecord[]> {
 
 
 //向后端更新upcoming的一个数据
-
 updateBwicUpcomingFullRecord(bwicId: string, record: BwicUpcomingFullRecord): Observable<any> {
   const apiUrl = `bwic/bwics/${bwicId}/full-record`;
   return this.http.put(apiUrl, record);
@@ -70,6 +70,25 @@ updateBwicUpcomingFullRecord(bwicId: string, record: BwicUpcomingFullRecord): Ob
 //向后端更新upcoming的一个数据
 
 
+//向后端删除upcoming的一个数据
+deleteBwicUpcomingRecord(bwicId: string): Observable<any> {
+  const apiUrl = `bwic/bwics/${bwicId}`;
+  return this.http.delete(apiUrl);
+}
+//向后端删除upcoming的一个数据
+
+
+
+
+// ---------------向后端请求ended的数据---------------
+
+getEndedBwics(): Observable<BwicEndedRecordResponseDTO[]> {
+  const apiUrl = `bwic/bwics/ended`; 
+  console.log("bwic.service.ts: getEndedBwics(): apiUrl = " + apiUrl);
+  return this.http.get<BwicEndedRecordResponseDTO[]>(apiUrl);
+}
+
+// ---------------向后端请求ended的数据---------------
 
 
 
