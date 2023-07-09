@@ -7,6 +7,8 @@
       <th>Cusip</th>
       <th>Issuer</th>
       <th>Size</th>
+      <th>Start Price</th>
+      <th>Max Price</th>
       <th>Start Time</th>
       <th>Due Time</th>
       <th>Last Bid Time</th>
@@ -22,11 +24,14 @@
         <td>{{ data.cusip }}</td>
         <td>{{ data.issuer }}</td>
         <td>{{ data.size }}</td>
+        <td>{{ data.startPrice }}</td>
+        <td>{{ data.maxPrice }}</td>
         <td>{{ data.startTime }}</td>
         <td>{{ data.dueTime }}</td>
         <td>{{ data.lastBidTime }}</td>
         <td>{{ data.bidCounts }}</td>
       </tr>
+      
       <tr [nzExpand]="data.expand">
         <nz-table #innerTable [nzData]="data.children" nzSize="middle" [nzShowPagination]="false">
           <thead>

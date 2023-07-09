@@ -23,6 +23,8 @@ export interface ParentItemData {
   cusip: string;
   issuer: string;
   size: number;
+  startPrice:number;
+  maxPrice: number;
   startTime: string;
   dueTime: string;
   lastBidTime: string;
