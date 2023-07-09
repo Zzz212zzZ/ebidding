@@ -1,22 +1,16 @@
 package com.ebidding.bwic.service;
 
-import cn.hutool.json.JSONObject;
-import cn.hutool.json.JSONUtil;
+import com.ebidding.bid.api.BidClient;
+import com.ebidding.bid.api.BidRankItemDataDTO;
 import com.ebidding.bwic.api.BwicDTO;
-import com.ebidding.bwic.api.BwicRecordResponseDTO;
+import com.ebidding.bwic.api.ongoingDTO.BwicOngoingRecordResponseDTO;
 import com.ebidding.bwic.domain.Bwic;
-import com.ebidding.bwic.repository.BondRepository;
 import com.ebidding.bwic.repository.BwicRepository;
-import com.ebidding.common.utils.WebSocketMessageUtil;
-import com.ebidding.common.websocket.UserIdSessionManager;
-import com.ebidding.common.websocket.enums.WebSocketMsgType;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.socket.WebSocketSession;
 
-import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.*;
@@ -31,6 +25,11 @@ public class BwicService {
 
     @Autowired
     private ModelMapper modelMapper;
+
+    @Autowired
+    private BidClient bidClient;
+
+
 
     public Optional<BwicDTO> saveBwic(String bondId, double startPrice, Timestamp startTime, Timestamp dueTime, double size) {
         Bwic bwic = Bwic.builder()
@@ -93,16 +92,21 @@ public class BwicService {
     }
 
     //---------------------------------------------查找正在进行的bwic------------------------------------------------
-    public List<BwicRecordResponseDTO> getOngoingBwics() {
+    public List<BwicOngoingRecordResponseDTO> getOngoingBwics() {
 
         List<Bwic> ongoingBwics = bwicRepository.findOngoingBwics();
-        List<BwicRecordResponseDTO> responseDTOs = new ArrayList<>();
+        List<BwicOngoingRecordResponseDTO> responseDTOs = new ArrayList<>();
 
         for (Bwic bwic : ongoingBwics) {
-            BwicRecordResponseDTO dto = modelMapper.map(bwic, BwicRecordResponseDTO.class);
+            BwicOngoingRecordResponseDTO dto = modelMapper.map(bwic, BwicOngoingRecordResponseDTO.class);
 
             dto.setCusip(getBondCusip(bwic.getBondId()));
             dto.setIssuer(getBondIssuer(bwic.getBondId()));
+            List<BidRankItemDataDTO> bidRankings = bidClient.getBidRankingsByBwicId(bwic.getBwicId());
+
+            // set the children property of dto with the obtained bidRankings
+            dto.setChildren(bidRankings);
+
             responseDTOs.add(dto);
         }
 
@@ -115,13 +119,13 @@ public class BwicService {
 
 
     //---------------------------------------------查找还未开始的bwic------------------------------------------------
-    public List<BwicRecordResponseDTO> getUpcomingBwics() {
+    public List<BwicOngoingRecordResponseDTO> getUpcomingBwics() {
 
             List<Bwic> incomingBwics = bwicRepository.findUpcomingBwics();
-            List<BwicRecordResponseDTO> responseDTOs = new ArrayList<>();
+            List<BwicOngoingRecordResponseDTO> responseDTOs = new ArrayList<>();
 
             for (Bwic bwic : incomingBwics) {
-                BwicRecordResponseDTO dto = modelMapper.map(bwic, BwicRecordResponseDTO.class);
+                BwicOngoingRecordResponseDTO dto = modelMapper.map(bwic, BwicOngoingRecordResponseDTO.class);
 
                 dto.setCusip(getBondCusip(bwic.getBondId()));
                 dto.setIssuer(getBondIssuer(bwic.getBondId()));
@@ -135,13 +139,13 @@ public class BwicService {
 
 
     //---------------------------------------------查找已经结束的bwic------------------------------------------------
-    public List<BwicRecordResponseDTO> getEndedBwics() {
+    public List<BwicOngoingRecordResponseDTO> getEndedBwics() {
 
                 List<Bwic> endedBwics = bwicRepository.findEndedBwics();
-                List<BwicRecordResponseDTO> responseDTOs = new ArrayList<>();
+                List<BwicOngoingRecordResponseDTO> responseDTOs = new ArrayList<>();
 
                 for (Bwic bwic : endedBwics) {
-                    BwicRecordResponseDTO dto = modelMapper.map(bwic, BwicRecordResponseDTO.class);
+                    BwicOngoingRecordResponseDTO dto = modelMapper.map(bwic, BwicOngoingRecordResponseDTO.class);
 
                     dto.setCusip(getBondCusip(bwic.getBondId()));
                     dto.setIssuer(getBondIssuer(bwic.getBondId()));

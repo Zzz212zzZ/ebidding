@@ -2,7 +2,7 @@ package com.ebidding.bwic.controller;
 
 
 import com.ebidding.bwic.api.BwicDTO;
-import com.ebidding.bwic.api.BwicRecordResponseDTO;
+import com.ebidding.bwic.api.ongoingDTO.BwicOngoingRecordResponseDTO;
 import com.ebidding.bwic.domain.Bwic;
 import com.ebidding.bwic.service.BondService;
 import com.ebidding.bwic.service.BwicService;
@@ -11,10 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.math.BigDecimal;
-import java.sql.Time;
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -83,20 +80,20 @@ public class BwicController {
     }
 
     @GetMapping("/bwics/ongoing")
-    public ResponseEntity<List<BwicRecordResponseDTO>> getOngoingBwics() {
-        List<BwicRecordResponseDTO> ongoingBwics = this.bwicService.getOngoingBwics();
+    public ResponseEntity<List<BwicOngoingRecordResponseDTO>> getOngoingBwics() {
+        List<BwicOngoingRecordResponseDTO> ongoingBwics = this.bwicService.getOngoingBwics();
         return ResponseEntity.ok(ongoingBwics);
     }
 
     @GetMapping("/bwics/upcoming")
-    public ResponseEntity<List<BwicRecordResponseDTO>> getUpcomingBwics() {
-        List<BwicRecordResponseDTO> incomingBwics = this.bwicService.getUpcomingBwics();
+    public ResponseEntity<List<BwicOngoingRecordResponseDTO>> getUpcomingBwics() {
+        List<BwicOngoingRecordResponseDTO> incomingBwics = this.bwicService.getUpcomingBwics();
         return ResponseEntity.ok(incomingBwics);
     }
 
     @GetMapping("/bwics/ended")
-    public ResponseEntity<List<BwicRecordResponseDTO>> getEndedBwics() {
-        List<BwicRecordResponseDTO> endedBwics = this.bwicService.getEndedBwics();
+    public ResponseEntity<List<BwicOngoingRecordResponseDTO>> getEndedBwics() {
+        List<BwicOngoingRecordResponseDTO> endedBwics = this.bwicService.getEndedBwics();
         return ResponseEntity.ok(endedBwics);
     }
 
