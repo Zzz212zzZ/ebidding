@@ -1,28 +1,20 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {ParentItemData } from 'src/app/pages/trader-portal/admin/ongoing-table/ongoing-table.component';
+import { BwicUpcomingRecord } from 'src/app/pages/trader-portal/admin/upcoming-table/upcoming-table.component';
 import { Observable,map } from 'rxjs';
 
-// interface ServerResponseData {
-//   bwicId: number;
-//   bondId: string;
-//   cusip: string;
-//   issuer: string;
-//   size: number;
-//   startTime: string;
-//   dueTime: string;
-//   lastBidTime: string;
-//   bidCounts: number;
-//   children: BidRankItemData[];  // here's the change
-// }
 
-// interface BidRankItemData {
-//   ranking: number;
-//   accountId: number;
-//   accountName: string;
-//   price: number;
-//   time: string;
-// }
+export interface BwicUpcomingFullRecord {
+  bwicId: string;
+  bondId: string;
+  size: number;
+  startPrice: number;
+  startTime: Date;
+  dueTime: Date;
+}
+
+
 
 
 @Injectable({
@@ -33,26 +25,50 @@ export class BwicService {
   constructor(private http: HttpClient) { }
 
 
-  //---------------向后端请求ongoing的数据----------------
-  getOngoingBwics(): Observable<ParentItemData[]> {
-    const apiUrl = 'bwic/bwics/ongoing';
-    console.log("bwic.service.ts: getOngoingBwics(): apiUrl = " + apiUrl);
-    return this.http.get<ParentItemData[]>(apiUrl).pipe(
-      map((data: ParentItemData[]) => 
-        data.map(item => ({
-          ...item,   // 拷贝 item 的所有字段
-          expand: false,  // 默认设置为false
-          children: item.children.map(child => ({
-            ...child,    // 拷贝 child 的所有字段
+    //---------------向后端请求ongoing的数据----------------
+    getOngoingBwics(): Observable<ParentItemData[]> {
+      const apiUrl = 'bwic/bwics/ongoing';
+      console.log("bwic.service.ts: getOngoingBwics(): apiUrl = " + apiUrl);
+      return this.http.get<ParentItemData[]>(apiUrl).pipe(
+        map((data: ParentItemData[]) => 
+          data.map(item => ({
+            ...item,   // 拷贝 item 的所有字段
+            expand: false,  // 默认设置为false
+            children: item.children.map(child => ({
+              ...child,    // 拷贝 child 的所有字段
+            }))
           }))
-        }))
-      )
-    );
-  }
-  
-  
+        )
+      );
+    }
+    
+    //---------------向后端请求ongoing的数据----------------
 
-  //---------------向后端请求ongoing的数据----------------
+
+
+      //---------------向后端请求Upcoming的数据----------------
+getUpcomingBwics(): Observable<BwicUpcomingRecord[]> {
+  const apiUrl = 'bwic/bwics/upcoming';
+  console.log("bwic.service.ts: getUpcomingBwics(): apiUrl = " + apiUrl);
+  return this.http.get<BwicUpcomingRecord[]>(apiUrl).pipe(
+    map((data: BwicUpcomingRecord[]) => 
+      data.map(item => ({
+        ...item,   // 拷贝 item 的所有字段
+      }))
+    )
+  );
+}
+  //---------------向后端请求upComing的数据----------------
+
+
+//向后端更新upcoming的一个数据
+
+updateBwicUpcomingFullRecord(bwicId: string, record: BwicUpcomingFullRecord): Observable<any> {
+  const apiUrl = `bwic/bwics/${bwicId}/full-record`;
+  return this.http.put(apiUrl, record);
+}
+//向后端更新upcoming的一个数据
+
 
 
 
