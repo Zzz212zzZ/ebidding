@@ -2,10 +2,7 @@ package com.ebidding.bwic.service;
 
 import com.ebidding.bid.api.BidClient;
 import com.ebidding.bid.api.BidRankItemDataDTO;
-import com.ebidding.bwic.api.BwicDTO;
-import com.ebidding.bwic.api.BwicUpcomingFullRecord;
-import com.ebidding.bwic.api.BwicOngoingRecordResponseDTO;
-import com.ebidding.bwic.api.BwicUpcomingRecordResponseDTO;
+import com.ebidding.bwic.api.*;
 import com.ebidding.bwic.domain.Bwic;
 import com.ebidding.bwic.repository.BwicRepository;
 import org.modelmapper.ModelMapper;
@@ -147,13 +144,13 @@ public class BwicService {
 
 
     //---------------------------------------------查找已经结束的bwic------------------------------------------------
-    public List<BwicOngoingRecordResponseDTO> getEndedBwics() {
+    public List<BwicEndedRecordResponseDTO> getEndedBwics() {
 
                 List<Bwic> endedBwics = bwicRepository.findEndedBwics();
-                List<BwicOngoingRecordResponseDTO> responseDTOs = new ArrayList<>();
+                List<BwicEndedRecordResponseDTO> responseDTOs = new ArrayList<>();
 
                 for (Bwic bwic : endedBwics) {
-                    BwicOngoingRecordResponseDTO dto = modelMapper.map(bwic, BwicOngoingRecordResponseDTO.class);
+                    BwicEndedRecordResponseDTO dto = modelMapper.map(bwic, BwicEndedRecordResponseDTO.class);
 
                     dto.setCusip(getBondCusip(bwic.getBondId()));
                     dto.setIssuer(getBondIssuer(bwic.getBondId()));
