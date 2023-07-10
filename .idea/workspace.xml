@@ -4,23 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2a4f9960-20b1-4731-ae3d-438c38e3e91e" name="更改" comment="第二个组件，upcoming，完成edit的submit到后端的更新bwic操作">
+    <list default="true" id="2a4f9960-20b1-4731-ae3d-438c38e3e91e" name="更改" comment="更新打包">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/account-api/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/account-api/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/account-svc/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/account-svc/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/account-svc/src/test/java/com/ebidding/account/AccountServiceApplicationTests.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/account-svc/src/test/java/com/ebidding/service/ServiceApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/account-svc/test/ebidding_accounts.mv.db" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/bid-api/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/bid-api/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bid-svc/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/bid-svc/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bid-svc/src/test/java/com/ebidding/bid/controller/BidControllerTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bid-svc/src/test/java/com/ebidding/bid/service/BidServiceTest.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/bwic-api/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/bwic-api/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bwic-svc/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/bwic-svc/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bwic-svc/src/main/java/com/ebidding/bwic/controller/BwicController.java" beforeDir="false" afterPath="$PROJECT_DIR$/bwic-svc/src/main/java/com/ebidding/bwic/controller/BwicController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bwic-svc/src/main/java/com/ebidding/bwic/service/BondService.java" beforeDir="false" afterPath="$PROJECT_DIR$/bwic-svc/src/main/java/com/ebidding/bwic/service/BondService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/common-lib/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/common-lib/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gateway/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -242,7 +232,7 @@
       <workItem from="1688908687105" duration="7471000" />
       <workItem from="1688950017823" duration="256000" />
       <workItem from="1688950286325" duration="9882000" />
-      <workItem from="1688979683965" duration="353000" />
+      <workItem from="1688979683965" duration="1100000" />
     </task>
     <task id="LOCAL-00001" summary="后端7.7更改，添加了getissuer和通过cusip区查询bwic方法">
       <option name="closed" value="true" />
@@ -294,7 +284,14 @@
       <option name="project" value="LOCAL" />
       <updated>1688896892545</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="更新打包">
+      <created>1688980067618</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1688980067618</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -308,7 +305,8 @@
     <MESSAGE value="完善获取ongoing Item的逻辑，实现了Bid-api的一些逻辑" />
     <MESSAGE value="更新dto,加入startPrice和maxPrice" />
     <MESSAGE value="第二个组件，upcoming，完成edit的submit到后端的更新bwic操作" />
-    <option name="LAST_COMMIT_MESSAGE" value="第二个组件，upcoming，完成edit的submit到后端的更新bwic操作" />
+    <MESSAGE value="更新打包" />
+    <option name="LAST_COMMIT_MESSAGE" value="更新打包" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
