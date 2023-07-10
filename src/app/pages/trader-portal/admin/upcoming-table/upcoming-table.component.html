@@ -39,6 +39,7 @@
           <td><input type="text" nz-input [(ngModel)]="editCache[data.bwicId].data.dueTime" /></td>
           <td>
             <a (click)="saveEdit(data.bwicId)" class="save">Save</a>
+            <nz-divider nzType="vertical"></nz-divider>
             <a nz-popconfirm nzPopconfirmTitle="Sure to cancel?" (nzOnConfirm)="cancelEdit(data.bwicId)">Cancel</a>
           </td>
         </ng-template>

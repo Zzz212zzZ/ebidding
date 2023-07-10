@@ -40,8 +40,11 @@
             ],
             "scripts": [
               "node_modules/echarts/dist/echarts.js"
+            ],
+            "allowedCommonJsDependencies": [
+              "file-saver"
             ]
-          },
+        },
           "configurations": {
             "production": {
               "budgets": [

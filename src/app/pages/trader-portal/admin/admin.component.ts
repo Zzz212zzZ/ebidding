@@ -34,30 +34,45 @@ export class AdminComponent implements OnInit{
   endedData: any[] = [];
   
   constructor(private bwicService: BwicService){}
+  active_color="#ebaa96";
+  inactive_color="#1890ff";
+
   selectedTab = 'Ongoing';
   tabs = [
     {
       name: 'Ongoing',
       iconType: 'hourglass',
-      iconSpin: true,
+      iconSpin: true, // initially false
       iconTheme: 'twotone',
+      color: this.active_color, 
     },
     {
       name: 'Upcoming',
       iconType: 'notification',
-      iconSpin: false,
+      iconSpin: false, // initially false
       iconTheme: 'twotone',
-
+      color: this.inactive_color, // default color
     },
     {
       name: 'Ended',
       iconType: 'trophy',
-      iconSpin: false,
+      iconSpin: false, // initially false
       iconTheme: 'twotone',
+      color: this.inactive_color, // default color
     }
   ];
   
   tabChange(index: number): void {
+    this.tabs.forEach((tab, i) => {
+      if(i === index){
+        tab.iconSpin = true;
+        tab.color = this.active_color; // active color
+      }
+      else {
+        tab.iconSpin = false;
+        tab.color = this.inactive_color; // default color
+      }
+    });
     this.selectedTab = this.tabs[index].name;
   }
 
