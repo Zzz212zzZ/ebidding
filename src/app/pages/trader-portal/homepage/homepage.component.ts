@@ -1,73 +1,152 @@
-import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NzTableModule } from 'ng-zorro-antd/table';
-import { NzButtonModule } from 'ng-zorro-antd/button';
-//MODEL   [(ngModel)]="editCache[data.id].data.name" />
-import { FormsModule } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import * as echarts from 'echarts';
+import { BwicService } from 'src/app/core/services/bwic.service';
 
-
-interface ItemData {
-  id: string;
-  name: string;
-  age: number;
-  address: string;
+export interface Bwics {
+  bwicId: number,
+  bondId: string,
+  size: number,
+  startPrice: number,
+  presentPrice: number,
+  startTime: string,
+  dueTime: string,
+  lastBidTime: string,
+  bidCounts: number,
 }
 
 
 @Component({
   selector: 'app-homepage',
   standalone: true,
-  imports: [CommonModule,
-    NzTableModule,
-    FormsModule],
+  imports: [CommonModule],
   templateUrl: './homepage.component.html',
   styleUrls: ['./homepage.component.less']
 })
+export class HomepageComponent implements OnInit {
 
-
-
-export class HomepageComponent {
-  editCache: { [key: string]: { edit: boolean; data: ItemData } } = {};
-  listOfData: ItemData[] = [];
-
-  startEdit(id: string): void {
-    this.editCache[id].edit = true;
+  AllBwics: Bwics[] = [];
+  IdData1: number[] = [];
+  IdData2: number[] = [];
+  CountsData: number[] = [];
+  StartPriceData: number[] = [];
+  PresentPriceData: number[] = [];
+  constructor(private bwicService: BwicService) {
+    // console.log(echarts)
   }
 
-  cancelEdit(id: string): void {
-    const index = this.listOfData.findIndex(item => item.id === id);
-    this.editCache[id] = {
-      data: { ...this.listOfData[index] },
-      edit: false
-    };
-  }
-
-  saveEdit(id: string): void {
-    const index = this.listOfData.findIndex(item => item.id === id);
-    Object.assign(this.listOfData[index], this.editCache[id].data);
-    this.editCache[id].edit = false;
-  }
-
-  updateEditCache(): void {
-    this.listOfData.forEach(item => {
-      this.editCache[item.id] = {
-        edit: false,
-        data: { ...item }
-      };
+  ngOnInit() {
+    this.bwicService.getAllBwics().subscribe((data: Bwics[]) => {
+      this.AllBwics = data;
+      let sortedBwics = [...this.AllBwics]; // 创建副本用于排序
+      sortedBwics.sort((a, b) => b.bidCounts - a.bidCounts);
+      //第一个表
+      for (let i = 5; i > 0; i--) {
+        this.CountsData.push(sortedBwics[i].bidCounts);
+        this.IdData1.push(sortedBwics[i].bwicId);
+      }
+      //第二个表
+      for (let i = 0; i < this.AllBwics.length; i++) {
+        this.IdData2.push(this.AllBwics[i].bwicId);
+        this.StartPriceData.push(this.AllBwics[i].startPrice);
+        this.PresentPriceData.push(this.AllBwics[i].presentPrice);
+      }
+      //必须在后端获取数据后调用下列方法来生成图表。
+      this.Bar();
+      this.initCharts();
     });
-  }
 
-  ngOnInit(): void {
-    const data = [];
-    for (let i = 0; i < 100; i++) {
-      data.push({
-        id: `${i}`,
-        name: `Edrward ${i}`,
-        age: 32,
-        address: `London Park no. ${i}`
-      });
-    }
-    this.listOfData = data;
-    this.updateEditCache();
+  }
+  Bar() {
+    const ec = echarts as any;
+    let bar = ec.init(document.getElementById('bar'));
+    let barOption = {
+      title: {
+        text: 'Popular BWIC'
+      },
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+          type: 'shadow'
+        }
+      },
+      legend: {},
+      grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+      },
+      xAxis: {
+        type: 'value',
+        boundaryGap: [0, 0.01]
+      },
+      yAxis: {
+        type: 'category',
+        data: this.IdData1,
+        name: 'BwicId'
+      },
+      series: [
+        {
+          name: 'TotalCounts',
+          type: 'bar',
+          data: this.CountsData
+        },
+      ]
+    };
+    bar.setOption(barOption);
+  }
+  initCharts() {
+    const ec = echarts as any;
+    let lineChart = ec.init(document.getElementById('lineChart'));
+    let lineChartOption = {
+      title: {
+        text: 'Price Difference'
+      },
+      tooltip: {
+        trigger: 'axis'
+      },
+      toolbox: {
+        show: false,
+      },
+      legend: {
+        padding: 0
+      },
+      xAxis: [
+        {
+          type: 'category',
+          boundaryGap: false,
+          data: this.IdData2,
+          name: 'BwicId'
+        }
+      ],
+      yAxis: [
+        {
+          type: 'value'
+        }
+      ],
+      series: [
+        {
+          name: 'StartPrice',
+          type: 'line',
+          smooth: true,
+          lineStyle: {
+            color: '#ff713a'
+          },
+          data: this.StartPriceData
+        },
+        {
+          name: 'PresentPrice',
+          type: 'line',
+          smooth: true,
+          lineStyle: {
+            color: '#1ab394'
+          },
+          data: this.PresentPriceData
+        }
+      ]
+    };
+    lineChart.setOption(lineChartOption);
   }
 }
+
