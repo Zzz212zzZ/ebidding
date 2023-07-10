@@ -1,4 +1,4 @@
-import { Component,OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzIconModule } from 'ng-zorro-antd/icon';
@@ -8,24 +8,20 @@ import { NzBadgeModule } from 'ng-zorro-antd/badge';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzGridModule } from 'ng-zorro-antd/grid';
+import { BwicService } from 'src/app/core/services/bwic.service';
+import { FormsModule, ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
+import { NzDrawerModule } from 'ng-zorro-antd/drawer';
+
 
 interface BwicItemData {
-  key:number;
-  bwicId: number;
+  bwicId: string;
   issuer: string;
-  cussip: string;
+  cusip: string;
   startTime: string;
   dueTime: string;
   startPrice: number;
-  size:number;
+  size: number;
   expand: boolean;
-}
-
-interface BidHistoryItemData {
-  key: number;
-  time: string;
-  price: string;
-  upgradeRank: number;
 }
 
 @Component({
@@ -39,36 +35,136 @@ interface BidHistoryItemData {
     NzBadgeModule,
     NzDropDownModule,
     NzDividerModule,
-    NzGridModule],
+    NzGridModule,
+    FormsModule,
+    NzDrawerModule],
   templateUrl: './history.component.html',
   styleUrls: ['./history.component.less']
 })
 
 export class HistoryComponent implements OnInit {
-  listOfBwicData: BwicItemData[] = [];
-  listOfBidHistoryData: BidHistoryItemData[] = [];
+  constructor(private bwicService: BwicService,
+    private fb: UntypedFormBuilder,) { }
 
-  ngOnInit(): void {
-    for (let i = 0; i < 3; ++i) {
-      this.listOfBwicData.push({
-        key:i,
-        bwicId: i+1,
-        issuer: 'LIBERTY MUTUAL INSURANCE GROUP',
-        cussip: '310867UR2',
-        startTime: '2023-07-07 16:23:00',
-        dueTime: '2024-12-24 23:12:00',
-        startPrice: 100,
-        size:100,
-        expand: false
-      });
-    }
-    for (let i = 0; i < 3; ++i) {
-      this.listOfBidHistoryData.push({
-        key: i,
-        time: '2014-12-24 23:12:00',
-        price: 'This is history ebidding-price',
-        upgradeRank: 1
-      });
-    }
+  //searchValue = '';
+  searchvisible = false;
+  drawervisible = false
+
+  editCache: { [key: number]: { edit: boolean; data: BwicItemData } } = {};
+  listOfBwicData: BwicItemData[] = [];
+  defaultData:BwicItemData[] = [];
+  //listOfDisplayData = [...this.listOfBwicData];
+
+  detailsData!: BwicItemData
+
+  // reset(): void {
+  //   this.searchValue = '';
+  //   this.searchbwicId()
+  // }
+
+  // searchbwicId(): void {
+  //   this.searchvisible = false;
+  //   this.listOfDisplayData = this.listOfBwicData.filter((item: BwicItemData) => item.bwicId.indexOf(this.searchValue) !== -1);
+  // }
+
+  validateForm!: UntypedFormGroup;
+
+  price: string = ''
+
+  dataSet: Data[] = []
+
+  async ngOnInit(): Promise<void> {
+    this.getAllData();
+    this.validateForm = this.fb.group({
+      bwicId: [null],
+      issuer: [null],
+      cusip: [null],
+      startTime: [null],
+      dueTime: [null],
+      startPrice: [null],
+      size: [null],
+      expand: false
+    });
   }
+
+  async getAllData() {
+    const data = (await this.bwicService.getBwicByAccountId()) as BwicItemData[]
+    this.listOfBwicData = [...data!]
+    this.defaultData = [...data!]
+    console.log(this.listOfBwicData, 'this.listOfBwicData')
+  }
+
+  async open(id: string): Promise<void> {
+    // 目前只有一个数据使用push展示
+    // let data:Data[] = []
+    const value = await this.bwicService.getBidByBwicIdAndAccountId(id)
+    // data.push(value as Data)
+    // this.dataSet = [...data]
+    // 如果后端返回的是一些数据，数组需要
+    this.dataSet = [...value as Data[] ]
+    // console.log(data)
+    this.drawervisible = true;
+  }
+
+  close(): void {
+    this.drawervisible = false;
+  }
+
+  //bwicid
+  bwicIdVisible: boolean = false;
+  bwicIdSearchValue: string = '';
+
+  bwicIdSearch() {
+    console.log(this.bwicIdSearchValue)
+    // this.searchData(this.bwicIdSearchValue)
+    this.listOfBwicData = this.defaultData.filter(res => res.bwicId == this.bwicIdSearchValue)
+  }
+
+  bwicIdReset() {
+    this.bwicIdSearchValue = ''
+    this.getAllData()
+
+  }
+  //Issuer
+  issuerVisible: boolean = false;
+  issuerSearchValue: string = '';
+
+  issuerSearch() {
+    console.log(this.issuerSearchValue)
+    this.listOfBwicData = this.defaultData.filter(res => res.issuer == this.issuerSearchValue)
+
+  }
+
+  issuerReset() {
+    this.issuerSearchValue = ''
+    this.getAllData()
+
+  }
+  //bwicid
+  cusipVisible: boolean = false;
+  cusipSearchValue: string = '';
+
+  cusipSearch() {
+    console.log(this.cusipSearchValue)
+    // this.searchData(this.cusipSearchValue)
+    this.listOfBwicData = this.defaultData.filter(res => res.cusip == this.cusipSearchValue)
+
+  }
+
+  cusipReset() {
+    this.cusipSearchValue = ''
+    this.getAllData()
+  }
+
+
+
+}
+
+interface Data {
+  accountId: number,
+  bidId: number,
+  bwicId: number,
+  price: number,
+  ranking: number,
+  time: string
 }

@@ -20,6 +20,7 @@
     "@angular/platform-browser": "^16.1.0",
     "@angular/platform-browser-dynamic": "^16.1.0",
     "@angular/router": "^16.1.0",
+    "@types/echarts": "^4.9.18",
     "bootstrap": "^5.3.0",
     "echarts": "^5.4.2",
     "ng-zorro-antd": "^16.0.0",

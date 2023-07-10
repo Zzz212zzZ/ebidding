@@ -8,9 +8,9 @@ export class WebsocketBwicService {
 
   constructor() { }
 
-  connect(id: string): WebSocket {
+  connect(): WebSocket {
     // 构建 WebSocket URL
-    const url = `ws://localhost:8080/api/v1/bid-service/bids?bwicid=${id}`;
+    const url = `ws://127.0.0.1:8002/msg`;
 
     // 创建 WebSocket 连接
     this.socket = new WebSocket(url);
@@ -35,11 +35,12 @@ export class WebsocketBwicService {
     return this.socket;
   }
 
-  send(message: string): void {
+  send(message: any): void {
     // 确保 WebSocket 连接已建立
     if (this.socket && this.socket.readyState === WebSocket.OPEN) {
       // 发送消息
       this.socket.send(message);
+      console.log(message,'send')
     } else {
       console.error('WebSocket connection is not open');
     }
