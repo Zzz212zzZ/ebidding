@@ -13,15 +13,20 @@ import { BwicService } from 'src/app/core/services/bwic.service';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { WebsocketBwicService } from 'src/app/core/services/websocket-bwic.service';
 import { NzMessageModule, NzMessageService } from 'ng-zorro-antd/message';
+import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
+import { BidService } from 'src/app/core/services/bid.service';
+import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
+import { UserService } from 'src/app/core/services/user.service';
 
 interface ItemData {
-  bwicId: number;
+  bwicId: string;
   issuer: string;
   cusip: string;
   startTime: string;
   dueTime: string;
   startPrice: number;
   size: number;
+  active:boolean
 }
 
 @Component({
@@ -31,7 +36,7 @@ interface ItemData {
     NzIconModule, NzButtonModule,
     NzFormModule, NzCardModule,
     NzTableModule, NzDividerModule,
-    FormsModule,NzModalModule,ReactiveFormsModule ,NzMessageModule],
+    FormsModule, NzModalModule, ReactiveFormsModule, NzMessageModule, NzDescriptionsModule, NzDropDownModule],
   templateUrl: './bidding.component.html',
   styleUrls: ['./bidding.component.less']
 })
@@ -39,98 +44,77 @@ interface ItemData {
 
 
 export class BiddingComponent implements OnInit {
-  constructor(private bwicService: BwicService,private fb: UntypedFormBuilder,private websocketBwicService:WebsocketBwicService,private message: NzMessageService) {
+  constructor(private bwicService: BwicService, private fb: UntypedFormBuilder, private websocketBwicService: WebsocketBwicService, private message: NzMessageService,
+    private bidService: BidService, private userService: UserService) {
 
   }
   isVisible = false;
   searchValue: string = ''
-  editCache: { [key: number]: { edit: boolean; data: ItemData } } = {};
+  biddingCache: { [key: number]: { bidding: boolean; data: ItemData } } = {};
   listOfData: ItemData[] = [];
 
-  editData: ItemData | undefined
+  defaultData: ItemData[] = [];
 
-  validateForm!: UntypedFormGroup;
+  biddingData!: ItemData;
 
-  price:string = ''
+  price: string = ''
 
-  async submit(){
+  msg: string = ''
+
+
+  async submit() {
     const model = {
-      bwicId:this.editData!.bwicId + '',
-      price:this.price
+      bwicId: this.biddingData!.bwicId + '',
+      price: this.price
     }
-    await this.bwicService.setBids(model).toPromise()
+    await this.bidService.setBids(model).toPromise()
+    this.price = ''
     this.message.success('Success！')
   }
 
-  startEdit(bwicData: ItemData): void {
-    // this.editCache[bwicId].edit = true;
-    this.validateForm.reset(bwicData)
-    this.validateForm.get('bwicId')?.disable();
-    // const socket = this.websocketBwicService.connect(bwicData.bwicId + '');
-     // 发送消息
-    //  this.websocketBwicService.send('Hello, server!');
-    // 接收到消息的处理
-    // socket.onmessage = (event) => {
-    //   const message = event.data;
-    //   console.log('Received message:', message);
-    // };
-    this.isVisible = true;
-    this.editData = bwicData
-  }
+  async startBidding(bwicData: ItemData): Promise<void> {
+    let userId = ''
+    try {
+      const id = (await this.userService.getById())as {id:string}
+      userId = id!.id 
+    } catch (error) {
+      userId = '1'
+    }
+    this.biddingData = bwicData
+    const socket = this.websocketBwicService.connect();
+    // 发送消息
 
-  cancelEdit(bwicId: number): void {
-    const index = this.listOfData.findIndex(item => item.bwicId === bwicId);
-    this.editCache[bwicId] = {
-      data: { ...this.listOfData[index] },
-      edit: false
+    // 等待 WebSocket 连接建立
+    socket.onopen = () => {
+      // 发送消息
+      this.websocketBwicService.send(JSON.stringify({
+        "msgType": "BindUserId",
+        "userId": userId
+      }));
     };
+    // 接收到消息的处理
+    socket.onmessage = (event) => {
+      const message = event.data
+      message.includes('{')
+      console.log('Received message:', message);
+      console.log('includes:', message.includes('{'));
+      if (message.includes('{')) {
+        this.msg = JSON.parse(message).msg
+      }
+    };
+    this.isVisible = true;
   }
 
-  saveEdit(bwicId: number): void {
-    const index = this.listOfData.findIndex(item => item.bwicId === bwicId);
-    Object.assign(this.listOfData[index], this.editCache[bwicId].data);
-    this.editCache[bwicId].edit = false;
-  }
-
-  updateEditCache(): void {
-    this.listOfData.forEach(item => {
-      this.editCache[item.bwicId] = {
-        edit: false,
-        data: { ...item }
-      };
-    });
-  }
 
   ngOnInit(): void {
     this.getAllData();
-    this.validateForm = this.fb.group({
-      bwicId: [null],
-      issuer: [null],
-      cusip: [null],
-      startTime: [null],
-      dueTime: [null],
-      startPrice: [null],
-      size: [null],
-    });
-  }
-
-  searchChange() {
-    if (this.searchValue.trim().length === 0) {
-      this.getAllData()
-    } else {
-      this.bwicService.getBidding(this.searchValue).subscribe(res => {
-        console.log(res)
-        const data: ItemData[] = []
-        data.push(res as ItemData)
-        this.listOfData = [...data]
-      })
-    }
 
   }
 
   async getAllData() {
-    const data = (await this.bwicService.getHistory()) as { active: ItemData[] }
-    this.listOfData = [...data!.active]
+    const data = (await this.bwicService.getHistory()) as ItemData[] 
+    this.listOfData = [...data!]
+    this.defaultData = [...data!]
   }
 
   showModal(): void {
@@ -145,7 +129,55 @@ export class BiddingComponent implements OnInit {
   handleCancel(): void {
     console.log('Button cancel clicked!');
     // 关闭moadl同时关闭 WebSocket 连接
-    // this.websocketBwicService.disconnect();
+    this.websocketBwicService.disconnect();
+    this.msg = ''
     this.isVisible = false;
   }
+
+  //bwicid
+  bwicIdVisible: boolean = false;
+  bwicIdSearchValue: string = '';
+
+  bwicIdSearch() {
+    console.log(this.bwicIdSearchValue)
+    // this.searchData(this.bwicIdSearchValue)
+    this.listOfData = this.defaultData.filter(res => res.bwicId == this.bwicIdSearchValue)
+  }
+
+  bwicIdReset() {
+    this.bwicIdSearchValue = ''
+    this.getAllData()
+
+  }
+  //Issuer
+  issuerVisible: boolean = false;
+  issuerSearchValue: string = '';
+
+  issuerSearch() {
+    console.log(this.issuerSearchValue)
+    this.listOfData = this.defaultData.filter(res => res.issuer == this.issuerSearchValue)
+
+  }
+
+  issuerReset() {
+    this.issuerSearchValue = ''
+    this.getAllData()
+
+  }
+  //bwicid
+  cusipVisible: boolean = false;
+  cusipSearchValue: string = '';
+
+  cusipSearch() {
+    console.log(this.cusipSearchValue)
+    // this.searchData(this.cusipSearchValue)
+    this.listOfData = this.defaultData.filter(res => res.cusip == this.cusipSearchValue)
+
+  }
+
+  cusipReset() {
+    this.cusipSearchValue = ''
+    this.getAllData()
+  }
+
 }

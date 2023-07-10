@@ -8,7 +8,12 @@ import { BidRankItemData } from 'src/app/pages/trader-portal/admin/ongoing-table
 })
 export class BidService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
+
+  setBids(model:{bwicId:string,price:string}){
+    return this.http.post('/bid/bids',model)
+  }
+
 
   getAllBidRankingsByBwicId(bwicId: number): Observable<BidRankItemData[]> {
     return this.http.get<BidRankItemData[]>(`bid/bwics/${bwicId}/ongoing-all-items`);
