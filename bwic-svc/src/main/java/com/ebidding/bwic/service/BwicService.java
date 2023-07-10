@@ -4,12 +4,23 @@ import com.ebidding.bid.api.BidClient;
 import com.ebidding.bid.api.BidRankItemDataDTO;
 import com.ebidding.bwic.api.*;
 import com.ebidding.bwic.domain.Bwic;
+import com.ebidding.bwic.domain.chat.ApiError;
+import com.ebidding.bwic.domain.chat.ChatRequestDTO;
+import com.ebidding.bwic.domain.chat.ChatResponseDTO;
 import com.ebidding.bwic.repository.BwicRepository;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.*;
+import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.client.RestClientException;
+import org.springframework.web.client.RestTemplate;
 
+import java.net.InetSocketAddress;
+import java.net.Proxy;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.*;
@@ -28,6 +39,10 @@ public class BwicService {
     @Autowired
     private BidClient bidClient;
 
+
+
+    @Autowired
+    private ObjectMapper objectMapper;
 
 
     public Optional<BwicDTO> saveBwic(String bondId, double startPrice, Timestamp startTime, Timestamp dueTime, double size) {
@@ -259,6 +274,44 @@ public class BwicService {
     }
     public List<Bwic> getAllBwics(){
         return bwicRepository.findAll();
+    }
+
+
+    public String chatWithGPT(ChatRequestDTO request) {
+
+        SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
+
+        Proxy proxy = new Proxy(Proxy.Type.SOCKS, new InetSocketAddress("localhost", 10808));
+        requestFactory.setProxy(proxy);
+
+        RestTemplate restTemplate = new RestTemplate(requestFactory);
+        String url = "https://api.openai.com/v1/chat/completions";
+        String apiKey = "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"; // replace with your actual OpenAI API key
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setBearerAuth(apiKey);
+
+        HttpEntity<ChatRequestDTO> entity = new HttpEntity<>(request, headers);
+
+        try {
+            ResponseEntity<ChatResponseDTO> responseEntity = restTemplate.exchange(url, HttpMethod.POST, entity, ChatResponseDTO.class);
+
+            ChatResponseDTO response = responseEntity.getBody();
+
+            if (response == null || response.getChoices() == null || response.getChoices().isEmpty()) {
+                return "No response";
+            }
+
+            return response.getChoices().get(0).getMessage().getContent();
+        } catch (RestClientException e) {
+            try {
+                ApiError apiError = objectMapper.readValue(e.getMessage(), ApiError.class);
+                return apiError.getError().getMessage();
+            } catch (JsonProcessingException jsonException) {
+                return "Error parsing API response: " + e.getMessage();
+            }
+        }
     }
 
 }

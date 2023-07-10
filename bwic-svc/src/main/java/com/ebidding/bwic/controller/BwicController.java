@@ -4,6 +4,8 @@ package com.ebidding.bwic.controller;
 import com.ebidding.bwic.api.*;
 import com.ebidding.bwic.domain.Bond;
 import com.ebidding.bwic.domain.Bwic;
+import com.ebidding.bwic.domain.chat.ChatRequestDTO;
+import com.ebidding.bwic.domain.chat.SingleMessageDTO;
 import com.ebidding.bwic.service.BondService;
 import com.ebidding.bwic.service.BwicService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +13,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -26,7 +30,11 @@ public class BwicController {
     @Autowired
     private BwicService bwicService;
 
-//    @GetMapping()
+    @Autowired
+    private HttpSession httpSession;
+
+
+    //    @GetMapping()
 //    public ResponseEntity<Bwic> getBwic(@RequestParam("cusip") String cusip) {
 //        this.bwicService.findByCusip(cusip);
 //        return ResponseEntity.ok(this.bwicService.findByCusip(cusip));
@@ -135,6 +143,32 @@ public class BwicController {
     }
 
 
+    //调用GPT对话服务
+    @GetMapping("/bwics/chat")
+    public ResponseEntity<String> chat(@RequestParam String message) {
+        String role = "user";  // or another role based on your logic
+
+        // Get the message history from session
+        List<SingleMessageDTO> history = (List<SingleMessageDTO>) httpSession.getAttribute("history");
+        if (history == null) {
+            history = new ArrayList<>();
+        }
+
+        // Create a new request and add the new message
+        ChatRequestDTO request = new ChatRequestDTO();
+        request.setMessages(history);
+        request.addMessage(role, message);
+
+        // Send the request and get the response
+        String response = bwicService.chatWithGPT(request);
+
+        // Save the response to the history
+        request.addMessage("assistant", response);
+        httpSession.setAttribute("history", request.getMessages());
+
+        return ResponseEntity.ok(response);
+    }
+
 //
 //    @GetMapping("/bwics/{bondId}")
 //    public ResponseEntity<Bwic> getBwicByBondid(@PathVariable("bondId") String bondId){
@@ -161,3 +195,5 @@ public class BwicController {
 
 
 }
+
+
