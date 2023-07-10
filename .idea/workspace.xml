@@ -5,11 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2a4f9960-20b1-4731-ae3d-438c38e3e91e" name="更改" comment="第二个组件，upcoming，完成edit的submit到后端的更新bwic操作">
-      <change afterPath="$PROJECT_DIR$/bwic-api/src/main/java/com/ebidding/bwic/api/BwicEndedRecordResponseDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bwic-api/src/main/java/com/ebidding/bwic/api/BwicUpcomingFullRecord.java" beforeDir="false" afterPath="$PROJECT_DIR$/bwic-api/src/main/java/com/ebidding/bwic/api/BwicUpcomingFullRecord.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/account-api/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/account-api/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/account-svc/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/account-svc/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/account-svc/src/test/java/com/ebidding/account/AccountServiceApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/account-svc/src/test/java/com/ebidding/service/ServiceApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bid-api/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/bid-api/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bid-svc/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/bid-svc/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bid-svc/src/test/java/com/ebidding/bid/controller/BidControllerTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bid-svc/src/test/java/com/ebidding/bid/service/BidServiceTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bwic-api/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/bwic-api/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bwic-svc/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/bwic-svc/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bwic-svc/src/main/java/com/ebidding/bwic/controller/BwicController.java" beforeDir="false" afterPath="$PROJECT_DIR$/bwic-svc/src/main/java/com/ebidding/bwic/controller/BwicController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bwic-svc/src/main/java/com/ebidding/bwic/service/BwicService.java" beforeDir="false" afterPath="$PROJECT_DIR$/bwic-svc/src/main/java/com/ebidding/bwic/service/BwicService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bwic-svc/src/main/java/com/ebidding/bwic/service/BondService.java" beforeDir="false" afterPath="$PROJECT_DIR$/bwic-svc/src/main/java/com/ebidding/bwic/service/BondService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common-lib/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/common-lib/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gateway/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,7 +78,7 @@
     &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.projectsettings.compiler.javacompiler&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;configuration.execution&quot;,
     &quot;spring.configuration.checksum&quot;: &quot;576f1a7e4ba1c9bfcd8e44bc2185f8bd&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
@@ -81,7 +92,7 @@
       <recent name="com.ebidding.bid.api" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.BwicServiceApplication">
+  <component name="RunManager" selected="Spring Boot.BidServiceApplication">
     <configuration name="AccountServiceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.ebidding.account.AccountServiceApplication" />
       <module name="account-svc" />
@@ -135,8 +146,14 @@
       </method>
     </configuration>
     <configuration name="AccountServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="11" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <envs>
+        <env name="SW_AGENT_NAME" value="account-svc" />
+      </envs>
       <module name="account-svc" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.ebidding.account.AccountServiceApplication" />
+      <option name="VM_PARAMETERS" value="-javaagent:Z:\Desktop\skywalking-agent\skywalking-agent.jar" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.ebidding.account.*" />
@@ -148,26 +165,54 @@
       </method>
     </configuration>
     <configuration name="BidServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="11" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <envs>
+        <env name="SW_AGENT_NAME" value="bid-svc" />
+      </envs>
       <module name="bid-svc" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.ebidding.bid.BidServiceApplication" />
+      <option name="VM_PARAMETERS" value="-javaagent:Z:\Desktop\skywalking-agent\skywalking-agent.jar" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <configuration name="BwicServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="11" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <envs>
+        <env name="SW_AGENT_NAME" value="bwic-svc" />
+      </envs>
       <module name="bwic-svc" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.ebidding.bwic.BwicServiceApplication" />
+      <option name="VM_PARAMETERS" value="-javaagent:Z:\Desktop\skywalking-agent\skywalking-agent.jar" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <configuration name="GatewayApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="11" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <envs>
+        <env name="SW_AGENT_NAME" value="gateway" />
+      </envs>
       <module name="gateway" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.ebidding.gateway.GatewayApplication" />
+      <option name="VM_PARAMETERS" value="-javaagent:Z:\Desktop\skywalking-agent\skywalking-agent.jar" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Application.AccountServiceApplication" />
+      <item itemvalue="Application.BidServiceApplication" />
+      <item itemvalue="Application.BwicServiceApplication" />
+      <item itemvalue="Application.GatewayApplication" />
+      <item itemvalue="Spring Boot.BidServiceApplication" />
+      <item itemvalue="Spring Boot.BwicServiceApplication" />
+      <item itemvalue="Spring Boot.GatewayApplication" />
+      <item itemvalue="Spring Boot.AccountServiceApplication" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Spring Boot.AccountServiceApplication" />
@@ -195,6 +240,9 @@
       <workItem from="1688886167714" duration="1146000" />
       <workItem from="1688888226262" duration="8027000" />
       <workItem from="1688908687105" duration="7471000" />
+      <workItem from="1688950017823" duration="256000" />
+      <workItem from="1688950286325" duration="9882000" />
+      <workItem from="1688979683965" duration="353000" />
     </task>
     <task id="LOCAL-00001" summary="后端7.7更改，添加了getissuer和通过cusip区查询bwic方法">
       <option name="closed" value="true" />
