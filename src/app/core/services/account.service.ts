@@ -36,7 +36,7 @@ export class AccountService {
   // }
 
   login(params: { username: string; password: string }): Observable<UserInfo> {
-    return this.http.post<UserInfo>('/api/v1/account-service/accounts/login', params);
+    return this.http.post<UserInfo>('/account/accounts/login', params);
   }
 
 }

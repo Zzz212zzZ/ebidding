@@ -7,7 +7,7 @@
       "^/account": "/api/v1/account-service"
     }
   },
- 
+
   "/bwic": {
     "target": "http://localhost:8080",
     "secure": false,

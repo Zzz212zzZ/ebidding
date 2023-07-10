@@ -11,6 +11,8 @@ import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { Router } from '@angular/router';  // 导入 Router 服务
 import { SpinService } from 'src/app/core/services/spin.service';
 import { AccountService, UserInfo } from 'src/app/core/services/account.service';
+import { NzMessageService } from 'ng-zorro-antd/message';
+import { NzMessageModule } from 'ng-zorro-antd/message';
 
 
 const fnCheckLoginForm = function checkLoginForm(form: FormGroup): boolean {
@@ -42,12 +44,13 @@ const fnCheckLoginForm = function checkLoginForm(form: FormGroup): boolean {
     NzInputModule,
     NzFormModule,
     NzTabsModule,
+    NzMessageModule
   ]
 })
 
 
 export class LoginComponent implements OnInit {
-  constructor(private router: Router, private spinService: SpinService, private accountService: AccountService) { }
+  constructor(private router: Router, private spinService: SpinService, private accountService: AccountService,private messageService: NzMessageService) { }
 
   signupForm!: FormGroup;
   loginForm!: FormGroup;
@@ -98,6 +101,7 @@ export class LoginComponent implements OnInit {
     console.log(param);
     this.accountService.login(param).subscribe((data: UserInfo) => {
 
+        this.messageService.create('success', `Welcome ${data.name}!`);
         let token = data.token;
         let role = data.role.toLocaleLowerCase();
 
@@ -106,7 +110,7 @@ export class LoginComponent implements OnInit {
        //设置localStorage的role
        localStorage.setItem('role', role);
         localStorage.setItem('name', data.name);
-
+      
       if(role === 'client'){
         console.log(role);
         console.log(token);

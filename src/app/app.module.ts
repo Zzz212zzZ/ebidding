@@ -7,7 +7,7 @@ import { en_US } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule, provideHttpClient, withInterceptors } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { IconsProviderModule } from './icons-provider.module';
@@ -21,8 +21,9 @@ import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
-import { authInterceptor } from './core/interceptor/auth.interceptor';
+import { AuthInterceptor } from './core/interceptor/auth.interceptor';
 import { NgxEchartsModule } from 'ngx-echarts';
+import { NzMessageModule } from 'ng-zorro-antd/message';
 
 
 
@@ -49,16 +50,13 @@ registerLocaleData(en);
     ReactiveFormsModule,
     NzTabsModule,
     NzSpinModule,
-    NgxEchartsModule
+    NgxEchartsModule,
+    NzMessageModule
     
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US },
-    provideHttpClient(
-      withInterceptors(
-        [authInterceptor]
-      )
-    ),
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]
 })

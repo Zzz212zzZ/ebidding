@@ -27,6 +27,8 @@ import { EndedTableComponent } from './ended-table/ended-table.component';
 })
 export class AdminComponent implements OnInit{
 
+  selectedIndex = 0;
+
   ongoingData: any[] = [];
   upcomingData: any[] = [];
   endedData: any[] = [];
