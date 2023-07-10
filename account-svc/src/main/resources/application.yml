@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: test
+    active: uat
   application:
     name: account-service
 
