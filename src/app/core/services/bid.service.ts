@@ -12,6 +12,7 @@ export class BidService {
 
   setBids(model:{bwicId:string,price:string}){
     return this.http.post('/bid/bids',model)
+  }
 
 
   getAllBidRankingsByBwicId(bwicId: number): Observable<BidRankItemData[]> {
