@@ -11,3 +11,8 @@ spring:
 
   jpa:
     show-sql: true
+
+ebidding:
+  account-endpoint: localhost:8001
+  bid-endpoint: localhost:8002
+  bwic-endpoint: localhost:8003

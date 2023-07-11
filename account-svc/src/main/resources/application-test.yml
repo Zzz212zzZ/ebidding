@@ -1,7 +1,13 @@
 spring:
   datasource:
-    url: jdbc:mysql://47.108.72.83:3306/ebidding_account?useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
-    username: cq-team
-    password: cq-team!
+    url: ${ACCOUNT_DATASOURCE_URL}
+    username: ${ACCOUNT_DATASOURCE_USERNAME}
+    password: ${ACCOUNT_DATASOURCE_PASSWORD}
+
   jpa:
-    show-sql: false
+    show-sql: true
+
+ebidding:
+  account-endpoint: ${ACCOUNT_SERVICE_ENDPOINT}
+  bid-endpoint: ${BID_SERVICE_ENDPOINT}
+  bwic-endpoint: ${BWIC_SERVICE_ENDPOINT}

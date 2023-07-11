@@ -5,13 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2a4f9960-20b1-4731-ae3d-438c38e3e91e" name="更改" comment="修改yml，增加application-test.yml">
-      <change afterPath="$PROJECT_DIR$/bwic-svc/src/main/java/com/ebidding/bwic/domain/chat/ApiError.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bwic-svc/src/main/java/com/ebidding/bwic/domain/chat/ChatRequestDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bwic-svc/src/main/java/com/ebidding/bwic/domain/chat/ChatResponseDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bwic-svc/src/main/java/com/ebidding/bwic/domain/chat/SingleMessageDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gateway/src/main/resources/application-test.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bwic-svc/src/main/java/com/ebidding/bwic/controller/BwicController.java" beforeDir="false" afterPath="$PROJECT_DIR$/bwic-svc/src/main/java/com/ebidding/bwic/controller/BwicController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bwic-svc/src/main/java/com/ebidding/bwic/service/BwicService.java" beforeDir="false" afterPath="$PROJECT_DIR$/bwic-svc/src/main/java/com/ebidding/bwic/service/BwicService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/account-svc/src/main/resources/application-test.yml" beforeDir="false" afterPath="$PROJECT_DIR$/account-svc/src/main/resources/application-test.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bid-svc/src/main/resources/application-test.yml" beforeDir="false" afterPath="$PROJECT_DIR$/bid-svc/src/main/resources/application-test.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bwic-svc/src/main/resources/application-test.yml" beforeDir="false" afterPath="$PROJECT_DIR$/bwic-svc/src/main/resources/application-test.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bwic-svc/src/main/resources/application-uat.yml" beforeDir="false" afterPath="$PROJECT_DIR$/bwic-svc/src/main/resources/application-uat.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gateway/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/src/main/resources/application.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,7 +64,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "Z:/OneDrive/CitiPractice/group4/service/bwic-svc/src/main/resources",
+    "last_opened_file_path": "Z:/OneDrive/CitiPractice/group4/service/gateway/src/main/resources",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
@@ -79,6 +81,8 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="Z:\OneDrive\CitiPractice\group4\service\gateway\src\main\resources" />
+      <recent name="Z:\OneDrive\CitiPractice\group4\service" />
       <recent name="Z:\OneDrive\CitiPractice\group4\service\bwic-svc\src\main\resources" />
       <recent name="Z:\OneDrive\CitiPractice\group4\service\bid-svc\src\main\resources" />
       <recent name="Z:\OneDrive\CitiPractice\group4\service\account-svc\src\main\resources" />
@@ -88,7 +92,7 @@
       <recent name="com.ebidding.bid.api" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.BwicServiceApplication">
+  <component name="RunManager" selected="Application.BidServiceApplication">
     <configuration name="AccountServiceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.ebidding.account.AccountServiceApplication" />
       <module name="account-svc" />
@@ -211,11 +215,11 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.GatewayApplication" />
+        <item itemvalue="Application.BidServiceApplication" />
         <item itemvalue="Spring Boot.AccountServiceApplication" />
+        <item itemvalue="Application.GatewayApplication" />
         <item itemvalue="Application.BwicServiceApplication" />
         <item itemvalue="Application.AccountServiceApplication" />
-        <item itemvalue="Application.BidServiceApplication" />
       </list>
     </recent_temporary>
   </component>
@@ -241,6 +245,8 @@
       <workItem from="1688979683965" duration="3187000" />
       <workItem from="1688999021584" duration="1910000" />
       <workItem from="1689000942648" duration="9501000" />
+      <workItem from="1689036118120" duration="5647000" />
+      <workItem from="1689046273381" duration="2168000" />
     </task>
     <task id="LOCAL-00001" summary="后端7.7更改，添加了getissuer和通过cusip区查询bwic方法">
       <option name="closed" value="true" />
