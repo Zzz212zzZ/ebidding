@@ -1,9 +1,9 @@
 FROM openjdk:11
 
-COPY ./target/gateway-1.0.0.jar /usr/app/
+COPY ./target/gateway-0.0.1-SNAPSHOT.jar /usr/app/
 
 WORKDIR /usr/app
 
-RUN sh -c 'touch gateway-1.0.0.jar'
+RUN sh -c 'touch gateway-0.0.1-SNAPSHOT.jar'
 
-ENTRYPOINT ["java", "-jar", "gateway-1.0.0.jar"]
+ENTRYPOINT ["java", "-jar", "gateway-0.0.1-SNAPSHOT.jar"]
