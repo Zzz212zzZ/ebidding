@@ -9,6 +9,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -40,4 +41,14 @@ public class AccountService {
                     return user;
                 });
     }
+
+    public String getAccountNameByAccountId(Long accountId) {
+        Optional<Account> accountOptional = accountRepository.findByAccountId(accountId);
+        if(accountOptional.isPresent()) {
+            return accountOptional.get().getName();
+        } else {
+            throw new NoSuchElementException("Account with id " + accountId + " not found");
+        }
+    }
+
 }

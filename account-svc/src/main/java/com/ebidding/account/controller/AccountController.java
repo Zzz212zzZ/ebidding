@@ -39,5 +39,13 @@ public class AccountController {
         return loginResponse.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
     }
 
+
+
+    @GetMapping("accounts/account/{accountId}/name")
+    public String getAccountNameByAccountId(@PathVariable("accountId") Long accountId) {
+        return accountService.getAccountNameByAccountId(accountId);
+
+    }
+
 }
 

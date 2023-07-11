@@ -18,5 +18,5 @@ public class BwicDTO {
     private Double startPrice;
     private Timestamp startTime;
     private Timestamp dueTime;
-    private double size;
+    private Double size;
 }
