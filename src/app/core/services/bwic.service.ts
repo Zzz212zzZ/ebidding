@@ -53,6 +53,37 @@ export class BwicService {
   constructor(private http: HttpClient) {}
 
 
+  getHistory(){
+    return this.http
+      .get(`/bwic/bwics/history`).toPromise();
+  }
+  // http://localhost:8080/api/v1/bid-service/getBidByBwicIdAndAccountId/16
+  // "/bwic": {
+  //   "target": "http://localhost:8080",
+  //   "secure": false,
+  //   "changeOrigin": true,
+  //   "pathRewrite": {
+  //     "^/bwic": "/api/v1/bwic-service"
+  //   }
+  // },
+  // "/bid": {
+  //   "target": "http://localhost:8080",
+  //   "secure": false,
+  //   "changeOrigin": true,
+  //   "pathRewrite": {
+  //     "^/bid": "/api/v1/bid-service"
+  //   }
+  getBwicByAccountId(){
+    return this.http
+    .get(`/bwic/bwics/getBwicByAccountId`).toPromise();
+  }
+
+  getBidByBwicIdAndAccountId(id:string){
+    return this.http
+    .get(`/bid/getBidByBwicIdAndAccountId/`+id).toPromise();
+  }
+
+
     //---------------向后端请求ongoing的数据----------------
     getOngoingBwics(): Observable<ParentItemData[]> {
       const apiUrl = 'bwic/bwics/ongoing';
@@ -117,32 +148,11 @@ getEndedBwics(): Observable<BwicEndedRecordResponseDTO[]> {
 
 // ---------------向后端请求ended的数据---------------
 
-
-
-
-
-
-
-
   getBidding(value:string){
     return this.http
       .get(`/bwic/bwics/${value}/bycusip`);
   }
 
-  getHistory(){
-    return this.http
-      .get(`/bwic/bwics/history`).toPromise();
-  }
-
-  getBwicByAccountId(){
-    return this.http
-    .get(`/bwic/bwics/getBwicByAccountId`).toPromise();
-  }
-
-  getBidByBwicIdAndAccountId(id:string){
-    return this.http
-    .get(`/bid/getBidByBwicIdAndAccountId/`+id).toPromise();
-  }
 
   getAllBonds(): Observable<Bonds[]>{
     const apiUrl = `bwic/bwics/Allbonds`;
@@ -154,7 +164,7 @@ getEndedBwics(): Observable<BwicEndedRecordResponseDTO[]> {
     return this.http.get<Bwics[]>(apiUrl);
   }
 
-  createBwic(params : { 
+  createBwic(params : {
     bondId:string;
     startPrice:string;
     startTime:string;
