@@ -4,6 +4,7 @@ import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.ebidding.account.api.AccountDTO;
 import com.ebidding.account.api.AccountClient;
+import com.ebidding.bid.api.BidRankItemDataDTO;
 import com.ebidding.bwic.api.BwicClient;
 import com.ebidding.bid.api.PriceResponseDTO;
 import com.ebidding.bid.domain.Bid;
@@ -158,6 +159,59 @@ public class BidService {
             }
         });
         return bid;
+    }
+
+    //获取部分bidRanking
+
+    public List<BidRankItemDataDTO> getPartBidRankingsByBwicId(Long bwicId) {
+        List<BidRank> bidRanks = bidRankRepository.getByBwicIdOrderByPriceDesc(bwicId);
+        List<BidRankItemDataDTO> bidRankItems = new ArrayList<>();
+
+        if(bidRanks.size() > 3) {
+            BidRank firstBidRank = bidRanks.get(0);
+            BidRank secondBidRank = bidRanks.get(1);
+            BidRank lastBidRank = bidRanks.get(bidRanks.size()-1);
+
+            bidRankItems.add(convertBidRankToDTO(firstBidRank, 1L));
+            bidRankItems.add(convertBidRankToDTO(secondBidRank, 2L));
+            bidRankItems.add(new BidRankItemDataDTO()); // 省略中间部分
+            bidRankItems.add(convertBidRankToDTO(lastBidRank, (long) bidRanks.size()));
+        } else {
+            for (int i = 0; i < bidRanks.size(); i++) {
+                bidRankItems.add(convertBidRankToDTO(bidRanks.get(i), (long) (i+1)));
+            }
+        }
+
+        return bidRankItems;
+    }
+
+    private BidRankItemDataDTO convertBidRankToDTO(BidRank bidRank, Long ranking) {
+        BidRankItemDataDTO dto = new BidRankItemDataDTO();
+        dto.setRanking(ranking);
+        dto.setPrice(bidRank.getPrice());
+        dto.setTime(bidRank.getTime());
+
+        // 从BidRankPK获取accountId
+        //其中getId()获取到的是BidRank对象的BidRankPK实例，然后通过getAccountId()获取到实际的accountId
+        Long accountId = bidRank.getId().getAccountId();
+        dto.setAccountId(accountId);
+
+        // 使用FeignClient调用远程服务获取账户名
+        String accountName = accountClient.getAccountNameByAccountId(accountId);
+        dto.setAccountName(accountName);
+
+        return dto;
+    }
+
+    public List<BidRankItemDataDTO> getAllBidRankingsByBwicId(Long bwicId) {
+        List<BidRank> bidRanks = bidRankRepository.getByBwicIdOrderByPriceDesc(bwicId);
+        List<BidRankItemDataDTO> bidRankItems = new ArrayList<>();
+
+        for (int i = 0; i < bidRanks.size(); i++) {
+            bidRankItems.add(convertBidRankToDTO(bidRanks.get(i), (long) (i+1)));
+        }
+
+        return bidRankItems;
     }
 
 

@@ -23,5 +23,9 @@ public interface BidClient {
     ResponseEntity<Long> getUserRank(@PathVariable("bwicId") Long bwicId,
                                      @RequestParam(value = "accountId",required = false) Long accountId);
 
+    @GetMapping("/bwics/{bwicId}/ongoing-part-items")
+    List<BidRankItemDataDTO> getBidRankingsByBwicId(@PathVariable("bwicId") Long bwicId);
+
+
 }
 

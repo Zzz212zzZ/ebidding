@@ -1,26 +1,31 @@
 package com.ebidding.bwic.service;
 
-import cn.hutool.json.JSONObject;
-import cn.hutool.json.JSONUtil;
 import com.ebidding.bid.api.BidClient;
-import com.ebidding.bwic.api.BwicDTO;
-import com.ebidding.bwic.api.BwicRecordResponseDTO;
+import com.ebidding.bid.api.BidRankItemDataDTO;
+import com.ebidding.bwic.api.*;
 import com.ebidding.bwic.domain.Bwic;
-import com.ebidding.bwic.repository.BondRepository;
+import com.ebidding.bwic.domain.chat.ApiError;
+import com.ebidding.bwic.domain.chat.ChatRequestDTO;
+import com.ebidding.bwic.domain.chat.ChatResponseDTO;
 import com.ebidding.bwic.repository.BwicRepository;
-import com.ebidding.common.utils.WebSocketMessageUtil;
-import com.ebidding.common.websocket.UserIdSessionManager;
-import com.ebidding.common.websocket.enums.WebSocketMsgType;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.*;
+import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.socket.WebSocketSession;
+import org.springframework.web.client.RestClientException;
+import org.springframework.web.client.RestTemplate;
 
-import java.math.BigDecimal;
+import java.net.InetSocketAddress;
+import java.net.Proxy;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.*;
+
+
 
 @Service
 public class BwicService {
@@ -34,6 +39,10 @@ public class BwicService {
     private ModelMapper modelMapper;
     @Autowired
     private BidClient bidClient;
+
+
+    @Autowired
+    private ObjectMapper objectMapper;
 
     public Optional<BwicDTO> saveBwic(String bondId, double startPrice, Timestamp startTime, Timestamp dueTime, double size) {
         Bwic bwic = Bwic.builder()
@@ -98,19 +107,27 @@ public class BwicService {
     }
 
     //---------------------------------------------查找正在进行的bwic------------------------------------------------
-    public List<BwicRecordResponseDTO> getOngoingBwics() {
+    public List<BwicOngoingRecordResponseDTO> getOngoingBwics() {
 
         List<Bwic> ongoingBwics = bwicRepository.findOngoingBwics();
-        List<BwicRecordResponseDTO> responseDTOs = new ArrayList<>();
+        List<BwicOngoingRecordResponseDTO> responseDTOs = new ArrayList<>();
 
         for (Bwic bwic : ongoingBwics) {
-            BwicRecordResponseDTO dto = modelMapper.map(bwic, BwicRecordResponseDTO.class);
+            BwicOngoingRecordResponseDTO dto = modelMapper.map(bwic, BwicOngoingRecordResponseDTO.class);
+
+            //因为前端展示的table是标的maxPrice，而数据库中的是presentPrice，但含义是一样的，所以这里将presentPrice赋值给maxPrice
+            dto.setMaxPrice(bwic.getPresentPrice());
 
             dto.setCusip(getBondCusip(bwic.getBondId()));
             dto.setIssuer(getBondIssuer(bwic.getBondId()));
+
+            List<BidRankItemDataDTO> bidRankings = bidClient.getBidRankingsByBwicId(bwic.getBwicId());
+
+            // set the children property of dto with the obtained bidRankings
+            dto.setChildren(bidRankings);
+
             responseDTOs.add(dto);
         }
-
 
         return responseDTOs;
 
@@ -258,4 +275,67 @@ public class BwicService {
     public Long getUserRankByBwicId(Long bwicId,Long accountId) {
         return bidClient.getUserRank(bwicId,accountId).getBody();
     }
+
+    public List<Bwic> getAllBwics(){
+        return bwicRepository.findAll();
+    }
+
+    public String chatWithGPT(ChatRequestDTO request) {
+
+        SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
+
+        Proxy proxy = new Proxy(Proxy.Type.SOCKS, new InetSocketAddress("localhost", 10808));
+        requestFactory.setProxy(proxy);
+
+        RestTemplate restTemplate = new RestTemplate(requestFactory);
+        String url = "https://api.openai.com/v1/chat/completions";
+        String apiKey = "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"; // replace with your actual OpenAI API key
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setBearerAuth(apiKey);
+
+        HttpEntity<ChatRequestDTO> entity = new HttpEntity<>(request, headers);
+
+        try {
+            ResponseEntity<ChatResponseDTO> responseEntity = restTemplate.exchange(url, HttpMethod.POST, entity, ChatResponseDTO.class);
+
+            ChatResponseDTO response = responseEntity.getBody();
+
+            if (response == null || response.getChoices() == null || response.getChoices().isEmpty()) {
+                return "No response";
+            }
+
+            return response.getChoices().get(0).getMessage().getContent();
+        } catch (RestClientException e) {
+            try {
+                ApiError apiError = objectMapper.readValue(e.getMessage(), ApiError.class);
+                return apiError.getError().getMessage();
+            } catch (JsonProcessingException jsonException) {
+                return "Error parsing API response: " + e.getMessage();
+            }
+        }
+    }
+
+    public void updateBwicFullRecord(Long bwicId, BwicUpcomingFullRecord record) {
+        Bwic bwic = bwicRepository.findById(bwicId)
+                .orElseThrow(() -> new RuntimeException("Bwic not found"));
+
+        bwic.setBondId(record.getBondId());
+        bwic.setSize(record.getSize());
+        bwic.setStartPrice(record.getStartPrice());
+        bwic.setStartTime(record.getStartTime());
+        bwic.setDueTime(record.getDueTime());
+
+        bwicRepository.save(bwic);
+    }
+
+    public void deleteBwic(Long bwicId) {
+        if(bwicRepository.existsById(bwicId)) {
+            bwicRepository.deleteById(bwicId);
+        } else {
+            throw new RuntimeException("Bwic not found");
+        }
+    }
+
 }
