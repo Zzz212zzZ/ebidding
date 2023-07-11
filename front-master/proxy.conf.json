@@ -1,6 +1,6 @@
 {
   "/account": {
-    "target": "http://47.108.72.83:8080",
+    "target": "http://47.108.72.83:80",
     "secure": false,
     "changeOrigin": true,
     "pathRewrite": {
@@ -9,7 +9,7 @@
   },
 
   "/bwic": {
-    "target": "http://47.108.72.83:8080",
+    "target": "http://47.108.72.83:80",
     "secure": false,
     "changeOrigin": true,
     "pathRewrite": {
@@ -17,7 +17,7 @@
     }
   },
   "/bid": {
-    "target": "http://47.108.72.83:8080",
+    "target": "http://47.108.72.83:80",
     "secure": false,
     "changeOrigin": true,
     "pathRewrite": {
