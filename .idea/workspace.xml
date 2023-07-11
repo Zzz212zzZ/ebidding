@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2a4f9960-20b1-4731-ae3d-438c38e3e91e" name="更改" comment="client端所需接口修改，websocket修复" />
+    <list default="true" id="2a4f9960-20b1-4731-ae3d-438c38e3e91e" name="更改" comment="后端合并，client端所需接口修改，websocket修复" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -24,7 +24,7 @@
         <option name="title" value="Current Branch" />
       </GitPushTagMode>
     </option>
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/group4" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -262,7 +262,15 @@
       <option name="project" value="LOCAL" />
       <updated>1689038237628</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="后端合并，client端所需接口修改，websocket修复">
+      <option name="closed" value="true" />
+      <created>1689041527641</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1689041527641</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -274,7 +282,8 @@
     <MESSAGE value="更新Upcoming以及ended" />
     <MESSAGE value="7.8" />
     <MESSAGE value="client端所需接口修改，websocket修复" />
-    <option name="LAST_COMMIT_MESSAGE" value="client端所需接口修改，websocket修复" />
+    <MESSAGE value="后端合并，client端所需接口修改，websocket修复" />
+    <option name="LAST_COMMIT_MESSAGE" value="后端合并，client端所需接口修改，websocket修复" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
