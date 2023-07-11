@@ -9,9 +9,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class PriceResponseDTO {
 
+    private Double secondPrice;
     private Double price;
     private Long ranking;
-    private Double secondPrice;
+
 
 
 }

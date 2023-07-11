@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2a4f9960-20b1-4731-ae3d-438c38e3e91e" name="更改" comment="更新Upcoming以及ended">
-      <change beforePath="$PROJECT_DIR$/bid-api/src/main/java/com/ebidding/bid/api/BidClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/bid-api/src/main/java/com/ebidding/bid/api/BidClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bid-svc/src/main/java/com/ebidding/bid/controller/BidController.java" beforeDir="false" afterPath="$PROJECT_DIR$/bid-svc/src/main/java/com/ebidding/bid/controller/BidController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bwic-svc/src/main/java/com/ebidding/bwic/service/BwicService.java" beforeDir="false" afterPath="$PROJECT_DIR$/bwic-svc/src/main/java/com/ebidding/bwic/service/BwicService.java" afterDir="false" />
-    </list>
+    <list default="true" id="2a4f9960-20b1-4731-ae3d-438c38e3e91e" name="更改" comment="client端所需接口修改，websocket修复" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -28,7 +24,7 @@
         <option name="title" value="Current Branch" />
       </GitPushTagMode>
     </option>
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/group4" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -58,7 +54,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;Z:/OneDrive/CitiPractice/group4/service&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Serei/Desktop/service&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
@@ -73,10 +69,21 @@
   <component name="ReactorSettings">
     <option name="notificationShown" value="true" />
   </component>
-  <component name="RunManager" selected="Spring Boot.BwicServiceApplication">
+  <component name="RunDashboard">
+    <option name="configurationTypes">
+      <set>
+        <option value="MavenRunConfiguration" />
+      </set>
+    </option>
+  </component>
+  <component name="RunManager" selected="Application.BidServiceApplication">
     <configuration name="AccountServiceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <envs>
+        <env name="SW_AGENT_NAME" value="account-svc" />
+      </envs>
       <option name="MAIN_CLASS_NAME" value="com.ebidding.account.AccountServiceApplication" />
       <module name="account-svc" />
+      <option name="VM_PARAMETERS" value=" -javaagent:&quot;D:\skywalking\skywalking-agent\skywalking-agent.jar&quot;" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.ebidding.account.*" />
@@ -87,9 +94,26 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="BidService" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.ebidding.bid.service.BidService" />
+      <module name="bid-svc" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ebidding.bid.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="BidServiceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <envs>
+        <env name="SW_AGENT_NAME" value="bid-svc" />
+      </envs>
       <option name="MAIN_CLASS_NAME" value="com.ebidding.bid.BidServiceApplication" />
       <module name="bid-svc" />
+      <option name="VM_PARAMETERS" value=" -javaagent:&quot;D:\skywalking\skywalking-agent\skywalking-agent.jar&quot;" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.ebidding.bid.*" />
@@ -101,8 +125,12 @@
       </method>
     </configuration>
     <configuration name="BwicServiceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <envs>
+        <env name="SW_AGENT_NAME" value="bwic-svc" />
+      </envs>
       <option name="MAIN_CLASS_NAME" value="com.ebidding.bwic.BwicServiceApplication" />
       <module name="bwic-svc" />
+      <option name="VM_PARAMETERS" value=" -javaagent:&quot;D:\skywalking\skywalking-agent\skywalking-agent.jar&quot;" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.ebidding.bwic.*" />
@@ -114,24 +142,15 @@
       </method>
     </configuration>
     <configuration name="GatewayApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <envs>
+        <env name="SW_AGENT_NAME" value="gateway" />
+      </envs>
       <option name="MAIN_CLASS_NAME" value="com.ebidding.gateway.GatewayApplication" />
       <module name="gateway" />
+      <option name="VM_PARAMETERS" value=" -javaagent:&quot;D:\skywalking\skywalking-agent\skywalking-agent.jar&quot;" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.ebidding.gateway.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="AccountServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
-      <module name="account-svc" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="com.ebidding.account.AccountServiceApplication" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.ebidding.account.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -160,13 +179,20 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Application.BidService" />
+      <item itemvalue="Application.AccountServiceApplication" />
+      <item itemvalue="Application.BidServiceApplication" />
+      <item itemvalue="Application.BwicServiceApplication" />
+      <item itemvalue="Application.GatewayApplication" />
+    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.AccountServiceApplication" />
-        <item itemvalue="Application.BwicServiceApplication" />
-        <item itemvalue="Application.GatewayApplication" />
-        <item itemvalue="Spring Boot.AccountServiceApplication" />
         <item itemvalue="Application.BidServiceApplication" />
+        <item itemvalue="Application.BwicServiceApplication" />
+        <item itemvalue="Application.BidService" />
+        <item itemvalue="Application.GatewayApplication" />
+        <item itemvalue="Application.AccountServiceApplication" />
       </list>
     </recent_temporary>
   </component>
@@ -204,7 +230,39 @@
       <option name="project" value="LOCAL" />
       <updated>1688806890855</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="更新Upcoming以及ended">
+      <option name="closed" value="true" />
+      <created>1688812840700</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1688812840700</updated>
+    </task>
+    <task id="LOCAL-00005" summary="7.8">
+      <option name="closed" value="true" />
+      <created>1688812876292</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1688812876292</updated>
+    </task>
+    <task id="LOCAL-00006" summary="7.8">
+      <option name="closed" value="true" />
+      <created>1688812894353</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1688812894353</updated>
+    </task>
+    <task id="LOCAL-00007" summary="client端所需接口修改，websocket修复">
+      <option name="closed" value="true" />
+      <created>1689038237628</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1689038237628</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -214,18 +272,9 @@
     <MESSAGE value="后端7.7更改，添加了getissuer和通过cusip区查询bwic方法" />
     <MESSAGE value="更新getOngoing的bwic接口" />
     <MESSAGE value="更新Upcoming以及ended" />
-    <option name="LAST_COMMIT_MESSAGE" value="更新Upcoming以及ended" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/account-svc/src/main/java/com/ebidding/account/AccountServiceApplication.java</url>
-          <line>11</line>
-          <option name="timeStamp" value="6" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="7.8" />
+    <MESSAGE value="client端所需接口修改，websocket修复" />
+    <option name="LAST_COMMIT_MESSAGE" value="client端所需接口修改，websocket修复" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

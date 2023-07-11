@@ -1,16 +1,20 @@
 package com.ebidding.bwic.controller;
 
 
+import cn.hutool.json.JSONObject;
+import com.ebidding.bid.api.BidClient;
 import com.ebidding.bwic.api.BwicDTO;
 import com.ebidding.bwic.api.BwicRecordResponseDTO;
 import com.ebidding.bwic.domain.Bwic;
 import com.ebidding.bwic.service.BondService;
 import com.ebidding.bwic.service.BwicService;
+import com.ebidding.common.auth.AuthConstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
 import java.sql.Time;
 import java.sql.Timestamp;
@@ -28,7 +32,8 @@ public class BwicController {
     @Autowired
     private BwicService bwicService;
 
-//    @GetMapping()
+
+    //    @GetMapping()
 //    public ResponseEntity<Bwic> getBwic(@RequestParam("cusip") String cusip) {
 //        this.bwicService.findByCusip(cusip);
 //        return ResponseEntity.ok(this.bwicService.findByCusip(cusip));
@@ -71,14 +76,14 @@ public class BwicController {
     }
 
     @GetMapping("/bwics/{bwicId}/status")
-    public ResponseEntity<Boolean> isActive(@PathVariable("bwicId")  Long bwicId) {
+    public ResponseEntity<Boolean> isActive(@PathVariable("bwicId") Long bwicId) {
         boolean isActive = bwicService.isActive(bwicId);
         return ResponseEntity.ok(isActive);
     }
 
     @GetMapping("/bwics/history")
-    public ResponseEntity<Map<String, List<Bwic>>> getHistoryRecords() {
-        Map<String, List<Bwic>> historyRecords = this.bwicService.getHistoryRecords();
+    public ResponseEntity<List<BwicRecordResponseDTO>> getHistoryRecords() {
+        List<BwicRecordResponseDTO> historyRecords = this.bwicService.getHistoryRecords();
         return ResponseEntity.ok(historyRecords);
     }
 
@@ -101,7 +106,6 @@ public class BwicController {
     }
 
 
-
     @PutMapping("/bwics/{bwicId}")
     public ResponseEntity<Void> updateBwic(@PathVariable("bwicId") Long bwicId,
                                            @RequestParam("price") double price,
@@ -110,14 +114,46 @@ public class BwicController {
 
         return ResponseEntity.ok().build();
     }
+
     @GetMapping("/bwics/{bwicId}/bybwicId")
-    public ResponseEntity<Bwic> getBwicByBwicid(@PathVariable("bwicId") Long bwicId){
+    public ResponseEntity<Bwic> getBwicByBwicid(@PathVariable("bwicId") Long bwicId) {
         return ResponseEntity.ok(this.bwicService.findByBwicId(bwicId));
     }
+
     @GetMapping("/bwics/{cusip}/bycusip")
-    public ResponseEntity<Bwic> getBwicByCusip(@PathVariable("cusip") String cusip){
+    public ResponseEntity<Bwic> getBwicByCusip(@PathVariable("cusip") String cusip) {
         return ResponseEntity.ok(this.bwicService.findByBondId(this.bondService.getBondid(cusip)));
     }
+
+
+    @GetMapping("/bwics/getBwicByAccountId")
+    public ResponseEntity<List<BwicRecordResponseDTO>> getBwicByAccountId(HttpServletRequest request) {
+        String currentAccountId = request.getHeader(AuthConstant.X_JWT_ID_HEADER);
+        Long accountId = Long.valueOf(currentAccountId);
+        return ResponseEntity.ok(this.bwicService.getBwicByAccountId(accountId));
+    }
+
+    @GetMapping("/bwics/{bwicId}/getMyBwicResult")
+    public ResponseEntity<String> getMyBwicResult(HttpServletRequest request, @PathVariable("bwicId") Long bwicId) {
+        boolean isActive = bwicService.isActive(bwicId);
+        if (isActive) {
+            return ResponseEntity.ok("BWIC is ongoing.");
+        }
+        String currentAccountId = request.getHeader(AuthConstant.X_JWT_ID_HEADER);
+        Long accountId = Long.valueOf(currentAccountId);
+        // 查询用户排名
+        Long rank = bwicService.getUserRankByBwicId(bwicId, accountId);
+        String msg = "";
+        if (rank == null) {
+            msg = "You have not participated in the bidding of this Bwic yet.";
+        } else if (rank == 1) {
+            msg = "Successful bidding!";
+        } else {
+            msg = "Bidding failed.";
+        }
+        return ResponseEntity.ok(msg);
+    }
+
 //
 //    @GetMapping("/bwics/{bondId}")
 //    public ResponseEntity<Bwic> getBwicByBondid(@PathVariable("bondId") String bondId){
@@ -128,8 +164,6 @@ public class BwicController {
 //    public ResponseEntity<String> getBondId(@PathVariable("cusip") String cusip){
 //        return ResponseEntity.ok(this.bondService.getBondidByCusip(cusip));
 //    }
-
-
 
 
 }

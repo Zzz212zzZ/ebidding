@@ -22,10 +22,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.socket.WebSocketSession;
 
 import java.sql.Timestamp;
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Optional;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -62,8 +61,6 @@ public class BidService {
 
 
     public Bid createBid(Bid bid) {
-
-
         // 1. 添加AccountId和BwicId,再添加时间戳
         BidRank bidRank = new BidRank();
         BidRankPK embbedeId = new BidRankPK(bid.getAccountId(), bid.getBwicId());
@@ -86,19 +83,23 @@ public class BidService {
         bwicClient.updateBwic(bid.getBwicId(),bid.getPrice(),bid.getTime());
 
         // 通知当前bwicId的用户排名更新
-        List<Bid> bidList = bidRepository.getListByBwicid(bid.getBwicId());
-        bidList.forEach(bidInfo -> {
-            WebSocketSession webSocketSession = UserIdSessionManager.getSession(bidInfo.getAccountId().intValue());
+        List<BidRank> bidRankList = bidRankRepository.getListByBwicid(bid.getBwicId()).get();
+        for (int i = 0; i < bidRankList.size(); i++) {
+            BidRank bidRankInfo = bidRankList.get(i);
+            WebSocketSession webSocketSession = UserIdSessionManager.getSession(bidRankInfo.getId().getAccountId().intValue());
             JSONObject msgObj = new JSONObject();
             msgObj.put("msgType", WebSocketMsgType.NOTICE_RANK_CHANGE_MSG.getCode());
             msgObj.put("result", "success");
-            msgObj.put("msg", "您的排名已被更新为：" + bidInfo.getRanking());
+            if(i == 0){
+                msgObj.put("msg", "Your ranking has been updated to " + (i + 1) +";    No.2's price is " + bidRankList.get(1).getPrice());
+            }else{
+                msgObj.put("msg", "Your ranking has been updated to " + (i + 1) +";    No.2's price is Unable to view");
+            }
             WebSocketMessageUtil.sendMsgToOne(webSocketSession, JSONUtil.toJsonStr(msgObj));
-        });
+        }
 
         return bid;
     }
-
 
     public Long getRankByBwicIdAndAccountId(Long bwicId, Long accountId) {
         // 检查bidRank是否存在
@@ -126,7 +127,10 @@ public class BidService {
             }
         }
         return response;
+
     }
+
+
 
 //    public BidRank getByBidId(Long bidId){
 //        return this.bidRankRepository.findByBidId(bidId).orElse(null);
@@ -156,4 +160,12 @@ public class BidService {
         return bid;
     }
 
+
+    public List<Bid> getBidByBwicIdAndAccountId(Long bwicId,Long accountId){
+        return bidRepository.getBidByBwicIdAndAccountId(bwicId,accountId);
+    }
+
+    public List<Long> getBwicIdListByAccountId(Long accountId){
+        return bidRepository.getBwicIdListByAccountId(accountId);
+    }
 }

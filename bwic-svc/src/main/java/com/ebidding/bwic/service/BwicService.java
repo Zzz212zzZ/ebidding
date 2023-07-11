@@ -2,6 +2,7 @@ package com.ebidding.bwic.service;
 
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
+import com.ebidding.bid.api.BidClient;
 import com.ebidding.bwic.api.BwicDTO;
 import com.ebidding.bwic.api.BwicRecordResponseDTO;
 import com.ebidding.bwic.domain.Bwic;
@@ -31,6 +32,8 @@ public class BwicService {
 
     @Autowired
     private ModelMapper modelMapper;
+    @Autowired
+    private BidClient bidClient;
 
     public Optional<BwicDTO> saveBwic(String bondId, double startPrice, Timestamp startTime, Timestamp dueTime, double size) {
         Bwic bwic = Bwic.builder()
@@ -69,27 +72,29 @@ public class BwicService {
         }
         LocalDateTime dueTime = bwic.getDueTime().toLocalDateTime();
 
-
-        // 查询竞拍成功的用户并发送通知
-        // TODO 这里通过feign调用 bid-svc服务的api/v1/bids/getSuccesBidByBwicid接口即可
-
-
-
+        if(!dueTime.isAfter(LocalDateTime.now())){
+            // 查询竞拍成功的用户并发送通知
+            // TODO 这里通过feign调用 bid-svc服务的api/v1/bids/getSuccesBidByBwicid接口即可
+        }
 
         return dueTime.isAfter(LocalDateTime.now());
     }
 
 
-    public Map<String, List<Bwic>> getHistoryRecords() {
+    public List<BwicRecordResponseDTO> getHistoryRecords() {
+        List<BwicRecordResponseDTO> bwicRecordList = new ArrayList<>();
         Timestamp timestampNow = Timestamp.valueOf(LocalDateTime.now());
-        List<Bwic> activeBwics = bwicRepository.findAllByDueTimeAfterOrderByDueTimeAsc(timestampNow);
-        List<Bwic> inactiveBwics = bwicRepository.findAllByDueTimeBeforeOrderByDueTimeDesc(timestampNow);
 
-        Map<String, List<Bwic>> result = new HashMap<>();
-        result.put("active", activeBwics);
-        result.put("inactive", inactiveBwics);
-
-        return result;
+        List<Bwic> bwicList = bwicRepository.findAll();
+        for (Bwic bwic : bwicList) {
+            Boolean active = bwic.getDueTime().getTime() > timestampNow.getTime();
+            BwicRecordResponseDTO dto = modelMapper.map(bwic, BwicRecordResponseDTO.class);
+            dto.setCusip(getBondCusip(bwic.getBondId()));
+            dto.setIssuer(getBondIssuer(bwic.getBondId()));
+            dto.setActive(active);
+            bwicRecordList.add(dto);
+        }
+        return bwicRecordList;
     }
 
     //---------------------------------------------查找正在进行的bwic------------------------------------------------
@@ -227,6 +232,30 @@ public class BwicService {
         return this.bwicRepository.findByBondId(bondId).orElse(null);
     }
 
+    public List<BwicRecordResponseDTO> getBwicByAccountId(Long accountId){
+        List<BwicRecordResponseDTO> responseDTOs = new ArrayList<>();
+
+        // 查询accountId的Bid
+        List<Long> bwicIdList = bidClient.getBwicIdListByAccountId(accountId);
+        Set<Long> bwicIdSet = new HashSet<>(bwicIdList);
+        bwicIdSet.forEach(bwicId -> {
+            Bwic bwic = bwicRepository.findByBwicId(bwicId).orElse(new Bwic());
+            BwicRecordResponseDTO dto = modelMapper.map(bwic, BwicRecordResponseDTO.class);
+            dto.setCusip(getBondCusip(bwic.getBondId()));
+            dto.setIssuer(getBondIssuer(bwic.getBondId()));
+            responseDTOs.add(dto);
+        });
+        return responseDTOs;
+    }
 
 
+    /**
+     * 根據bwicId查詢用戶的排名
+     * @param bwicId
+     * @param accountId
+     * @return
+     */
+    public Long getUserRankByBwicId(Long bwicId,Long accountId) {
+        return bidClient.getUserRank(bwicId,accountId).getBody();
+    }
 }

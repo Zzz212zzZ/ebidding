@@ -16,5 +16,7 @@ public class BwicRecordResponseDTO {
     private String startTime;
     private String dueTime;
     private String lastBidTime;
+    private double startPrice;
     private Long bidCounts;
+    private Boolean active;
 }

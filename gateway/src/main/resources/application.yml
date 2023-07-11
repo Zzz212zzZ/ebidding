@@ -6,6 +6,8 @@ spring:
           uri: http://localhost:8001
           predicates:
             - Path=/api/v1/account-service/**
+          filters:
+            JwtFilter
         - id: bid_service
           uri: http://localhost:8002
           predicates:

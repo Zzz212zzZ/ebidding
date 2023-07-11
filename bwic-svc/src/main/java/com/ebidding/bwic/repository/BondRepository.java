@@ -10,8 +10,8 @@ import java.util.Optional;
 
 public interface BondRepository extends JpaRepository<Bond, Long> {
 
-
-    Optional<Bond> findByBondId(String bondId);
+    @Query(nativeQuery = true, value = "SELECT * FROM bond WHERE bond_id = :bondId")
+    Optional<Bond> findByBondId(@Param("bondId") String bondId);
 
     @Query(nativeQuery = true, value = "SELECT bond_id FROM bond WHERE cusip = :cusip")
     Optional<String> getBondid(@Param("cusip") String cusip);

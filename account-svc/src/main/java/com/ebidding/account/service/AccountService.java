@@ -24,6 +24,10 @@ public class AccountService {
         return this.accountRepository.findByName(inputName).orElse(null);
     }
 
+    public Account findById(Long accountId) {
+        return this.accountRepository.findById(accountId).orElse(null);
+    }
+
 
     public Optional<LoginResponseDTO> login(String username, String password) {
         return this.accountRepository.findByName(username)

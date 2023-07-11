@@ -17,7 +17,7 @@ public class Account {
 
     @Id
     @Column(name = "account_id", nullable = false)
-    private String accountId;
+    private Long accountId;
     @Column(name = "name", nullable = false)
     private String name;
     @Column(name = "password_hash", nullable = false)
