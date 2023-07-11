@@ -98,10 +98,10 @@ public class BidService {
             JSONObject msgObj = new JSONObject();
             msgObj.put("msgType", WebSocketMsgType.NOTICE_RANK_CHANGE_MSG.getCode());
             msgObj.put("result", "success");
-            if(i == 0){
-                msgObj.put("msg", "Your ranking has been updated to " + (i + 1) +";    No.2's price is " + bidRankList.get(1).getPrice());
-            }else{
-                msgObj.put("msg", "Your ranking has been updated to " + (i + 1) +";    No.2's price is Unable to view");
+            if (i == 0) {
+                msgObj.put("msg", "Your ranking has been updated to " + (i + 1)+"/"+ bidRankList.size() + "; No.2's price is " + (bidRankList.size() >= 2 ? bidRankList.get(1).getPrice() : "Unavailable"));
+            } else {
+                msgObj.put("msg", "Your ranking has been updated to " + (i + 1)+"/"+ bidRankList.size()+ "; No.2's price is Unable to view");
             }
             WebSocketMessageUtil.sendMsgToOne(webSocketSession, JSONUtil.toJsonStr(msgObj));
         }

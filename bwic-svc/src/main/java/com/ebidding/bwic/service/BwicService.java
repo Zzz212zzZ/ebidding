@@ -40,8 +40,6 @@ public class BwicService {
 
     @Autowired
     private ModelMapper modelMapper;
-    @Autowired
-    private BidClient bidClient;
 
     @Autowired
     private BidClient bidClient;
