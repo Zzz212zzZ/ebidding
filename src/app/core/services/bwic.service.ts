@@ -154,11 +154,6 @@ getEndedBwics(): Observable<BwicEndedRecordResponseDTO[]> {
   }
 
 
-  getBidByBwicIdAndAccountId(id:string){
-    return this.http
-    .get(`/bid/getBidByBwicIdAndAccountId/`+id).toPromise();
-  }
-
   getAllBonds(): Observable<Bonds[]>{
     const apiUrl = `bwic/bwics/Allbonds`;
     return this.http.get<Bonds[]>(apiUrl);
