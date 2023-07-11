@@ -96,35 +96,35 @@ services:
       - internal_access
       - external_access # db access
 
-  gateway-service:
-    build: ./gateway
-    image: ebidding/gateway-svc
-    ports:
-      - 80:80
-    environment:
-      - SPRING_PROFILES_ACTIVE
-      - SERVER_PORT
-      - SIGNING_SECRET
-      - ACCOUNT_SERVICE_ENDPOINT
-      - BID_SERVICE_ENDPOINT
-      - BWIC_SERVICE_ENDPOINT
-      - UI_SERVICE_ENDPOINT
-    deploy:
-      resources:
-        limits:
-          cpus: ${CPU_LIMIT}
-          memory: ${MEMORY_LIMIT}
-        reservations:
-          memory: ${MEMORY_REQUEST}
-    depends_on:
-      - account-service
-      # - pricer-service
-      - bid-service
-      - bwic-service
-      - ui-service
-    networks:
-      - internal_access
-      - external_access
+#  gateway-service:
+#    build: ./gateway
+#    image: ebidding/gateway-svc
+#    ports:
+#      - 80:80
+#    environment:
+#      - SPRING_PROFILES_ACTIVE
+#      - SERVER_PORT
+#      - SIGNING_SECRET
+#      - ACCOUNT_SERVICE_ENDPOINT
+#      - BID_SERVICE_ENDPOINT
+#      - BWIC_SERVICE_ENDPOINT
+#      - UI_SERVICE_ENDPOINT
+#    deploy:
+#      resources:
+#        limits:
+#          cpus: ${CPU_LIMIT}
+#          memory: ${MEMORY_LIMIT}
+#        reservations:
+#          memory: ${MEMORY_REQUEST}
+#    depends_on:
+#      - account-service
+#      # - pricer-service
+#      - bid-service
+#      - bwic-service
+#      - ui-service
+#    networks:
+#      - internal_access
+#      - external_access
 
 #  ui-service:
 #    build: ./front-master
