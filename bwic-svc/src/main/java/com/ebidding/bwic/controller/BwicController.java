@@ -5,6 +5,7 @@ import cn.hutool.json.JSONObject;
 import com.ebidding.bid.api.BidClient;
 import com.ebidding.bwic.api.BwicDTO;
 import com.ebidding.bwic.api.BwicRecordResponseDTO;
+import com.ebidding.bwic.domain.Bond;
 import com.ebidding.bwic.domain.Bwic;
 import com.ebidding.bwic.service.BondService;
 import com.ebidding.bwic.service.BwicService;
@@ -22,6 +23,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("api/v1/bwic-service")
@@ -154,7 +156,7 @@ public class BwicController {
         return ResponseEntity.ok(msg);
     }
 
-//
+    //
 //    @GetMapping("/bwics/{bondId}")
 //    public ResponseEntity<Bwic> getBwicByBondid(@PathVariable("bondId") String bondId){
 //        return ResponseEntity.ok(this.bwicService.findByBondId(bondId));
@@ -164,6 +166,15 @@ public class BwicController {
 //    public ResponseEntity<String> getBondId(@PathVariable("cusip") String cusip){
 //        return ResponseEntity.ok(this.bondService.getBondidByCusip(cusip));
 //    }
+    @GetMapping("/bwics/Allbonds")
+    public List<Bond> getAllBonds() {
+        return bondService.getAllBonds().stream().collect(Collectors.toList());
+    }
+
+    @GetMapping("/bwics/Allbwics")
+    public List<Bwic> getAllBwics() {
+        return bwicService.getAllBwics().stream().collect(Collectors.toList());
+    }
 
 
 }

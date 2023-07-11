@@ -258,4 +258,8 @@ public class BwicService {
     public Long getUserRankByBwicId(Long bwicId,Long accountId) {
         return bidClient.getUserRank(bwicId,accountId).getBody();
     }
+
+    public List<Bwic> getAllBwics(){
+        return bwicRepository.findAll();
+    }
 }
