@@ -1,0 +1,27 @@
+{
+  "/account": {
+    "target": "http://localhost:8080",
+    "secure": false,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/account": "/api/v1/account-service"
+    }
+  },
+
+  "/bwic": {
+    "target": "http://localhost:8080",
+    "secure": false,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/bwic": "/api/v1/bwic-service"
+    }
+  },
+  "/bid": {
+    "target": "http://localhost:8080",
+    "secure": false,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/bid": "/api/v1/bid-service"
+    }
+  }
+}
