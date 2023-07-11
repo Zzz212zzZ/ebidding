@@ -5,7 +5,11 @@ import cn.hutool.json.JSONObject;
 import com.ebidding.bid.api.BidClient;
 import com.ebidding.bwic.api.BwicDTO;
 import com.ebidding.bwic.api.BwicRecordResponseDTO;
+import com.ebidding.bwic.api.*;
+import com.ebidding.bwic.domain.Bond;
 import com.ebidding.bwic.domain.Bwic;
+import com.ebidding.bwic.domain.chat.ChatRequestDTO;
+import com.ebidding.bwic.domain.chat.SingleMessageDTO;
 import com.ebidding.bwic.service.BondService;
 import com.ebidding.bwic.service.BwicService;
 import com.ebidding.common.auth.AuthConstant;
@@ -17,11 +21,13 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
 import java.sql.Time;
+import javax.servlet.http.HttpSession;
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("api/v1/bwic-service")
@@ -31,6 +37,9 @@ public class BwicController {
 
     @Autowired
     private BwicService bwicService;
+
+    @Autowired
+    private HttpSession httpSession;
 
 
     //    @GetMapping()
@@ -88,22 +97,23 @@ public class BwicController {
     }
 
     @GetMapping("/bwics/ongoing")
-    public ResponseEntity<List<BwicRecordResponseDTO>> getOngoingBwics() {
-        List<BwicRecordResponseDTO> ongoingBwics = this.bwicService.getOngoingBwics();
+    public ResponseEntity<List<BwicOngoingRecordResponseDTO>> getOngoingBwics() {
+        List<BwicOngoingRecordResponseDTO> ongoingBwics = this.bwicService.getOngoingBwics();
         return ResponseEntity.ok(ongoingBwics);
     }
 
     @GetMapping("/bwics/upcoming")
-    public ResponseEntity<List<BwicRecordResponseDTO>> getUpcomingBwics() {
-        List<BwicRecordResponseDTO> incomingBwics = this.bwicService.getUpcomingBwics();
-        return ResponseEntity.ok(incomingBwics);
+    public ResponseEntity<List<BwicUpcomingRecordResponseDTO>> getUpcomingBwics() {
+        List<BwicUpcomingRecordResponseDTO> upcomingBwics = this.bwicService.getUpcomingBwics();
+        return ResponseEntity.ok(upcomingBwics);
     }
 
     @GetMapping("/bwics/ended")
-    public ResponseEntity<List<BwicRecordResponseDTO>> getEndedBwics() {
-        List<BwicRecordResponseDTO> endedBwics = this.bwicService.getEndedBwics();
+    public ResponseEntity<List<BwicEndedRecordResponseDTO>> getEndedBwics() {
+        List<BwicEndedRecordResponseDTO> endedBwics = this.bwicService.getEndedBwics();
         return ResponseEntity.ok(endedBwics);
     }
+
 
 
     @PutMapping("/bwics/{bwicId}")
@@ -112,6 +122,15 @@ public class BwicController {
                                            @RequestParam("time") Timestamp time) {
         this.bwicService.updateBwicAndBond(bwicId, price, time);
 
+        return ResponseEntity.ok().build();
+    }
+
+
+    // 新增一个方法来处理全字段更新
+    @PutMapping("/bwics/{bwicId}/full-record")
+    public ResponseEntity<Void> updateBwicFull(@PathVariable("bwicId") Long bwicId,
+                                               @RequestBody BwicUpcomingFullRecord record) {
+        this.bwicService.updateBwicFullRecord(bwicId, record);
         return ResponseEntity.ok().build();
     }
 
@@ -154,6 +173,41 @@ public class BwicController {
         return ResponseEntity.ok(msg);
     }
 
+
+
+    @DeleteMapping("/bwics/{bwicId}")
+    public ResponseEntity<String> deleteBwic(@PathVariable("bwicId") Long bwicId) {
+        this.bwicService.deleteBwic(bwicId);
+        return ResponseEntity.ok().body("{\"message\":\"Delete success\"}");
+    }
+
+
+    //调用GPT对话服务
+    @GetMapping("/bwics/chat")
+    public ResponseEntity<String> chat(@RequestParam String message) {
+        String role = "user";  // or another role based on your logic
+
+        // Get the message history from session
+        List<SingleMessageDTO> history = (List<SingleMessageDTO>) httpSession.getAttribute("history");
+        if (history == null) {
+            history = new ArrayList<>();
+        }
+
+        // Create a new request and add the new message
+        ChatRequestDTO request = new ChatRequestDTO();
+        request.setMessages(history);
+        request.addMessage(role, message);
+
+        // Send the request and get the response
+        String response = bwicService.chatWithGPT(request);
+
+        // Save the response to the history
+        request.addMessage("assistant", response);
+        httpSession.setAttribute("history", request.getMessages());
+
+        return ResponseEntity.ok(response);
+    }
+
 //
 //    @GetMapping("/bwics/{bondId}")
 //    public ResponseEntity<Bwic> getBwicByBondid(@PathVariable("bondId") String bondId){
@@ -164,6 +218,19 @@ public class BwicController {
 //    public ResponseEntity<String> getBondId(@PathVariable("cusip") String cusip){
 //        return ResponseEntity.ok(this.bondService.getBondidByCusip(cusip));
 //    }
+
+
+
+//    @GetMapping("/bwics/Allbonds")
+//    public List<Bond> getAllBonds() {
+//        return bondService.getAllBonds().stream().collect(Collectors.toList());
+//    }
+//
+//    @GetMapping("/bwics/Allbwics")
+//    public List<Bwic> getAllBwics() {
+//        return bwicService.getAllBwics().stream().collect(Collectors.toList());
+//    }
+
 
 
 }

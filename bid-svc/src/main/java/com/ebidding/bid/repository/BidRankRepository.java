@@ -2,6 +2,7 @@ package com.ebidding.bid.repository;
 
 import com.ebidding.bid.domain.Bid;
 import com.ebidding.bid.domain.BidRank;
+import com.ebidding.bid.domain.BidRankPK;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -10,7 +11,7 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
 
-public interface BidRankRepository extends JpaRepository<BidRank, Long> {
+public interface BidRankRepository extends JpaRepository<BidRank, BidRankPK> {
 
     @Query(nativeQuery = true, value = "" +
             "SELECT COUNT(*)+1 \n" +
@@ -32,6 +33,11 @@ public interface BidRankRepository extends JpaRepository<BidRank, Long> {
 
     @Query(nativeQuery = true, value = "SELECT * FROM bidrank WHERE bwic_id = :bwicId  ORDER BY price DESC")
     Optional<List<BidRank>> getListByBwicid(@Param("bwicId") Long bwicId);
+
+    @Query(nativeQuery = true,value="SELECT * FROM bidrank WHERE bwic_id = :bwicId ORDER BY price DESC")
+    List<BidRank> getByBwicIdOrderByPriceDesc(@Param("bwicId") Long bwicId);
+
+
 
 }
 
