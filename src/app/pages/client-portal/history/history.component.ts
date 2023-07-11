@@ -21,6 +21,7 @@ interface BwicItemData {
   dueTime: string;
   startPrice: number;
   size: number;
+  result:string;
   expand: boolean;
 }
 
