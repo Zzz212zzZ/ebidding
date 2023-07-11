@@ -83,11 +83,12 @@ export class BwicService {
     .get(`/bid/getBidByBwicIdAndAccountId/`+id).toPromise();
   }
 
-  getMyBwicResult(bwicId: string): Observable<any>{
-    const apiUrl = `bwic/bwics/{bwicId}/getMyBwicResult`;
-   
-    return this.http.get(apiUrl, {  responseType: 'text' })
-  }
+  getMyBwicResult(bwicId: string){
+
+      const apiUrl = `bwic/bwics/${bwicId}/getMyBwicResult`;
+
+      return this.http.get(apiUrl, {  responseType: 'text' }).toPromise()
+    }
 
   getAllBonds(): Observable<Bonds[]>{
     const apiUrl = `bwic/bwics/Allbonds`;
@@ -180,5 +181,5 @@ getEndedBwics(): Observable<BwicEndedRecordResponseDTO[]> {
   }
 
 
- 
+
 }

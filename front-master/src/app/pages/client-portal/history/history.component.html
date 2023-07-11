@@ -67,7 +67,7 @@
       <td>{{ data.startPrice }}</td>
       <td>{{ data.size }}</td>
         <button nz-button nzType="default" (click)="open(data.bwicId)">Details</button>
-        <button nz-button [nzType]="'primary'" (click)="result(data.bwicId)"><span>Result</span></button>
+      <button nz-button [nzType]="'primary'" (click)="result(data.bwicId)"><span>Result</span></button>
     </tr>
   </tbody>
 </nz-table>
@@ -75,11 +75,37 @@
 <nz-modal [(nzVisible)]="isVisible" nzTitle="Result" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
   <ng-container *nzModalContent>
     <div>
-      <span>bwicId:</span>
-      <span>{{result}}</span>
+      <span>{{resultText}}</span>
     </div>
   </ng-container>
 </nz-modal>
+
+<nz-drawer [nzBodyStyle]="{ overflow: 'auto' }" [nzMaskClosable]="false" [nzWidth]="720" [nzVisible]="drawervisible"
+           nzTitle="Bidding history" (nzOnClose)="close()">
+  <ng-container *nzDrawerContent>
+
+    <nz-table #basicTable [nzData]="dataSet">
+      <thead>
+      <tr>
+        <th>BwicId</th>
+        <th>Price</th>
+        <th>Ranking</th>
+        <th>Time</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let data of basicTable.data">
+        <td>{{data.bwicId}}</td>
+        <td>{{data.price}}</td>
+        <td>{{data.ranking}}</td>
+        <td>
+          {{data.time}}
+        </td>
+      </tr>
+      </tbody>
+    </nz-table>
+  </ng-container>
+</nz-drawer>
 
 <nz-drawer [nzBodyStyle]="{ overflow: 'auto' }" [nzMaskClosable]="false" [nzWidth]="720" [nzVisible]="drawervisible"
   nzTitle="Bidding history" (nzOnClose)="close()">

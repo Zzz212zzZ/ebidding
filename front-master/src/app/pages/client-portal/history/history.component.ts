@@ -110,18 +110,14 @@ export class HistoryComponent implements OnInit {
     this.drawervisible = true;
   }
 
-  async result(id: string) {
-    // 目前只有一个数据使用push展示
-  
-    this.bwicService.getMyBwicResult(id).subscribe(
-      response => {
-        this.isVisible = true;
-      },
-      error => {
-        // 在此处处理错误
-      }
-    );
-  }
+   resultText:string = ''
+
+    async result(id: string) {
+      // 目前只有一个数据使用push展示
+      console.log(id, 'id')
+      this.isVisible = true;
+      this.resultText = (await this.bwicService.getMyBwicResult(id)) as string;
+    }
 
   close(): void {
     this.drawervisible = false;
