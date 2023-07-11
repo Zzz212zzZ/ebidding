@@ -51,13 +51,5 @@ public class AccountController {
         return ResponseEntity.ok(accountDTO);
     }
 
-
-
-    @GetMapping("accounts/account/{accountId}/name")
-    public String getAccountNameByAccountId(@PathVariable("accountId") Long accountId) {
-        return accountService.getAccountNameByAccountId(accountId);
-
-    }
-
 }
 

@@ -32,9 +32,7 @@ public class BondService {
         this.bondRepository.incrementTransactionCount(bondId);
     }
 
-//    public List<Bond> getAllBonds(){
-//        return bondRepository.findAll();
-//    }
+
 
 
 

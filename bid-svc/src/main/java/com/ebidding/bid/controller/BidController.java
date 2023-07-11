@@ -3,7 +3,6 @@ package com.ebidding.bid.controller;
 import com.ebidding.account.api.AccountDTO;
 import com.ebidding.bid.api.BidCreateRequestDTO;
 import com.ebidding.bid.api.BidCreateResponseDTO;
-import com.ebidding.bid.api.BidRankItemDataDTO;
 import com.ebidding.bid.api.PriceResponseDTO;
 import com.ebidding.bid.domain.Bid;
 import com.ebidding.bid.domain.BidRank;
@@ -101,6 +100,8 @@ public class BidController {
     }
 
 
+
+
     @GetMapping("/bwics/{bwicId}/bids/count")
     public ResponseEntity<Long> getParticipantCount(@PathVariable("bwicId") Long bwicId) {
         Long participantCount = bidService.getParticipantCount(bwicId);
@@ -114,6 +115,7 @@ public class BidController {
         PriceResponseDTO response = this.bidService.getPrice(bwicId, Long.valueOf(accountId));
         return ResponseEntity.ok(response);
     }
+
 
     @GetMapping("api/v1/bid-service/{bwicId}/bid/success")
     public Bid getSuccesBidByBwicid(@PathVariable Long bwicId) {
@@ -142,18 +144,6 @@ public class BidController {
         }
         return bidService.getBwicIdListByAccountId(accountId);
     }
-    //传入某一个bwicId，返回这个bwicId下部分的bidRankItemDataDTO
-    @GetMapping("/bwics/{bwicId}/ongoing-part-items")
-    List<BidRankItemDataDTO> getPartBidRankingsByBwicId(@PathVariable("bwicId") Long bwicId){
-        return bidService.getPartBidRankingsByBwicId(bwicId);
-    }
-
-    //传入某一个bwicId，返回这个bwicId下所有的bidRankItemDataDTO
-    @GetMapping("/bwics/{bwicId}/ongoing-all-items")
-    List<BidRankItemDataDTO> getAllBidRankingsByBwicId(@PathVariable("bwicId") Long bwicId){
-        return bidService.getAllBidRankingsByBwicId(bwicId);
-    }
-
 
 
 //    @GetMapping("/bidRanks")
