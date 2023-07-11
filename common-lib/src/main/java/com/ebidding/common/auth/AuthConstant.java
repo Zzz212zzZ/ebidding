@@ -7,7 +7,7 @@ public class AuthConstant {
 
     public static final String CLAIM_EXPIRATION_TIME = "exp"; // 添加过期时间字段
 
-    public static final long EXPIRATION_TIME_MS = 24 * 60 * 60 * 1000; // 1天的过期时间，以毫秒为单位
+    public static final long EXPIRATION_TIME_MS = 7 * 24 * 60 * 60 * 1000; // 1天的过期时间，以毫秒为单位
 
 //    public static final long EXPIRATION_TIME_MS = 1; // 测试过期时间为0
 

@@ -5,6 +5,7 @@ import com.auth0.jwt.exceptions.TokenExpiredException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.ebidding.common.auth.AuthConstant;
 import com.ebidding.common.utils.JwtUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
 import org.springframework.http.HttpHeaders;
@@ -15,16 +16,27 @@ import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
+import springfox.documentation.builders.PathSelectors;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Component
+@Slf4j
 public class JwtFilter extends AbstractGatewayFilterFactory {
     @Override
     public GatewayFilter apply(Object config) {
         return (exchange, chain) -> {
+            ServerHttpRequest request = exchange.getRequest();
+            String path = request.getPath().value();
+            // 在这里添加不需要过滤的路径
+            List<String> excludePaths = Arrays.asList("/api/v1/account-service/accounts/login");
+            if (excludePaths.contains(path)) {
+                return chain.filter(exchange);
+            }
+            // 执行过滤器逻辑
             List<String> headers = exchange.getRequest().getHeaders().getOrDefault(HttpHeaders.AUTHORIZATION, new ArrayList<>());
             System.out.println("headers: " + headers);
             if (headers.size() > 0) {
@@ -42,7 +54,7 @@ public class JwtFilter extends AbstractGatewayFilterFactory {
                                 .header(AuthConstant.X_JWT_ID_HEADER, userId)
                                 .header(AuthConstant.X_JWT_NAME_HEADER, name)
                                 .header(AuthConstant.X_JWT_ROLE_HEADER, role);
-
+                        log.info("请求用户ID ==> {}", userId);
                         ServerHttpRequest modifiedRequest = builder.build();
                         return chain.filter(exchange.mutate().request(modifiedRequest).build());
                     } catch (Exception ex) {
@@ -51,6 +63,7 @@ public class JwtFilter extends AbstractGatewayFilterFactory {
                     }
                 }
             }
+
             return OnUnAuthorized(exchange, "Missing or invalid authorization header"); // 自定义返回信息
         };
     }

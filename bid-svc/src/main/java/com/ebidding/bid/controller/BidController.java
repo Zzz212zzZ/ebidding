@@ -3,7 +3,6 @@ package com.ebidding.bid.controller;
 import com.ebidding.account.api.AccountDTO;
 import com.ebidding.bid.api.BidCreateRequestDTO;
 import com.ebidding.bid.api.BidCreateResponseDTO;
-import com.ebidding.bid.api.BidRankItemDataDTO;
 import com.ebidding.bid.api.PriceResponseDTO;
 import com.ebidding.bid.domain.Bid;
 import com.ebidding.bid.domain.BidRank;
@@ -14,6 +13,7 @@ import com.ebidding.common.auth.AuthConstant;
 import com.ebidding.common.auth.Authorize;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -86,12 +86,20 @@ public class BidController {
 
 
     @GetMapping("/bwics/{bwicId}/accounts/rank")
-    public ResponseEntity<Long> getUserRank(@PathVariable("bwicId") Long bwicId, @RequestHeader(AuthConstant.X_JWT_ID_HEADER) String accountId) {
+    public ResponseEntity<Long> getUserRank(HttpServletRequest request,
+                                            @PathVariable("bwicId") Long bwicId,
+                                            @RequestParam(value = "accountId",required = false) Long accountId) {
+        if(accountId == null || accountId <= 0) {
+            String currentAccountId = request.getHeader(AuthConstant.X_JWT_ID_HEADER);
+            accountId = Long.valueOf(currentAccountId);
+        }
         //通过bidrank表获取到某个用户现在的排名
         Long rank = this.bidService.getRankByBwicIdAndAccountId(bwicId, Long.valueOf(accountId));
         return ResponseEntity.ok(rank);
 
     }
+
+
 
 
     @GetMapping("/bwics/{bwicId}/bids/count")
@@ -108,24 +116,34 @@ public class BidController {
         return ResponseEntity.ok(response);
     }
 
+
     @GetMapping("api/v1/bid-service/{bwicId}/bid/success")
     public Bid getSuccesBidByBwicid(@PathVariable Long bwicId) {
         return bidService.getSuccesBidByBwicid(bwicId);
     }
 
-
-    //传入某一个bwicId，返回这个bwicId下部分的bidRankItemDataDTO
-    @GetMapping("/bwics/{bwicId}/ongoing-part-items")
-    List<BidRankItemDataDTO> getPartBidRankingsByBwicId(@PathVariable("bwicId") Long bwicId){
-        return bidService.getPartBidRankingsByBwicId(bwicId);
+    /**
+     * accountid和bwicid查bid
+     * @param request
+     * @param bwicId
+     * @return
+     */
+    @GetMapping("/getBidByBwicIdAndAccountId/{bwicId}")
+    public List<Bid> getBidByBwicIdAndAccountId(HttpServletRequest request, @PathVariable Long bwicId) {
+        String currentAccountId = request.getHeader(AuthConstant.X_JWT_ID_HEADER);
+        Long accountId =Long.valueOf(currentAccountId);
+        return bidService.getBidByBwicIdAndAccountId(bwicId,accountId);
     }
 
-    //传入某一个bwicId，返回这个bwicId下所有的bidRankItemDataDTO
-    @GetMapping("/bwics/{bwicId}/ongoing-all-items")
-    List<BidRankItemDataDTO> getAllBidRankingsByBwicId(@PathVariable("bwicId") Long bwicId){
-        return bidService.getAllBidRankingsByBwicId(bwicId);
+    @GetMapping("/getBidByAccountId")
+    public List<Long> getBwicIdListByAccountId(HttpServletRequest request,
+           @RequestParam(value = "accountId",required = false) Long accountId){
+        if(accountId == null){
+            String currentAccountId = request.getHeader(AuthConstant.X_JWT_ID_HEADER);
+            accountId =Long.valueOf(currentAccountId);
+        }
+        return bidService.getBwicIdListByAccountId(accountId);
     }
-
 
 
 //    @GetMapping("/bidRanks")

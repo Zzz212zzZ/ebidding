@@ -4,7 +4,6 @@ import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.ebidding.account.api.AccountDTO;
 import com.ebidding.account.api.AccountClient;
-import com.ebidding.bid.api.BidRankItemDataDTO;
 import com.ebidding.bwic.api.BwicClient;
 import com.ebidding.bid.api.PriceResponseDTO;
 import com.ebidding.bid.domain.Bid;
@@ -12,7 +11,6 @@ import com.ebidding.bid.domain.BidRank;
 import com.ebidding.bid.domain.BidRankPK;
 import com.ebidding.bid.repository.BidRankRepository;
 import com.ebidding.bid.repository.BidRepository;
-import com.ebidding.common.auth.AuthConstant;
 import com.ebidding.common.utils.WebSocketMessageUtil;
 import com.ebidding.common.websocket.UserIdSessionManager;
 import com.ebidding.common.websocket.enums.WebSocketMsgType;
@@ -24,13 +22,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.socket.WebSocketSession;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Optional;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 //针对标有 @NonNull 注解的变量和 final 变量进行参数的构造方法。
@@ -66,8 +61,6 @@ public class BidService {
 
 
     public Bid createBid(Bid bid) {
-
-
         // 1. 添加AccountId和BwicId,再添加时间戳
         BidRank bidRank = new BidRank();
         BidRankPK embbedeId = new BidRankPK(bid.getAccountId(), bid.getBwicId());
@@ -90,19 +83,23 @@ public class BidService {
         bwicClient.updateBwic(bid.getBwicId(),bid.getPrice(),bid.getTime());
 
         // 通知当前bwicId的用户排名更新
-        List<Bid> bidList = bidRepository.getListByBwicid(bid.getBwicId());
-        bidList.forEach(bidInfo -> {
-            WebSocketSession webSocketSession = UserIdSessionManager.getSession(bidInfo.getAccountId().intValue());
+        List<BidRank> bidRankList = bidRankRepository.getListByBwicid(bid.getBwicId()).get();
+        for (int i = 0; i < bidRankList.size(); i++) {
+            BidRank bidRankInfo = bidRankList.get(i);
+            WebSocketSession webSocketSession = UserIdSessionManager.getSession(bidRankInfo.getId().getAccountId().intValue());
             JSONObject msgObj = new JSONObject();
             msgObj.put("msgType", WebSocketMsgType.NOTICE_RANK_CHANGE_MSG.getCode());
             msgObj.put("result", "success");
-            msgObj.put("msg", "您的排名已被更新为：" + bidInfo.getRanking());
+            if (i == 0) {
+                msgObj.put("msg", "Your ranking has been updated to " + (i + 1)+"/"+ bidRankList.size() + "; No.2's price is " + (bidRankList.size() >= 2 ? bidRankList.get(1).getPrice() : "Unavailable"));
+            } else {
+                msgObj.put("msg", "Your ranking has been updated to " + (i + 1)+"/"+ bidRankList.size()+ "; No.2's price is Unable to view");
+            }
             WebSocketMessageUtil.sendMsgToOne(webSocketSession, JSONUtil.toJsonStr(msgObj));
-        });
+        }
 
         return bid;
     }
-
 
     public Long getRankByBwicIdAndAccountId(Long bwicId, Long accountId) {
         // 检查bidRank是否存在
@@ -130,7 +127,10 @@ public class BidService {
             }
         }
         return response;
+
     }
+
+
 
 //    public BidRank getByBidId(Long bidId){
 //        return this.bidRankRepository.findByBidId(bidId).orElse(null);
@@ -161,57 +161,11 @@ public class BidService {
     }
 
 
-    //获取部分bidRanking
-
-    public List<BidRankItemDataDTO> getPartBidRankingsByBwicId(Long bwicId) {
-        List<BidRank> bidRanks = bidRankRepository.getByBwicIdOrderByPriceDesc(bwicId);
-        List<BidRankItemDataDTO> bidRankItems = new ArrayList<>();
-
-        if(bidRanks.size() > 3) {
-            BidRank firstBidRank = bidRanks.get(0);
-            BidRank secondBidRank = bidRanks.get(1);
-            BidRank lastBidRank = bidRanks.get(bidRanks.size()-1);
-
-            bidRankItems.add(convertBidRankToDTO(firstBidRank, 1L));
-            bidRankItems.add(convertBidRankToDTO(secondBidRank, 2L));
-            bidRankItems.add(new BidRankItemDataDTO()); // 省略中间部分
-            bidRankItems.add(convertBidRankToDTO(lastBidRank, (long) bidRanks.size()));
-        } else {
-            for (int i = 0; i < bidRanks.size(); i++) {
-                bidRankItems.add(convertBidRankToDTO(bidRanks.get(i), (long) (i+1)));
-            }
-        }
-
-        return bidRankItems;
+    public List<Bid> getBidByBwicIdAndAccountId(Long bwicId,Long accountId){
+        return bidRepository.getBidByBwicIdAndAccountId(bwicId,accountId);
     }
 
-    private BidRankItemDataDTO convertBidRankToDTO(BidRank bidRank, Long ranking) {
-        BidRankItemDataDTO dto = new BidRankItemDataDTO();
-        dto.setRanking(ranking);
-        dto.setPrice(bidRank.getPrice());
-        dto.setTime(bidRank.getTime());
-
-        // 从BidRankPK获取accountId
-        //其中getId()获取到的是BidRank对象的BidRankPK实例，然后通过getAccountId()获取到实际的accountId
-        Long accountId = bidRank.getId().getAccountId();
-        dto.setAccountId(accountId);
-
-        // 使用FeignClient调用远程服务获取账户名
-        String accountName = accountClient.getAccountNameByAccountId(accountId);
-        dto.setAccountName(accountName);
-
-        return dto;
+    public List<Long> getBwicIdListByAccountId(Long accountId){
+        return bidRepository.getBwicIdListByAccountId(accountId);
     }
-
-    public List<BidRankItemDataDTO> getAllBidRankingsByBwicId(Long bwicId) {
-        List<BidRank> bidRanks = bidRankRepository.getByBwicIdOrderByPriceDesc(bwicId);
-        List<BidRankItemDataDTO> bidRankItems = new ArrayList<>();
-
-        for (int i = 0; i < bidRanks.size(); i++) {
-            bidRankItems.add(convertBidRankToDTO(bidRanks.get(i), (long) (i+1)));
-        }
-
-        return bidRankItems;
-    }
-
 }

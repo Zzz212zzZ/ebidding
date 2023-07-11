@@ -8,7 +8,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @EnableDiscoveryClient
 @SpringBootApplication
-@EnableFeignClients(basePackages = {"com.ebidding.bid.api"})
+@EnableFeignClients(basePackages = {"com.ebidding.account", "com.ebidding.bid"})
 public class BwicServiceApplication {
     public static void main(String[] args) {
         SpringApplication.run(BwicServiceApplication.class, args);

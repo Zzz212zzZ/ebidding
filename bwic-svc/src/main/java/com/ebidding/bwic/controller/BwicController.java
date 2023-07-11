@@ -1,21 +1,25 @@
 package com.ebidding.bwic.controller;
 
 
-import com.ebidding.bwic.api.*;
+import cn.hutool.json.JSONObject;
+import com.ebidding.bid.api.BidClient;
+import com.ebidding.bwic.api.BwicDTO;
+import com.ebidding.bwic.api.BwicRecordResponseDTO;
 import com.ebidding.bwic.domain.Bond;
 import com.ebidding.bwic.domain.Bwic;
-import com.ebidding.bwic.domain.chat.ChatRequestDTO;
-import com.ebidding.bwic.domain.chat.SingleMessageDTO;
 import com.ebidding.bwic.service.BondService;
 import com.ebidding.bwic.service.BwicService;
+import com.ebidding.common.auth.AuthConstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletRequest;
+import java.math.BigDecimal;
+import java.sql.Time;
 import java.sql.Timestamp;
-import java.util.ArrayList;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -29,9 +33,6 @@ public class BwicController {
 
     @Autowired
     private BwicService bwicService;
-
-    @Autowired
-    private HttpSession httpSession;
 
 
     //    @GetMapping()
@@ -77,35 +78,34 @@ public class BwicController {
     }
 
     @GetMapping("/bwics/{bwicId}/status")
-    public ResponseEntity<Boolean> isActive(@PathVariable("bwicId")  Long bwicId) {
+    public ResponseEntity<Boolean> isActive(@PathVariable("bwicId") Long bwicId) {
         boolean isActive = bwicService.isActive(bwicId);
         return ResponseEntity.ok(isActive);
     }
 
     @GetMapping("/bwics/history")
-    public ResponseEntity<Map<String, List<Bwic>>> getHistoryRecords() {
-        Map<String, List<Bwic>> historyRecords = this.bwicService.getHistoryRecords();
+    public ResponseEntity<List<BwicRecordResponseDTO>> getHistoryRecords() {
+        List<BwicRecordResponseDTO> historyRecords = this.bwicService.getHistoryRecords();
         return ResponseEntity.ok(historyRecords);
     }
 
     @GetMapping("/bwics/ongoing")
-    public ResponseEntity<List<BwicOngoingRecordResponseDTO>> getOngoingBwics() {
-        List<BwicOngoingRecordResponseDTO> ongoingBwics = this.bwicService.getOngoingBwics();
+    public ResponseEntity<List<BwicRecordResponseDTO>> getOngoingBwics() {
+        List<BwicRecordResponseDTO> ongoingBwics = this.bwicService.getOngoingBwics();
         return ResponseEntity.ok(ongoingBwics);
     }
 
     @GetMapping("/bwics/upcoming")
-    public ResponseEntity<List<BwicUpcomingRecordResponseDTO>> getUpcomingBwics() {
-        List<BwicUpcomingRecordResponseDTO> upcomingBwics = this.bwicService.getUpcomingBwics();
-        return ResponseEntity.ok(upcomingBwics);
+    public ResponseEntity<List<BwicRecordResponseDTO>> getUpcomingBwics() {
+        List<BwicRecordResponseDTO> incomingBwics = this.bwicService.getUpcomingBwics();
+        return ResponseEntity.ok(incomingBwics);
     }
 
     @GetMapping("/bwics/ended")
-    public ResponseEntity<List<BwicEndedRecordResponseDTO>> getEndedBwics() {
-        List<BwicEndedRecordResponseDTO> endedBwics = this.bwicService.getEndedBwics();
+    public ResponseEntity<List<BwicRecordResponseDTO>> getEndedBwics() {
+        List<BwicRecordResponseDTO> endedBwics = this.bwicService.getEndedBwics();
         return ResponseEntity.ok(endedBwics);
     }
-
 
 
     @PutMapping("/bwics/{bwicId}")
@@ -117,59 +117,46 @@ public class BwicController {
         return ResponseEntity.ok().build();
     }
 
-
-    // 新增一个方法来处理全字段更新
-    @PutMapping("/bwics/{bwicId}/full-record")
-    public ResponseEntity<Void> updateBwicFull(@PathVariable("bwicId") Long bwicId,
-                                               @RequestBody BwicUpcomingFullRecord record) {
-        this.bwicService.updateBwicFullRecord(bwicId, record);
-        return ResponseEntity.ok().build();
-    }
-
     @GetMapping("/bwics/{bwicId}/bybwicId")
-    public ResponseEntity<Bwic> getBwicByBwicid(@PathVariable("bwicId") Long bwicId){
+    public ResponseEntity<Bwic> getBwicByBwicid(@PathVariable("bwicId") Long bwicId) {
         return ResponseEntity.ok(this.bwicService.findByBwicId(bwicId));
     }
+
     @GetMapping("/bwics/{cusip}/bycusip")
-    public ResponseEntity<Bwic> getBwicByCusip(@PathVariable("cusip") String cusip){
+    public ResponseEntity<Bwic> getBwicByCusip(@PathVariable("cusip") String cusip) {
         return ResponseEntity.ok(this.bwicService.findByBondId(this.bondService.getBondid(cusip)));
     }
 
 
-    @DeleteMapping("/bwics/{bwicId}")
-    public ResponseEntity<String> deleteBwic(@PathVariable("bwicId") Long bwicId) {
-        this.bwicService.deleteBwic(bwicId);
-        return ResponseEntity.ok().body("{\"message\":\"Delete success\"}");
+    @GetMapping("/bwics/getBwicByAccountId")
+    public ResponseEntity<List<BwicRecordResponseDTO>> getBwicByAccountId(HttpServletRequest request) {
+        String currentAccountId = request.getHeader(AuthConstant.X_JWT_ID_HEADER);
+        Long accountId = Long.valueOf(currentAccountId);
+        return ResponseEntity.ok(this.bwicService.getBwicByAccountId(accountId));
     }
 
-
-    //调用GPT对话服务
-    @GetMapping("/bwics/chat")
-    public ResponseEntity<String> chat(@RequestParam String message) {
-        String role = "user";  // or another role based on your logic
-
-        // Get the message history from session
-        List<SingleMessageDTO> history = (List<SingleMessageDTO>) httpSession.getAttribute("history");
-        if (history == null) {
-            history = new ArrayList<>();
+    @GetMapping("/bwics/{bwicId}/getMyBwicResult")
+    public ResponseEntity<String> getMyBwicResult(HttpServletRequest request, @PathVariable("bwicId") Long bwicId) {
+        boolean isActive = bwicService.isActive(bwicId);
+        if (isActive) {
+            return ResponseEntity.ok("BWIC is ongoing.");
         }
-
-        // Create a new request and add the new message
-        ChatRequestDTO request = new ChatRequestDTO();
-        request.setMessages(history);
-        request.addMessage(role, message);
-
-        // Send the request and get the response
-        String response = bwicService.chatWithGPT(request);
-
-        // Save the response to the history
-        request.addMessage("assistant", response);
-        httpSession.setAttribute("history", request.getMessages());
-
-        return ResponseEntity.ok(response);
+        String currentAccountId = request.getHeader(AuthConstant.X_JWT_ID_HEADER);
+        Long accountId = Long.valueOf(currentAccountId);
+        // 查询用户排名
+        Long rank = bwicService.getUserRankByBwicId(bwicId, accountId);
+        String msg = "";
+        if (rank == null) {
+            msg = "You have not participated in the bidding of this Bwic yet.";
+        } else if (rank == 1) {
+            msg = "Successful bidding!";
+        } else {
+            msg = "Bidding failed.";
+        }
+        return ResponseEntity.ok(msg);
     }
 
-//
+    //
 //    @GetMapping("/bwics/{bondId}")
 //    public ResponseEntity<Bwic> getBwicByBondid(@PathVariable("bondId") String bondId){
 //        return ResponseEntity.ok(this.bwicService.findByBondId(bondId));
@@ -179,21 +166,15 @@ public class BwicController {
 //    public ResponseEntity<String> getBondId(@PathVariable("cusip") String cusip){
 //        return ResponseEntity.ok(this.bondService.getBondidByCusip(cusip));
 //    }
+    @GetMapping("/bwics/Allbonds")
+    public List<Bond> getAllBonds() {
+        return bondService.getAllBonds().stream().collect(Collectors.toList());
+    }
 
-
-
-//    @GetMapping("/bwics/Allbonds")
-//    public List<Bond> getAllBonds() {
-//        return bondService.getAllBonds().stream().collect(Collectors.toList());
-//    }
-//
-//    @GetMapping("/bwics/Allbwics")
-//    public List<Bwic> getAllBwics() {
-//        return bwicService.getAllBwics().stream().collect(Collectors.toList());
-//    }
-
+    @GetMapping("/bwics/Allbwics")
+    public List<Bwic> getAllBwics() {
+        return bwicService.getAllBwics().stream().collect(Collectors.toList());
+    }
 
 
 }
-
-

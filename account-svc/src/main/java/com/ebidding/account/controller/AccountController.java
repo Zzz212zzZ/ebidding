@@ -5,12 +5,14 @@ import com.ebidding.account.api.LoginRequestDTO;
 import com.ebidding.account.api.LoginResponseDTO;
 import com.ebidding.account.domain.Account;
 import com.ebidding.account.service.AccountService;
+import com.ebidding.common.auth.AuthConstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.modelmapper.ModelMapper;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
 
@@ -39,12 +41,14 @@ public class AccountController {
         return loginResponse.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
     }
 
-
-
-    @GetMapping("accounts/account/{accountId}/name")
-    public String getAccountNameByAccountId(@PathVariable("accountId") Long accountId) {
-        return accountService.getAccountNameByAccountId(accountId);
-
+    @GetMapping("/accounts/getCurrentAccount")
+    public ResponseEntity<AccountDTO> getCurrentAccount(HttpServletRequest request) {
+        String currentAccountId = request.getHeader(AuthConstant.X_JWT_ID_HEADER);
+        Long accountId =Long.valueOf(currentAccountId);
+        Account account = this.accountService.findById(accountId);
+        // Account -> AccountDTO
+        AccountDTO accountDTO = this.modelMapper.map(account, AccountDTO.class);
+        return ResponseEntity.ok(accountDTO);
     }
 
 }

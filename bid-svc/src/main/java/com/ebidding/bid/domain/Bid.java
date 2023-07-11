@@ -34,4 +34,5 @@ public class Bid {
 
     @Column(name = "bwic_id")
     private Long bwicId;     // name: bwic_id
+
 }
