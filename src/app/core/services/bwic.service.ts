@@ -15,8 +15,35 @@ export interface BwicUpcomingFullRecord {
   dueTime: string;
 }
 
+export interface Bwics{
+  bwicId: number,
+  bondId: string,
+  size: number,
+  startPrice: number,
+  presentPrice: number,
+  startTime: string,
+  dueTime: string,
+  lastBidTime: string,
+  bidCounts: number
+}
 
+export interface Bonds{
+  bondId: String;
+  coupon: String;
+  cusip: String;
+  issuer: String;
+  maturityDate: String;
+  rating: String;
+  transaction_counts: Number;
+}
 
+export interface newBwic{
+  bond_id:string;
+  startPrice:string;
+  startTime:string;
+  dueTime:string;
+  size:string;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -127,4 +154,28 @@ getEndedBwics(): Observable<BwicEndedRecordResponseDTO[]> {
   }
 
 
+  getBidByBwicIdAndAccountId(id:string){
+    return this.http
+    .get(`/bid/getBidByBwicIdAndAccountId/`+id).toPromise();
+  }
+
+  getAllBonds(): Observable<Bonds[]>{
+    const apiUrl = `bwic/bwics/Allbonds`;
+    return this.http.get<Bonds[]>(apiUrl);
+  }
+
+  getAllBwics(): Observable<Bwics[]>{
+    const apiUrl = `bwic/bwics/Allbwics`;
+    return this.http.get<Bwics[]>(apiUrl);
+  }
+
+  createBwic(params : {
+    bondId:string;
+    startPrice:string;
+    startTime:string;
+    dueTime:string;
+    size:string }):Observable<newBwic>{
+      const apiUrl = `bwic/bwics`;
+      return this.http.post<newBwic>(apiUrl, params);
+  }
 }
