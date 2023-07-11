@@ -33,6 +33,8 @@ public interface BidRankRepository extends JpaRepository<BidRank, Long> {
     @Query(nativeQuery = true, value = "SELECT * FROM bidrank WHERE bwic_id = :bwicId  ORDER BY price DESC")
     Optional<List<BidRank>> getListByBwicid(@Param("bwicId") Long bwicId);
 
+    @Query(nativeQuery = true,value="SELECT * FROM bidrank WHERE bwic_id = :bwicId ORDER BY price DESC")
+    List<BidRank> getByBwicIdOrderByPriceDesc(@Param("bwicId") Long bwicId);
 }
 
 

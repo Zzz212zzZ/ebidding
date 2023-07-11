@@ -4,16 +4,30 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2a4f9960-20b1-4731-ae3d-438c38e3e91e" name="更改" comment="修改yml，增加application-test.yml">
-      <change afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/src/main/resources/application-test.yml" afterDir="false" />
+    <list default="true" id="2a4f9960-20b1-4731-ae3d-438c38e3e91e" name="更改" comment="修改docker-compose的配置文件">
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/account-svc/src/main/resources/application-test.yml" beforeDir="false" afterPath="$PROJECT_DIR$/account-svc/src/main/resources/application-test.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bid-svc/src/main/resources/application-test.yml" beforeDir="false" afterPath="$PROJECT_DIR$/bid-svc/src/main/resources/application-test.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bwic-svc/src/main/resources/application-test.yml" beforeDir="false" afterPath="$PROJECT_DIR$/bwic-svc/src/main/resources/application-test.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/account-api/src/main/java/com/ebidding/account/api/AccountClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/account-api/src/main/java/com/ebidding/account/api/AccountClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/account-svc/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/account-svc/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/account-svc/src/main/java/com/ebidding/account/controller/AccountController.java" beforeDir="false" afterPath="$PROJECT_DIR$/account-svc/src/main/java/com/ebidding/account/controller/AccountController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/account-svc/src/main/java/com/ebidding/account/repository/AccountRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/account-svc/src/main/java/com/ebidding/account/repository/AccountRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/account-svc/src/main/java/com/ebidding/account/service/AccountService.java" beforeDir="false" afterPath="$PROJECT_DIR$/account-svc/src/main/java/com/ebidding/account/service/AccountService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/account-svc/src/main/resources/application-uat.yml" beforeDir="false" afterPath="$PROJECT_DIR$/account-svc/src/main/resources/application-uat.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/account-svc/src/test/java/com/ebidding/account/AccountServiceApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/account-svc/src/test/java/com/ebidding/service/ServiceApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bid-api/src/main/java/com/ebidding/bid/api/BidClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/bid-api/src/main/java/com/ebidding/bid/api/BidClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bid-svc/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/bid-svc/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bid-svc/src/main/java/com/ebidding/bid/controller/BidController.java" beforeDir="false" afterPath="$PROJECT_DIR$/bid-svc/src/main/java/com/ebidding/bid/controller/BidController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bid-svc/src/main/java/com/ebidding/bid/repository/BidRankRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/bid-svc/src/main/java/com/ebidding/bid/repository/BidRankRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bid-svc/src/main/java/com/ebidding/bid/service/BidService.java" beforeDir="false" afterPath="$PROJECT_DIR$/bid-svc/src/main/java/com/ebidding/bid/service/BidService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bid-svc/src/main/resources/application-uat.yml" beforeDir="false" afterPath="$PROJECT_DIR$/bid-svc/src/main/resources/application-uat.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bwic-api/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/bwic-api/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bwic-svc/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/bwic-svc/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bwic-svc/src/main/java/com/ebidding/bwic/controller/BwicController.java" beforeDir="false" afterPath="$PROJECT_DIR$/bwic-svc/src/main/java/com/ebidding/bwic/controller/BwicController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bwic-svc/src/main/java/com/ebidding/bwic/service/BwicService.java" beforeDir="false" afterPath="$PROJECT_DIR$/bwic-svc/src/main/java/com/ebidding/bwic/service/BwicService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bwic-svc/src/main/resources/application-uat.yml" beforeDir="false" afterPath="$PROJECT_DIR$/bwic-svc/src/main/resources/application-uat.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gateway/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,11 +82,13 @@
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
     "settings.editor.selected.configurable": "configuration.execution",
     "spring.configuration.checksum": "4af6ed0bc645567b7541ec338f9f7404",
+    "ts.external.directory.path": "Z:\\OneDrive\\CitiPractice\\group4\\service\\front-master\\node_modules\\typescript\\lib",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -92,7 +108,7 @@
       <recent name="com.ebidding.bid.api" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.BidServiceApplication">
+  <component name="RunManager" selected="Application.BwicServiceApplication">
     <configuration name="AccountServiceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.ebidding.account.AccountServiceApplication" />
       <module name="account-svc" />
@@ -246,7 +262,10 @@
       <workItem from="1688999021584" duration="1910000" />
       <workItem from="1689000942648" duration="9501000" />
       <workItem from="1689036118120" duration="5647000" />
-      <workItem from="1689046273381" duration="2168000" />
+      <workItem from="1689046273381" duration="3763000" />
+      <workItem from="1689050049023" duration="3730000" />
+      <workItem from="1689054972206" duration="250000" />
+      <workItem from="1689055235542" duration="1670000" />
     </task>
     <task id="LOCAL-00001" summary="后端7.7更改，添加了getissuer和通过cusip区查询bwic方法">
       <option name="closed" value="true" />
@@ -319,7 +338,14 @@
       <option name="project" value="LOCAL" />
       <updated>1688999882883</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="修改docker-compose的配置文件">
+      <created>1689048717583</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1689048717583</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -336,7 +362,8 @@
     <MESSAGE value="更新打包" />
     <MESSAGE value="删除不需要启动的类(api,common-lib)" />
     <MESSAGE value="修改yml，增加application-test.yml" />
-    <option name="LAST_COMMIT_MESSAGE" value="修改yml，增加application-test.yml" />
+    <MESSAGE value="修改docker-compose的配置文件" />
+    <option name="LAST_COMMIT_MESSAGE" value="修改docker-compose的配置文件" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

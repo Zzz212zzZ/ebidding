@@ -3,6 +3,7 @@ package com.ebidding.bid.controller;
 import com.ebidding.account.api.AccountDTO;
 import com.ebidding.bid.api.BidCreateRequestDTO;
 import com.ebidding.bid.api.BidCreateResponseDTO;
+import com.ebidding.bid.api.BidRankItemDataDTO;
 import com.ebidding.bid.api.PriceResponseDTO;
 import com.ebidding.bid.domain.Bid;
 import com.ebidding.bid.domain.BidRank;
@@ -121,6 +122,21 @@ public class BidController {
     public Bid getSuccesBidByBwicid(@PathVariable Long bwicId) {
         return bidService.getSuccesBidByBwicid(bwicId);
     }
+
+
+    //传入某一个bwicId，返回这个bwicId下部分的bidRankItemDataDTO
+    @GetMapping("/bwics/{bwicId}/ongoing-part-items")
+    List<BidRankItemDataDTO> getPartBidRankingsByBwicId(@PathVariable("bwicId") Long bwicId){
+        return bidService.getPartBidRankingsByBwicId(bwicId);
+    }
+
+    //传入某一个bwicId，返回这个bwicId下所有的bidRankItemDataDTO
+    @GetMapping("/bwics/{bwicId}/ongoing-all-items")
+    List<BidRankItemDataDTO> getAllBidRankingsByBwicId(@PathVariable("bwicId") Long bwicId){
+        return bidService.getAllBidRankingsByBwicId(bwicId);
+    }
+
+
 
     /**
      * accountid和bwicid查bid

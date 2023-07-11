@@ -13,8 +13,8 @@
         <module name="common-lib" />
         <module name="bid-api" />
         <module name="bwic-svc" />
-        <module name="account-svc" />
         <module name="gateway" />
+        <module name="account-svc" />
       </profile>
     </annotationProcessing>
   </component>
