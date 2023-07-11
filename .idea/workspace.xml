@@ -4,9 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2a4f9960-20b1-4731-ae3d-438c38e3e91e" name="更改" comment="后端合并，client端所需接口修改，websocket修复">
+    <list default="true" id="2a4f9960-20b1-4731-ae3d-438c38e3e91e" name="更改" comment="第二次尝试合并后端">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bwic-api/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/bwic-api/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/account-svc/src/main/resources/application-uat.yml" beforeDir="false" afterPath="$PROJECT_DIR$/account-svc/src/main/resources/application-uat.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bid-svc/src/main/resources/application-uat.yml" beforeDir="false" afterPath="$PROJECT_DIR$/bid-svc/src/main/resources/application-uat.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bwic-svc/src/main/resources/application-uat.yml" beforeDir="false" afterPath="$PROJECT_DIR$/bwic-svc/src/main/resources/application-uat.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gateway/src/main/resources/application-uat.yml" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/src/main/resources/application-uat.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,7 +82,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Application.GatewayApplication">
+  <component name="RunManager" selected="Application.AccountServiceApplication">
     <configuration name="AccountServiceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <envs>
         <env name="SW_AGENT_NAME" value="account-svc" />
@@ -192,9 +195,9 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.GatewayApplication" />
+        <item itemvalue="Application.AccountServiceApplication" />
         <item itemvalue="Application.BidServiceApplication" />
         <item itemvalue="Application.BwicServiceApplication" />
-        <item itemvalue="Application.AccountServiceApplication" />
         <item itemvalue="Application.BidService" />
       </list>
     </recent_temporary>
@@ -289,7 +292,15 @@
       <option name="project" value="LOCAL" />
       <updated>1689042798600</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="第二次尝试合并后端">
+      <option name="closed" value="true" />
+      <created>1689061641438</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1689061641438</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -302,7 +313,8 @@
     <MESSAGE value="7.8" />
     <MESSAGE value="client端所需接口修改，websocket修复" />
     <MESSAGE value="后端合并，client端所需接口修改，websocket修复" />
-    <option name="LAST_COMMIT_MESSAGE" value="后端合并，client端所需接口修改，websocket修复" />
+    <MESSAGE value="第二次尝试合并后端" />
+    <option name="LAST_COMMIT_MESSAGE" value="第二次尝试合并后端" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
