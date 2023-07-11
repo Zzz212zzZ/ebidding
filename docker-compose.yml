@@ -126,16 +126,16 @@ services:
       - internal_access
       - external_access
 
-  ui-service:
-    build: ./front-master
-    image: ebidding/spa
-    deploy:
-      resources:
-        limits:
-          cpus: ${CPU_LIMIT}
-          memory: ${MEMORY_LIMIT}
-    networks:
-      - internal_access
+#  ui-service:
+#    build: ./front-master
+#    image: ebidding/ui
+#    deploy:
+#      resources:
+#        limits:
+#          cpus: ${CPU_LIMIT}
+#          memory: ${MEMORY_LIMIT}
+#    networks:
+#      - internal_access
 
 networks:
   internal_access:
