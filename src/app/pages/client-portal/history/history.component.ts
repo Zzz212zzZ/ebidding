@@ -11,6 +11,7 @@ import { NzGridModule } from 'ng-zorro-antd/grid';
 import { BwicService } from 'src/app/core/services/bwic.service';
 import { FormsModule, ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
+import { NzModalModule } from 'ng-zorro-antd/modal';
 
 
 interface BwicItemData {
@@ -38,12 +39,14 @@ interface BwicItemData {
     NzDividerModule,
     NzGridModule,
     FormsModule,
-    NzDrawerModule],
+    NzDrawerModule,
+    NzModalModule],
   templateUrl: './history.component.html',
   styleUrls: ['./history.component.less']
 })
 
 export class HistoryComponent implements OnInit {
+  isVisible = false;
   constructor(private bwicService: BwicService,
     private fb: UntypedFormBuilder,) { }
 
@@ -107,6 +110,19 @@ export class HistoryComponent implements OnInit {
     this.drawervisible = true;
   }
 
+  async result(id: string) {
+    // 目前只有一个数据使用push展示
+  
+    this.bwicService.getMyBwicResult(id).subscribe(
+      response => {
+        this.isVisible = true;
+      },
+      error => {
+        // 在此处处理错误
+      }
+    );
+  }
+
   close(): void {
     this.drawervisible = false;
   }
@@ -155,6 +171,20 @@ export class HistoryComponent implements OnInit {
   cusipReset() {
     this.cusipSearchValue = ''
     this.getAllData()
+  }
+
+  showModal(): void {
+    this.isVisible = true;
+  }
+
+  handleOk(): void {
+    console.log('Button ok clicked!');
+    this.isVisible = false;
+  }
+
+  handleCancel(): void {
+    console.log('Button cancel clicked!');
+    this.isVisible = false;
   }
 
 

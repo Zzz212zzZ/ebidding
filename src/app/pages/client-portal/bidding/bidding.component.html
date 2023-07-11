@@ -99,22 +99,27 @@
     </form> -->
     <div>
       <div>
-        <span>bwicId:</span>
-        <span>{{biddingData.bwicId}}</span>
-      </div>
-      <div>
-        <span>issuer:</span>
-        <span>{{biddingData.issuer}}</span>
-      </div>
-      <div>
-        <span>cusip:</span>
-        <span>{{biddingData.cusip}}</span>
+        <div Title="BWIC-Info" class="data-container">
+          <div>
+            <span>bwicId:</span>
+            <span>{{biddingData.bwicId}}</span>
+          </div>
+          <div>
+            <span>issuer:</span>
+            <span>{{biddingData.issuer}}</span>
+          </div>
+          <div>
+            <span>cusip:</span>
+            <span>{{biddingData.cusip}}</span>
+          </div>
+        </div>
+      <div></div>
+        <div class="data-msg">
+        <div>
+          {{msg}}
+        </div>
       </div>
     </div>
-    <div>
-      <div>
-        {{msg}}
-      </div>
     </div>
     <nz-input-group nzSearch nzSize="large" [nzAddOnAfter]="suffixButton">
       <input type="text" nz-input placeholder="BIDDING" [(ngModel)]="price" />

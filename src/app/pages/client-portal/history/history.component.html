@@ -54,7 +54,7 @@
       <th>Due Time</th>
       <th>Start Price</th>
       <th>Size</th>
-      <th>button</th>
+      <th>Action</th>
     </tr>
   </thead>
   <tbody>
@@ -66,13 +66,23 @@
       <td>{{ data.dueTime }}</td>
       <td>{{ data.startPrice }}</td>
       <td>{{ data.size }}</td>
-      <button nz-button nzType="primary" (click)="open(data.bwicId)">Details</button>
+        <button nz-button nzType="default" (click)="open(data.bwicId)">Details</button>
+        <button nz-button [nzType]="'primary'" (click)="result(data.bwicId)"><span>Result</span></button>
     </tr>
   </tbody>
 </nz-table>
 
+<nz-modal [(nzVisible)]="isVisible" nzTitle="Result" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+  <ng-container *nzModalContent>
+    <div>
+      <span>bwicId:</span>
+      <span>{{result}}</span>
+    </div>
+  </ng-container>
+</nz-modal>
+
 <nz-drawer [nzBodyStyle]="{ overflow: 'auto' }" [nzMaskClosable]="false" [nzWidth]="720" [nzVisible]="drawervisible"
-  nzTitle="Create" (nzOnClose)="close()">
+  nzTitle="Bidding history" (nzOnClose)="close()">
   <ng-container *nzDrawerContent>
 
     <nz-table #basicTable [nzData]="dataSet">

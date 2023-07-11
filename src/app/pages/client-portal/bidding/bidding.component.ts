@@ -180,4 +180,6 @@ export class BiddingComponent implements OnInit {
     this.getAllData()
   }
 
+  
+
 }

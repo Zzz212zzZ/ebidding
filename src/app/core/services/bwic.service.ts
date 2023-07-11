@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {ParentItemData } from 'src/app/pages/trader-portal/admin/ongoing-table/ongoing-table.component';
 import { BwicUpcomingRecord } from 'src/app/pages/trader-portal/admin/upcoming-table/upcoming-table.component';
@@ -83,6 +83,32 @@ export class BwicService {
     .get(`/bid/getBidByBwicIdAndAccountId/`+id).toPromise();
   }
 
+  getMyBwicResult(bwicId: string): Observable<any>{
+    const apiUrl = `bwic/bwics/{bwicId}/getMyBwicResult`;
+   
+    return this.http.get(apiUrl, {  responseType: 'text' })
+  }
+
+  getAllBonds(): Observable<Bonds[]>{
+    const apiUrl = `bwic/bwics/Allbonds`;
+    return this.http.get<Bonds[]>(apiUrl);
+  }
+
+  getAllBwics(): Observable<Bwics[]>{
+    const apiUrl = `bwic/bwics/Allbwics`;
+    return this.http.get<Bwics[]>(apiUrl);
+  }
+
+  createBwic(params : {
+    bondId:string;
+    startPrice:string;
+    startTime:string;
+    dueTime:string;
+    size:string }):Observable<newBwic>{
+      const apiUrl = `bwic/bwics`;
+      return this.http.post<newBwic>(apiUrl, params);
+  }
+
 
     //---------------向后端请求ongoing的数据----------------
     getOngoingBwics(): Observable<ParentItemData[]> {
@@ -154,23 +180,5 @@ getEndedBwics(): Observable<BwicEndedRecordResponseDTO[]> {
   }
 
 
-  getAllBonds(): Observable<Bonds[]>{
-    const apiUrl = `bwic/bwics/Allbonds`;
-    return this.http.get<Bonds[]>(apiUrl);
-  }
-
-  getAllBwics(): Observable<Bwics[]>{
-    const apiUrl = `bwic/bwics/Allbwics`;
-    return this.http.get<Bwics[]>(apiUrl);
-  }
-
-  createBwic(params : {
-    bondId:string;
-    startPrice:string;
-    startTime:string;
-    dueTime:string;
-    size:string }):Observable<newBwic>{
-      const apiUrl = `bwic/bwics`;
-      return this.http.post<newBwic>(apiUrl, params);
-  }
+ 
 }
