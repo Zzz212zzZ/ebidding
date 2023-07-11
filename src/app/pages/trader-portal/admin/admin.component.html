@@ -7,9 +7,9 @@
     <p>{{ gptResponse }}</p>
   </mat-card-content>
   <mat-card-footer>
-    <mat-form-field appearance="outline" class="example-full-width chat-form">
+    <mat-form-field appearance="outline" class="example-full-width chat-form" >
       <mat-label>Trader Chat</mat-label>
-      <input matInput #message maxlength="256" placeholder="I need help with...">
+      <input matInput #message maxlength="256" placeholder="I need help with..." (keydown.enter)="sendMessage(message.value); $event.preventDefault()"> <!-- preventDefault() prevents form from being submitted twice -->
       <mat-icon matSuffix [fontIcon]="submitIconType" (click)="sendMessage(message.value)" [ngClass]="{'active': hover}" (mouseover)="hover = true" (mouseout)="hover = false" ></mat-icon>      
       <mat-hint align="start"><strong>Feel free to ask!</strong> </mat-hint>
       <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
