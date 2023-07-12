@@ -4,11 +4,11 @@ import com.ebidding.bid.api.BidClient;
 import com.ebidding.bid.api.BidRankItemDataDTO;
 import com.ebidding.bwic.api.*;
 import com.ebidding.bwic.domain.Bwic;
-import com.ebidding.gpt.api.ChatRequestDTO;
+
 
 
 import com.ebidding.bwic.repository.BwicRepository;
-import com.ebidding.gpt.api.GPTClient;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.modelmapper.ModelMapper;
