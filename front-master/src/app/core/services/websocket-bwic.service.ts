@@ -10,7 +10,7 @@ export class WebsocketBwicService {
 
   connect(): WebSocket {
     // 构建 WebSocket URL
-    const url = `ws://localhost:8002/msg`;
+    const url = `ws://47.108.72.83:30001/msg/`;
 
     // 创建 WebSocket 连接
     this.socket = new WebSocket(url);
