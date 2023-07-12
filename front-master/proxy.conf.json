@@ -2,26 +2,17 @@
   "/api/v1/account-service": {
     "target": "http://47.108.72.83:80",
     "secure": false,
-    "changeOrigin": true,
-    "pathRewrite": {
-      "^/account": "/api/v1/account-service"
-    }
+    "changeOrigin": true
   },
 
   "/bwic": {
     "target": "http://47.108.72.83:80",
     "secure": false,
-    "changeOrigin": true,
-    "pathRewrite": {
-      "^/bwic": "/api/v1/bwic-service"
-    }
+    "changeOrigin": true
   },
   "/bid": {
     "target": "http://47.108.72.83:80",
     "secure": false,
-    "changeOrigin": true,
-    "pathRewrite": {
-      "^/bid": "/api/v1/bid-service"
-    }
+    "changeOrigin": true
   }
 }
