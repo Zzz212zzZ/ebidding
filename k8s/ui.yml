@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: account-svc-deployment
+  name: ui-deployment
 spec:
   replicas: 1
   selector:
