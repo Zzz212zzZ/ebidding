@@ -32,7 +32,7 @@ public class JwtFilter extends AbstractGatewayFilterFactory {
             ServerHttpRequest request = exchange.getRequest();
             String path = request.getPath().value();
             // 在这里添加不需要过滤的路径
-            List<String> excludePaths = Arrays.asList("/api/v1/account-service/accounts/login");
+            List<String> excludePaths = Arrays.asList("/api/v1/account-service/accounts/login","/msg/");
             if (excludePaths.contains(path)) {
                 return chain.filter(exchange);
             }

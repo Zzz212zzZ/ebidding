@@ -11,7 +11,7 @@ spring:
         - id: bid_service
           uri: ${BID_SERVICE_ENDPOINT}
           predicates:
-            - Path=/api/v1/bid-service/**
+            - Path=/api/v1/bid-service/**,/msg/**
           filters:
             JwtFilter
         - id : bwic_service
