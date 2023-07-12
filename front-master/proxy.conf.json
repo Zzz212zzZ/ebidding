@@ -5,12 +5,12 @@
     "changeOrigin": true
   },
 
-  "/bwic": {
+  "/api/v1/bwic-service": {
     "target": "http://47.108.72.83:80",
     "secure": false,
     "changeOrigin": true
   },
-  "/bid": {
+  "/api/v1/bid-service": {
     "target": "http://47.108.72.83:80",
     "secure": false,
     "changeOrigin": true
