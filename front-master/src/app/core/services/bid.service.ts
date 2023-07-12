@@ -11,11 +11,11 @@ export class BidService {
   constructor(private http: HttpClient) {}
 
   setBids(model:{bwicId:string,price:string}){
-    return this.http.post('/bid/bids',model)
+    return this.http.post('/api/v1/bid-service/bids',model)
   }
 
 
   getAllBidRankingsByBwicId(bwicId: number): Observable<BidRankItemData[]> {
-    return this.http.get<BidRankItemData[]>(`bid/bwics/${bwicId}/ongoing-all-items`);
+    return this.http.get<BidRankItemData[]>(`/api/v1/bid-service/bwics/${bwicId}/ongoing-all-items`);
   }
 }
