@@ -57,22 +57,6 @@ export class BwicService {
     return this.http
       .get(`/api/v1/bwic-service/bwics/history`).toPromise();
   }
-  // http://localhost:8080/api/v1/bid-service/getBidByBwicIdAndAccountId/16
-  // "/bwic": {
-  //   "target": "http://localhost:8080",
-  //   "secure": false,
-  //   "changeOrigin": true,
-  //   "pathRewrite": {
-  //     "^/bwic": "/api/v1/bwic-service"
-  //   }
-  // },
-  // "/bid": {
-  //   "target": "http://localhost:8080",
-  //   "secure": false,
-  //   "changeOrigin": true,
-  //   "pathRewrite": {
-  //     "^/bid": "/api/v1/bid-service"
-  //   }
   getBwicByAccountId(){
     return this.http
     .get(`/api/v1/bwic-service/bwics/getBwicByAccountId`).toPromise();
@@ -80,7 +64,7 @@ export class BwicService {
 
   getBidByBwicIdAndAccountId(id:string){
     return this.http
-    .get(`/api/v1/bid-service/getBidByBwicIdAndAccountId/`+id).toPromise();
+    .get(`/api/v1/bid-service/getBidByBwicIdAndAccountId`+id).toPromise();
   }
 
   getMyBwicResult(bwicId: string){

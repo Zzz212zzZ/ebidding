@@ -5,7 +5,7 @@ import { AnonymousSubject } from 'rxjs/internal/Subject';
 import { Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-const CHAT_URL = "ws://localhost:8080";
+const CHAT_URL = "ws://47.108.72.83:80";
 
 export interface Message {
     source: string;
@@ -59,7 +59,7 @@ export class WebsocketService {
             console.log('Websocket connection closed');
           }
         };
-        
+
         return new AnonymousSubject<MessageEvent>(observer, observable);
     }
 }
