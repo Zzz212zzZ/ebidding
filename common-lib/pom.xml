@@ -39,12 +39,7 @@
             <artifactId>hutool-all</artifactId>
             <version>5.7.13</version>
         </dependency>
-        <dependency>
-            <groupId>com.ebidding</groupId>
-            <artifactId>gpt-api</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
+
 
     </dependencies>
 
