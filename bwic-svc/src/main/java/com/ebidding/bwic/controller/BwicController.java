@@ -9,15 +9,21 @@ import com.ebidding.bwic.api.BwicRecordResponseDTO;
 import com.ebidding.bwic.api.BwicUpcomingFullRecord;
 import com.ebidding.bwic.domain.Bond;
 import com.ebidding.bwic.domain.Bwic;
+
+
 import com.ebidding.bwic.domain.chat.ChatRequestDTO;
 import com.ebidding.bwic.domain.chat.SingleMessageDTO;
 import com.ebidding.bwic.service.BondService;
 import com.ebidding.bwic.service.BwicService;
+import com.ebidding.bwic.service.GPTService;
 import com.ebidding.common.auth.AuthConstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.codec.ServerSentEvent;
 import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Flux;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -42,6 +48,9 @@ public class BwicController {
 
     @Autowired
     private HttpSession httpSession;
+
+    @Autowired
+    private GPTService gptService;
 
 
     //    @GetMapping()
@@ -180,9 +189,9 @@ public class BwicController {
     }
 
 
-    //调用GPT对话服务
-    @GetMapping("/bwics/chat")
-    public ResponseEntity<String> chat(@RequestParam String message) {
+
+    @GetMapping(value = "/bwics/chat", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    public Flux<ServerSentEvent> chat(@RequestParam String message, HttpSession httpSession) {
         String role = "user";  // or another role based on your logic
 
         // Get the message history from session
@@ -196,15 +205,25 @@ public class BwicController {
         request.setMessages(history);
         request.addMessage(role, message);
 
-        // Send the request and get the response
-        String response = bwicService.chatWithGPT(request);
-
-        // Save the response to the history
-        request.addMessage("assistant", response);
+        // Save the message to the history
         httpSession.setAttribute("history", request.getMessages());
 
-        return ResponseEntity.ok(response);
+        // Send the request and return the response stream
+        return gptService.chatWithGPT(request);
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

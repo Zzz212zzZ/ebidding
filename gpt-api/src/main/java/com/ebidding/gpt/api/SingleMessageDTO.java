@@ -1,4 +1,4 @@
-package com.ebidding.bwic.domain.chat;
+package com.ebidding.gpt.api;
 
 
 import lombok.AllArgsConstructor;

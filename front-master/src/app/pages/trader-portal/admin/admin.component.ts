@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BwicService } from 'src/app/core/services/bwic.service';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
@@ -14,6 +14,7 @@ import { MatInputModule } from '@angular/material/input';
 import { HttpClient } from '@angular/common/http';
 import { GptService } from 'src/app/core/services/gpt.service';
 import {ProgressBarMode} from '@angular/material/progress-bar';
+import { Subscription } from 'rxjs';
 
 
 
@@ -39,10 +40,10 @@ import {ProgressBarMode} from '@angular/material/progress-bar';
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.less']
 })
-export class AdminComponent implements OnInit{
+export class AdminComponent {
 
   selectedIndex = 0;
-
+  
   ongoingData: any[] = [];
   upcomingData: any[] = [];
   endedData: any[] = [];
@@ -58,6 +59,8 @@ export class AdminComponent implements OnInit{
   // Set initial iconType and progressBarMode to default
   submitIconType: string = this.defaultIconType;
   progressBarMode: ProgressBarMode = this.defaultProgressBarMode;
+
+  private subscription!: Subscription;
 
 
   constructor(private bwicService: BwicService, private http: HttpClient, private gptService: GptService) { }
@@ -105,17 +108,24 @@ export class AdminComponent implements OnInit{
   }
 
 
+  sendMessage(message: string): void {  
+    //清空上一次的聊天记录
+    this.gptResponse = '';
 
-  sendMessage(message: string): void {
+
     // Switch to query icon and progress bar mode when sending a message
     this.submitIconType = this.queryIconType;
     this.progressBarMode = this.queryProgressBarMode;
-
-    this.gptService.traderChatWithGpt(message).subscribe(
-      response => {
-        // Update the response
-        this.gptResponse = response;
-        
+  
+    this.subscription = this.gptService.traderChatWithGpt(message).subscribe(
+      (event: MessageEvent) => {
+        // Parse the response data
+        const eventData = JSON.parse(event.data);
+        const content = eventData.choices[0]?.delta?.content || '';
+  
+        // Append the content to gptResponse
+        this.gptResponse += content;
+  
         // Switch back to default icon and progress bar mode when response is received
         this.submitIconType = this.defaultIconType;
         this.progressBarMode = this.defaultProgressBarMode;
@@ -123,12 +133,20 @@ export class AdminComponent implements OnInit{
       err => {
         // Handle error
         this.gptResponse = 'An error occurred. Please try again.';
-
+  
         // Switch back to default icon and progress bar mode when an error occurs
         this.submitIconType = this.defaultIconType;
         this.progressBarMode = this.defaultProgressBarMode;
       }
     );
+  }
+  
+  
+  ngOnDestroy() {
+    // Clean up the subscription when the component is destroyed
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 
   ngOnInit(): void {
