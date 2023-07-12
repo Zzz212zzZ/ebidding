@@ -59,11 +59,13 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
 
-    // 检查是否存在 Token
-    if (localStorage.getItem('Token')) {
-      // 如果存在 Token，自动跳转到 dashboard
-      this.router.navigate(['/layout']);
-    }
+   // 检查是否存在 Token, role 和 name
+if (localStorage.getItem('Token') && localStorage.getItem('role') && localStorage.getItem('name')) {
+  // 如果存在 Token、role 和 name，根据 role 的值自动跳转到相应的页面
+  let role = localStorage.getItem('role');
+  this.router.navigate([`/${role}`]);
+}
+
 
 
     this.signupForm = new FormGroup({
@@ -114,11 +116,11 @@ export class LoginComponent implements OnInit {
       if(role === 'client'){
         console.log(role);
         console.log(token);
-        this.router.navigateByUrl('/layout/client/homepage');
+        this.router.navigateByUrl('client/homepage');
       }
       if(role === 'trader'){
         // this.router.navigateByUrl('/layout/sales/admin');
-        this.router.navigateByUrl('/layout/trader/homepage');
+        this.router.navigateByUrl('trader/homepage');
       }
       this.spinService.setCurrentGlobalSpinStore(false);
   });

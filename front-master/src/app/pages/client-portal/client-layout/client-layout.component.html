@@ -1,4 +1,4 @@
-<mat-toolbar class="mat-elevation-z8">
+<mat-toolbar class="mat-elevation-z8" [ngClass]="{'mat-toolbar-trader':role ==='trader', 'mat-toolbar-client':role ==='client'}">
   <button
     mat-icon-button
     *ngIf="sidenavMode === 'over'"
@@ -8,14 +8,11 @@
     <mat-icon *ngIf="sidenav.opened && sidenavMode === 'over'"> close </mat-icon>
   </button>
   Bidding Dashboard
-  <button mat-raised-button class="LogoutButton" (click)="logout()">Logout</button>
 </mat-toolbar>
 
 
-
-
 <mat-sidenav-container>
-  <mat-sidenav #sidenav="matSidenav" [mode]="sidenavMode" opened  class="mat-elevation-z8">
+<mat-sidenav #sidenav="matSidenav" [mode]="sidenavMode" opened class="mat-elevation-z8" [ngClass]="{'mat-sidenav-trader':role ==='trader','mat-sidenav-client':role ==='client'}" >
     <img
       class="avatar mat-elevation-z8"
       [src]="avatar"
@@ -28,7 +25,7 @@
 
 
     <ng-container *ngFor="let item of menus">
-      <button mat-button class="menu-button" [routerLink]="item.path" routerLinkActive="active" >
+      <button mat-button class="menu-button"[ngClass]="{'menu-button-trader':role ==='trader','menu-button-client':role ==='client'}" [routerLink]="item.path" routerLinkActive="active" >
         <mat-icon>{{item.icon}}</mat-icon>
         <span class="button-text">{{item.desc}}</span>
       </button>

@@ -22,7 +22,7 @@ export interface MenuItem {
 }
 
 @Component({
-  selector: 'app-layout',
+  selector: 'app-trader-layout',
   standalone: true,
   imports: [
     CommonModule,
@@ -38,10 +38,10 @@ export interface MenuItem {
 
   ],
 
-  templateUrl: './layout.component.html',
-  styleUrls: ['./layout.component.less']
+  templateUrl: './trader-layout.component.html',
+  styleUrls: ['./trader-layout.component.less']
 })
-export class LayoutComponent {
+export class TraderLayoutComponent {
   sidenavMode: MatDrawerMode = 'over';
   isChecked = false;
   @Input() isCollapsed = false;
