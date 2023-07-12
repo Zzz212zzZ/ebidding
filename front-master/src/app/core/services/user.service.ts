@@ -29,7 +29,7 @@ export class UserService {
     //   "pathRewrite": {
     //     "^/account": "/api/v1/account-service"
     //   }
-    return this.http.get('/account/accounts/getCurrentAccount').toPromise()
+    return this.http.get('/api/v1/account-service/accounts/getCurrentAccount').toPromise()
   }
 
 }

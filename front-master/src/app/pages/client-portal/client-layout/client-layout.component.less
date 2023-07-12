@@ -82,16 +82,15 @@ mat-divider {
 }
 
 //---------------------------------------------trader layout--------------------------------------------
-::ng-deep {  //总背景栏
-    .mat-drawer-container {
-        position: relative;
-        z-index: 1;
-        box-sizing: border-box;
-        -webkit-overflow-scrolling: touch;
-        display: block;
-        overflow: hidden;
-        background-color: #ecedea;
-    }
+    //总背景栏
+.mat-drawer-container-trader {
+    position: relative;
+    z-index: 1;
+    box-sizing: border-box;
+    -webkit-overflow-scrolling: touch;
+    display: block;
+    overflow: hidden;
+    background-color: #ecedea;
 }
 .mat-toolbar-trader {
     background: #2b473e;
@@ -124,14 +123,26 @@ mat-divider {
 }
 
 /* 定义滚动条的滑块 */
-.content::-webkit-scrollbar-thumb {
+.content::-webkit-scrollbar-thumb-trader {
     background-color: #809c55;
     border-radius: 10px;
-}
+  }
+
 
 
 //---------------------------------------------client layout---------------------------------------------
-
+::ng-deep {
+    //总背景栏
+    .mat-drawer-container-client {
+        position: relative;
+        z-index: 1;
+        box-sizing: border-box;
+        -webkit-overflow-scrolling: touch;
+        display: block;
+        overflow: hidden;
+        background-color: #eceae4;
+    }
+}
 
 .mat-toolbar-client {
     background: #77908e;
@@ -163,3 +174,6 @@ mat-divider {
 .menu-button-client:hover {
     background-color: #e7e0e0 !important;
 }
+
+
+

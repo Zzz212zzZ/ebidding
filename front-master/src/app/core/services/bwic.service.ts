@@ -55,48 +55,32 @@ export class BwicService {
 
   getHistory(){
     return this.http
-      .get(`/bwic/bwics/history`).toPromise();
+      .get(`/api/v1/bwic-service/bwics/history`).toPromise();
   }
-  // http://localhost:8080/api/v1/bid-service/getBidByBwicIdAndAccountId/16
-  // "/bwic": {
-  //   "target": "http://localhost:8080",
-  //   "secure": false,
-  //   "changeOrigin": true,
-  //   "pathRewrite": {
-  //     "^/bwic": "/api/v1/bwic-service"
-  //   }
-  // },
-  // "/bid": {
-  //   "target": "http://localhost:8080",
-  //   "secure": false,
-  //   "changeOrigin": true,
-  //   "pathRewrite": {
-  //     "^/bid": "/api/v1/bid-service"
-  //   }
   getBwicByAccountId(){
     return this.http
-    .get(`/bwic/bwics/getBwicByAccountId`).toPromise();
+    .get(`/api/v1/bwic-service/bwics/getBwicByAccountId`).toPromise();
   }
 
   getBidByBwicIdAndAccountId(id:string){
     return this.http
-    .get(`/bid/getBidByBwicIdAndAccountId/`+id).toPromise();
+    .get(`/api/v1/bid-service/getBidByBwicIdAndAccountId/`+id).toPromise();
   }
 
   getMyBwicResult(bwicId: string){
 
-      const apiUrl = `bwic/bwics/${bwicId}/getMyBwicResult`;
+      const apiUrl = `api/v1/bwic-service/bwics/${bwicId}/getMyBwicResult`;
 
       return this.http.get(apiUrl, {  responseType: 'text' }).toPromise()
     }
 
   getAllBonds(): Observable<Bonds[]>{
-    const apiUrl = `bwic/bwics/Allbonds`;
+    const apiUrl = `api/v1/bwic-service/bwics/Allbonds`;
     return this.http.get<Bonds[]>(apiUrl);
   }
 
   getAllBwics(): Observable<Bwics[]>{
-    const apiUrl = `bwic/bwics/Allbwics`;
+    const apiUrl = `api/v1/bwic-service/bwics/Allbwics`;
     return this.http.get<Bwics[]>(apiUrl);
   }
 
@@ -106,14 +90,14 @@ export class BwicService {
     startTime:string;
     dueTime:string;
     size:string }):Observable<newBwic>{
-      const apiUrl = `bwic/bwics`;
+      const apiUrl = `api/v1/bwic-service/bwics`;
       return this.http.post<newBwic>(apiUrl, params);
   }
 
 
     //---------------向后端请求ongoing的数据----------------
     getOngoingBwics(): Observable<ParentItemData[]> {
-      const apiUrl = 'bwic/bwics/ongoing';
+      const apiUrl = '/api/v1/bwic-service/bwics/ongoing';
       console.log("bwic.service.ts: getOngoingBwics(): apiUrl = " + apiUrl);
       return this.http.get<ParentItemData[]>(apiUrl).pipe(
         map((data: ParentItemData[]) =>
@@ -134,7 +118,7 @@ export class BwicService {
 
       //---------------向后端请求Upcoming的数据----------------
 getUpcomingBwics(): Observable<BwicUpcomingRecord[]> {
-  const apiUrl = 'bwic/bwics/upcoming';
+  const apiUrl = '/api/v1/bwic-service/bwics/upcoming';
   console.log("bwic.service.ts: getUpcomingBwics(): apiUrl = " + apiUrl);
   return this.http.get<BwicUpcomingRecord[]>(apiUrl).pipe(
     map((data: BwicUpcomingRecord[]) =>
@@ -149,7 +133,7 @@ getUpcomingBwics(): Observable<BwicUpcomingRecord[]> {
 
 //向后端更新upcoming的一个数据
 updateBwicUpcomingFullRecord(bwicId: string, record: BwicUpcomingFullRecord): Observable<any> {
-  const apiUrl = `bwic/bwics/${bwicId}/full-record`;
+  const apiUrl = `api/v1/bwic-service/bwics/${bwicId}/full-record`;
   return this.http.put(apiUrl, record);
 }
 //向后端更新upcoming的一个数据
@@ -157,7 +141,7 @@ updateBwicUpcomingFullRecord(bwicId: string, record: BwicUpcomingFullRecord): Ob
 
 //向后端删除upcoming的一个数据
 deleteBwicUpcomingRecord(bwicId: string): Observable<any> {
-  const apiUrl = `bwic/bwics/${bwicId}`;
+  const apiUrl = `api/v1/bwic-service/bwics/${bwicId}`;
   return this.http.delete(apiUrl);
 }
 //向后端删除upcoming的一个数据
@@ -168,7 +152,7 @@ deleteBwicUpcomingRecord(bwicId: string): Observable<any> {
 // ---------------向后端请求ended的数据---------------
 
 getEndedBwics(): Observable<BwicEndedRecordResponseDTO[]> {
-  const apiUrl = `bwic/bwics/ended`;
+  const apiUrl = `api/v1/bwic-service/bwics/ended`;
   console.log("bwic.service.ts: getEndedBwics(): apiUrl = " + apiUrl);
   return this.http.get<BwicEndedRecordResponseDTO[]>(apiUrl);
 }
@@ -177,7 +161,7 @@ getEndedBwics(): Observable<BwicEndedRecordResponseDTO[]> {
 
   getBidding(value:string){
     return this.http
-      .get(`/bwic/bwics/${value}/bycusip`);
+      .get(`/api/v1/bwic-service/bwics/${value}/bycusip`);
   }
 
 

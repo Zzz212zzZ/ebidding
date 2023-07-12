@@ -6,17 +6,17 @@ export interface MenuItem {
 
 export const ClientMenu: MenuItem[] = [
   {
-    path: '/layout/client/homepage',
+    path: '/client/homepage',
     desc: 'Client Dashboard',
     icon: 'dashboard'
   },
   {
-    path: '/layout/client/bidding',
+    path: '/client/bidding',
     desc: 'Bidding',
     icon: 'paid'
   },
   {
-    path: '/layout/client/history',
+    path: '/client/history',
     desc: 'History',
     icon: 'history'
   }
@@ -24,17 +24,17 @@ export const ClientMenu: MenuItem[] = [
   
 export const TraderMenu: MenuItem[] = [
   {
-    path: '/layout/trader/homepage',
+    path: '/trader/homepage',
     desc: 'Manager Dashboard',
     icon: 'dashboard'
   },
   {
-    path: '/layout/trader/admin',
+    path: '/trader/admin',
     desc: 'Admin',
     icon: 'manage_accounts'
   },
   {
-    path: '/layout/trader/bond',
+    path: '/trader/bond',
     desc: 'Bond',
     icon: 'local_atm'
   }

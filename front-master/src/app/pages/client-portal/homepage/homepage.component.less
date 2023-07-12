@@ -1,5 +1,85 @@
+// .example-card {
+//     max-width: 400px;
+// }
 .example-card {
-    max-width: 400px;
+    max-width: 70%;
+    margin: 0 auto;
+    /* to center the card */
+    margin-bottom: 20px;
+}
+
+.example-form {
+    display: flex;
+    justify-content: center;
+    /* center form horizontally */
+    width: 100%;
+    padding: 20px;
+    /* Add some padding around the form to separate it from the edges */
+}
+
+.example-form mat-form-field {
+    width: 100%;
+    /* make form field take up full width */
+    flex: 1;
+    /* This will make the form field expand to fill the available space */
+}
+
+mat-card-content {
+    min-height: 150px;
+    /* adjust as needed */
+}
+
+/* Add some spacing around the card */
+mat-card {
+    margin: 20px;
+    /* adjust as needed */
+}
+
+
+
+mat-card-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 0;
+    /* Remove default padding */
+    height: auto;
+    /* Allow footer height to adjust based on its content */
+}
+
+.chat-form {
+    width: 60%;
+}
+
+
+.content-border {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin: 10px;
+}
+
+mat-icon {
+    color: inherit;
+    /* default color */
+    transition: transform 0.3s ease-in-out;
+    /* smooth transition for enlarging */
+}
+
+mat-icon.active {
+    color: blue;
+    /* color when hover */
+    cursor: pointer;
+    /* changes the cursor to a hand pointer */
+    transform: scale(1.2);
+    /* enlarges the icon */
+}
+
+.Echarts {
+    width: 75%;
+    height: 350px;
+    margin: 0 auto;
+    margin-top: 20px;
 }
 
 .example-header-image {
@@ -8,11 +88,11 @@
 }
 
 .content {
-    height: 500px;
-    background: #364d79;
+    height: 600px;
+    background: #ffffff;
     color: #fff;
     overflow: hidden;
-    width: 800px;
+    width: 80%;
 }
 
 .wrap {
@@ -20,9 +100,12 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 100%;
+    margin-top: 20px;
 }
-.carousel{
-    width: 800px;
+
+.carousel {
+    width: 100%;
 }
 
 mat-toolbar {
@@ -177,3 +260,7 @@ mat-divider {
     }
 }
 
+.echarts{
+    width: 100%; 
+    height: 100%
+}
