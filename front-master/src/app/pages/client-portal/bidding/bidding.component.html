@@ -88,7 +88,7 @@
 </nz-table>
 
 <nz-modal [(nzVisible)]="isVisible" nzTitle="Bidding" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()"
-  [nzMaskClosable]="false">
+  [nzMaskClosable]="false" nzWidth="520">
   <ng-container *nzModalContent>
     <!-- <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="handleOk()">
       <nz-form-item>
@@ -101,15 +101,15 @@
       <div>
         <div Title="BWIC-Info" class="data-container">
           <div>
-            <span>bwicId:</span>
+            <span>Bwic Id : </span>
             <span>{{biddingData.bwicId}}</span>
           </div>
           <div>
-            <span>issuer:</span>
+            <span>Issuer :     </span>
             <span>{{biddingData.issuer}}</span>
           </div>
           <div>
-            <span>cusip:</span>
+            <span>Cusip :    </span>
             <span>{{biddingData.cusip}}</span>
           </div>
         </div>

@@ -81,52 +81,6 @@ mat-divider {
   border-radius: 10px;
 }
 
-//---------------------------------------------trader layout--------------------------------------------
-    //总背景栏
-.mat-drawer-container-trader {
-    position: relative;
-    z-index: 1;
-    box-sizing: border-box;
-    -webkit-overflow-scrolling: touch;
-    display: block;
-    overflow: hidden;
-    background-color: #ecedea;
-}
-.mat-toolbar-trader {
-    background: #2b473e;
-    color: white;
-}
-
-.mat-sidenav-trader {
-    height: calc(100vh - 100px);
-    margin: 16px;
-    width: 200px;
-    border-right: none;
-    background: #acafa9;
-    color: white;
-    border-radius: 10px;
-    padding: 16px;
-    text-align: center;
-}
-/* 当按钮的路由被激活时，改变它和它内部的元素的颜色 */
-.menu-button-trader.active,
-.menu-button-trader.active mat-icon,
-.menu-button-trader.active span {
-    background-color: #2b473e !important;
-    /* 使用你想要的背景颜色 */
-    color: white !important;
-}
-
-/* 当鼠标悬停在按钮上时，改变背景颜色 */
-.menu-button-trader:hover {
-    background-color: #ecedea !important;
-}
-
-/* 定义滚动条的滑块 */
-.content::-webkit-scrollbar-thumb-trader {
-    background-color: #809c55;
-    border-radius: 10px;
-  }
 
 
 
@@ -141,6 +95,37 @@ mat-divider {
         display: block;
         overflow: hidden;
         background-color: #eceae4;
+    }
+    //chat
+    .mat-mdc-card-header {
+        display: flex;
+        padding: 16px 16px 0;
+        background-color: #77908e;
+        color:white
+    }
+    /* 定义滚动条的滑块 */
+    .content::-webkit-scrollbar-thumb {
+        background-color: #77908e;
+        border-radius: 10px;
+    }
+}
+
+
+    //chat标题
+::ng-deep {
+    .mat-mdc-card-title, .mat-mdc-card-subtitle {
+        display: block;
+        margin: 0;
+        color:white
+    }
+    
+
+    //chat回复
+    .content-border[_ngcontent-ng-c3398589236] {
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        margin: 10px;
+        background-color: cornsilk;
     }
 }
 

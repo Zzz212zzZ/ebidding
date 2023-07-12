@@ -123,14 +123,13 @@ mat-divider {
 }
 
 /* 定义滚动条的滑块 */
-.content::-webkit-scrollbar-thumb-trader {
+.content::-webkit-scrollbar-thumb {
     background-color: #809c55;
     border-radius: 10px;
   }
 
 
 
-//---------------------------------------------client layout---------------------------------------------
 ::ng-deep {
     //总背景栏
     .mat-drawer-container-client {
@@ -142,6 +141,11 @@ mat-divider {
         overflow: hidden;
         background-color: #eceae4;
     }
+
+    .content::-webkit-scrollbar-thumb {
+        background-color: #809c55;
+        border-radius: 10px;
+      }
 }
 
 .mat-toolbar-client {
