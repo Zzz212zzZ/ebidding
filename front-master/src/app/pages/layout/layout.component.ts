@@ -77,6 +77,6 @@ export class LayoutComponent {
 
   logout(): void{
     localStorage.clear();//清除localstorage
-    window.location.href = `http://localhost:${window.location.port}/login`;
+    window.location.href = `http://47.108.72.83:80`;
   }
 }
