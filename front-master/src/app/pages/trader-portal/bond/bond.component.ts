@@ -18,6 +18,7 @@ import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { BwicService } from 'src/app/core/services/bwic.service';
+import { NzMessageModule, NzMessageService } from 'ng-zorro-antd/message';
 
 export interface Bonds{
   bondId: String;
@@ -32,7 +33,6 @@ export interface Bonds{
 let nowBond : Bonds;
 
 const fnCheckBwicForm = function checkBwicForm(form: FormGroup): boolean {
-  // 检查登录表单的字段
   ['startPrice', 'size' , 'StartTime' , 'DueTime'].forEach(key => {
     const control = form.controls[key];
     // 检查字段是否存在
@@ -67,13 +67,14 @@ const fnCheckBwicForm = function checkBwicForm(form: FormGroup): boolean {
     NzSelectModule,
     NzDatePickerModule,
     NzIconModule,
+    NzMessageModule
   ],
   templateUrl: './bond.component.html',
   styleUrls: ['./bond.component.less']
 })
 export class BondComponent implements OnInit{
 
-  constructor(private bwicService: BwicService){}
+  constructor(private bwicService: BwicService,private message: NzMessageService){}
   bwicForm = new FormGroup({
     startPrice : new FormControl('',[Validators.required]),
     size : new FormControl('',[Validators.required]),
@@ -100,7 +101,7 @@ export class BondComponent implements OnInit{
 
   CreateBWIC(): void{
     if (!fnCheckBwicForm(this.bwicForm)) {
-      alert("All values need to be entered !!!")
+      this.message.create('error', `All values need to be entered !!!`);
       return;
     }
     // this.visible = false;
@@ -113,21 +114,33 @@ export class BondComponent implements OnInit{
       size: formData.size || ''
     };
     this.bwicService.createBwic(param).subscribe(() => {
-      alert("BWIC created successfully"); // 创建成功后显示提示消息
+      this.message.create('success',`BWIC created successfully`)
       this.bwicForm.reset();
     },
     (error) => {
       // 创建失败时的错误处理
-      alert("BWIC creation failed");
+      this.message.create('error', `BWIC creation failed`);
       console.error("Failed to create BWIC:", error);
     });
   }
 
   ngOnInit() {
     this.bwicService.getAllBonds().subscribe((data: Bonds[]) => {
-      this.listOfBonds = data;
-      // console.log(this.listOfBonds);
-    })
+      this.listOfBonds = data.map(bond => {
+        const maturityDate = new Date(bond.maturityDate as string);  // 将字符串转为日期对象
+        // 格式化日期字符串
+        const formattedDate = `${maturityDate.getFullYear()}-${(maturityDate.getMonth() + 1)
+          .toString()
+          .padStart(2, '0')}-${maturityDate
+          .getDate()
+          .toString()
+          .padStart(2, '0')} 00:00:00`;
+        return {
+          ...bond,
+          maturityDate: formattedDate
+        };
+      });
+    });
   }
 
 }
