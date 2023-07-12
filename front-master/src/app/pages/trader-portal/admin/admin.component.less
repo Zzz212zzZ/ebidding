@@ -59,3 +59,24 @@
     transform: scale(1.2); /* enlarges the icon */
   }
   
+ ::ng-deep {
+   //chat回复框
+   .content-border[_ngcontent-ng-c3792759892] {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin: 10px;
+    background-color: #ecedea;
+}
+  //chat表头
+  .mat-mdc-card-header {
+    display: flex;
+    padding: 16px 16px 0;
+    background-color: #809c55;
+  }
+//chat with gpt:
+.mat-mdc-card-subtitle~.mat-mdc-card-title, .mat-mdc-card-title~.mat-mdc-card-subtitle, .mat-mdc-card-header .mat-mdc-card-header-text .mat-mdc-card-title, .mat-mdc-card-header .mat-mdc-card-header-text .mat-mdc-card-subtitle, .mat-mdc-card-title-group .mat-mdc-card-title, .mat-mdc-card-title-group .mat-mdc-card-subtitle {
+    padding-top: 0;
+    color: white;
+}
+
+ } 
