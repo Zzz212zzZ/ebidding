@@ -64,7 +64,7 @@ export class BwicService {
 
   getBidByBwicIdAndAccountId(id:string){
     return this.http
-    .get(`/api/v1/bid-service/getBidByBwicIdAndAccountId`+id).toPromise();
+    .get(`/api/v1/bid-service/getBidByBwicIdAndAccountId/`+id).toPromise();
   }
 
   getMyBwicResult(bwicId: string){

@@ -27,7 +27,7 @@ public class WebSocketConfig implements WebSocketConfigurer {
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
         // msg 为前端请求的地址，前端具体地址组成结构为：ws://127.0.0.1:xxxx/msg
-        registry.addHandler(webSocketServerHandler,"msg").setAllowedOrigins("*");
+        registry.addHandler(webSocketServerHandler,"msg/").setAllowedOrigins("*");
     }
 
     @Bean
