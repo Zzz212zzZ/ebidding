@@ -15,7 +15,7 @@ export class GptService {
 
   traderChatWithGpt(message: string): Observable<any> {
     // TODO: Replace with your actual API URL
-    const apiUrl = 'bwic/bwics/chat';
+    const apiUrl = 'api/v1/bwic-service/bwics/chat';
 
     // Initialize Params Object
     let params = new HttpParams();
