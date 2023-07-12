@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import * as echarts from 'echarts';
 import { BwicService } from 'src/app/core/services/bwic.service';
+import { NzCarouselModule } from 'ng-zorro-antd/carousel';
 
 export interface Bwics {
   bwicId: number,
@@ -19,7 +20,7 @@ export interface Bwics {
 @Component({
   selector: 'app-homepage',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, NzCarouselModule],
   templateUrl: './homepage.component.html',
   styleUrls: ['./homepage.component.less']
 })
@@ -38,19 +39,17 @@ export class HomepageComponent implements OnInit {
   ngOnInit() {
     this.bwicService.getAllBwics().subscribe((data: Bwics[]) => {
       this.AllBwics = data;
-      let sortedBwics = [...this.AllBwics]; // 创建副本用于排序
-      sortedBwics.sort((a, b) => b.bidCounts - a.bidCounts);
-      //第一个表
-      for (let i = 5; i > 0; i--) {
-        this.CountsData.push(sortedBwics[i].bidCounts);
-        this.IdData1.push(sortedBwics[i].bwicId);
-      }
-      //第二个表
-      for (let i = 0; i < this.AllBwics.length; i++) {
-        this.IdData2.push(this.AllBwics[i].bwicId);
-        this.StartPriceData.push(this.AllBwics[i].startPrice);
-        this.PresentPriceData.push(this.AllBwics[i].presentPrice);
-      }
+      // 创建副本用于排序
+      const sortedBwics = [...this.AllBwics].sort((a, b) => b.bidCounts - a.bidCounts);
+
+      // 第一张表
+      this.CountsData = sortedBwics.slice(0, 5).map(bwic => bwic.bidCounts).reverse();
+      this.IdData1 = sortedBwics.slice(0, 5).map(bwic => bwic.bwicId).reverse();
+
+      // 第二张表
+      this.IdData2 = this.AllBwics.map(bwic => bwic.bwicId);
+      this.StartPriceData = this.AllBwics.map(bwic => bwic.startPrice);
+      this.PresentPriceData = this.AllBwics.map(bwic => bwic.presentPrice);
       //必须在后端获取数据后调用下列方法来生成图表。
       this.Bar();
       this.initCharts();
@@ -77,6 +76,11 @@ export class HomepageComponent implements OnInit {
         bottom: '3%',
         containLabel: true
       },
+      toolbox: {
+        feature: {
+          saveAsImage: {}
+        }
+      },
       xAxis: {
         type: 'value',
         boundaryGap: [0, 0.01]
@@ -90,7 +94,10 @@ export class HomepageComponent implements OnInit {
         {
           name: 'TotalCounts',
           type: 'bar',
-          data: this.CountsData
+          data: this.CountsData,
+          itemStyle: {
+            color: '#2b473e'
+          }
         },
       ]
     };
@@ -108,6 +115,9 @@ export class HomepageComponent implements OnInit {
       },
       toolbox: {
         show: false,
+        feature: {
+          saveAsImage: {}
+        }
       },
       legend: {
         padding: 0
