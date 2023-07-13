@@ -42,7 +42,7 @@ export const TraderMenu: MenuItem[] = [
 
 
 export const avatarUrl = {
-  trader: 'https://s2.loli.net/2023/07/08/TpcRn5ArWPdmQVK.png',
-  client: 'https://s2.loli.net/2023/07/08/Jk9seHrTn2ACuQW.png'
+  trader: 'https://s2.loli.net/2023/07/13/1GoKAnSPcMCkr6X.png',
+  client: 'https://s2.loli.net/2023/07/13/fFXMyzvNq2TBpu3.png'
 
 }
