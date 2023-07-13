@@ -14,7 +14,15 @@
     padding-top: 40px;
     padding-bottom: 30px;
 }
+
+.button-container button {
+    margin-right: 20px;
+    width: 80px;
+    height: 30px;
+}
+
 ::ng-deep {
+
     //create button
     .ant-btn-primary {
         color: #fff;
@@ -23,7 +31,9 @@
         text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.12);
         box-shadow: 0 2px 0 rgba(0, 0, 0, 0.045);
     }
-    .ant-btn-primary:hover, .ant-btn-primary:focus {
+
+    .ant-btn-primary:hover,
+    .ant-btn-primary:focus {
         color: #fff;
         border-color: #2b473e;
         background: #2b473e;
@@ -54,7 +64,7 @@
         border-width: 2px;
     }
 
-    .ant-table-thead > tr > th {
+    .ant-table-thead>tr>th {
         position: relative;
         color: white;
         font-weight: 500;

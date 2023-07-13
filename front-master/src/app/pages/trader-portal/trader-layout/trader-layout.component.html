@@ -26,7 +26,7 @@
 
 
     <ng-container *ngFor="let item of menus">
-      <button mat-button class="menu-button" [ngClass]="{'menu-button-trader':role ==='trader','menu-button-client':role ==='client'}" [routerLink]="item.path" routerLinkActive="active" >
+      <button mat-button class="menu-button"[ngClass]="{'menu-button-trader':role ==='trader','menu-button-client':role ==='client'}" [routerLink]="item.path" routerLinkActive="active" >
         <mat-icon>{{item.icon}}</mat-icon>
         <span class="button-text">{{item.desc}}</span>
       </button>
@@ -54,6 +54,3 @@
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
-
-<mat-drawer-container class = "mat-drawer-container" [ngClass] = "{'mat-drawer-container-trader':role ==='trader', 'mat-drawer-container-client':role ==='client'}">
-</mat-drawer-container>
