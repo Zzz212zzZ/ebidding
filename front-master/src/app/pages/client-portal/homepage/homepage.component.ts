@@ -15,6 +15,11 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatInputModule } from '@angular/material/input';
+import { GptService } from 'src/app/core/services/gpt.service';
+import { ProgressBarMode } from '@angular/material/progress-bar';
+import { Subscription } from 'rxjs';
+
+
 
 export interface Bwics {
     bwicId: number,
@@ -44,13 +49,70 @@ export interface Bwics {
 
 
 export class HomepageComponent implements OnInit {
+    //----------gpt-----------
+    gptResponse: string = '';
+    message: string = '';
+    hover: boolean = false;
+
+    defaultIconType: string = 'sentiment_very_satisfied';  // default icon
+    queryIconType: string = 'auto_mode';  // query icon
+    defaultProgressBarMode: ProgressBarMode = 'determinate';
+    queryProgressBarMode: ProgressBarMode = 'query';
+
+    // Set initial iconType and progressBarMode to default
+    submitIconType: string = this.defaultIconType;
+    progressBarMode: ProgressBarMode = this.defaultProgressBarMode;
+
+    private subscription!: Subscription;
+
+
+
+    sendMessage(message: string): void {  
+        //清空上一次的聊天记录
+        this.gptResponse = '';
+    
+    
+        // Switch to query icon and progress bar mode when sending a message
+        this.submitIconType = this.queryIconType;
+        this.progressBarMode = this.queryProgressBarMode;
+      
+        this.subscription = this.gptService.traderChatWithGpt(message).subscribe(
+          (event: MessageEvent) => {
+            // Parse the response data
+            const eventData = JSON.parse(event.data);
+            const content = eventData.choices[0]?.delta?.content || '';
+      
+            // Append the content to gptResponse
+            this.gptResponse += content;
+      
+            // Switch back to default icon and progress bar mode when response is received
+            this.submitIconType = this.defaultIconType;
+            this.progressBarMode = this.defaultProgressBarMode;
+          },
+          err => {
+            // Handle error
+            this.gptResponse = 'An error occurred. Please try again.';
+      
+            // Switch back to default icon and progress bar mode when an error occurs
+            this.submitIconType = this.defaultIconType;
+            this.progressBarMode = this.defaultProgressBarMode;
+          }
+        );
+      }
+
+
+
+
+    //------------------------
+
+
     AllBwics: Bwics[] = [];
     IdData1: number[] = [];
     IdData2: number[] = [];
     CountsData: number[] = [];
     SizeData: number[] = [];
     StartPriceData: number[] = [];
-    constructor(private bwicService: BwicService) { }
+    constructor(private bwicService: BwicService,private gptService: GptService) { }
 
     ngOnInit() {
         this.bwicService.getAllBwics().subscribe((data: Bwics[]) => {

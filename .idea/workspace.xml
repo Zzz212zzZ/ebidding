@@ -4,8 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2a4f9960-20b1-4731-ae3d-438c38e3e91e" name="更改" comment="配置nginx" />
+    <list default="true" id="2a4f9960-20b1-4731-ae3d-438c38e3e91e" name="更改" comment="配置nginx">
+      <change afterPath="$PROJECT_DIR$/bid-svc/src/main/java/com/ebidding/bid/domain/chat/ApiError.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bid-svc/src/main/java/com/ebidding/bid/domain/chat/ChatRequestDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bid-svc/src/main/java/com/ebidding/bid/domain/chat/ChatResponseDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bid-svc/src/main/java/com/ebidding/bid/domain/chat/SingleMessageDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bid-svc/src/main/java/com/ebidding/bid/service/GPTService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bid-svc/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/bid-svc/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bid-svc/src/main/java/com/ebidding/bid/controller/BidController.java" beforeDir="false" afterPath="$PROJECT_DIR$/bid-svc/src/main/java/com/ebidding/bid/controller/BidController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bwic-svc/src/main/java/com/ebidding/bwic/service/GPTService.java" beforeDir="false" afterPath="$PROJECT_DIR$/bwic-svc/src/main/java/com/ebidding/bwic/service/GPTService.java" afterDir="false" />
+    </list>
     <list id="a58cf2ab-9c2b-4078-b0c4-ea5db3fcc318" name="dev" comment="解决pull问题">
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <list id="34c7cc04-8f4f-4ff0-bb9e-0893446d0a9f" name="local" comment="local" />
