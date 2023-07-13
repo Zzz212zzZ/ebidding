@@ -13,6 +13,7 @@ import { SpinService } from 'src/app/core/services/spin.service';
 import { AccountService, UserInfo } from 'src/app/core/services/account.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzMessageModule } from 'ng-zorro-antd/message';
+import { catchError } from 'rxjs/operators';
 
 
 const fnCheckLoginForm = function checkLoginForm(form: FormGroup): boolean {
@@ -93,24 +94,29 @@ if (localStorage.getItem('Token') && localStorage.getItem('role') && localStorag
     }
   }
   submitLogin(): void {
-
     if (!fnCheckLoginForm(this.loginForm)) {
       return;
     }
     const param = this.loginForm.getRawValue();
-
+  
     this.spinService.setCurrentGlobalSpinStore(true);
     console.log(param);
-    this.accountService.login(param).subscribe((data: UserInfo) => {
+    this.accountService.login(param).pipe(
+      catchError((error: any) => {
+        this.spinService.setCurrentGlobalSpinStore(false);
+        if (error.status === 401) {
+          this.messageService.create('error', `Incorrect password!`);
+        }
 
+        throw error;
+      })
+    ).subscribe((data: UserInfo) => {
         this.messageService.create('success', `Welcome ${data.name}!`);
         let token = data.token;
         let role = data.role.toLocaleLowerCase();
-
-       // localStorage.setItem('Authorization', `Bearer ${data.token as string}`);
-       localStorage.setItem('Token', `Bearer ${token}`);
-       //设置localStorage的role
-       localStorage.setItem('role', role);
+  
+        localStorage.setItem('Token', `Bearer ${token}`);
+        localStorage.setItem('role', role);
         localStorage.setItem('name', data.name);
       
       if(role === 'client'){
@@ -119,14 +125,11 @@ if (localStorage.getItem('Token') && localStorage.getItem('role') && localStorag
         this.router.navigateByUrl('client/homepage');
       }
       if(role === 'trader'){
-        // this.router.navigateByUrl('/layout/sales/admin');
         this.router.navigateByUrl('trader/homepage');
       }
       this.spinService.setCurrentGlobalSpinStore(false);
-  });
-
-  }
-
+    });
+}
 }
 
 export enum Role { CLIENT, TRADER };
