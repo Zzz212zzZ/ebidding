@@ -85,7 +85,7 @@ export class OngoingTableComponent {
     // 获取数据
     this.bidService.getAllBidRankingsByBwicId(data.bwicId).subscribe(bidRankData => {
       const drawerRef = this.drawerService.create({
-        nzTitle: '详细信息',
+        nzTitle: 'Detailed information',
         nzPlacement: 'right',
         nzWidth: '80%',  // 宽度设为屏幕的 80%
         nzBodyStyle: {   // 自定义抽屉的样式
