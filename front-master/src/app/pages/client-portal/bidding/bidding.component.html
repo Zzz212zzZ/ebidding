@@ -88,7 +88,7 @@
 </nz-table>
 
 <nz-modal [(nzVisible)]="isVisible" nzTitle="Bidding" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()"
-  [nzMaskClosable]="false" nzWidth="520">
+  [nzMaskClosable]="false">
   <ng-container *nzModalContent>
     <!-- <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="handleOk()">
       <nz-form-item>
@@ -125,7 +125,7 @@
       <input type="text" nz-input placeholder="BIDDING" [(ngModel)]="price" />
     </nz-input-group>
     <ng-template #suffixButton>
-      <button nz-button nzType="primary" nzSize="large" class="" (click)="submit()">Submit</button>
+      <button nz-button nzType="default" nzSize="large" class="" (click)="submit()">Submit</button>
     </ng-template>
   </ng-container>
 </nz-modal>
