@@ -5,16 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2a4f9960-20b1-4731-ae3d-438c38e3e91e" name="更改" comment="配置nginx" />
-    <list id="a58cf2ab-9c2b-4078-b0c4-ea5db3fcc318" name="dev" comment="" />
-    <list id="34c7cc04-8f4f-4ff0-bb9e-0893446d0a9f" name="local" comment="">
-      <change afterPath="$PROJECT_DIR$/account-svc/src/main/resources/application-dev.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bid-svc/src/main/resources/application-dev.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+    <list id="a58cf2ab-9c2b-4078-b0c4-ea5db3fcc318" name="dev" comment="解决pull问题">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/account-svc/src/main/resources/application-uat.yml" beforeDir="false" afterPath="$PROJECT_DIR$/account-svc/src/main/resources/application-uat.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bid-svc/src/main/resources/application-uat.yml" beforeDir="false" afterPath="$PROJECT_DIR$/bid-svc/src/main/resources/application-uat.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bwic-svc/src/main/resources/application-uat.yml" beforeDir="false" afterPath="$PROJECT_DIR$/bwic-svc/src/main/resources/application-uat.yml" afterDir="false" />
     </list>
+    <list id="34c7cc04-8f4f-4ff0-bb9e-0893446d0a9f" name="local" comment="local" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -329,7 +323,23 @@
       <option name="project" value="LOCAL" />
       <updated>1689219889494</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="local">
+      <option name="closed" value="true" />
+      <created>1689229421920</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1689229421920</updated>
+    </task>
+    <task id="LOCAL-00015" summary="解决pull问题">
+      <option name="closed" value="true" />
+      <created>1689233960962</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1689233960962</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -348,7 +358,9 @@
     <MESSAGE value="第二次尝试合并后端" />
     <MESSAGE value="修改图标" />
     <MESSAGE value="配置nginx" />
-    <option name="LAST_COMMIT_MESSAGE" value="配置nginx" />
+    <MESSAGE value="local" />
+    <MESSAGE value="解决pull问题" />
+    <option name="LAST_COMMIT_MESSAGE" value="解决pull问题" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
