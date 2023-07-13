@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="2a4f9960-20b1-4731-ae3d-438c38e3e91e" name="更改" comment="配置nginx">
+      <change afterPath="$PROJECT_DIR$/bid-svc/src/main/java/com/ebidding/bid/domain/chat/ApiError.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bid-svc/src/main/java/com/ebidding/bid/domain/chat/ChatRequestDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bid-svc/src/main/java/com/ebidding/bid/domain/chat/ChatResponseDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bid-svc/src/main/java/com/ebidding/bid/domain/chat/SingleMessageDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bid-svc/src/main/java/com/ebidding/bid/service/GPTService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bid-svc/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/bid-svc/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bid-svc/src/main/java/com/ebidding/bid/controller/BidController.java" beforeDir="false" afterPath="$PROJECT_DIR$/bid-svc/src/main/java/com/ebidding/bid/controller/BidController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bwic-svc/src/main/java/com/ebidding/bwic/service/GPTService.java" beforeDir="false" afterPath="$PROJECT_DIR$/bwic-svc/src/main/java/com/ebidding/bwic/service/GPTService.java" afterDir="false" />
+    </list>
+    <list id="a58cf2ab-9c2b-4078-b0c4-ea5db3fcc318" name="dev" comment="解决pull问题">
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
+    <list id="34c7cc04-8f4f-4ff0-bb9e-0893446d0a9f" name="local" comment="local" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager">
+    <option name="groupingKeys">
+      <option value="directory" />
+    </option>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="PUSH_TAGS">
+      <GitPushTagMode>
+        <option name="argument" value="--follow-tags" />
+        <option name="title" value="Current Branch" />
+      </GitPushTagMode>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="Use Maven wrapper" />
+        <option name="useMavenConfig" value="true" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="2S8rz0NakR03yVYPG1rEi5rjSWk" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Serei/Desktop/group4&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;d0d2190b5de3aee74bf4e2882c3aeef8&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="ReactorSettings">
+    <option name="notificationShown" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Cynthia\Desktop\group4\front-master\deploy" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="configurationTypes">
+      <set>
+        <option value="MavenRunConfiguration" />
+      </set>
+    </option>
+  </component>
+  <component name="RunManager" selected="Application.GatewayApplication">
+    <configuration name="AccountServiceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <envs>
+        <env name="SW_AGENT_NAME" value="account-svc" />
+      </envs>
+      <option name="MAIN_CLASS_NAME" value="com.ebidding.account.AccountServiceApplication" />
+      <module name="account-svc" />
+      <option name="VM_PARAMETERS" value=" -javaagent:&quot;D:\skywalking-agent\skywalking-agent.jar&quot;" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ebidding.account.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="BidService" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.ebidding.bid.service.BidService" />
+      <module name="bid-svc" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ebidding.bid.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="BidServiceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <envs>
+        <env name="SW_AGENT_NAME" value="bid-svc" />
+      </envs>
+      <option name="MAIN_CLASS_NAME" value="com.ebidding.bid.BidServiceApplication" />
+      <module name="bid-svc" />
+      <option name="VM_PARAMETERS" value=" -javaagent:&quot;D:\skywalking-agent\skywalking-agent.jar&quot;" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ebidding.bid.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="BwicServiceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <envs>
+        <env name="SW_AGENT_NAME" value="bwic-svc" />
+      </envs>
+      <option name="MAIN_CLASS_NAME" value="com.ebidding.bwic.BwicServiceApplication" />
+      <module name="bwic-svc" />
+      <option name="VM_PARAMETERS" value=" -javaagent:&quot;D:\skywalking-agent\skywalking-agent.jar&quot;" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ebidding.bwic.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GatewayApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <envs>
+        <env name="SW_AGENT_NAME" value="gateway" />
+      </envs>
+      <option name="MAIN_CLASS_NAME" value="com.ebidding.gateway.GatewayApplication" />
+      <module name="gateway" />
+      <option name="VM_PARAMETERS" value=" -javaagent:&quot;D:\skywalking-agent\skywalking-agent.jar&quot;" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ebidding.gateway.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="BidServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="bid-svc" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.ebidding.bid.BidServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="BwicServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="bwic-svc" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.ebidding.bwic.BwicServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GatewayApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="gateway" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.ebidding.gateway.GatewayApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.AccountServiceApplication" />
+      <item itemvalue="Application.BidService" />
+      <item itemvalue="Application.BidServiceApplication" />
+      <item itemvalue="Application.BwicServiceApplication" />
+      <item itemvalue="Application.GatewayApplication" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.GatewayApplication" />
+        <item itemvalue="Application.BwicServiceApplication" />
+        <item itemvalue="Application.BidServiceApplication" />
+        <item itemvalue="Application.AccountServiceApplication" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="默认任务">
+      <changelist id="2a4f9960-20b1-4731-ae3d-438c38e3e91e" name="更改" comment="" />
+      <created>1688539318350</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1688539318350</updated>
+      <workItem from="1688796769571" duration="690000" />
+      <workItem from="1688797468525" duration="4776000" />
+      <workItem from="1688806480570" duration="1125000" />
+    </task>
+    <task id="LOCAL-00001" summary="后端7.7更改，添加了getissuer和通过cusip区查询bwic方法">
+      <option name="closed" value="true" />
+      <created>1688788386748</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1688788386748</updated>
+    </task>
+    <task id="LOCAL-00002" summary="更新getOngoing的bwic接口">
+      <created>1688804173828</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1688804173828</updated>
+    </task>
+    <task id="LOCAL-00003" summary="更新Upcoming以及ended">
+      <created>1688806890855</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1688806890855</updated>
+    </task>
+    <task id="LOCAL-00004" summary="更新Upcoming以及ended">
+      <option name="closed" value="true" />
+      <created>1688812840700</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1688812840700</updated>
+    </task>
+    <task id="LOCAL-00005" summary="7.8">
+      <option name="closed" value="true" />
+      <created>1688812876292</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1688812876292</updated>
+    </task>
+    <task id="LOCAL-00006" summary="7.8">
+      <option name="closed" value="true" />
+      <created>1688812894353</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1688812894353</updated>
+    </task>
+    <task id="LOCAL-00007" summary="client端所需接口修改，websocket修复">
+      <option name="closed" value="true" />
+      <created>1689038237628</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1689038237628</updated>
+    </task>
+    <task id="LOCAL-00008" summary="后端合并，client端所需接口修改，websocket修复">
+      <option name="closed" value="true" />
+      <created>1689041527641</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1689041527641</updated>
+    </task>
+    <task id="LOCAL-00009" summary="后端合并，client端所需接口修改，websocket修复">
+      <option name="closed" value="true" />
+      <created>1689042703776</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1689042703776</updated>
+    </task>
+    <task id="LOCAL-00010" summary="后端合并，client端所需接口修改，websocket修复">
+      <option name="closed" value="true" />
+      <created>1689042798600</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1689042798600</updated>
+    </task>
+    <task id="LOCAL-00011" summary="第二次尝试合并后端">
+      <option name="closed" value="true" />
+      <created>1689061641438</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1689061641438</updated>
+    </task>
+    <task id="LOCAL-00012" summary="修改图标">
+      <option name="closed" value="true" />
+      <created>1689218220401</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1689218220401</updated>
+    </task>
+    <task id="LOCAL-00013" summary="配置nginx">
+      <option name="closed" value="true" />
+      <created>1689219889494</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1689219889494</updated>
+    </task>
+    <task id="LOCAL-00014" summary="local">
+      <option name="closed" value="true" />
+      <created>1689229421920</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1689229421920</updated>
+    </task>
+    <task id="LOCAL-00015" summary="解决pull问题">
+      <option name="closed" value="true" />
+      <created>1689233960962</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1689233960962</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <ignored-roots>
+      <path value="$PROJECT_DIR$/front-master" />
+    </ignored-roots>
+    <MESSAGE value="后端7.7更改，添加了getissuer和通过cusip区查询bwic方法" />
+    <MESSAGE value="更新getOngoing的bwic接口" />
+    <MESSAGE value="更新Upcoming以及ended" />
+    <MESSAGE value="7.8" />
+    <MESSAGE value="client端所需接口修改，websocket修复" />
+    <MESSAGE value="后端合并，client端所需接口修改，websocket修复" />
+    <MESSAGE value="第二次尝试合并后端" />
+    <MESSAGE value="修改图标" />
+    <MESSAGE value="配置nginx" />
+    <MESSAGE value="local" />
+    <MESSAGE value="解决pull问题" />
+    <option name="LAST_COMMIT_MESSAGE" value="解决pull问题" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>
