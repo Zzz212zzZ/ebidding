@@ -1,17 +1,14 @@
-package com.ebidding.bwic.service;
+package com.ebidding.bid.service;
 
+import com.ebidding.bid.domain.chat.ChatRequestDTO;
+import io.netty.channel.ChannelOption;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
+import org.springframework.http.client.reactive.ReactorClientHttpConnector;
 import org.springframework.http.codec.ServerSentEvent;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
-
-import com.ebidding.bwic.domain.chat.ChatRequestDTO;
-
-import org.springframework.http.client.reactive.ReactorClientHttpConnector;
-import io.netty.handler.proxy.Socks5ProxyHandler;
-import io.netty.channel.ChannelOption;
 import reactor.netty.http.client.HttpClient;
 import reactor.netty.transport.ProxyProvider;
 
@@ -20,7 +17,7 @@ public class GPTService {
 
     private final WebClient webClient;
 
-    public GPTService(@Value("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") String apiKey) {
+    public GPTService(@Value("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") String apiKey) {
         HttpClient httpClient = HttpClient.create()
                 .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 5000)
                 .proxy(proxy -> proxy.type(ProxyProvider.Proxy.SOCKS5).host("localhost").port(10808));

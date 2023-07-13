@@ -8,7 +8,10 @@ import com.ebidding.bid.api.PriceResponseDTO;
 import com.ebidding.bid.domain.Bid;
 import com.ebidding.bid.domain.BidRank;
 import com.ebidding.bid.domain.BidRankPK;
+import com.ebidding.bid.domain.chat.ChatRequestDTO;
+import com.ebidding.bid.domain.chat.SingleMessageDTO;
 import com.ebidding.bid.service.BidService;
+import com.ebidding.bid.service.GPTService;
 import com.ebidding.bwic.api.BwicClient;
 import com.ebidding.common.auth.AuthConstant;
 import com.ebidding.common.auth.Authorize;
@@ -16,11 +19,16 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.codec.ServerSentEvent;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Flux;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,6 +43,9 @@ public class BidController {
 
     @Autowired
     private BwicClient bwicClient;
+
+    @Autowired
+    private GPTService gptService;
 
 
 //
@@ -160,6 +171,32 @@ public class BidController {
         }
         return bidService.getBwicIdListByAccountId(accountId);
     }
+
+
+    @GetMapping(value = "/bids/chat", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    public Flux<ServerSentEvent> chat(@RequestParam String message, HttpSession httpSession) {
+        String role = "user";  // or another role based on your logic
+
+        // Get the message history from session
+        List<SingleMessageDTO> history = (List<SingleMessageDTO>) httpSession.getAttribute("history");
+        if (history == null) {
+            history = new ArrayList<>();
+        }
+
+        // Create a new request and add the new message
+        ChatRequestDTO request = new ChatRequestDTO();
+        request.setMessages(history);
+        request.addMessage(role, message);
+
+        // Save the message to the history
+        httpSession.setAttribute("history", request.getMessages());
+
+        // Send the request and return the response stream
+        return gptService.chatWithGPT(request);
+    }
+
+
+
 
 
 //    @GetMapping("/bidRanks")
