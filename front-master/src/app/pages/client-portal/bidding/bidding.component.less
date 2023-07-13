@@ -1,28 +1,99 @@
 .save {
-    margin-right: 8px;
+  margin-right: 8px;
+}
+.search-box {
+  padding: 8px;
+}
+
+.search-box input {
+  width: 188px;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.search-box button {
+  width: 90px;
+}
+
+.search-button {
+  margin-right: 8px;
+}
+::ng-deep {
+  //表格翻页围栏
+  .ant-table-pagination.ant-pagination {
+    margin: 0 0;
+    background-color: #faf2d5;
   }
-  .search-box {
-    padding: 8px;
+  //button
+  .ant-btn {
+    line-height: 1.5715;
+    position: relative;
+    display: inline-block;
+    font-weight: 400;
+    white-space: nowrap;
+    text-align: center;
+    background-image: none;
+    border: 1px solid transparent;
+    box-shadow: 0 2px 0 rgba(0, 0, 0, 0.015);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+    -webkit-user-select: none;
+    user-select: none;
+    touch-action: manipulation;
+    height: 32px;
+    padding: 4px 15px;
+    font-size: 14px;
+    border-radius: 6px;
+    color: rgb(245, 245, 245);
+    border-color: #d9d9d9;
+    background: #77908e;
+  }
+  //表格内容
+  .ant-table table {
+    width: 100%;
+    text-align: left;
+    border-radius: 2px 2px 0 0;
+    border-collapse: separate;
+    border-spacing: 0;
+    background:#faf2d5;
   }
 
-  .search-box input {
-    width: 188px;
-    margin-bottom: 8px;
-    display: block;
+  //表头
+  thead {
+    display: table-header-group;
+    vertical-align: middle;
+    border-color: inherit;
+    background: #77908e;
+  }
+  //页码
+  .ant-pagination-item-active a {
+    color: white;
+    background-color: #77908e;
   }
 
-  .search-box button {
-    width: 90px;
+  .ant-table-thead > tr > th {
+    position: relative;
+    color: rgba(0, 0, 0, 0.85);
+    font-weight: 500;
+    text-align: left;
+    background: #fafafa;
+    border-bottom: 1px solid #f0f0f0;
+    transition: background 0.3s ease;
+    background: #77908e;
   }
 
-  .search-button {
-    margin-right: 8px;
+  .ant-modal-header {
+    padding: 16px 24px;
+    color: rgba(0, 0, 0, 0.85);
+    background: #faf2d5;
+    border-bottom: 1px solid #f0f0f0;
+    border-radius: 2px 2px 0 0;
   }
-  .data-msg {
-    background-color: #f9f9f9;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+  .ant-modal-body {
+    padding: 24px;
+    font-size: 20px;
+    line-height: 3;
+    word-wrap: break-word;
   }
   .data-container > div {
     display: flex;
@@ -31,4 +102,29 @@
     font-family: Arial, sans-serif;
     font-size: 26px;
   }
-  
+
+  .ant-modal-header {
+    padding: 16px 24px;
+    color: rgba(0, 0, 0, 0.85);
+    background: #faf2d5;
+    border-bottom: 1px solid #f0f0f0;
+    border-radius: 2px 2px 0 0;
+  }
+  .ant-modal-body {
+    padding: 24px;
+    font-size: 20px;
+    line-height: 3;
+    word-wrap: break-word;
+  }
+
+  .ant-modal-content {
+    position: relative;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 0;
+    border-radius: 2px;
+    box-shadow: 0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 9px 28px 8px rgba(0, 0, 0, 0.05);
+    pointer-events: auto;
+    width: max-content;
+}
+}

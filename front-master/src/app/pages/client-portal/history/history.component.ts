@@ -108,6 +108,24 @@ export class HistoryComponent implements OnInit {
     this.dataSet = [...value as Data[] ]
     // console.log(data)
     this.drawervisible = true;
+  //   this.ngOnInit() {
+  //     this.bwicService.getBidByBwicIdAndAccountId(id).subscribe((data: Bids[]) => {
+  //     this.listOfBwicData = data.map(bond => {
+  //       const maturityDate = new Date(bond.maturityDate as string); // 将字符串转为日期对象
+  //     //           // 格式化日期字符串
+  //           const formattedDate = `${maturityDate.getFullYear()}-${(maturityDate.getMonth() + 1)
+  //            .toString()
+  //            .padStart(2, '0')}-${maturityDate
+  //        .getDate()
+  //        .toString()
+  //        .padStart(2, '0')} 00:00:00`;
+  //        return {
+  //        ...bond,
+  //        maturityDate: formattedDate
+  //       };
+  //      });
+  //     });
+  //   }
   }
 
    resultText:string = ''

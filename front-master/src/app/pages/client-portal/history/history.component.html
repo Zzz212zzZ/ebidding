@@ -66,8 +66,9 @@
       <td>{{ data.dueTime }}</td>
       <td>{{ data.startPrice }}</td>
       <td>{{ data.size }}</td>
-        <button nz-button nzType="default" (click)="open(data.bwicId)">Details</button>
-      <button nz-button [nzType]="'primary'" (click)="result(data.bwicId)"><span>Result</span></button>
+      <td>
+        <button nz-button [nzType]="'default'" (click)="open(data.bwicId)">Details</button>
+        <button nz-button [nzType]="'default'" (click)="result(data.bwicId)"><span>Result</span></button>
     </tr>
   </tbody>
 </nz-table>
@@ -99,7 +100,7 @@
         <td>{{data.price}}</td>
         <td>{{data.ranking}}</td>
         <td>
-          {{data.time}}
+          {{ data.time }}
         </td>
       </tr>
       </tbody>
@@ -126,7 +127,7 @@
           <td>{{data.price}}</td>
           <td>{{data.ranking}}</td>
           <td>
-            {{data.time}}
+            {{ data.time | date:'yyyy-MM-dd HH:mm:ss' }}
           </td>
         </tr>
       </tbody>
