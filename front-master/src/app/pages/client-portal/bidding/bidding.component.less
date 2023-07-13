@@ -70,7 +70,7 @@
     color: white;
     background-color: #77908e;
   }
-
+//表头
   .ant-table-thead > tr > th {
     position: relative;
     color: rgba(0, 0, 0, 0.85);
@@ -81,7 +81,7 @@
     transition: background 0.3s ease;
     background: #77908e;
   }
-
+//弹出框表头
   .ant-modal-header {
     padding: 16px 24px;
     color: rgba(0, 0, 0, 0.85);
@@ -89,12 +89,26 @@
     border-bottom: 1px solid #f0f0f0;
     border-radius: 2px 2px 0 0;
   }
-  .ant-modal-body {
-    padding: 24px;
-    font-size: 20px;
-    line-height: 3;
-    word-wrap: break-word;
-  }
+//弹出对话框
+.ant-modal {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  color: rgba(0, 0, 0, 0.85);
+  font-size: 14px;
+  font-variant: tabular-nums;
+  line-height: 1.5715;
+  list-style: none;
+  font-feature-settings: 'tnum';
+  pointer-events: none;
+  position: relative;
+  top: 100px;
+  width: auto;
+  max-width: calc(100vw - 32px);
+  margin: 0 auto;
+  padding-bottom: 24px;
+}
+
   .data-container > div {
     display: flex;
     align-items: center;
@@ -102,29 +116,5 @@
     font-family: Arial, sans-serif;
     font-size: 26px;
   }
-
-  .ant-modal-header {
-    padding: 16px 24px;
-    color: rgba(0, 0, 0, 0.85);
-    background: #faf2d5;
-    border-bottom: 1px solid #f0f0f0;
-    border-radius: 2px 2px 0 0;
-  }
-  .ant-modal-body {
-    padding: 24px;
-    font-size: 20px;
-    line-height: 3;
-    word-wrap: break-word;
-  }
-
-  .ant-modal-content {
-    position: relative;
-    background-color: #fff;
-    background-clip: padding-box;
-    border: 0;
-    border-radius: 2px;
-    box-shadow: 0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 9px 28px 8px rgba(0, 0, 0, 0.05);
-    pointer-events: auto;
-    width: max-content;
 }
-}
+

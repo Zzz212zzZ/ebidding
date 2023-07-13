@@ -87,8 +87,8 @@
   </tbody>
 </nz-table>
 
-<nz-modal [(nzVisible)]="isVisible" nzTitle="Bidding" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()"
-  [nzMaskClosable]="false" nzWidth="520">
+<nz-modal [(nzVisible)]="isVisible" nzTitle="Bidding" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()" nzOkType="default"
+  [nzMaskClosable]="false" >
   <ng-container *nzModalContent>
     <!-- <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="handleOk()">
       <nz-form-item>
