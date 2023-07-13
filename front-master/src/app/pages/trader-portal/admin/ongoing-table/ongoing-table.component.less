@@ -9,11 +9,7 @@
     transition: none !important;
 }
 ::ng-deep {
-    //页码
-    .ant-pagination-item-active a {
-        color: white;
-        background-color: #809c55;
-    }
+    //表头
     .ant-table-thead > tr > th {
         position: relative;
         color: #2b473e;
@@ -23,6 +19,25 @@
         border-bottom: 1px solid #f0f0f0;
         transition: background 0.3s ease;
         background-color: #809c55;
+    }
+    .ant-table-container {
+        border-top-left-radius: 2px;
+        border-top-right-radius: 2px;
+        position: relative;
+    }
+    .ant-table {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        color: rgba(0, 0, 0, 0.85);
+        font-variant: tabular-nums;
+        line-height: 1.5715;
+        list-style: none;
+        font-feature-settings: 'tnum';
+        position: relative;
+        font-size: 14px;
+        background: #fff;
+        border-radius: 2px;
     }
 }
 

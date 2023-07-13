@@ -199,7 +199,7 @@ export class HomepageComponent implements OnInit {
         let lineChart = ec.init(document.getElementById('lineChart'));
         let lineoption = {
             title: {
-                text: 'Uncoming BWIC'
+                text: 'Upcoming BWIC'
             },
             tooltip: {
                 trigger: 'axis'
@@ -234,7 +234,7 @@ export class HomepageComponent implements OnInit {
                     stack: 'Total',
                     data: this.SizeData,
                     itemStyle: {
-                        color: '#c0c7d9'
+                        color: '#77908e'
                     }
                 },
                 {

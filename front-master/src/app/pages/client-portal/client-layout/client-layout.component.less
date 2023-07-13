@@ -7,10 +7,6 @@
     overflow-y: scroll;
 }
 
-mat-sidenav-container {
-    height: calc(100vh - 65px);
-}
-
 .menu-button {
     width: 100%;
     display: flex;
@@ -96,29 +92,34 @@ mat-divider {
         overflow: hidden;
         background-color: #eceae4;
     }
-    //chat
+    //chat对话框头
     .mat-mdc-card-header {
         display: flex;
         padding: 16px 16px 0;
         background-color: #77908e;
-        color:white
+        color: white;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
     }
     /* 定义滚动条的滑块 */
     .content::-webkit-scrollbar-thumb {
         background-color: #77908e;
         border-radius: 10px;
     }
-}
-
-
-    //chat标题
-::ng-deep {
-    .mat-mdc-card-title, .mat-mdc-card-subtitle {
-        display: block;
-        margin: 0;
-        color:white
+//对话框表底
+    .example-card[_ngcontent-ng-c2779749524] {
+        max-width: 70%;
+        margin: 0 auto;
+        margin-bottom: 20px;
+        border-radius: 20px;
     }
-    
+
+    .mat-mdc-text-field-wrapper {
+        height: auto;
+        flex: auto;
+        text-shadow: #77908e;
+    }
+}
 
     //chat回复
     .content-border[_ngcontent-ng-c3398589236] {
@@ -127,7 +128,6 @@ mat-divider {
         margin: 10px;
         background-color: cornsilk;
     }
-}
 
 .mat-toolbar-client {
     background: #77908e;
