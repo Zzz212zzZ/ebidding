@@ -8,6 +8,7 @@
     <mat-icon *ngIf="sidenav.opened && sidenavMode === 'over'"> close </mat-icon>
   </button>
   Bidding Dashboard
+  <button mat-raised-button class="LogoutButton" (click)="logout()">Logout</button>
 </mat-toolbar>
 
 
@@ -48,7 +49,7 @@
 
   <mat-sidenav-content>
     <div class="content mat-elevation-z8">
-     
+
       <router-outlet></router-outlet>
     </div>
   </mat-sidenav-content>
