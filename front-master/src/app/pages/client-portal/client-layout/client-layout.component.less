@@ -45,6 +45,7 @@ mat-sidenav-container {
 mat-divider {
     margin: 10px !important;
 }
+
 .avatar {
     margin-top: 16px;
     width: 100px;
@@ -69,20 +70,20 @@ mat-divider {
     background-color: rgba(255, 255, 255, 0.5);
 }
 
-  /* 定义滚动条的轨道（背景） */
+/* 定义滚动条的轨道（背景） */
 .content::-webkit-scrollbar {
-  width: 8px;
-  background-color: #F5F5F5;
+    width: 8px;
+    background-color: #F5F5F5;
 }
 
 /* 定义滚动条的轨道（背景）上的阴影或边界 */
 .content::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  border-radius: 10px;
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
 }
 
 //---------------------------------------------trader layout--------------------------------------------
-    //总背景栏
+//总背景栏
 .mat-drawer-container-trader {
     position: relative;
     z-index: 1;
@@ -92,6 +93,7 @@ mat-divider {
     overflow: hidden;
     background-color: #ecedea;
 }
+
 .mat-toolbar-trader {
     background: #2b473e;
     color: white;
@@ -108,6 +110,7 @@ mat-divider {
     padding: 16px;
     text-align: center;
 }
+
 /* 当按钮的路由被激活时，改变它和它内部的元素的颜色 */
 .menu-button-trader.active,
 .menu-button-trader.active mat-icon,
@@ -126,12 +129,13 @@ mat-divider {
 .content::-webkit-scrollbar-thumb-trader {
     background-color: #809c55;
     border-radius: 10px;
-  }
+}
 
 
 
 //---------------------------------------------client layout---------------------------------------------
 ::ng-deep {
+
     //总背景栏
     .mat-drawer-container-client {
         position: relative;
@@ -175,5 +179,6 @@ mat-divider {
     background-color: #e7e0e0 !important;
 }
 
-
-
+.LogoutButton {
+    margin-left: auto;
+}

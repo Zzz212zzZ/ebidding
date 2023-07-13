@@ -7,7 +7,8 @@
     <mat-icon *ngIf="!sidenav.opened && sidenavMode === 'over'"> menu </mat-icon>
     <mat-icon *ngIf="sidenav.opened && sidenavMode === 'over'"> close </mat-icon>
   </button>
-  eBidding 
+  eBidding
+  <button mat-raised-button class="LogoutButton" (click)="logout()">Logout</button>
 </mat-toolbar>
 
 
