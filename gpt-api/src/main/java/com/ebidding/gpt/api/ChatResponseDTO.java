@@ -1,4 +1,4 @@
-package com.ebidding.bwic.domain.chat;
+package com.ebidding.gpt.api;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;

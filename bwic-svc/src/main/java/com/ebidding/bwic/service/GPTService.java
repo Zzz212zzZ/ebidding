@@ -1,4 +1,4 @@
-package com.ebidding.gpt.api;
+package com.ebidding.bwic.service;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
 
+import com.ebidding.bwic.domain.chat.ChatRequestDTO;
+
 import org.springframework.http.client.reactive.ReactorClientHttpConnector;
 import io.netty.handler.proxy.Socks5ProxyHandler;
 import io.netty.channel.ChannelOption;
@@ -14,11 +16,11 @@ import reactor.netty.http.client.HttpClient;
 import reactor.netty.transport.ProxyProvider;
 
 @Service
-public class GPTClient {
+public class GPTService {
 
     private final WebClient webClient;
 
-    public GPTClient(@Value("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") String apiKey) {
+    public GPTService(@Value("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") String apiKey) {
         HttpClient httpClient = HttpClient.create()
                 .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 5000)
                 .proxy(proxy -> proxy.type(ProxyProvider.Proxy.SOCKS5).host("localhost").port(10808));
@@ -30,12 +32,17 @@ public class GPTClient {
                 .build();
     }
 
-    public Flux<ServerSentEvent> streamResponses(ChatRequestDTO chatRequest) {
+    public Flux<ServerSentEvent> chatWithGPT(ChatRequestDTO chatRequest) {
         return this.webClient.post()
                 .contentType(MediaType.APPLICATION_JSON)
                 .bodyValue(chatRequest)
                 .retrieve()
-                .bodyToFlux(ServerSentEvent.class);
+                .bodyToFlux(ServerSentEvent.class)
+                .takeWhile(event -> {
+                    // 检查 finish_reason 是否为 "stop"，如果是，则停止解析
+                    String eventData = event.data().toString();
+                    return !eventData.contains("\"finish_reason\":\"stop\"");
+                });
     }
 }
 
