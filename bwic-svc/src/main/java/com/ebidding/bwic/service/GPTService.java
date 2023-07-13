@@ -22,11 +22,11 @@ public class GPTService {
 
     public GPTService(@Value("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") String apiKey) {
         HttpClient httpClient = HttpClient.create()
-                .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 5000)
-                .proxy(proxy -> proxy.type(ProxyProvider.Proxy.SOCKS5).host("localhost").port(10808));
+                .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 5000);
+//                .proxy(proxy -> proxy.type(ProxyProvider.Proxy.SOCKS5).host("localhost").port(10808));
 
         this.webClient = WebClient.builder()
-                .baseUrl("https://api.openai.com/v1/chat/completions")
+                .baseUrl("https://rich-ape-56-xm8vahkzkd00.deno.dev/v1/chat/completions")
                 .clientConnector(new ReactorClientHttpConnector(httpClient))
                 .defaultHeader("Authorization", "Bearer " + apiKey)
                 .build();
