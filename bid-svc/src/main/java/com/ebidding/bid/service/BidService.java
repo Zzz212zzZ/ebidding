@@ -94,7 +94,7 @@ public class BidService {
             if (i == 0) {
                 msgObj.put("msg", "Your ranking has been updated to " + (i + 1)+"/"+ bidRankList.size() + "; No.2's price is " + (bidRankList.size() >= 2 ? bidRankList.get(1).getPrice() : "Unavailable"));
             } else {
-                msgObj.put("msg", "Your ranking has been updated to " + (i + 1)+"/"+ bidRankList.size()+ "; No.2's price is Unable to view");
+                msgObj.put("msg", "Your ranking has been updated to " + (i + 1)+"/"+ bidRankList.size());
             }
             WebSocketMessageUtil.sendMsgToOne(webSocketSession, JSONUtil.toJsonStr(msgObj));
         }

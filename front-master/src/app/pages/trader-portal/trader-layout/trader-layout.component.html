@@ -7,7 +7,7 @@
     <mat-icon *ngIf="!sidenav.opened && sidenavMode === 'over'"> menu </mat-icon>
     <mat-icon *ngIf="sidenav.opened && sidenavMode === 'over'"> close </mat-icon>
   </button>
-  Bidding Dashboard
+  TRADER DASHBOARD
   <button mat-raised-button class="LogoutButton" (click)="logout()">Logout</button>
 </mat-toolbar>
 
@@ -41,7 +41,7 @@
       <span>Help</span>
     </button> -->
 
-    <mat-slide-toggle [(ngModel)]="isChecked" (change)="toggleSidenavMode($event)">锁定bar: {{isChecked}}</mat-slide-toggle>
+    <mat-slide-toggle [(ngModel)]="isChecked" (change)="toggleSidenavMode($event)">Lock</mat-slide-toggle>
 
 
   </mat-sidenav>
