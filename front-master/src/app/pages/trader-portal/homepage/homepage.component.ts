@@ -70,7 +70,6 @@ export class HomepageComponent implements OnInit {
       this.dataTable = this.cusipData.map((cusip, index) => {
         return cusip + ' & ' + this.SizeData[index];
       });
-      console.log(this.dataTable);
       // 第二张表
       this.IdData = this.AllBwics.map(bwic => bwic.bwicId);
       this.StartPriceData = this.AllBwics.map(bwic => bwic.startPrice);

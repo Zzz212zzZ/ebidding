@@ -144,7 +144,7 @@ export class HomepageComponent implements OnInit {
             const sortedBwics = [...filteredBwics1].sort((a, b) => b.bidCounts - a.bidCounts);
             const topFiveBwics = sortedBwics.slice(0, 5).reverse();
             this.CountsData = topFiveBwics.map(bwic => bwic.bidCounts);
-            this.SizeData = filteredBwics1.map(bwic => bwic.size);
+            this.SizeData = topFiveBwics.map(bwic => bwic.size);
             this.BondIdData = topFiveBwics.map(bwic => bwic.bondId);
             this.cusipData = this.BondIdData.map(bondId => {
                 const bond = this.AllBonds.find(b => b.bondId === bondId);
