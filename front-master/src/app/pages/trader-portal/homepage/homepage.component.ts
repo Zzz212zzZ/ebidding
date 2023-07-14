@@ -16,6 +16,16 @@ export interface Bwics {
   bidCounts: number,
 }
 
+export interface Bonds {
+  bondId: String;
+  coupon: String;
+  cusip: String;
+  issuer: String;
+  maturityDate: String;
+  rating: String;
+  transaction_counts: Number;
+}
+
 
 @Component({
   selector: 'app-homepage',
@@ -27,8 +37,12 @@ export interface Bwics {
 export class HomepageComponent implements OnInit {
 
   AllBwics: Bwics[] = [];
-  IdData1: number[] = [];
-  IdData2: number[] = [];
+  AllBonds: Bonds[] = [];
+  BondIdData: string[] = [];
+  cusipData: String[] = [];
+  SizeData: number[] = [];
+  dataTable: String[] = [];
+  IdData: number[] = [];
   CountsData: number[] = [];
   StartPriceData: number[] = [];
   PresentPriceData: number[] = [];
@@ -37,6 +51,9 @@ export class HomepageComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.bwicService.getAllBonds().subscribe((item: Bonds[]) => {
+      this.AllBonds = item;
+    })
     this.bwicService.getAllBwics().subscribe((data: Bwics[]) => {
       this.AllBwics = data;
       // 创建副本用于排序
@@ -44,10 +61,17 @@ export class HomepageComponent implements OnInit {
 
       // 第一张表
       this.CountsData = sortedBwics.slice(0, 5).map(bwic => bwic.bidCounts).reverse();
-      this.IdData1 = sortedBwics.slice(0, 5).map(bwic => bwic.bwicId).reverse();
-
+      this.BondIdData = sortedBwics.slice(0, 5).map(bwic => bwic.bondId).reverse();
+      this.SizeData = sortedBwics.slice(0, 5).map(bwic => bwic.size).reverse();
+      this.cusipData = this.BondIdData.map(bondId => {
+        const bond = this.AllBonds.find(b => b.bondId === bondId);
+        return bond ? bond.cusip : '';
+      });
+      this.dataTable = this.cusipData.map((cusip, index) => {
+        return cusip + ' & ' + this.SizeData[index];
+      });
       // 第二张表
-      this.IdData2 = this.AllBwics.map(bwic => bwic.bwicId);
+      this.IdData = this.AllBwics.map(bwic => bwic.bwicId);
       this.StartPriceData = this.AllBwics.map(bwic => bwic.startPrice);
       this.PresentPriceData = this.AllBwics.map(bwic => bwic.presentPrice);
       //必须在后端获取数据后调用下列方法来生成图表。
@@ -87,8 +111,8 @@ export class HomepageComponent implements OnInit {
       },
       yAxis: {
         type: 'category',
-        data: this.IdData1,
-        name: 'BwicId'
+        data: this.dataTable,
+        name: 'Cusip&Size'
       },
       series: [
         {
@@ -126,7 +150,7 @@ export class HomepageComponent implements OnInit {
         {
           type: 'category',
           boundaryGap: false,
-          data: this.IdData2,
+          data: this.IdData,
           name: 'BwicId'
         }
       ],

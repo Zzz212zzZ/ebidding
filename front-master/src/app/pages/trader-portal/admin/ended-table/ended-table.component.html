@@ -19,8 +19,8 @@
         <td>{{ bwic.cusip }}</td>
         <td>{{ bwic.issuer }}</td>
         <td>{{ bwic.size }}</td>
-        <td>{{ bwic.startPrice }}</td>
-        <td>{{ bwic.maxPrice }}</td>
+        <td>{{ bwic.startPrice | number:'1.1-1'}}</td>
+        <td>{{ bwic.maxPrice | number:'1.1-1'}}</td>
         <td>{{ bwic.startTime }}</td>
         <td>{{ bwic.dueTime }}</td>
         <td>{{ bwic.lastBidTime}}</td>
