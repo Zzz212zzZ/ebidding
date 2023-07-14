@@ -33,6 +33,16 @@ export interface Bwics {
     bidCounts: number,
 }
 
+export interface Bonds {
+    bondId: String;
+    coupon: String;
+    cusip: String;
+    issuer: String;
+    maturityDate: String;
+    rating: String;
+    transaction_counts: Number;
+}
+
 @Component({
     selector: 'app-homepage',
     standalone: true,
@@ -107,16 +117,23 @@ export class HomepageComponent implements OnInit {
 
 
     AllBwics: Bwics[] = [];
-    IdData1: number[] = [];
-    IdData2: number[] = [];
+    AllBonds: Bonds[] = [];
+    BondIdData: string[] = [];
+    cusipData: String[] = [];
+    dataTable: String[] = [];
+    IdData: number[] = [];
     CountsData: number[] = [];
     SizeData: number[] = [];
     StartPriceData: number[] = [];
-    constructor(private bwicService: BwicService,private gptService: GptService) { }
+    constructor(private bwicService: BwicService, private gptService: GptService) { }
 
     ngOnInit() {
+        this.bwicService.getAllBonds().subscribe((item: Bonds[]) => {
+            this.AllBonds = item;
+        })
         this.bwicService.getAllBwics().subscribe((data: Bwics[]) => {
             this.AllBwics = data;
+
             //Popular Bwic
             const currentTime = new Date();
             const filteredBwics1 = this.AllBwics.filter(bwic => {
@@ -127,14 +144,22 @@ export class HomepageComponent implements OnInit {
             const sortedBwics = [...filteredBwics1].sort((a, b) => b.bidCounts - a.bidCounts);
             const topFiveBwics = sortedBwics.slice(0, 5).reverse();
             this.CountsData = topFiveBwics.map(bwic => bwic.bidCounts);
-            this.IdData1 = topFiveBwics.map(bwic => bwic.bwicId);
-
+            this.SizeData = filteredBwics1.map(bwic => bwic.size);
+            this.BondIdData = topFiveBwics.map(bwic => bwic.bondId);
+            this.cusipData = this.BondIdData.map(bondId => {
+                const bond = this.AllBonds.find(b => b.bondId === bondId);
+                return bond ? bond.cusip : '';
+            });
+            this.dataTable = this.cusipData.map((cusip, index) => {
+                return cusip + ' & ' + this.SizeData[index];
+            });
+            console.log(this.dataTable);
             //Uncoming Bwic
             const filteredBwics2 = this.AllBwics.filter(bwic => {
                 const startTime = new Date(bwic.startTime);
                 return startTime > currentTime;
             });
-            this.IdData2 = filteredBwics2.map(bwic => bwic.bwicId);
+            this.IdData = filteredBwics2.map(bwic => bwic.bwicId);
             this.SizeData = filteredBwics2.map(bwic => bwic.size);
             this.StartPriceData = filteredBwics2.map(bwic => bwic.startPrice);
 
@@ -146,8 +171,6 @@ export class HomepageComponent implements OnInit {
     Bar() {
         const ec = echarts as any;
         let bar = ec.init(document.getElementById('bar'));
-        // let lineChart2 = ec.init(document.getElementById('lineChart2'));
-        // let lineChart3 = ec.init(document.getElementById('lineChart3'));
         let barOption = {
             title: {
                 text: 'Popular Ongoing BWIC'
@@ -176,8 +199,8 @@ export class HomepageComponent implements OnInit {
             },
             yAxis: {
                 type: 'category',
-                data: this.IdData1,
-                name: 'BwicId'
+                data: this.dataTable,
+                name: 'Cusip&Size'
             },
             series: [
                 {
@@ -191,8 +214,6 @@ export class HomepageComponent implements OnInit {
             ]
         };
         bar.setOption(barOption);
-        // lineChart2.setOption(barOption);
-        // lineChart3.setOption(barOption);
     }
     linechart() {
         const ec = echarts as any;
@@ -221,7 +242,7 @@ export class HomepageComponent implements OnInit {
             xAxis: {
                 type: 'category',
                 boundaryGap: false,
-                data: this.IdData2,
+                data: this.IdData,
                 name: 'BwicId'
             },
             yAxis: {

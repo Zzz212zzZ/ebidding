@@ -64,7 +64,7 @@
       <td>{{ data.cusip }}</td>
       <td>{{ data.startTime }}</td>
       <td>{{ data.dueTime }}</td>
-      <td>{{ data.startPrice }}</td>
+      <td>{{ data.startPrice | number:'1.1-1'}}</td>
       <td>{{ data.size }}</td>
       <td>
         <button nz-button [nzType]="'default'" (click)="open(data.bwicId)">Details</button>
@@ -97,7 +97,7 @@
       <tbody>
       <tr *ngFor="let data of basicTable.data">
         <td>{{data.bwicId}}</td>
-        <td>{{data.price}}</td>
+        <td>{{data.price | number:'1.1-1'}}</td>
         <td>{{data.ranking}}</td>
         <td>
           {{ data.time }}
@@ -124,7 +124,7 @@
       <tbody>
         <tr *ngFor="let data of basicTable.data">
           <td>{{data.bwicId}}</td>
-          <td>{{data.price}}</td>
+          <td>{{data.price | number:'1.1-1'}}</td>
           <td>{{data.ranking}}</td>
           <td>
             {{ data.time | date:'yyyy-MM-dd HH:mm:ss' }}

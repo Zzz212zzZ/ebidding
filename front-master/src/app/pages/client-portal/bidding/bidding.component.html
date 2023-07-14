@@ -77,7 +77,7 @@
         <td>{{ data.cusip }}</td>
         <td>{{ data.startTime }}</td>
         <td>{{ data.dueTime }}</td>
-        <td>{{ data.startPrice }}</td>
+        <td>{{ data.startPrice | number:'1.1-1'}}</td>
         <td>{{ data.size }}</td>
         <td>
           <button nz-button nzType="default" [disabled]="!data.active" (click)="startBidding(data)">Bidding</button>

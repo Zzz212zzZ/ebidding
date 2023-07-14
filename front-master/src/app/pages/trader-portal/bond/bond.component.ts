@@ -134,7 +134,7 @@ export class BondComponent implements OnInit{
           .padStart(2, '0')}-${maturityDate
           .getDate()
           .toString()
-          .padStart(2, '0')} 00:00:00`;
+          .padStart(2, '0')}`;
         return {
           ...bond,
           maturityDate: formattedDate
