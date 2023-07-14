@@ -92,7 +92,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Application.GatewayApplication">
+  <component name="RunManager" selected="应用程序.GatewayApplication">
     <configuration name="AccountServiceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <envs>
         <env name="SW_AGENT_NAME" value="account-svc" />
@@ -196,18 +196,18 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.AccountServiceApplication" />
-      <item itemvalue="Application.BidService" />
-      <item itemvalue="Application.BidServiceApplication" />
-      <item itemvalue="Application.BwicServiceApplication" />
-      <item itemvalue="Application.GatewayApplication" />
+      <item itemvalue="应用程序.AccountServiceApplication" />
+      <item itemvalue="应用程序.BidService" />
+      <item itemvalue="应用程序.BidServiceApplication" />
+      <item itemvalue="应用程序.BwicServiceApplication" />
+      <item itemvalue="应用程序.GatewayApplication" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.GatewayApplication" />
-        <item itemvalue="Application.BwicServiceApplication" />
-        <item itemvalue="Application.BidServiceApplication" />
-        <item itemvalue="Application.AccountServiceApplication" />
+        <item itemvalue="应用程序.GatewayApplication" />
+        <item itemvalue="应用程序.BwicServiceApplication" />
+        <item itemvalue="应用程序.BidServiceApplication" />
+        <item itemvalue="应用程序.AccountServiceApplication" />
       </list>
     </recent_temporary>
   </component>
