@@ -77,38 +77,38 @@ export class HomepageComponent implements OnInit {
 
 
 
-    sendMessage(message: string): void {  
+    sendMessage(message: string): void {
         //清空上一次的聊天记录
         this.gptResponse = '';
-    
-    
+
+
         // Switch to query icon and progress bar mode when sending a message
         this.submitIconType = this.queryIconType;
         this.progressBarMode = this.queryProgressBarMode;
-      
+
         this.subscription = this.gptService.traderChatWithGpt(message).subscribe(
-          (event: MessageEvent) => {
-            // Parse the response data
-            const eventData = JSON.parse(event.data);
-            const content = eventData.choices[0]?.delta?.content || '';
-      
-            // Append the content to gptResponse
-            this.gptResponse += content;
-      
-            // Switch back to default icon and progress bar mode when response is received
-            this.submitIconType = this.defaultIconType;
-            this.progressBarMode = this.defaultProgressBarMode;
-          },
-          err => {
-            // Handle error
-            this.gptResponse = 'An error occurred. Please try again.';
-      
-            // Switch back to default icon and progress bar mode when an error occurs
-            this.submitIconType = this.defaultIconType;
-            this.progressBarMode = this.defaultProgressBarMode;
-          }
+            (event: MessageEvent) => {
+                // Parse the response data
+                const eventData = JSON.parse(event.data);
+                const content = eventData.choices[0]?.delta?.content || '';
+
+                // Append the content to gptResponse
+                this.gptResponse += content;
+
+                // Switch back to default icon and progress bar mode when response is received
+                this.submitIconType = this.defaultIconType;
+                this.progressBarMode = this.defaultProgressBarMode;
+            },
+            err => {
+                // Handle error
+                this.gptResponse = 'An error occurred. Please try again.';
+
+                // Switch back to default icon and progress bar mode when an error occurs
+                this.submitIconType = this.defaultIconType;
+                this.progressBarMode = this.defaultProgressBarMode;
+            }
         );
-      }
+    }
 
 
 
@@ -118,12 +118,18 @@ export class HomepageComponent implements OnInit {
 
     AllBwics: Bwics[] = [];
     AllBonds: Bonds[] = [];
+
+    //Popular Bwic
     BondIdData: string[] = [];
     cusipData: String[] = [];
+    SizeData1: number[] = [];
     dataTable: String[] = [];
-    IdData: number[] = [];
+
+    //Uncoming Bwic
     CountsData: number[] = [];
-    SizeData: number[] = [];
+    BondIdData1: string[] = [];
+    cusipData1: String[] = [];
+    SizeData2: number[] = [];
     StartPriceData: number[] = [];
     constructor(private bwicService: BwicService, private gptService: GptService) { }
 
@@ -144,23 +150,27 @@ export class HomepageComponent implements OnInit {
             const sortedBwics = [...filteredBwics1].sort((a, b) => b.bidCounts - a.bidCounts);
             const topFiveBwics = sortedBwics.slice(0, 5).reverse();
             this.CountsData = topFiveBwics.map(bwic => bwic.bidCounts);
-            this.SizeData = topFiveBwics.map(bwic => bwic.size);
+            this.SizeData1 = topFiveBwics.map(bwic => bwic.size);
             this.BondIdData = topFiveBwics.map(bwic => bwic.bondId);
             this.cusipData = this.BondIdData.map(bondId => {
                 const bond = this.AllBonds.find(b => b.bondId === bondId);
                 return bond ? bond.cusip : '';
             });
             this.dataTable = this.cusipData.map((cusip, index) => {
-                return cusip + ' & ' + this.SizeData[index];
+                return cusip + ' & ' + this.SizeData1[index];
             });
-            console.log(this.dataTable);
+
             //Uncoming Bwic
             const filteredBwics2 = this.AllBwics.filter(bwic => {
                 const startTime = new Date(bwic.startTime);
                 return startTime > currentTime;
             });
-            this.IdData = filteredBwics2.map(bwic => bwic.bwicId);
-            this.SizeData = filteredBwics2.map(bwic => bwic.size);
+            this.BondIdData1 = filteredBwics2.map(bwic => bwic.bondId);
+            this.cusipData1 = this.BondIdData1.map(bondId => {
+                const bond = this.AllBonds.find(b => b.bondId === bondId);
+                return bond ? bond.cusip : '';
+            });
+            this.SizeData2 = filteredBwics2.map(bwic => bwic.size);
             this.StartPriceData = filteredBwics2.map(bwic => bwic.startPrice);
 
             this.Bar();
@@ -218,57 +228,50 @@ export class HomepageComponent implements OnInit {
     linechart() {
         const ec = echarts as any;
         let lineChart = ec.init(document.getElementById('lineChart'));
-        let lineoption = {
+        let option = {
             title: {
-                text: 'Upcoming BWIC'
+                text: 'Upcoming BWIC',
             },
-            tooltip: {
-                trigger: 'axis'
-            },
+            tooltip: {},
             legend: {
-                data: ['Size', 'StartPrice']
+                data: ['Size', 'StartPrice'],
             },
-            grid: {
-                left: '3%',
-                right: '4%',
-                bottom: '3%',
-                containLabel: true
-            },
-            // toolbox: {
-            //     feature: {
-            //         saveAsImage: {}
-            //     }
-            // },
             xAxis: {
-                type: 'category',
-                boundaryGap: false,
-                data: this.IdData,
-                name: 'BwicId'
+                name: 'Cusip',
+                data: this.cusipData1,
             },
-            yAxis: {
-                type: 'value'
-            },
+            yAxis: [
+                {
+                    name: 'Size',
+                },
+                {
+                    name: 'StartPrice',
+                    axisLine: {
+                        show: false,
+                    },
+                    axisTick: {
+                        show: false,
+                    },
+                    splitLine: {
+                        show: false,
+                    },
+                },
+            ],
             series: [
                 {
                     name: 'Size',
                     type: 'line',
-                    stack: 'Total',
-                    data: this.SizeData,
-                    itemStyle: {
-                        color: '#77908e'
-                    }
+                    yAxisIndex: 0, // 使用第一个Y轴
+                    data: this.SizeData2,
                 },
                 {
                     name: 'StartPrice',
                     type: 'line',
-                    stack: 'Total',
+                    yAxisIndex: 1, // 使用第二个Y轴
                     data: this.StartPriceData,
-                    itemStyle: {
-                        color: '#52dfe9'
-                    }
-                }
-            ]
+                },
+            ],
         };
-        lineChart.setOption(lineoption);
+        lineChart.setOption(option);
     }
 }

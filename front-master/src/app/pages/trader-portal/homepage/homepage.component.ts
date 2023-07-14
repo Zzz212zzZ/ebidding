@@ -138,7 +138,6 @@ export class HomepageComponent implements OnInit {
         trigger: 'axis'
       },
       toolbox: {
-        show: false,
         feature: {
           saveAsImage: {}
         }
