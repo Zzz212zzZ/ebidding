@@ -6,22 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="2a4f9960-20b1-4731-ae3d-438c38e3e91e" name="更改" comment="配置nginx">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/account-svc/src/main/resources/application-uat.yml" beforeDir="false" afterPath="$PROJECT_DIR$/account-svc/src/main/resources/application-uat.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bid-svc/src/main/java/com/ebidding/bid/service/BidService.java" beforeDir="false" afterPath="$PROJECT_DIR$/bid-svc/src/main/java/com/ebidding/bid/service/BidService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bid-svc/src/main/resources/application-uat.yml" beforeDir="false" afterPath="$PROJECT_DIR$/bid-svc/src/main/resources/application-uat.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bwic-svc/src/main/resources/application-uat.yml" beforeDir="false" afterPath="$PROJECT_DIR$/bwic-svc/src/main/resources/application-uat.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-master/proxy.conf-remote.json" beforeDir="false" afterPath="$PROJECT_DIR$/front-master/proxy.conf-local.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-master/proxy.conf.json" beforeDir="false" afterPath="$PROJECT_DIR$/front-master/proxy.conf.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front-master/src/app/core/services/websocket-bwic.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front-master/src/app/core/services/websocket-bwic.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-master/src/app/pages/client-portal/client-layout/client-layout.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/front-master/src/app/pages/client-portal/client-layout/client-layout.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-master/src/app/pages/client-portal/client-layout/client-layout.component.less" beforeDir="false" afterPath="$PROJECT_DIR$/front-master/src/app/pages/client-portal/client-layout/client-layout.component.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-master/src/app/pages/client-portal/client-layout/roleProperties.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front-master/src/app/pages/client-portal/client-layout/roleProperties.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-master/src/app/pages/trader-portal/admin/admin.component.less" beforeDir="false" afterPath="$PROJECT_DIR$/front-master/src/app/pages/trader-portal/admin/admin.component.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-master/src/app/pages/trader-portal/admin/ended-table/ended-table.component.less" beforeDir="false" afterPath="$PROJECT_DIR$/front-master/src/app/pages/trader-portal/admin/ended-table/ended-table.component.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-master/src/app/pages/trader-portal/bond/bond.component.less" beforeDir="false" afterPath="$PROJECT_DIR$/front-master/src/app/pages/trader-portal/bond/bond.component.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-master/src/app/pages/trader-portal/trader-layout/roleProperties.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front-master/src/app/pages/trader-portal/trader-layout/roleProperties.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-master/src/app/pages/trader-portal/trader-layout/trader-layout.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/front-master/src/app/pages/trader-portal/trader-layout/trader-layout.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-master/src/favicon.ico" beforeDir="false" afterPath="$PROJECT_DIR$/front-master/src/favicon.ico" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-master/src/app/pages/client-portal/bidding/bidding.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/front-master/src/app/pages/client-portal/bidding/bidding.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-master/src/app/pages/client-portal/bidding/bidding.component.less" beforeDir="false" afterPath="$PROJECT_DIR$/front-master/src/app/pages/client-portal/bidding/bidding.component.less" afterDir="false" />
     </list>
     <list id="a58cf2ab-9c2b-4078-b0c4-ea5db3fcc318" name="dev" comment="解决pull问题" />
     <list id="34c7cc04-8f4f-4ff0-bb9e-0893446d0a9f" name="local" comment="local" />
@@ -70,28 +57,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/Serei/Desktop/group4",
-    "node.js.detected.package.eslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings",
-    "spring.configuration.checksum": "d0d2190b5de3aee74bf4e2882c3aeef8",
-    "ts.external.directory.path": "Z:\\OneDrive\\CitiPractice\\group4\\front-master\\node_modules\\typescript\\lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Serei/Desktop/group4&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;d0d2190b5de3aee74bf4e2882c3aeef8&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;Z:\\OneDrive\\CitiPractice\\group4\\front-master\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="ReactorSettings">
     <option name="notificationShown" value="true" />
   </component>
@@ -107,7 +94,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.BwicServiceApplication">
+  <component name="RunManager" selected="应用程序.AccountServiceApplication">
     <configuration name="AccountServiceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <envs>
         <env name="SW_AGENT_NAME" value="account-svc" />
@@ -211,23 +198,12 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.AccountServiceApplication" />
-      <item itemvalue="Application.BidService" />
-      <item itemvalue="Application.BidServiceApplication" />
-      <item itemvalue="Application.BwicServiceApplication" />
-      <item itemvalue="Application.GatewayApplication" />
-      <item itemvalue="Spring Boot.BidServiceApplication" />
-      <item itemvalue="Spring Boot.BwicServiceApplication" />
-      <item itemvalue="Spring Boot.GatewayApplication" />
+      <item itemvalue="应用程序.AccountServiceApplication" />
+      <item itemvalue="应用程序.BidService" />
+      <item itemvalue="应用程序.BidServiceApplication" />
+      <item itemvalue="应用程序.BwicServiceApplication" />
+      <item itemvalue="应用程序.GatewayApplication" />
     </list>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Application.AccountServiceApplication" />
-        <item itemvalue="Application.GatewayApplication" />
-        <item itemvalue="Application.BwicServiceApplication" />
-        <item itemvalue="Application.BidServiceApplication" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -391,7 +367,15 @@
       <option name="project" value="LOCAL" />
       <updated>1689321963782</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="最终版开始修改">
+      <option name="closed" value="true" />
+      <created>1689322076591</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1689322076591</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
