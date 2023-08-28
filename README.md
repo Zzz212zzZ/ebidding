@@ -14,4 +14,4 @@ At **Citicorp Software Technology and Services**, I spearheaded a team of four i
 
 🤖 **6. AI Integration**: Incorporated OpenAi GPT API, fine-tuning it to be the perfect AI assistant for our system.
 
-🔄 **Collaboration & Recognition**: We diligently followed agile development principles throughout our project. Our efforts were recognized with the **Excellent Project (sole)** award by Citicorp Software Technology and Services. <u>**A heartfelt thank you to our mentors for their invaluable guidance and support. We express our deepest and most respectful gratitude to them.**</u>
+🔄 **Collaboration & Recognition**: We diligently followed agile development principles throughout our project. Our efforts were recognized with the **Excellent Project (sole)** award by Citicorp Software Technology and Services. **<u>A heartfelt thank you to our mentors for their invaluable guidance and support. We express our deepest and most respectful gratitude to them.</u>**
